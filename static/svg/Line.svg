@@ -1,0 +1,26 @@
+<svg width="240" height="2" viewBox="0 0 240 2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Line</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(4629 1142)">
+<rect x="-4629" y="-1142" width="240" height="2" fill="#FFFFFF"/>
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M -5021 -1930L -3997 -1930L -3997 -1008L -5021 -1008L -5021 -1930Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="SIS Ch1-1" clip-path="url(#clip-0)">
+<g id="progress bar">
+<g id="Line" opacity="0.3">
+<use xlink:href="#path0_stroke" transform="translate(-4627.75 -1142)" fill="#333333"/>
+</g>
+</g>
+<g id="progress">
+<g id="Line" opacity="0.3">
+<use xlink:href="#path1_stroke" transform="translate(-4628 -1142)" fill="#333333"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 0 0L -1 0L -1 2L 0 2L 0 0ZM 237.5 2L 238.5 2L 238.5 0L 237.5 0L 237.5 2ZM 0 2L 237.5 2L 237.5 0L 0 0L 0 2Z"/>
+<path id="path1_stroke" d="M 0 0L -1 0L -1 2L 0 2L 0 0ZM 238.034 2L 239.034 2L 239.034 0L 238.034 0L 238.034 2ZM 0 2L 238.034 2L 238.034 0L 0 0L 0 2Z"/>
+</defs>
+</svg>
