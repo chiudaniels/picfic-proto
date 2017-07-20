@@ -1,0 +1,6 @@
+7-18-2017
+	- Basic html conversion of invision website. No interactivity yet.
+ 
+7-19-2017
+	- Hide and show pictures
+	- Upload and add to slideshow for pictures
