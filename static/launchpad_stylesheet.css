@@ -1,0 +1,85 @@
+body{
+	width:100%;
+}
+
+.pageone {
+	opacity: .4;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(launchpad/png/background1.png);
+    height: 98vh;
+    width:auto;
+
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
+#laptop1 {
+	padding-left: 5px;
+    top: 38.3vh;
+    left: 60vw;
+    position: absolute;
+}
+
+
+.text1 {
+	font-size:2.3vw;
+    top: 50.5vh;
+    left:16.2vw;
+    z-index: 1;
+    position: absolute;
+}
+
+.container{
+	width:100%;
+	height:1200px;
+}
+
+#page2{
+	position:absolute;
+	top:115vh;
+}
+
+#bookgallery{
+	padding-right: 5%;
+	padding-left:10%;
+}
+
+#startreading{
+	text-align: center;
+	font-size: 5vh;
+	padding-bottom: 5vh;
+	padding-top: 7vh;
+}
+
+.pagethree{
+	position:absolute;
+	top:300vh;
+	background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(launchpad/png/background2.png);
+    height: 105vh;
+    width:100%;
+    z-index: -1;
+}
+
+#laptop2{
+	position:absolute;
+	z-index:1;
+}
+
+.pagethreetext{
+	position:absolute;
+	top:300vh;
+	font-size: 5vh;
+	left:35vw;
+	z-index: 1;
+}
