@@ -3,7 +3,7 @@ from utils import users, books, gallery
 import json, os
 
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.secret_key = "secrets"
 
 #UPLOAD_FOLDER = join(dirname(), "maps/")
@@ -22,7 +22,7 @@ app.secret_key = "secrets"
 
 @app.route("/")
 def root():
-    return render_template("launch.html")
+    return render_template("launchpad.html")
 
 # == Settings =======================================
 
@@ -69,7 +69,7 @@ def bookLanding(bookID):
 def bookRedir(bookID):
     return redirect("/books/<bookid>/read/1/1")
 
-@app.route("books/<bookID>/read/<chNum>/<pgNum>")
+@app.route("/books/<bookID>/read/<chNum>/<pgNum>")
 def bookPage(bookID, chNum, pgNum):
     data = books.getPageData(bookID, chNum, pgNum)
     if data == None or len(data) == 0:

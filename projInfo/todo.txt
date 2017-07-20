@@ -1,0 +1,5 @@
+TODO:
+
+Book parsing
+Incorporate authortag
+Image uploading

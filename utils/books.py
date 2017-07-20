@@ -24,7 +24,7 @@ Given:
 Returns:
   boolean of whether a bookID exists
 """
-def exists( mapID ):
+def exists( bookID ):
     finder = cB.find_one(
         { "bookID" : int(bookID) }
         )
@@ -48,49 +48,20 @@ def getBookMetadata( bookID ):
 """
 def getImages( mapID ):
     if exists( mapID ):
-        finder = cM.find_one(
+        finder = cB.find_one(
             { "mapID" : int(mapID) }
             )
         return finder["outline"]
     return None
 """
 
-def getPageData( bookNum, chNum, pgNum ):
+def getPageData( bookID, chNum, pgNum ):
     return None
 
-def addImage( url, mapID ):
-    if exists( mapID ):
-        finder = cM.find_one(
-            { "mapID" : int(mapID) }
-        )  
-        print finder["outline"]
-        if finder["outline"] == []:
-            cM.update_one(
-                {"mapID" : int(mapID)},
-                {"$set" :
-                    {   
-                        "outline" : [url],
-                        "timeUpdated" :  datetime.date.today().ctime(),
-                        "tUpdated" : time.time()
-                        }
-                }
-                )
-            return True
-        else:
-            cM.update_one(
-                {"mapID" : int(mapID)},
-                {"$set" :
-                    {   
-                        "outline" : finder["outline"] + [url],
-                        "timeUpdated" :  datetime.date.today().ctime(),
-                        "tUpdated" : time.time()
-                        }
-                }
-                )
-            return True
-    return False
+def getTopImages( bookID ):
+    return None
 
 #helper functions
 
-def counter_cM():
-    return cM.count()
+def counter_cB():
+    return cB.count()
