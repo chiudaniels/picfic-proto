@@ -1,0 +1,12 @@
+DC 7-18-2017
+	- Basic html conversion of invision website. No interactivity yet.
+ 
+DC 7-19-2017
+	- Hide and show pictures
+	- Upload and add to slideshow for pictures
+
+JY 7-20-2017
+	- work ported
+	- user database set up
+	- gallery database set up
+	- routes set up
