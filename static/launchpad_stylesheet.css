@@ -1,9 +1,10 @@
-body{
-	width:100%;
+body {
+    width: 100%;
+    max-width: 1920px;
 }
 
 .pageone {
-	opacity: .4;
+    opacity: .4;
     position: absolute;
     left: 0;
     right: 0;
@@ -13,7 +14,7 @@ body{
     background-size: contain;
     background-image: url(launchpad/png/background1.png);
     height: 98vh;
-    width:auto;
+    width: auto;
 
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
@@ -23,7 +24,7 @@ body{
 }
 
 #laptop1 {
-	padding-left: 5px;
+    padding-left: 5px;
     top: 38.3vh;
     left: 60vw;
     position: absolute;
@@ -31,56 +32,129 @@ body{
 
 
 .text1 {
-	font-size:2.3vw;
+    font-size: 2.3vw;
     top: 50.5vh;
-    left:16.2vw;
+    left: 16.2vw;
     z-index: 1;
     position: absolute;
 }
 
-.container{
-	width:100%;
-	height:1200px;
+.container {
+    width: 100%;
+    height: 1200px;
 }
 
-#page2{
-	position:absolute;
-	top:115vh;
+#page2 {
+    position: absolute;
+    top: 140vh;
 }
 
-#bookgallery{
-	padding-right: 5%;
-	padding-left:10%;
+#bookgallery {
+    padding-right: 5%;
+    padding-left: 10%;
 }
 
-#startreading{
-	text-align: center;
-	font-size: 5vh;
-	padding-bottom: 5vh;
-	padding-top: 7vh;
+#startreading {
+    text-align: center;
+    font-size: 5vh;
+    padding-bottom: 5vh;
+    padding-top: 7vh;
 }
 
-.pagethree{
-	position:absolute;
-	top:300vh;
-	background-repeat: no-repeat;
+.pagethree {
+    position: absolute;
+    top: 260vh;
+    background-repeat: no-repeat;
     background-size: contain;
     background-image: url(launchpad/png/background2.png);
-    height: 105vh;
-    width:100%;
+    height: 110vh;
+    width: 100%;
     z-index: -1;
 }
 
-#laptop2{
-	position:absolute;
-	top:310vh;
-	z-index:1;
+#laptop2 {
+    position: absolute;
+    top: 285vh;
+    left: 55vw;
+    z-index: 1;
 }
 
-.pagethreetext{
+.pagethreetext {
+    position: absolute;
+    top: 287vh;
+    left: 15vw;
+    z-index: 1;
+}
+
+#picficdesc {
+    font-size: 2.4vh;
+    max-width: 30vw;
+}
+
+.pagefour {
+    opacity: .17;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    top: 356.2vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(launchpad/png/background3.png);
+    height: 100vh;
+    width: auto;
+}
+
+.pagefourtext{
+	font-size:1.2em;
+}
+.pagefourcontainer {
 	position:absolute;
-	top:300vh;
-	font-size: 5vh;
-	left:35vw;
-	z-index: 1;
+    max-width: 52vw;
+    text-align:center;
+    align-content: center;
+    top:365vh;
+    left:24.3vw;
+}
+
+.picficLogo{
+	height:6vw;
+	width:auto;
+	fill: black;
+	stroke: black;
+	opacity: 1;
+}
+
+.pagefourcontent{
+	padding-top:5vh;
+}
+
+
+.pagefive {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    top: 455.2vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(launchpad/png/background4.png);
+    height: 100vh;
+    width: auto;
+}
+
+.pagefivetext{
+	font-size: 1.7em;
+	padding-top: 1em;
+}
+
+.pagefivecontent{
+	position: absolute;
+	text-align: center;
+	top:493vh;
+	left:26vw;
+	max-width: 47vw;
+	color:white;
 }
