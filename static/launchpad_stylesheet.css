@@ -106,28 +106,29 @@ body {
     width: auto;
 }
 
-.pagefourtext{
-	font-size:1.2em;
+.pagefourtext {
+    font-size: 1.2em;
 }
+
 .pagefourcontainer {
-	position:absolute;
+    position: absolute;
     max-width: 52vw;
-    text-align:center;
+    text-align: center;
     align-content: center;
-    top:365vh;
-    left:24.3vw;
+    top: 365vh;
+    left: 24.3vw;
 }
 
-.picficLogo{
-	height:6vw;
-	width:auto;
-	fill: black;
-	stroke: black;
-	opacity: 1;
+.picficLogo {
+    height: 6vw;
+    width: auto;
+    fill: black;
+    stroke: black;
+    opacity: 1;
 }
 
-.pagefourcontent{
-	padding-top:5vh;
+.pagefourcontent {
+    padding-top: 5vh;
 }
 
 
@@ -145,16 +146,75 @@ body {
     width: auto;
 }
 
-.pagefivetext{
-	font-size: 1.7em;
-	padding-top: 1em;
+.pagefivetext {
+    font-size: 1.7em;
+    padding-top: 1em;
 }
 
-.pagefivecontent{
+.pagefivecontent {
+    position: absolute;
+    text-align: center;
+    top: 493vh;
+    left: 26vw;
+    max-width: 47vw;
+    color: white;
+}
+
+.footer {
+    left: 41.5vw;
+    height: 13vh;
+    position: absolute;
+    top: 560vh;
+}
+
+.logo {
+    padding-right: 5vh;
+}
+
+.contactfooter {
+    position: absolute;
+    width: 100vw;
+    top: 570vh;
+    height: 13vh;
+    background: #EAEAEA;
+}
+
+.contactfootercontent {
+    left: 12vw;
+    position: absolute;
+    top: 575vh;
+}
+
+.footertext {
+    padding-left: 27vw;
+}
+
+#footerimg {
+    padding-left: 2vw;
+    height: 7vh;
+    width: auto;
+}
+
+.navbar {
+    background: #D1EBFF;
+}
+
+#aboutus {
+    position: absolute;
+    right: 15vw;
+    padding-top: 2.3vh;
+}
+
+#signup {
+    position: absolute;
+    right: 8vw;
+    padding-top: 2.3vh;
+}
+
+.navpicficLogo {
 	position: absolute;
-	text-align: center;
-	top:493vh;
-	left:26vw;
-	max-width: 47vw;
-	color:white;
+    height: 6vh;
+    width: auto;
+    top:.6vh;
+    left:6vw;
 }
