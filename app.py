@@ -167,7 +167,7 @@ print __name__
 
 # Photo Upload ==================================================================
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
+#UPLOAD_FOLDER = '/path/to/the/uploads'
 ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
@@ -180,7 +180,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/images', methods=['POST'])
+@app.route('/image/upload/', methods=['POST'])
 def upload_file():
         # check if the post request has the file part
         if 'file' not in request.files:
