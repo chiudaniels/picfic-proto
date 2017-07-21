@@ -73,6 +73,7 @@ body{
 
 #laptop2{
 	position:absolute;
+	top:310vh;
 	z-index:1;
 }
 
