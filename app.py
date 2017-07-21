@@ -23,7 +23,7 @@ app.secret_key = "secrets"
 
 @app.route("/")
 def root():
-    return render_template("launchpad.html")
+    return render_template("launchpadLoginTest.html")
 
 # == Settings =======================================
 
@@ -113,6 +113,7 @@ def register():
     # request
     uN = request.form["username"]
     pwd = request.form["password"]
+    pwd2 = request.form["password2"]
     #reg
     msg = ""
     if users.canRegister(uN):
@@ -132,6 +133,14 @@ def changePass():
         new1 = d["pass1"]
         new2 = d["pass2"]
         users.changePass( getUserID(), old, new1, new2 )
+    return redirect(url_for('root'))
+
+@app.route('/changeTag/', methods = ['POST'])
+def changePass():
+    if isLoggedIn():
+        d = request.form
+        newTag = d["tag"]
+        users.changeTag( getUserID(), newTag )
     return redirect(url_for('root'))
 
 
@@ -166,7 +175,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), "images/")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
+"""
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -188,15 +197,16 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-    return '''
+    return None
+
     <!doctype html>
     <title>Upload new File</title>
     <h1>Upload new File</h1>
     <form method=post enctype=multipart/form-data>
       <p><input type=file name=file>
          <input type=submit value=Upload>
-    </form>
-    '''
+</form>
+"""
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):

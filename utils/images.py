@@ -75,11 +75,17 @@ def saveImage( url, markerID, userID ):
     return True
 
 
-def like_image( userID, imageID ):
+def likeImage( userID, imageID ):
     cI.update_one(
         {"imageID": int(imageID)},
         {"$addToSet":
          {"likes": [userID]}
+        }
+    )
+    db.users.update_one(
+        {"userID": int(userID)},
+        {"$addToSet":
+         {"likedImages": [imageID]}
         }
     )
     return True

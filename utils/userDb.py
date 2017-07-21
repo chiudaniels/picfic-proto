@@ -63,7 +63,7 @@ Given:
 Returns:
     boolean of whether account was successfully created
 """
-def registerAccountInfo( uN, hP, tag ):
+def registerAccountInfo( uN, hP ):
     try:
         doc = {}
         doc["username"] = uN
@@ -71,7 +71,8 @@ def registerAccountInfo( uN, hP, tag ):
         doc["password"] = hP
         doc["starredIDs"] = []
         doc["ownedIDs"] = []
-        doc["authortag"] = tag
+        doc["authortag"] = uN #allow configuration
+        doc["likedImages"] = []
         cU.insert_one( doc )
         return True
     except:
@@ -147,6 +148,12 @@ def getTag( userID ):
 def getUsername ( userID ):    
     if exists(userID):
         finder = cU.find_one({"userID": int(userID)}, {"username": 1})
+        return finder
+    return False
+
+def getLikedImages ( userID ):    
+    if exists(userID):
+        finder = cU.find_one({"userID": int(userID)}, {"likedImages": 1})
         return finder
     return False
 

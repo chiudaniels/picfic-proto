@@ -20,7 +20,11 @@ def getUsername( uID ):
 
 def changePass( uID, old, new1, new2 ):
     if isValidAccountInfo( getUsername( uID ), old  ) and new1 == new2:
-        changePass( uID, hasher( new1 ))
+        userDb.changePass( uID, hasher( new1 ))
+    return True
+
+def changeTag( uID, tag ):
+    userDb.changeTag(uID, tag)
     return True
 
 def hasher(unhashed):

@@ -2,11 +2,11 @@ TODO:
 Image liking (see images.py)
 Image uploading
 
-Dynamo: multi-key queries (unnecessary)
-
-Track liked images by user
-
 following (of artists, and of stories)
 How much of a portfolio site is this going to be?
 
 "I want to draw!" - random story
+
+remind users to configure authortag
+
+use javascript to verify equality of passwords
