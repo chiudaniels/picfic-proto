@@ -1,5 +1,6 @@
 import pymongo
 from pymongo import MongoClient
+import string
 
 server = MongoClient( "127.0.0.1 " )
 
@@ -7,7 +8,9 @@ db = server.picfic
 
 cB = db.books
 
+#If every page has a marker, give it one. Right now, there's one after every line.
 def parseBook( textFilename, metaFilename ): #get the text formatted
+    printable = set(string.printable)
     bookData = {}
     bookData["meta"] = {}
     bookData["chapters"] = []
@@ -27,26 +30,31 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
     textText = textFile.readlines()
     #goals: find the chapters, find the splits.
     #manually parse through text...
-    chCt = 0
-    pageCt = 0
-    for line in textText:
+    chCt = -1
+    pgCt = 0
+    for ln in textText:        
+        line = filter(lambda x: x in printable, ln)
+        if line.isspace():
+            continue
         if "CHAPTER" in line:
-            bookData["chapters"][chCt] = {
+            bookData["chapters"].append({
                 "bookID" : bookID,
                 "pages" : [],
                 "title": line
-            }
-            pageCt = 0
-            chCount += 1
-            bookData['chapters'][chCt][pgCt] = []
-        elif "--------" in line:
-            pageCt += 1
-            bookData['chapters'][chCt][pgCt] = []
+            })
+            bookData['chapters'][chCt]["pages"].append([])
+            pgCt = 0
+            chCt += 1
+        elif "--------" in line:#replace with ***
+            bookData['chapters'][chCt]["pages"].append([])
+            pgCt += 1
         else:
-            bookData['chapters'][chCt][pgCt].append(line)
-        
+            bookData['chapters'][chCt]["pages"][pgCt].append([line, newMarker()])
+            
+    
     textFile.close()
     cB.insert_one(bookData)
+    print bookData
     return True
     
 def newMarker():
@@ -55,6 +63,6 @@ def newMarker():
         "markerID": db.markers.count()
     }
     db.markers.insert_one(markerData)
-    return None
+    return markerData["markerID"]
     
 parseBook("../data/texts/sampleText.txt", "../data/texts/sampleMeta.txt")

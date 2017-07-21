@@ -63,7 +63,7 @@ Given:
 Returns:
     boolean of whether account was successfully created
 """
-def registerAccountInfo( uN, hP ):
+def registerAccountInfo( uN, hP, tag ):
     try:
         doc = {}
         doc["username"] = uN
@@ -71,7 +71,7 @@ def registerAccountInfo( uN, hP ):
         doc["password"] = hP
         doc["starredIDs"] = []
         doc["ownedIDs"] = []
-
+        doc["authortag"] = tag
         cU.insert_one( doc )
         return True
     except:
@@ -122,7 +122,35 @@ def changePass( uID, newPass ):
         return True
     except:
         return False
-#helper functions
 
+
+def changeTag( uID, newTag ):
+    try:
+        cU.update(
+            { "userID" : uID },
+            { "$set":
+                { "authortag": newTag }
+            }
+        )
+        return True
+    except:
+        return False
+
+
+
+def getTag( userID ):
+    if exists(userID):
+        finder = cU.find_one({"userID": int(userID)}, {"authortag": 1})
+        return finder
+    return False
+
+def getUsername ( userID ):    
+    if exists(userID):
+        finder = cU.find_one({"userID": int(userID)}, {"username": 1})
+        return finder
+    return False
+
+    
+#helper functions    
 def counter_cU():
     return cU.count()
