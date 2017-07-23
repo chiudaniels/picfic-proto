@@ -175,6 +175,8 @@ app = Flask(__name__)
 UPLOAD_FOLDER = join(dirname(realpath(__file__)), "images/")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+
 """
 def allowed_file(filename):
     return '.' in filename and \

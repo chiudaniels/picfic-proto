@@ -1,92 +1,42 @@
+<!-- ####################JEANNE'S NOTES###################
+should navbar be in layout template for jinja? should it appear everywhere?
+if logged in, turns into log out
+-->
+
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <!-- bootstrap -->
+  <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/launchpad_stylesheet.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/launchpad_ss2.css">
 </head>
 
 <body>
-    <nav class="navbar">
+  <nav class="navbar">
         <img src="../static/svg/PicFic.svg" class="navpicficLogo">
         <span id="aboutus">
-	  <a href="/about/">About us</a>
+	  <a href="/about/">ABOUT US</a>
 	</span>
-        <!--<span id="signup">
-			Sign Up
-	</span>-->
-	<div class="dropdown">
-	  <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></span>
-	 <ul id="login-dp" class="dropdown-menu">
-	    <li>
-	      <div class="row">
-		<div class="col-md-10">
-		  <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
-		    <div class="form-group">
-		      <label class="sr-only" for="exampleInputEmail2">Email address</label>
-		      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="username" required>
-		    </div>
-		    <div class="form-group">
-		      <label class="sr-only" for="exampleInputPassword2">Password</label>
-		      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                      <div class="help-block text-right"><a href="">Forgot your password?</a></div>
-		    </div>
-		    <div class="form-group">
-		      <button type="submit">Sign in</button>
-		    </div>
-		    <div class="checkbox">
-		      <label>
-			<input type="checkbox"> keep me logged-in
-		      </label>
-		    </div>
-		  </form>
-		  
-		</div>
-	      </div>
-	    </div>
-	  </ul>
-	</li>
 
-
-	<div class="dropdown">
-	  <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Sign Up</b> <span class="caret"></span></span>
-
-	  <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>-->
-	  <ul id="login-dp" class="dropdown-menu">
-	    <li>
-	      <div class="row">
-		<div class="col-md-12">
-		  <form class="form" role="form" method="post" action="/register/" accept-charset="UTF-8" id="login-nav">
-		    <div class="form-group">
-		      <label class="sr-only" for="exampleInputEmail2">Email address</label>
-		      <input type="text" class="form-control" id="exampleInputEmail2" placeholder="username" name = "username" required>
-		    </div>
-		    <div class="form-group">
-		      <label class="sr-only" for="exampleInputPassword2">Password</label>
-		      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name = "password" required>
-		    </div>
-		    <div class="form-group">
-		      <label class="sr-only" for="exampleInputPassword2">Reenter Password</label>
-		      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" name = "password2" required>
-		    </div>
-                      
-		    <div class="form-group">
-		      <button type="submit">Sign Up</button>
-		    </div>
-		  </form>
-		  
-		</div>
-	      </div>
-
-	  </ul>
-	</li>
+        <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown">
+	  SIGN UP
+	</span>
+	
+	<span id="signin">
+	  SIGN IN
+	</span>
+	<span id="gallery">
+	  GALLERY
+	</span>
     </nav>
     <!-- FIRST PAGE-->
     <div class="pageone">
@@ -112,8 +62,10 @@
             </div>
         </div>
         <div class="row" id="bookgallery">
-            <div class="col-md-3">
-                <img src="../static/launchpad/png/study_in_scarlet.png">
+          <div class="col-md-3">
+	    <a href="chapter_template.html">
+              <img src="../static/launchpad/png/study_in_scarlet.png">
+	      </a>
                 <br>
                 <span>A STUDY IN SCARLET</span>
                 <br>
@@ -177,7 +129,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 logos pagefourcontent">
+            <div class="col-md-12 pagefourcontent">
                 <img src="../static/launchpad/png/mitlogo.png" class="picficLogo">
             </div>
         </div>
@@ -188,8 +140,23 @@
     </div>
     <div class="container-fluid pagefivecontent">
         <h1>Stay in the loop</h1>
-        <p class=pagefivetext>Fill out this form to receive updates for each chapter, 
-as well as newly released picfics!</p>
+        <p class=pagefivetext>Fill out this form to receive updates for each chapter, as well as newly released picfics!</p>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="container-fluid logos">
+                <img class="logo" id="logo1" src="../static/launchpad/png/facebook.png">
+                <img class="logo" src="../static/launchpad/png/instagram.png">
+                <img class="logo" src="../static/launchpad/png/twitter.png">
+            </div>
+        </div>
+    </div>
+    <div class="contactfooter">
+    </div>
+    <div class="contactfootercontent"> 
+    	<img id="footerimg" src="../static/svg/PicFic.svg">
+        <span class="footertext contact"> Contact</span>
+        <span class="footertext copyright">Copyright © 2017 PicFic</span>
     </div>
 </body>
 
