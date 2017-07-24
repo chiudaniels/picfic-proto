@@ -39,7 +39,12 @@ if logged in, turns into log out
 	  
           <li><p class="navbar-text"><a href="about/">ABOUT US</a></p></li>
 	  <li><p class="navbar-text"><a href="about/">GALLERY</a></p></li>
+
+	  {% if loggedin %}
+	  
 	  <li><p class="navbar-text"><a href="/settings/">SETTINGS</a></p></li>
+
+	  {% else %}
 	  
 	<!--<ul class="nav navbar-nav navbar-right">-->
           <li class="dropdown">
@@ -117,6 +122,7 @@ if logged in, turns into log out
 	    </ul>
           </li>
 	</ul>
+	{% endif %}
       </div><!-- /.navbar-collapse -->
       
     </div><!-- /.container-fluid -->
