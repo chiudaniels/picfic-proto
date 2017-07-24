@@ -32,7 +32,7 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	  <ul class="nav navbar-nav navbar-right">
 	    
-            <li><p class="navbar-text"><a href="about/">ABOUT US</a></p></li>
+            <li><p class="navbar-text"><a href="/about/">ABOUT US</a></p></li>
 	    <li><p class="navbar-text"><a href="/gallery/">GALLERY</a></p></li>
 
 	    {% if isLoggedIn %}
@@ -55,19 +55,19 @@
 			<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
 		      </div>
                       or
-		      <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+		      <form class="form" role="form" method="post" action="/register/" accept-charset="UTF-8" id="login-nav">
 			<div class="form-group">
 			  <label class="sr-only" for="inputUsername">username</label>
-			  <input type="text" class="form-control" id="exampleInputEmail2" placeholder="username" required>
+			  <input type="text" name="username" id="exampleInputEmail2" placeholder="username" required>
 			</div>
 			<div class="form-group">
 			  <label class="sr-only" for="makePass">password</label>
-			  <input type="password" class="form-control" id="makePass" placeholder="password" required>
+			  <input type="password" name="password" class="form-control" id="makePass" placeholder="password" required>
                           
 			</div>
 			<div class="form-group">
 			  <label class="sr-only" for="confirmPass">re-enter password</label>
-			  <input type="password" class="form-control" id="confirmPass" placeholder="re-enter password" required>
+			  <input type="password" name="password2" class="form-control" id="confirmPass" placeholder="re-enter password" required>
                           
 			</div>
 			<div class="form-group">
@@ -92,14 +92,14 @@
 			<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
 		      </div>
                       or
-		      <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+		      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
 			<div class="form-group">
 			  <label class="sr-only" for="inputUsername">Username</label>
-			  <input type="text" class="form-control" id="inputUser" placeholder="Email address" required>
+			  <input type="text" class="form-control" id="inputUser" placeholder="username" name="username" required>
 			</div>
 			<div class="form-group">
 			  <label class="sr-only" for="inputPass">Password</label>
-			  <input type="password" class="form-control" id="inputPass" placeholder="Password" required>
+			  <input type="password" class="form-control" id="inputPass" placeholder="Password" name="password" required>
                           <div class="help-block text-right"><a href="">Forget the password ?</a></div>
 			</div>
 			<div class="form-group">
