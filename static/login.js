@@ -18,7 +18,7 @@ $(document).ready(function(){
         data: "uN="+username+"pwd="+password,
         success: function(html){    
           if(html=='true') { //if the return value = 'true' then redirect to 'login_success.php
-            window.location="login_success.php";
+            window.location="/";
           }
           else { //if the return value != 'true' then add the error message to the div.#message
             $("#message").html(html);
