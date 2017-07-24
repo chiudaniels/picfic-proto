@@ -17,19 +17,17 @@
     <nav class="navbar">
         <img src="../static/svg/PicFic.svg" class="navpicficLogo">
         <span id="aboutus">
-			About us
-		</span>
+	  <a href="/about/">About us</a>
+	</span>
         <!--<span id="signup">
 			Sign Up
 	</span>-->
-	<li class="dropdown">
+	<div class="dropdown">
 	  <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></span>
-
-	  <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>-->
-	  <ul id="login-dp" class="dropdown-menu">
+	 <ul id="login-dp" class="dropdown-menu">
 	    <li>
 	      <div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10">
 		  <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
 		    <div class="form-group">
 		      <label class="sr-only" for="exampleInputEmail2">Email address</label>
@@ -38,10 +36,10 @@
 		    <div class="form-group">
 		      <label class="sr-only" for="exampleInputPassword2">Password</label>
 		      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                      <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                      <div class="help-block text-right"><a href="">Forgot your password?</a></div>
 		    </div>
 		    <div class="form-group">
-		      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+		      <button type="submit">Sign in</button>
 		    </div>
 		    <div class="checkbox">
 		      <label>
@@ -52,12 +50,12 @@
 		  
 		</div>
 	      </div>
-	    </li>
+	    </div>
 	  </ul>
 	</li>
 
 
-	<li class="dropdown">
+	<div class="dropdown">
 	  <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Sign Up</b> <span class="caret"></span></span>
 
 	  <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>-->
@@ -80,13 +78,13 @@
 		    </div>
                       
 		    <div class="form-group">
-		      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+		      <button type="submit">Sign Up</button>
 		    </div>
 		  </form>
 		  
 		</div>
 	      </div>
-	    </li>
+
 	  </ul>
 	</li>
     </nav>

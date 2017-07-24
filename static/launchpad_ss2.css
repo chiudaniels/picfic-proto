@@ -201,13 +201,25 @@ body {
 
 #aboutus {
     position: absolute;
-    right: 15vw;
+    right:31vw;
     padding-top: 2.3vh;
 }
 
 #signup {
     position: absolute;
-    right: 8vw;
+    right:24vw;
+    padding-top: 2.3vh;
+}
+
+#signin {
+    position: absolute;
+    right: 17vw;
+    padding-top: 2.3vh;
+}
+
+#gallery {
+    position: absolute;
+    right: 9vw;
     padding-top: 2.3vh;
 }
 
@@ -217,4 +229,8 @@ body {
     width: auto;
     top:.6vh;
     left:6vw;
+}
+
+.navbar-inner ul.nav li {
+    text-align: center;
 }

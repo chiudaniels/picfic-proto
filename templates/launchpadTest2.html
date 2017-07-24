@@ -1,24 +1,42 @@
+<!-- ####################JEANNE'S NOTES###################
+should navbar be in layout template for jinja? should it appear everywhere?
+if logged in, turns into log out
+-->
+
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/launchpad_stylesheet.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/launchpad_ss2.css">
 </head>
 
 <body>
-    <nav class="navbar">
+  <nav class="navbar">
         <img src="../static/svg/PicFic.svg" class="navpicficLogo">
         <span id="aboutus">
-			ABOUT US
-		</span>
-        <span id="signup">
-			SIGNUP
-		</span>
+	  <a href="/about/">ABOUT US</a>
+	</span>
+
+        <span id="signup" href="#" class="dropdown-toggle" data-toggle="dropdown">
+	  SIGN UP
+	</span>
+	
+	<span id="signin">
+	  SIGN IN
+	</span>
+	<span id="gallery">
+	  GALLERY
+	</span>
     </nav>
     <!-- FIRST PAGE-->
     <div class="pageone">
@@ -44,8 +62,10 @@
             </div>
         </div>
         <div class="row" id="bookgallery">
-            <div class="col-md-3">
-                <img src="../static/launchpad/png/study_in_scarlet.png">
+          <div class="col-md-3">
+	    <a href="chapter_template.html">
+              <img src="../static/launchpad/png/study_in_scarlet.png">
+	      </a>
                 <br>
                 <span>A STUDY IN SCARLET</span>
                 <br>
