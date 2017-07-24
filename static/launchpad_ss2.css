@@ -207,7 +207,13 @@ body {
 
 #signup {
     position: absolute;
-    right:24vw;
+    right:50vw;
+    padding-top: 2.3vh;
+}
+
+#tester{
+    position: absolute;
+    right:15vw;
     padding-top: 2.3vh;
 }
 
@@ -240,6 +246,7 @@ body {
     padding: 14px 14px 0;
     overflow:hidden;
     background-color:rgba(255,255,255,.8);
+    position: absolute;
 }
 #login-dp .help-block{
     font-size:12px    
