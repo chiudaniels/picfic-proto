@@ -43,7 +43,7 @@ def getImageDisplay( imageID ):
 #given: image url (from flask request), markerID, uploader
 #returns: imageID
 #creates image document
-def saveImage( url, markerID, userID ):
+def saveImage( url, markerID, userID, text ):
     imageID = counter_cI()
     #update user db
     db.users.update_one(
@@ -69,7 +69,8 @@ def saveImage( url, markerID, userID ):
             "likes" : [], #to hold userIDs,
             "comments" : [], #to hold comment data tructure
             #{ user: <userName>, message: <text>, timestamp: <timestamp> }
-            "url" : url
+            "url" : url,
+            "caption" : text
         }
     )
     return True

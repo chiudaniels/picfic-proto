@@ -14,5 +14,7 @@ JY 7-20-2017
 JY 7-24-2017
 	- forms fixed, temp edits to settings.html, landing page
 	- template set up for booklanding page
-
+	- login/basic navigation up
+	- first page of reading set up
+	- file uploading started (debugging)
 
