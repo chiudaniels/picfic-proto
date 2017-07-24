@@ -41,7 +41,7 @@ def getBookMetadata( bookID ):
     if exists(bookID):
         finder = cB.find_one(
             { "bookID" : int(bookID) },
-            { "meta": 1 }
+            { "meta": 1, "bookID": 1 }
             )
         #NOT DONE NEEDS IMAGES
         
@@ -52,11 +52,19 @@ def getTopImages( bookID ):
     return None
 
 #For the gallery
-def getGalleryPage(pgNum, query, userID):
+def getGalleryPage( pgNum, query, userID ):
 
     #for every book
     #finder = cB.find_one({}, {"galMeta":1, "bookID":1})
     return None
+
+#Reading
+def getPageData( bookID, chNum, pgNum ):
+    
+    return None
+
+
+
 
 #helper functions
 

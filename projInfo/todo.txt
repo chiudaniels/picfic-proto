@@ -15,3 +15,8 @@ use javascript to verify equality of passwords
 
 tumblr, emails, facebook
 google "<platform> identity api"
+
+
+Javascript alerts for actions
+
+Fix link

@@ -10,3 +10,7 @@ JY 7-20-2017
 	- user database set up
 	- gallery database set up
 	- routes set up
+
+JY 7-24-2017
+	- forms fixed, temp edits to settings.html, landing page
+	- template set up for booklanding page

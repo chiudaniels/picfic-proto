@@ -23,7 +23,7 @@ app.secret_key = "secrets"
 
 @app.route("/")
 def root():
-    return render_template("launchpadLoginTest.html")
+    return render_template("launchpadTest2.html")
 
 # == Settings =======================================
 
@@ -61,7 +61,7 @@ def galleryPage(pageNum):
 @app.route("/books/<bookID>")
 def bookLanding(bookID):
     metadata = books.getBookMetadata(bookID)
-    return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), bookData = metadata)
+    return render_template("bookLandingTemp.html", isLoggedIn = isLoggedIn(), data = metadata)
 
 
 # == reading =====
@@ -130,15 +130,15 @@ def changePass():
         new1 = d["pass1"]
         new2 = d["pass2"]
         users.changePass( getUserID(), old, new1, new2 )
-    return redirect(url_for('root'))
+    return redirect(url_for('settings'))
 
 @app.route('/changeTag/', methods = ['POST'])
-def changePass():
+def changeTag():
     if isLoggedIn():
         d = request.form
         newTag = d["tag"]
         users.changeTag( getUserID(), newTag )
-    return redirect(url_for('root'))
+    return redirect(url_for('settings'))
 
 
 # General Helpers =====================================

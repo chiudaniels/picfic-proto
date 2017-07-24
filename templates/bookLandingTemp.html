@@ -13,22 +13,12 @@
     <link rel="stylesheet" type="text/css" href="../static/launchpad_stylesheet.css">
 </head>
 <body>
-<h2>Settings</h2>
-  
-<form action="/changeTag/">
-  <label><b>Change Your Artist Tag</b></label><br>
-  <input type="text" name="tag"><br>
-  <input type="submit" value="Submit">
-</form>
+<h2>{{data["meta"]["title"]}}</h2>
 
-<br>
-
-<form action="/changePass/">
-  <label><b>Change Your Password</b></label><br>
-  <input type="password" placeholder="your old password" name="pass"><br>
-  <input type="password" placeholder="your new password" name="pass1"><br>
-  <input type="password" placeholder="reenter your new password" name="pass2"><br>
-  <input type="submit" value="Submit">
+<p>Author: {{data["meta"]["author"]}}</p>
+<p>Misc Data: {{data["meta"]["misc"]}}</p>
+<p>Blurb: {{data["meta"]["blurb"]}}</p>
+<a href="{{data['bookID']}}/read">Read</a>
 
 <a href="/">Back</a>  
 </body>
