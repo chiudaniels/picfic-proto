@@ -59,8 +59,25 @@ def getGalleryPage( pgNum, query, userID ):
     return None
 
 #Reading
-def getPageData( bookID, chNum, pgNum ):
-    
+def getPageData( bookIDA, chNumA, pgNumA ):
+    bookID = int(bookIDA)
+    chNum = int(chNumA) - 1
+    pgNum = int(pgNumA) - 1 #offset for list  indices
+    if exists( bookID ):
+        ret = {"bookID": bookID}
+        #ret["bookData"] =  cB.find_one({"bookID": bookID}) #just pass everything
+        print chNum
+        ret["chData"] = cB.find_one({"bookID": int(bookID) })["chapters"][chNum]
+        ret["pgData"] = ret["chData"]["pages"][pgNum] 
+        ret["markerData"] = db.markers.find_one(
+            {"markerID": ret["pgData"]["marker"]}
+        )
+        ret["imageData"] = db.images.find_one(
+            {"markerID": ret["markerData"]["markerID"]}
+        )
+        print "not nice"
+        return ret
+    print "nice"
     return None
 
 

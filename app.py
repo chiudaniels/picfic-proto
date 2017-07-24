@@ -23,7 +23,7 @@ app.secret_key = "secrets"
 
 @app.route("/")
 def root():
-    return render_template("launchpadTest2.html")
+    return render_template("launchpad.html")
 
 # == Settings =======================================
 
@@ -69,7 +69,7 @@ def bookLanding(bookID):
 
 @app.route("/books/<bookID>/read")
 def bookRedir(bookID):
-    return redirect("/books/<bookid>/read/1/1")
+    return redirect("/books/" + str(bookID) + "/read/1/1")
 
 @app.route("/books/<bookID>/read/<chNum>/<pgNum>")
 def bookPage(bookID, chNum, pgNum):
@@ -77,7 +77,7 @@ def bookPage(bookID, chNum, pgNum):
     if data == None or len(data) == 0:
         print "Something went wrong"
     else:
-        return render_template("bookPage.html", isLoggedIn = isLoggedIn(), pageData = data , message = "You are reading")
+        return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data , message = "You are reading")
 
     
 #=================== END SITE NAVIGATION =======================

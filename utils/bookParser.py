@@ -8,6 +8,7 @@ db = server.picfic
 
 cB = db.books
 
+
 #If every page has a marker, give it one. Right now, there's one after every line.
 def parseBook( textFilename, metaFilename ): #get the text formatted
     printable = set(string.printable)
@@ -48,14 +49,23 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
                 "pages" : [],
                 "title": line
             })
-            bookData['chapters'][chCt]["pages"].append([])
+            bookData['chapters'][chCt]["pages"].append(
+                {"text": [],
+                 "marker": newMarker()
+                }
+            )
             pgCt = 0
             chCt += 1
-        elif "--------" in line:#replace with ***
-            bookData['chapters'][chCt]["pages"].append([])
+        elif "--------" in line:#replace with ***, new page
+            bookData['chapters'][chCt]["pages"].append(
+                {"text": [],
+                 "marker": newMarker()
+                }
+            )            
             pgCt += 1
         else:
-            bookData['chapters'][chCt]["pages"][pgCt].append([line, newMarker()])
+            #bookData['chapters'][chCt]["pages"][pgCt].append([line, newMarker()])
+            bookData['chapters'][chCt]["pages"][pgCt]["text"].append(line)
             
     
     textFile.close()
@@ -63,10 +73,12 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
     print bookData
     return True
     
-def newMarker():
+def newMarker( ):
     markerData = {
         "imgs":[],
         "markerID": db.markers.count()
     }
     db.markers.insert_one(markerData)
     return markerData["markerID"]
+
+#parseBook("../data/texts/sampleText.txt", "../data/texts/sampleMeta.txt")

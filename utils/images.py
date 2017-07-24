@@ -108,3 +108,12 @@ def userFind( userID ):
 
 def counter_cI():
     return cI.count()
+
+#grab a bunch of ids
+#use arrays sql
+#ORM
+#refloat text - users want to change view of page
+#character count or associate it with line/paragraph
+#postgreSQL
+#order images by marker
+#track book and marker number
