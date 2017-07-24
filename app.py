@@ -89,18 +89,19 @@ def bookPage(bookID, chNum, pgNum):
 
 @app.route("/login/", methods=["POST"])
 def login():
+
     # request
     uN = request.form["username"]
     pwd = request.form["password"]
     #auth
     msg = ""
-    if 'login' in request.form:
-        if users.isValidAccountInfo( uN, pwd ):
-            session['uID'] = users.getUserID( uN )
-        else:
-            msg = "Invalid credentials"
+    
+    if users.isValidAccountInfo( uN, pwd ):
+        session['uID'] = users.getUserID( uN )
+        print 'logged in!'
     else:
-        message = "How"
+        msg = "Invalid credentials"
+
     return redirect( url_for('root', message=msg) )
 
 @app.route("/logout/")
