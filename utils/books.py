@@ -33,32 +33,29 @@ def exists( bookID ):
 """
 getBookMetadata( bookID )
 Given:
-  mapID - unique id given to each map
+  bookID - unique id given to each map
 Returns:
-  <data> form of the data held in a given map
+  data for book landing page
 """    
 def getBookMetadata( bookID ):
     if exists(bookID):
         finder = cB.find_one(
             { "bookID" : int(bookID) },
-            { "_id" : 0 }
+            { "meta": 1 }
             )
+        #NOT DONE NEEDS IMAGES
+        
         return finder
-    return None
-"""
-def getImages( mapID ):
-    if exists( mapID ):
-        finder = cB.find_one(
-            { "mapID" : int(mapID) }
-            )
-        return finder["outline"]
-    return None
-"""
-
-def getPageData( bookID, chNum, pgNum ):
     return None
 
 def getTopImages( bookID ):
+    return None
+
+#For the gallery
+def getGalleryPage(pgNum, query, userID):
+
+    #for every book
+    #finder = cB.find_one({}, {"galMeta":1, "bookID":1})
     return None
 
 #helper functions

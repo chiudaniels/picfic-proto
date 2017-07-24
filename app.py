@@ -65,9 +65,6 @@ def bookLanding(bookID):
 
 
 # == reading =====
-@app.route("/test/")
-def bookTest():
-    return render_template("testerLogin.html")
 
 
 @app.route("/books/<bookID>/read")

@@ -24,6 +24,12 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
     bookData["meta"]["author"] = metaList[1]
     bookData["meta"]["misc"] = metaList[2]
     bookData["meta"]["blurb"] = metaList[3]
+    bookData["meta"]["thumbName"] = metaList[4]
+    bookData["galMeta"] = {
+        "title": metaList[0]
+        "author": metaList[1]
+        "thumbnail": metaList[4]
+    }
     #hope that the blurb is 1 paragraph... or restructure
     
     textFile = open(textFilename, "r")

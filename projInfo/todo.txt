@@ -1,12 +1,17 @@
 TODO:
 Image liking (see images.py)
 Image uploading
-
-following (of artists, and of stories)
+      
+following (of artists, and of stories) check
+email notifications | push notifications
 How much of a portfolio site is this going to be?
 
-"I want to draw!" - random story
+"I want to draw!" - random story |
 
 remind users to configure authortag
 
 use javascript to verify equality of passwords
+
+
+tumblr, emails, facebook
+google "<platform> identity api"
