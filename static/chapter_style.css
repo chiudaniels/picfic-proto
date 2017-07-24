@@ -22,7 +22,10 @@ body{
 	left:95%;
 }
 
-
+.logos{
+  max-width:200px;
+  margin:0px;
+}
 
 .logo1{
 	position:relative;
@@ -71,7 +74,10 @@ body{
     transition: width 0.4s ease-in-out;
 }
 
-    
+.arrow{
+  padding-top:50%;
+  position:relative;
+}
 
 
 
