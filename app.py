@@ -23,7 +23,7 @@ app.secret_key = "secrets"
 
 @app.route("/")
 def root():
-    return render_template("launchpad.html")
+    return render_template("launchpad.html", isLoggedIn = isLoggedIn() )
 
 # == Settings =======================================
 
@@ -31,7 +31,7 @@ def root():
 def settings():
     if isLoggedIn():
         return render_template( "settings.html" )
-    return redirect( url_for('root') )
+    return redirect( url_for('root'), isLoggedIn = isLoggedIn() )
 
 # == About ==========================================
 
@@ -45,16 +45,19 @@ def about():
 
 @app.route("/gallery/")
 def galleryRoute():
-    return redirect("/gallery/browse/page/1")
+    return redirect("/gallery/browse/page/1", isLoggedIn = isLoggedIn() )
 
 @app.route("/gallery/browse/page/<pageNum>")
 def galleryPage(pageNum):
+    return render_template("gallery.html", isLoggedIn = isLoggedIn() )
+"""
     data = gallery.getPage(getUserID(), pageNum) #<-- get back later
+    
     if len(data) == 0:
         return render_template("gallery.html", isLoggedIn = isLoggedIn(), message = "There are no books at this time")
     else:
         return render_template("gallery.html", isLoggedIn = isLoggedIn(), galleryData = data , message = "You are viewing the gallery")
-
+"""
 
 # == Book landing page ==============================
 
