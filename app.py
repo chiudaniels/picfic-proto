@@ -177,7 +177,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
-"""
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -200,15 +199,6 @@ def upload_file():
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     return None
-
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-</form>
-"""
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
