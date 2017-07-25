@@ -199,7 +199,7 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-    return None
+        return None
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
