@@ -94,16 +94,16 @@ def bookPage(bookID, chNum, pgNum):
 # Login Routes ======================================
 
 @app.route("/login/", methods=["POST"])
-def login(username, password):
+def login():
 
     # request
-    #uN = request.form["username"]
-    #pwd = request.form["password"]
+    uN = request.form["username"]
+    pwd = request.form["password"]
     #auth
     msg = ""
     
-    if users.isValidAccountInfo( username, password ):
-        session['uID'] = users.getUserID( username )
+    if users.isValidAccountInfo( uN, pwd ):
+        session['uID'] = users.getUserID( uN )
         print 'logged in!'
     else:
         msg = "Invalid credentials"
