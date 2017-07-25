@@ -19,6 +19,8 @@
         <!-- search logo -->
         <img src="../../../../static/svg/search.svg" class="searchLogo">
     </nav>
+
+    {% if pageData["status"] == 1 %}
     <div class="container">
         <div class="row">
             
@@ -32,9 +34,16 @@
                 <!-- twitter logo -->
                 <img src="../../../../static/svg/twitter.svg " class="logo3 ">
             </div>
-
-            <div class="col-md-1 arrow">
-                <a class="prev" href="{{pageData['pgNum']-1}}"><img src="../../../../static/svg/leftarrow.svg"> </a>
+	    
+            <div class="col-md-1 arrow"
+		 {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
+		 style="visibility:hidden"
+		 {% endif %}>
+              <a class="prev" href="{{pageData['pgNum']-1}}"		 
+		 
+		 ><!-- put it here to keep positioning -->
+		<img src="../../../../static/svg/leftarrow.svg">
+	      </a>
             </div>
 
         <!-- story stuff -->
@@ -61,8 +70,17 @@
             </div>
         </div>
         <!-- -->
-        <div class="col-md-1 arrow">
-        <a class="next " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum']}}/{{pageData['pgNum']+1}}"><img src="../../../../static/svg/rightarrow.svg"></a>
+        <div class="col-md-1 arrow" {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
+		 style="visibility:hidden"
+	     {% endif %}>
+	  <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
+	  {% if pageData["pgNum"] == pageData["chLength"] %}
+	  <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
+	  {% else %}
+          <a class="next " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum']}}/{{pageData['pgNum']+1}}">
+	  {% endif %}
+	    <img src="../../../../static/svg/rightarrow.svg">
+	  </a>
         </div>
     </div>
     <!-- progress bar -->
@@ -76,6 +94,13 @@
         </div>
     </div>
     </div>
+    {% elif pageData["status"] == 0 %}
+    <p> {{pageData["errMsg"]}} </p>
+    <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a>
+    {% else %}
+    <p> {{pageData["errMsg"]}} </p>
+    <a href="/">Back home</a>
+    {% endif %}
    <!--  <script src="../static/chapter.js ">
     </script> -->
 </body>
