@@ -13,7 +13,7 @@
   <!-- -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../static/launchpad_ss2.css">
-  <script src="../templates/login.js"></script>
+  <!--<script src="../static/login.js"></script>-->
   {% block head %}{% endblock %}
   </head>
 
@@ -93,8 +93,8 @@
 			<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
 		      </div>
                       or
+		      <div id="errorMess"></div>
 		      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
-			<div id="errorRegion"></div>
 			<div class="form-group">
 			  <label class="sr-only" for="username">Username</label>
 			  <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
@@ -105,7 +105,7 @@
                           <div class="help-block text-right"><a href="">Forget your password ?</a></div>
 			</div>
 			<div class="form-group">
-			  <button type="submit" id="sign-in-button" class="btn btn-primary btn-block">Sign in</button>
+			  <button onClick="myFunction()" type="button" id="sign-in-button" class="btn btn-primary btn-block">Sign in</button>
 			</div>
 			<!--
 			<div class="checkbox">
@@ -128,6 +128,6 @@
     </nav>
     {% block content %}{% endblock %}
 
-
   </body>
+<script src="../static/login.js"></script>
 </html>
