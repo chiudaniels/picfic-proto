@@ -1,6 +1,5 @@
 TODO:
 Image liking (see images.py)
-Image uploading
       
 following (of artists, and of stories) check
 email notifications | push notifications
@@ -19,4 +18,6 @@ google "<platform> identity api"
 
 Javascript alerts for actions
 
-Fix link
+Fix link/pathing in html files with variable
+
+Track user read progress, and html read progress bar

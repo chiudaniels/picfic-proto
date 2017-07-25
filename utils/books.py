@@ -75,6 +75,9 @@ def getPageData( bookIDA, chNumA, pgNumA ):
         ret["imageData"] = db.images.find_one(
             {"markerID": ret["markerData"]["markerID"]}
         )
+        ret["pgNum"] = int(pgNumA)
+        ret["chNum"] = int(chNumA)
+        ret["bookID"] = int(bookIDA)
         return ret
     return None
 
