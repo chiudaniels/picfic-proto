@@ -138,14 +138,12 @@ body {
     padding-top: 5vh;
 }
 
-
 .pagefive {
     position: absolute;
     left: 0;
     right: 0;
     z-index: -1;
-
-    """<!--top: 455.2vh;"""
+    top: 455.2vh;
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url(launchpad/png/background4.png);
@@ -159,12 +157,13 @@ body {
 }
 
 .pagefivecontent {
-    """position: absolute;
+    position: absolute;
     text-align: center;
-    top: 50vh;"""
+    top: 50vh;
     left: 26vw;
     max-width: 47vw;
     color: white;
+    vertical-align: text-top;
 }
 
 .footer {
