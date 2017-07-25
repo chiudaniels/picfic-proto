@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = "secrets"
 
 UPLOAD_FOLDER = "data/images/"
-ALLOW_EXTENSIONS = set(["jpg", "jpeg", "png"])
+ALLOWED_EXTENSIONS = set(["jpg", "jpeg", "png"])
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 #Site navigation
@@ -83,6 +83,9 @@ def bookPage(bookID, chNum, pgNum):
     if data == None or len(data) == 0:
         print "Something went wrong"
     else:
+        print 'loading book page'
+        print data["pgData"]["text"]
+        print "why"
         return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data , message = "You are reading")
 
     
@@ -152,13 +155,6 @@ def changeTag():
 
 # Photo Upload ==================================================================
 
-#UPLOAD_FOLDER = '/path/to/the/uploads'
-#ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg'])
-
-#app = Flask(__name__)
-
-#UPLOAD_FOLDER = join(dirname(realpath(__file__)), "images/")
-#app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
@@ -168,51 +164,23 @@ def allowed_file(filename):
 
 @app.route('/upload/', methods=['POST'])
 def upload_file():
-<<<<<<< HEAD
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
-        return None
-=======
-    print "do something"
     # check if the post request has the file part
     if 'file' not in request.files:
         #flash('No file part')
-        print "No file part"
         return redirect(request.url)
     file = request.files['file']
     # if user does not select file, browser also
     # submit a empty part without filename
-    print "We're doing it"
     if file.filename == '':
         #flash('No selected file')
-        print "Empty file"
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         markerID = request.form["markerID"]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         images.saveImage(filename, markerID, getUserID(), "")
-        print "ALMSOT UPLOADED"
-        print filename
-        print markerID
-        print "END DEBUG"
         return redirect(url_for('uploaded_file', filename=filename))
-    print "flop"
     return None
->>>>>>> fe61b2fc908d9146fd10c01014c2e0364a0dd150
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
