@@ -145,7 +145,7 @@ body {
     right: 0;
     z-index: -1;
 
-    top: 455.2vh;
+    """<!--top: 455.2vh;"""
     background-repeat: no-repeat;
     background-size: contain;
     background-image: url(launchpad/png/background4.png);
@@ -160,8 +160,8 @@ body {
 
 .pagefivecontent {
     """position: absolute;
-    text-align: center;"""
-    top: 493vh;
+    text-align: center;
+    top: 50vh;"""
     left: 26vw;
     max-width: 47vw;
     color: white;
@@ -287,9 +287,4 @@ body {
         background-color: inherit;
         border-top:0 none;
     }
-}
-
-
-.fa-facebook-square {
-    font-size: 5em;
 }
