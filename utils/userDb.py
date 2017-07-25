@@ -79,12 +79,13 @@ def registerAccountInfo( uN, hP ):
         doc["ownedIDs"] = [] #images
         doc["authortag"] = uN #allow configuration
         doc["likedImages"] = []
+        doc["books"] = {}#entry: {id: [ch progress, pg progress]}
         cU.insert_one( doc )
         return True
     except:
         return False
 
-
+    
 def registerAdditionalInfo( uID, newInfo ):
     if exists(uID):
         finder = cU.update_one({"userID": uID }, {"userInfo": newInfo })
@@ -171,6 +172,18 @@ def getLikedImages ( userID ):
     return False
 
 
+#CHECK TYPES 
+def updateProgress( userID, bookID, chNum, pgNum ):
+    if exists(userID):
+        finder = cU.find_one({"userID": int(userID)},
+                               {"books":1}
+        )
+        finder["books"][int(bookID)] = [chNum, pgNum]
+        cU.update_one({"userID": int(userID)},
+                      {books : finder["books"]})
+    return None    
+            
+        
 
     
 #helper functions    

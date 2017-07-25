@@ -174,8 +174,9 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         markerID = request.form["markerID"]
+        caption = request.form["caption"]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        images.saveImage(filename, markerID, getUserID(), "")
+        images.saveImage(filename, markerID, getUserID(), caption)
         url = request.url.replace("/upload/", "")
         return redirect(url)
     return None

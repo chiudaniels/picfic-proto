@@ -26,8 +26,6 @@ move text files into folder, put filenames in database
 
 write ajax for getting image data
 
-data needs to be reset!
-
 SUBMIT FANART FOR REVIEW feature
 
 Highlighting and uploading text/ how text is split up
@@ -35,10 +33,15 @@ Highlighting and uploading text/ how text is split up
 Save user progress on page load
 
 
-TODO:
-user profile information
-highlighting
+TODO (for tomorrow):
+update user progress via ajax on button press
+turn page loading in ajax applet (text and images)
+image liking
+highlighting modal
 convert to sql
+get functions for caption
+sorting funtions for image gallery
+
 
 PATCHES:
 fix url problem
