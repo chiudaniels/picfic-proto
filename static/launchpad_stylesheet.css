@@ -1,10 +1,10 @@
 html{
-	width:100%; 
-	margin:0;
+    width:100%; 
+    margin:0;
 }
 
 body {
-	position:relative;
+    position:relative;
     max-width: 1920px;
     margin: 0 auto;
 }
@@ -126,7 +126,7 @@ body {
     left: 24.3vw;
 }
 
-.picficLogo {
+.picficLogo{
     height: 6vw;
     width: auto;
     fill: black;
@@ -159,8 +159,8 @@ body {
 }
 
 .pagefivecontent {
-    position: absolute;
-    text-align: center;
+    """position: absolute;
+    text-align: center;"""
     top: 493vh;
     left: 26vw;
     max-width: 47vw;
@@ -287,4 +287,9 @@ body {
         background-color: inherit;
         border-top:0 none;
     }
+}
+
+
+.fa-facebook-square {
+    font-size: 5em;
 }
