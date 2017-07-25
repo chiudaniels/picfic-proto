@@ -1,35 +1,58 @@
-$(document).ready(function(){
-
-  //When the user click on the login button    
-  $("#submit").click(function(){
-
-    //Get each input value in a veriable.
-    var username = $("#inputUSer").val();
-    var password = $("#inputPass").val();
-
-    //Check if the username and/or the password input are empty.
-    if((username == "") || (password == "")) {
-      $("#message").html("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Please enter a username and a password</div>");
-    }
-    else {
-      $.ajax({
-        type: "POST",
-        url: "../utils/users.py",
-        data: "uN="+username+"pwd="+password,
-        success: function(html){    
-          if(html=='true') { //if the return value = 'true' then redirect to 'login_success.php
-            window.location="/";
-          }
-          else { //if the return value != 'true' then add the error message to the div.#message
-            $("#message").html(html);
-          }
-        },
-        beforeSend:function()
-        { //loading gif 
-          $("#message").html("<p class='text-center'><img src='images/ajax-loader.gif'></p>")
+/*$.ajax({
+    url : '../templates/layout.html',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    crossDomain: true,
+    method: 'POST',
+    type: 'POST',
+    dataType:'json',
+    data: JSON.stringify(login),
+    success : function(data) { // executes in ajax success
+        if(data.success){ //assuming data contains success and message
+            alert('Logged in successfully....');
+            $(location).attr('href', "/ui/index.html");
         }
-      });
+        else{
+            alert(data.error.msg) // assuming data contains error                       and message
+        }
+    },
+    error : function(data) { // executes only if ajax fails
+        alert('Error....');
     }
-    return false;
-  });
-});
+    }); */
+
+var ajaxRequest;  // The variable that makes Ajax possible!
+function ajaxFunction(){
+   try{  
+      // Opera 8.0+, Firefox, Safari
+      ajaxRequest = new XMLHttpRequest();
+   }catch (e){
+      // Internet Explorer Browsers
+      try{
+         ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         try{
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+         } catch (e){
+            // Something went wrong
+            alert("Your browser broke!");
+            return false;
+         }
+      }
+   }
+}
+
+
+function validateAccount(){
+    ajaxFunction();
+   
+   // Here processRequest() is the callback function.
+   ajaxRequest.onreadystatechange = processRequest;
+   
+   if (!target) target = document.getElementById("userid");
+   var url = "validate?id=" + escape(target.value);
+   
+   ajaxRequest.open("GET", url, true);
+   ajaxRequest.send(null);
+}
