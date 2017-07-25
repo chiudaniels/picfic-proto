@@ -21,3 +21,27 @@ Javascript alerts for actions
 Fix link/pathing in html files with variable
 
 Track user read progress, and html read progress bar
+
+move text files into folder, put filenames in database
+
+write ajax for getting image data
+
+data needs to be reset!
+
+SUBMIT FANART FOR REVIEW feature
+
+Highlighting and uploading text/ how text is split up
+
+Save user progress on page load
+
+
+TODO:
+user profile information
+highlighting
+convert to sql
+
+PATCHES:
+fix url problem
+security for uploads - random filename, ensure uniqueness (well we have the ids, not necessary)
+more information in upload route so you're not redirected
+write get/set functions for userInfo key

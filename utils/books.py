@@ -2,7 +2,7 @@
 
 import datetime
 import time
-import userDb
+import userDb, markers, images
 
 #initialize mongo database
 import pymongo 
@@ -67,15 +67,39 @@ def getPageData( bookIDA, chNumA, pgNumA ):
     if exists( bookID ):
         ret["bookID"] = bookID
         #ret["bookData"] =  cB.find_one({"bookID": bookID}) #just pass everything
+        
+        ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
+        ret["pgData"] = ret["chData"]["pages"][pgNum] 
+        ret["markerData"] = db.markers.find_one(
+            {"markerID": ret["pgData"]["marker"]}
+        )
+        #probably needs to pull more data for sorting
+        ret["imageData"] = []
+        print markers.getImages(ret["markerData"]["markerID"])
+        for imgID in markers.getImages(ret["markerData"]["markerID"])["imageIDs"]:
+            ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
+            #attributes: authortag, url, userID, markerID
+        ret["pgNum"] = int(pgNumA)
+        ret["chNum"] = int(chNumA)
+        ret["bookID"] = int(bookIDA)
+        ret["chLength"] = len(ret["chData"]["pages"])
+        ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)})["chapters"])
+        ret["status"] = 1
+        return ret
+        """
         try:
             ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
             ret["pgData"] = ret["chData"]["pages"][pgNum] 
             ret["markerData"] = db.markers.find_one(
                 {"markerID": ret["pgData"]["marker"]}
             )
-            ret["imageData"] = db.images.find_one(
-                {"markerID": ret["markerData"]["markerID"]}
-            )
+            #probably needs to pull more data for sorting
+            ret["imageData"] = []
+            print markers.getImages(ret["markerData"]["markerID"])
+            for imgID in markers.getImages(ret["markerData"]["markerID"]):
+                
+                ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
+                #attributes: authortag, url, userID, markerID
             ret["pgNum"] = int(pgNumA)
             ret["chNum"] = int(chNumA)
             ret["bookID"] = int(bookIDA)
@@ -86,11 +110,12 @@ def getPageData( bookIDA, chNumA, pgNumA ):
         except:
             ret["status"] = 0
             ret["errMsg"] = "This book doesn't have this page."
+            
             return ret
     ret["status"] = -1
     ret["errMsg"] = "Book doesn't exist."
     return ret
-
+"""
 
 
 

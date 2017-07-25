@@ -8,7 +8,7 @@ import json, os
 app = Flask(__name__)
 app.secret_key = "secrets"
 
-UPLOAD_FOLDER = "data/images/"
+UPLOAD_FOLDER = "static/data/images/"
 ALLOWED_EXTENSIONS = set(["jpg", "jpeg", "png"])
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -75,7 +75,6 @@ def bookLanding(bookID):
 
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
-    print "redirecting"
     return redirect("/books/" + str(bookID) + "/read/1/1")
 
 #How do i pass data about the page to the router if not in the url?
@@ -163,8 +162,10 @@ def upload_file():
     # check if the post request has the file part
     if 'file' not in request.files:
         #flash('No file part')
+        print "work"
         return redirect(request.url)
     file = request.files['file']
+    print "work2"
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
@@ -175,7 +176,8 @@ def upload_file():
         markerID = request.form["markerID"]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         images.saveImage(filename, markerID, getUserID(), "")
-        return redirect(url_for('uploaded_file', filename=filename))
+        url = request.url.replace("/upload/", "")
+        return redirect(url)
     return None
 
 @app.route('/uploads/<filename>')
