@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory
+import flask
 from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
@@ -99,10 +100,10 @@ def login():
     if users.isValidAccountInfo( uN, pwd ):
         session['uID'] = users.getUserID( uN )
         print 'logged in!'
+        return redirect( url_for('root'))
     else:
-        msg = "Invalid credentials"
+        return flask.Response("fail")
 
-    return redirect( url_for('root', message=msg) )
 
 @app.route("/logout/")
 def logout():
