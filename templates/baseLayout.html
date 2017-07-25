@@ -58,17 +58,17 @@
                       or
 		      <form class="form" role="form" method="post" action="/register/" accept-charset="UTF-8" id="login-nav">
 			<div class="form-group">
-			  <label class="sr-only" for="inputUsername">username</label>
-			  <input type="text" name="username" id="exampleInputEmail2" class="form-control" placeholder="Username" required>
+			  <label class="sr-only" for="makeUser">username</label>
+			  <input type="text" name="makeUser" id="makeUser" class="form-control" placeholder="Username" required>
 			</div>
 			<div class="form-group">
 			  <label class="sr-only" for="makePass">password</label>
-			  <input type="password" name="password" class="form-control" id="makePass" placeholder="Password" required>
+			  <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password" required>
                           
 			</div>
 			<div class="form-group">
 			  <label class="sr-only" for="confirmPass">re-enter password</label>
-			  <input type="password" name="password2" class="form-control" id="confirmPass" placeholder="Re-enter password" required>
+			  <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter password" required>
                           
 			</div>
 			<div class="form-group">
@@ -96,16 +96,16 @@
 		      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
 			<div id="errorRegion"></div>
 			<div class="form-group">
-			  <label class="sr-only" for="inputUsername">Username</label>
-			  <input type="text" class="form-control" id="inputUser" placeholder="Username" name="username" required>
+			  <label class="sr-only" for="username">Username</label>
+			  <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
 			</div>
 			<div class="form-group">
-			  <label class="sr-only" for="inputPass">Password</label>
-			  <input type="password" class="form-control" id="inputPass" placeholder="Password" name="password" required>
+			  <label class="sr-only" for="password">Password</label>
+			  <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
                           <div class="help-block text-right"><a href="">Forget your password ?</a></div>
 			</div>
 			<div class="form-group">
-			  <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+			  <button type="submit" id="sign-in-button" class="btn btn-primary btn-block">Sign in</button>
 			</div>
 			<!--
 			<div class="checkbox">
