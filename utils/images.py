@@ -12,10 +12,12 @@ db = server.picfic
 
 cI = db.images
 
+IMGDIR = "data/images/"
+
 
 #Helper
 def exists( imageID ):
-    finder = cB.find_one(
+    finder = cI.find_one(
         { "imageID" : int(imageID) }
         )
     return finder is not None
@@ -33,9 +35,10 @@ def getImageURL( imageID ):
 
 #for the reading page (non detailed)
 def getImageDisplay( imageID ):
-    if exists(imageid):
+    if exists(imageID ):
         finder = cI.find_one({"imageID":int(imageID)}, {"url" : 1, "userID" : 1, "markerID" : 1})
         finder["authortag"] = userDb.getTag( finder["userID"])
+        finder["url"] = IMGDIR + finder["url"]
         return finder
     return False
         
@@ -49,14 +52,14 @@ def saveImage( url, markerID, userID, text ):
     db.users.update_one(
         {"userID": int(userID)},
         {"$addToSet":
-         {"imageIDs": [imageID]}
+         {"imageIDs": imageID}
         }
     )
     #update marker db
     db.markers.update_one(
         {"markerID": int(markerID)},
         {"$addToSet":
-         {"imageIDs": [imageID]}
+         {"imageIDs": imageID}
         }
     )
     #update images db

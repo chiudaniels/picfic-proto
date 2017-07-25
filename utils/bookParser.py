@@ -37,7 +37,7 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
     textText = textFile.readlines()
     #goals: find the chapters, find the splits.
     #manually parse through text...
-    chCt = -1
+    chCt = 0
     pgCt = 0
     for ln in textText:        
         line = filter(lambda x: x in printable, ln)
@@ -54,10 +54,13 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
                  "marker": newMarker()
                 }
             )
+            print "Chapter " + str(chCt)
+            #print bookData["chapters"][chCt]
+            print "CHAPTER INSERTED"
             pgCt = 0
             chCt += 1
         elif "--------" in line:#replace with ***, new page
-            bookData['chapters'][chCt]["pages"].append(
+            bookData['chapters'][chCt - 1]["pages"].append(
                 {"text": [],
                  "marker": newMarker()
                 }
@@ -65,7 +68,13 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
             pgCt += 1
         else:
             #bookData['chapters'][chCt]["pages"][pgCt].append([line, newMarker()])
-            bookData['chapters'][chCt]["pages"][pgCt]["text"].append(line)
+            #print chCt
+            #print pgCt
+            #if chCt == 1:
+             #   print "Debugging"
+              #  print pgCt
+               # print bookData["chapters"][chCt - 1]["pages"]
+            bookData['chapters'][chCt - 1]["pages"][pgCt]["text"].append(line)
             
     
     textFile.close()
@@ -81,4 +90,4 @@ def newMarker( ):
     db.markers.insert_one(markerData)
     return markerData["markerID"]
 
-#parseBook("../data/texts/sampleText.txt", "../data/texts/sampleMeta.txt")
+parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")

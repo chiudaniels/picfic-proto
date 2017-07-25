@@ -13,6 +13,12 @@ cU = db.users #collection of users
 
 #User data functions
 
+def exists( userID ):
+    finder = cU.find_one(
+        { "userID" : int(userID) }
+        )
+    return finder is not None
+
 """
 isValidAccountInfo( uN, hP )
 Given:
@@ -70,7 +76,7 @@ def registerAccountInfo( uN, hP ):
         doc["userID"] = counter_cU()
         doc["password"] = hP
         doc["starredIDs"] = []
-        doc["ownedIDs"] = []
+        doc["ownedIDs"] = [] #images
         doc["authortag"] = uN #allow configuration
         doc["likedImages"] = []
         cU.insert_one( doc )
@@ -78,6 +84,13 @@ def registerAccountInfo( uN, hP ):
     except:
         return False
 
+
+def registerAdditionalInfo( uID, newInfo ):
+    if exists(uID):
+        finder = cU.update_one({"userID": uID }, {"userInfo": newInfo })
+    return None
+    
+    
 """
 doesUserExist( uN )
 Given:
@@ -156,6 +169,8 @@ def getLikedImages ( userID ):
         finder = cU.find_one({"userID": int(userID)}, {"likedImages": 1})
         return finder
     return False
+
+
 
     
 #helper functions    
