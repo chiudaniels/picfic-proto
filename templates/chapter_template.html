@@ -59,12 +59,14 @@
         <a class="next "><img src="../static/svg/rightarrow.svg"></a>
         </div>
     </div>
-    <!-- prgoress bar -->
+    <!-- progress bar -->
     <div class="row ">
         <div class="column-md-12 ">
-        <form id="image_upload" name="/image/upload/" method="post">
-				    <input type='file' id="fileUpload"/>
-				    </form>
+        <form id="image_upload" action="/upload/" method="post" enctype="multipart/form-data">
+	  <input type='file' class="form-control" name = "upload" id="fileUpload"/>
+	  <input type='hidden' name="markerID" value="{{pageData['markerData']['markerID']}}">
+	  <button id="upload-button" class="btn btn default edit"> Upload picture </button>
+	</form>
         </div>
     </div>
     </div>

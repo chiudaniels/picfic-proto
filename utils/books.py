@@ -75,9 +75,7 @@ def getPageData( bookIDA, chNumA, pgNumA ):
         ret["imageData"] = db.images.find_one(
             {"markerID": ret["markerData"]["markerID"]}
         )
-        print "not nice"
         return ret
-    print "nice"
     return None
 
 
