@@ -64,7 +64,7 @@ def galleryPage(pageNum):
 
 # == Book landing page ==============================
 
-@app.route("/books/<bookID>")
+@app.route("/books/<int:bookID>")
 def bookLanding(bookID):
     metadata = books.getBookMetadata(bookID)
     return render_template("bookLandingTemp.html", isLoggedIn = isLoggedIn(), data = metadata)
@@ -73,21 +73,16 @@ def bookLanding(bookID):
 # == reading =====
 
 
-@app.route("/books/<bookID>/read")
+@app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
+    print "redirecting"
     return redirect("/books/" + str(bookID) + "/read/1/1")
 
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>/<int:pgNum>")
 def bookPage(bookID, chNum, pgNum):
     data = books.getPageData(bookID, chNum, pgNum)
-    if data == None or len(data) == 0:
-        print "Something went wrong"
-    else:
-        print 'loading book page'
-        print data["pgData"]["text"]
-        print "why"
-        return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data , message = "You are reading")
+    return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
 
     
 #=================== END SITE NAVIGATION =======================
@@ -203,9 +198,19 @@ def getUserID():
     else:
         return None
 
+# Error Handling =======================================
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+
+    
 if __name__ == "__main__":
     app.debug = True
     app.run()
     #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
     
 print __name__
+
+
+

@@ -63,23 +63,33 @@ def getPageData( bookIDA, chNumA, pgNumA ):
     bookID = int(bookIDA)
     chNum = int(chNumA) - 1
     pgNum = int(pgNumA) - 1 #offset for list  indices
+    ret = {}
     if exists( bookID ):
-        ret = {"bookID": bookID}
+        ret["bookID"] = bookID
         #ret["bookData"] =  cB.find_one({"bookID": bookID}) #just pass everything
-        print chNum
-        ret["chData"] = cB.find_one({"bookID": int(bookID) })["chapters"][chNum]
-        ret["pgData"] = ret["chData"]["pages"][pgNum] 
-        ret["markerData"] = db.markers.find_one(
-            {"markerID": ret["pgData"]["marker"]}
-        )
-        ret["imageData"] = db.images.find_one(
-            {"markerID": ret["markerData"]["markerID"]}
-        )
-        ret["pgNum"] = int(pgNumA)
-        ret["chNum"] = int(chNumA)
-        ret["bookID"] = int(bookIDA)
-        return ret
-    return None
+        try:
+            ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
+            ret["pgData"] = ret["chData"]["pages"][pgNum] 
+            ret["markerData"] = db.markers.find_one(
+                {"markerID": ret["pgData"]["marker"]}
+            )
+            ret["imageData"] = db.images.find_one(
+                {"markerID": ret["markerData"]["markerID"]}
+            )
+            ret["pgNum"] = int(pgNumA)
+            ret["chNum"] = int(chNumA)
+            ret["bookID"] = int(bookIDA)
+            ret["chLength"] = len(ret["chData"]["pages"])
+            ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)})["chapters"])
+            ret["status"] = 1
+            return ret
+        except:
+            ret["status"] = 0
+            ret["errMsg"] = "This book doesn't have this page."
+            return ret
+    ret["status"] = -1
+    ret["errMsg"] = "Book doesn't exist."
+    return ret
 
 
 
