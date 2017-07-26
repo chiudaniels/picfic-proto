@@ -114,9 +114,19 @@
       <h3>or sign up with your email</h3>
       <p>
 	<form action="/login/" class="pagefivetext">
-	  Email: <input type="email" name="email" placeholder="Email"><br>
-	  Password: <input type="password" name="makePass" placeholder="Password"><br>
-	  Re-enter your password: <input type="password" name="confirmPass" placeholder="Re-enter your password">
+	  <div class="form-group">
+	    <label for="makeEmail">Email address</label>
+	    <input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="makePass">Password</label>
+	    <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	  </div>
+	  <div class="form-group">
+	    <label for="confirmPass">Password</label>
+	    <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
+	  </div>
 	</form>
       </p>
     </div>
