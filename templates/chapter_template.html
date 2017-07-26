@@ -35,7 +35,7 @@
                 <img src="../../../../static/svg/twitter.svg " class="logo3 ">
             </div>
 	    
-            <div class="col-md-1 arrow"
+            <div class="col-md-1 arrow" id="prevPgBtn"
 		 {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
 		 style="visibility:hidden"
 		 {% endif %}>
@@ -59,7 +59,8 @@
             </div>
         </div>
         <!-- -->
-        <div class="col-md-1 arrow" {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
+        <div class="col-md-1 arrow" id="nextPgBtn"
+	     {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
 		 style="visibility:hidden"
 	     {% endif %}>
 	  <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
@@ -98,7 +99,8 @@
     <a href="/">Back home</a>
     {% endif %}
    <!--  <script src="../static/chapter.js ">
-    </script> -->
+	 </script> -->
+   <script src="../static/js/readingApplet.js">
 </body>
 
 </html>

@@ -33,7 +33,7 @@ Highlighting and uploading text/ how text is split up
 Save user progress on page load
 
 
-TODO (for tomorrow):
+TODO :
 update user progress via ajax on button press
 turn page loading in ajax applet (text and images)
 image liking
@@ -41,6 +41,8 @@ highlighting modal
 convert to sql
 get functions for caption
 sorting funtions for image gallery
+
+reroute css/js links
 
 
 PATCHES:
