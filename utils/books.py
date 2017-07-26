@@ -62,7 +62,11 @@ def getGalleryPage( pgNum, query, userID ):
 def getPageData( bookIDA, chNumA, userID ):
     bookID = int(bookIDA)
     chNum = int(chNumA) - 1
-    pgNum = 0 #turn into something loaded from userID
+    bookmark = userDb.getBookmark(userID, bookID )
+    if bookmark == None or bookmark[0] != chNum :
+        pgNum = 0 #turn into something loaded from userID
+    else:
+        pgNum = bookmark[1]
     ret = {}
     if exists( bookID ):
         ret["bookID"] = bookID

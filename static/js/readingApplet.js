@@ -83,7 +83,7 @@ var nextPage = function(){
 	    }
 	});
     }
-    //bookmark();
+    bookmark();
     return null;
 }
 
@@ -121,7 +121,10 @@ var bookmark = function(){
     $.ajax({
 	url : "/bookmark/",
 	type: "POST",
-	data: {},
+	data: {
+	    "chNum": curChapter,
+	    "pgNum": curPg
+	},
 	dataType: "json",
 	success: function(response) {
 	    console.log("user reading bookmarked");

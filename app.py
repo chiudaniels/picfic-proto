@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory
 import flask
-from utils import users, books, gallery, images
+from utils import users, books, gallery, images, userDb
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
@@ -76,7 +76,8 @@ def bookLanding(bookID):
 
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
-    return redirect("/books/" + str(bookID) + "/read/1")
+    #get user progress
+    return redirect("/books/" + str(bookID) + "/read/" + userDb.getBookmark(getUserID(), bookID)[0])
 
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
@@ -95,7 +96,17 @@ def bookPageAJAX():
 #    print jsonify(data)
     return json.dumps(data)
 
-    
+#How do i pass data about the page to the router if not in the url?
+@app.route("/bookmark/", methods = ["POST"])
+def bookmark():
+    bID = request.form.get("bookID")
+    chN = request.form.get("chNum")
+    pgN = request.form.get("pgNum")
+    if isLoggedIn():
+        data =  userDb.bookmark(getUserID(), bID, chN, pgN)
+    return None
+
+
 #=================== END SITE NAVIGATION =======================
 
 # Login Routes ======================================

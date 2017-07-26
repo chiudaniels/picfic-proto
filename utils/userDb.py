@@ -173,17 +173,31 @@ def getLikedImages ( userID ):
 
 
 #CHECK TYPES 
-def updateProgress( userID, bookID, chNum, pgNum ):
+def bookmark( userID, bookID, chNum, pgNum ):
+    userID = int(userID)
+    bookID = int(bookID)
+    chNum = int(chNum)
+    pgNum = int(pgNum)
     if exists(userID):
-        finder = cU.find_one({"userID": int(userID)},
+        finder = cU.find_one({"userID": userID},
                                {"books":1}
         )
-        finder["books"][int(bookID)] = [chNum, pgNum]
+        finder["books"][bookID] = [chNum, pgNum]
         cU.update_one({"userID": int(userID)},
                       {books : finder["books"]})
     return None    
             
-        
+
+def getBookmark( userID, bookID ):
+    if userID != None:
+        userID = int(userID)
+        bookID = int(bookID)
+        if exists(userID):
+            finder = cU.find_one({"userID": userID},
+                                 {"books":1}
+            )
+            return finder["books"][bookID]
+    return None    
 
     
 #helper functions    
