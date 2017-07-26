@@ -1,0 +1,27 @@
+{% extends 'baseLayout.html' %}
+{% block content %}
+
+<div class="jumbotron vertical-center">
+  Welcome back.
+  <div class="container">
+    <p>
+	<form action="/login/" class="pagefivetext">
+	  <div class="form-group">
+	    <label for="makeEmail">Email address</label>
+	    <input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="makePass">Password</label>
+	    <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	  </div>
+	  <div class="form-group">
+	    <label for="confirmPass">Password</label>
+	    <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
+	  </div>
+	</form>
+    </p>
+  </div>
+</div>
+
+{% endblock %}
