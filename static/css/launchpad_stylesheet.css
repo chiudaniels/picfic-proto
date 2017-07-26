@@ -164,7 +164,7 @@ body {
 }
 
 .pagefivecontent {
-    """position: absolute;"""
+    /*position: absolute;*/
     text-align: center;
     top: 50vh;
     left: 26vw;
@@ -177,6 +177,7 @@ body {
     align-items: center;
     justify-content: center;
     margin:-10px;
+    background-color:red;
 }
 
 .footer {

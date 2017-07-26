@@ -1,3 +1,33 @@
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+/*$(function() {
+ 
+    // if the function argument is given to overlay,
+    // it is assumed to be the onBeforeLoad event listener
+    $("a[rel]").overlay({
+ 
+        mask: 'darkred',
+        effect: 'apple',
+ 
+        onBeforeLoad: function() {
+ 
+            // grab wrapper element inside content
+            var wrap = this.getOverlay().find(".contentWrap");
+ 
+            // load the page specified in the trigger
+            wrap.load(this.getTrigger().attr("href"));
+        }
+ 
+    });
+});*/
+
+
 /*$(document).ready(function() {
     $("#sign-in-button").click(function() {
 	document.getElementById("errorMess").innerHTML = "HelloWorld";

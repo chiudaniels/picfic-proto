@@ -4,20 +4,422 @@
   <head>
     <title>{% block title %}{% endblock%}</title>
   <!-- bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
   <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
-  <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css"/>
+  <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
   {% block head %}{% endblock %}
+
+  <style>
+    html{
+    width:100%; 
+    margin:0;
+    }
+
+    body {
+    position:relative;
+    max-width: 1920px;
+    margin: 0 auto;
+    }
+
+    .blah {
+    font-size: 400px;
+    color:red;
+    }
+
+    .pageone {
+    opacity: .4;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../static/launchpad/png/background1.png);
+    height: 98vh;
+    width: 100%;
+    display:flex;
+    color: red;
+
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+    }
+
+    #laptop1 {
+    padding-left: 5px;
+    top: 38.3vh;
+    left: 60vw;
+    position: absolute;
+    }
+
+
+    .text1 {
+    font-size: 2.3vw;
+    top: 50.5vh;
+    left: 16.2vw;
+    z-index: 1;
+    position: absolute;
+    }
+
+    .content {
+    width: 70%;
+    max-width: 1920px;
+    }
+
+    #page2 {
+    position: absolute;
+    top: 140vh;
+    width: 100%;
+    }
+
+    #bookgallery {
+    padding-right: 5%;
+    padding-left: 10%;
+    }
+
+    #startreading {
+    text-align: center;
+    font-size: 5vh;
+    padding-bottom: 5vh;
+    padding-top: 7vh;
+    }
+
+    .pagethree {
+    position: absolute;
+    top: 260vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../static/launchpad/png/background2.png);
+    height: 110vh;
+    width: 100%;
+    z-index: -1;
+    }
+
+    #laptop2 {
+    position: absolute;
+    top: 285vh;
+    left: 55vw;
+    z-index: 1;
+    }
+
+    .pagethreetext {
+    position: absolute;
+    top: 287vh;
+    left: 15vw;
+    z-index: 1;
+    }
+
+    #picficdesc {
+    font-size: 2.4vh;
+    max-width: 30vw;
+    }
+
+    .pagefour {
+    opacity: .17;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    top: 356.2vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../static/launchpad/png/background3.png);
+    height: 100vh;
+    width: 100%;
+    }
+
+    .pagefourtext {
+    font-size: 1.2em;
+    }
+
+    .pagefourcontainer {
+    position: absolute;
+    max-width: 52vw;
+    text-align: center;
+    align-content: center;
+    top: 365vh;
+    left: 24.3vw;
+    }
+
+    .picficLogo{
+    height: 6vw;
+    width: auto;
+    fill: black;
+    stroke: black;
+    opacity: 1;
+    }
+
+    .pagefourcontent {
+    padding-top: 5vh;
+    }
+
+    .pagefive {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    top: 455.2vh;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../static/launchpad/png/background4.png);
+    height: 100vh;
+    width: 100%;
+    }
+
+    .pagefivetext {
+    font-size: 1.7em;
+    padding-top: 1em;
+    }
+
+    .pagefivecontent {
+    /*position: absolute;*/
+    text-align: center;
+    top: 50vh;
+    left: 26vw;
+    max-width: 47vw;
+    vertical-align: text-top;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    align-items: center;
+    }
+
+    .footer {
+    left: 41.5vw;
+    height: 13vh;
+    position: absolute;
+    top: 560vh;
+    }
+
+    .logo {
+    padding-right: 5vh;
+    }
+
+    .contactfooter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    top: 570vh;
+    height: 13vh;
+    background: #EAEAEA;
+    max-width: 1920px;
+    }
+
+    .contactfootercontent {
+    z-index: -1;
+    left: 12vw;
+    position: absolute;
+    top: 575vh;
+    width:100%;
+    max-width: 1920px;
+    }
+
+    .footertext {
+    padding-left: 27vw;
+    }
+
+    #footerimg {
+    padding-left: 2vw;
+    height: 7vh;
+    width: auto;
+    }
+
+    .navbar {
+    background: #D1EBFF;
+    }
+
+    #aboutus {
+    position: absolute;
+    right: 15vw;
+    padding-top: 2.3vh;
+    }
+
+    #signup {
+    position: absolute;
+    right: 8vw;
+    padding-top: 2.3vh;
+    }
+
+    .navpicficLogo {
+    position: absolute;
+    height: 6vh;
+    width: auto;
+    top:.6vh;
+    left:6vw;
+    }
+
+    .navbar-inner ul.nav li {
+    text-align: center;
+    }
+
+    #login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+    position: absolute;
+    }
+    #login-dp .help-block{
+    font-size:12px    
+    }
+    #login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+    }
+    #login-dp .social-buttons{
+    margin:12px 0    
+    }
+    #login-dp .social-buttons a{
+    width: 49%;
+    }
+    #login-dp .form-group {
+    margin-bottom: 10px;
+    }
+    .btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+    }
+    .btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+    }
+    .btn-tw{
+    color: #fff;
+    background-color:#55acee;
+    }
+    .btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+    }
+    @media(max-width:768px){
+    #login-dp{
+    background-color: inherit;
+    color: #fff;
+    }
+    #login-dp .bottom{
+    background-color: inherit;
+    border-top:0 none;
+    }
+    }
+
+  </style>
+  
   </head>
 
   <body>
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId      :  '1855877571394404', // Set YOUR APP ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+      });
+      
+      FB.Event.subscribe('auth.authResponseChange', function(response) 
+      {
+      if (response.status === 'connected') 
+      {
+      document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+      //SUCCESS
+      
+      }    
+      else if (response.status === 'not_authorized') 
+      {
+      document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+      
+      //FAILED
+      } else 
+      {
+      document.getElementById("message").innerHTML +=  "<br>Logged Out";
+      
+      //UNKNOWN ERROR
+      }
+      }); 
+      
+      };
+      
+      function Login()
+      {
+      
+      FB.login(function(response) {
+      if (response.authResponse) 
+      {
+      getUserInfo();
+      } else 
+      {
+      console.log('User cancelled login or did not fully authorize.');
+      }
+      },{scope: 'email,user_photos,user_videos'});
+      
+      }
+      
+      function getUserInfo() {
+      FB.api('/me', function(response) {
+      
+      var str="<b>Name</b> : "+response.name+"<br>";
+      str +="<b>Link: </b>"+response.link+"<br>";
+      str +="<b>Username:</b> "+response.username+"<br>";
+      str +="<b>id: </b>"+response.id+"<br>";
+      str +="<b>Email:</b> "+response.email+"<br>";
+      str +="<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+      str +="<input type='button' value='Logout' onclick='Logout();'/>";
+      document.getElementById("status").innerHTML=str;
+      
+      });
+      }
+      function getPhoto()
+      {
+      FB.api('/me/picture?type=normal', function(response) {
+      
+      var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
+      document.getElementById("status").innerHTML+=str;
+      
+      });
+      
+      }
+      function Logout()
+      {
+      FB.logout(function(){document.location.reload();});
+      }
+      
+      // Load the SDK asynchronously
+      (function(d){
+      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      ref.parentNode.insertBefore(js, ref);
+      }(document));
+
+      function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
+
+    </script>
     <nav class="navbar">
       <img src="../static/svg/PicFic.svg" class="navpicficLogo">
       <!--<span id="aboutus">
@@ -43,15 +445,81 @@
 
 	    {% else %}
 	    
-	    <li><p class="navbar-text scrollDown"><a href="#">SIGN UP or LOG IN</a></p></li>
-	  {% endif %}
-	</div><!-- /.navbar-collapse -->
-	
-      </div><!-- /.container-fluid -->
+	    <!--<li><p class="navbar-text scrollDown"><a href="#">SIGN UP or LOG IN</a></p></li>-->
+
+	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#myModal">SIGN UP or LOG IN</a></p></li>
+
+
+	    <!-- Modal -->
+	    <div class="modal fade" id="myModal" role="dialog">
+	      <div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header" style="text-align: center">
+		    <button type="button" class="close" data-dismiss="modal">&times;</button>
+		    <h3>Create an account with us</h3>
+		    <div class="modal-body">
+		      <p>
+
+			<h4>Connect with</h4>
+			<div class="row">
+			  <div class="col-md-12">
+			    <!--<a href="#" onclick="Login();"><i class="fa fa-facebook-square fa-fw" style="font-size:4em"></i></a>-->
+			    
+			    <span class="g-signin2" data-onsuccess="onSignIn"></span>
+			    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+			    <!--<i class="fa fa-google fa-fw" data-onsuccess="onSignIn" style="font-size:4em"></i>--->
+			    <i class="fa fa-twitter-square fa-fw" style="font-size:4em"></i>
+			  </div>
+			</div>
+			<h3>or sign up with your email</h3>
+		      <!--<p>
+			<form action="/login/" class="pagefivetext">
+			  <div class="form-group">
+			    <label for="makeEmail">Email address</label>
+			    <input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+			    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			  </div>
+			  <div class="form-group">
+			    <label for="makePass">Password</label>
+			    <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+			  </div>
+			  <div class="form-group">
+			    <label for="confirmPass">Password</label>
+			    <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Create account</button>
+			</form> <br>
+			<small class="form-text text-muted">Already have an account?</small>
+			<button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
+		      </p>-->
+		      </p>
+		    </div>
+		    <div class="modal-footer">
+
+		    </div>
+		  </div>
+		</div>
+	      </div>
+	      <!--
+		  <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
+		    <!-- remember that you can use any element inside the trigger -->
+		    <!--<button type="button">SIGN UP or LOG IN</button>
+			</a>
+		  
+		  <!-- overlayed element -->
+		  <!--<div class="apple_overlay" id="overlay">
+		      <!-- the external content is loaded inside this tag -->
+		      <!--<div class="contentWrap"></div>
+			  </div>-->
+
+		      
+		      {% endif %}
+		  </div><!-- /.navbar-collapse -->
+		  
+	    </div><!-- /.container-fluid -->
     </nav>
-    <div class="blah">
-      Hello World!!!!!
-    </div>
     {% block content %}{% endblock %}
     <div class="footer container-fluid">
       <div class="row">
