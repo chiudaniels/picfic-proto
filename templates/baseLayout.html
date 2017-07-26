@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../static/launchpad_ss2.css">
   <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!--<script src="../static/login.js"></script>-->
+  <script src="../static/login.js"></script>
   {% block head %}{% endblock %}
   </head>
 
@@ -45,84 +45,7 @@
 
 	    {% else %}
 	    
-	    <!--<ul class="nav navbar-nav navbar-right">-->
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGN UP<span class="caret"></span></a>
-	      <ul id="login-dp" class="dropdown-menu">
-		<li>
-		  <div class="row">
-		    <div class="col-md-12">
-		      Sign up via
-		      <div class="social-buttons">
-			<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-			<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-		      </div>
-                      or
-		      <form class="form" role="form" method="post" action="/register/" accept-charset="UTF-8" id="login-nav">
-			<div class="form-group">
-			  <label class="sr-only" for="makeUser">username</label>
-			  <input type="text" name="makeUser" id="makeUser" class="form-control" placeholder="Username" required>
-			</div>
-			<div class="form-group">
-			  <label class="sr-only" for="makePass">password</label>
-			  <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password" required>
-                          
-			</div>
-			<div class="form-group">
-			  <label class="sr-only" for="confirmPass">re-enter password</label>
-			  <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter password" required>
-                          
-			</div>
-			<div class="form-group">
-			  <button type="submit" class="btn btn-primary btn-block">Sign up</button>
-			</div>
-		      </form>
-		    </div>
-		  </div>
-		</li>
-	      </ul>
-            </li>
-
-	    <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LOG IN<span class="caret"></span></a>
-	      <ul id="login-dp" class="dropdown-menu">
-		<li>
-		  <div class="row">
-		    <div class="col-md-12">
-		      Login via
-		      <div class="social-buttons">
-			<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-			<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-		      </div>
-                      or
-		      <div id="errorMess"></div>
-		      <form class="form" role="form" method="post" action="/login/" accept-charset="UTF-8" id="login-nav">
-			<div class="form-group">
-			  <label class="sr-only" for="username">Username</label>
-			  <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
-			</div>
-			<div class="form-group">
-			  <label class="sr-only" for="password">Password</label>
-			  <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-                          <div class="help-block text-right"><a href="">Forget your password ?</a></div>
-			</div>
-			<div class="form-group">
-			  <button onClick="myFunction()" type="button" id="sign-in-button" class="btn btn-primary btn-block">Sign in</button>
-			</div>
-			<!--
-			<div class="checkbox">
-			  <label>
-			    <input type="checkbox"> keep me logged-in
-			  </label>
-			</div>-->
-		      </form>
-		    </div>
-
-		  </div>
-		</li>
-	      </ul>
-            </li>
-	  </ul>
+	    <li><p class="navbar-text scrollDown"><a href="#">SIGN UP or LOG IN</a></p></li>
 	  {% endif %}
 	</div><!-- /.navbar-collapse -->
 	

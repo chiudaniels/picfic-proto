@@ -2,108 +2,107 @@
 <html>
 
 <head>
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="../../../../static/chapter_style.css">
 </head>
 
 <body>
-  <div class="container">
     <nav class="navbar">
-      <!-- menu logo -->
-      <div class="container">
-	<div class="dropdown">
-          <img class="btn dropdown-toggle" src="../static/svg/Menu.svg" alt="dropdown image" data-toggle="dropdown" class="img-responsive">
-          <ul class="dropdown-menu">
-	    <li><a href="#">test1</a></li>
-	    <li><a href="#">test2</a></li>
-	    <li><a href="#">test3</a></li>
-          </ul>
-	</div>
-      </div>
-          <!-- picfic logo -->
-	  <!--<button>-->
-            <img src="../static/svg/PicFic.svg" class="picficLogo">
-	  <!--</button>-->
-	  <!-- search logo -->
-          <!--<button>-->
+        <!-- menu logo -->
+        <img src="../../../../static/svg/Menu.svg" class="menuLogo">
+        <!-- picfic logo -->
+        <img src="../../../../static/svg/PicFic.svg" class="picficLogo">
+        <!-- search logo -->
+        <img src="../../../../static/svg/search.svg" class="searchLogo">
+    </nav>
 
-	  <!--<form class="search-form" role="search">
-            <div class="form-group pull-right" id="search">
-              <input type="text" class="form-control" placeholder="Search">
-              <button type="submit" class="form-control form-control-submit">Submit</button>
-              <span class="search-label"><i class="glyphicon glyphicon-search"></i></span>
-	    </div>
-	  </form>-->
-	  
-	  <img src="../static/svg/search.svg" class="searchLogo">
-	  <!--</button>-->
-	</nav>
+    {% if pageData["status"] == 1 %}
+    <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <!-- change chapter logo-->
-                <img src="../static/svg/changeChapters.svg" class="logo1">
-                <br>
-                <!-- bookmark logo -->
-                <img src="../static/svg/bookmark.svg" class="logo2">
-                <br>
-                <!-- bookmarked-bites logo -->
-                <img src="../static/svg/bookmarkedBites.svg" class="logo3">
-            </div>
-            <!-- story stuff -->
-            <div class="col-md-8">
-                <div class="title">
-                    CHAPTER 1: SHERLOCK HOLMES
-                </div>
-                <div class="story">
-                    <p class="paragraph">IN the year 1878 I took my degree of Doctor of Medicine of the University of London, and proceeded to Netley to go through the course prescribed for surgeons in the army. Having completed my studies there, I was duly attached to the Fifth Northumberland Fusiliers as Assistant Surgeon. The regiment was stationed in India at the time, and before I could join it, the second Afghan war had broken out. On landing at Bombay, I learned that my corps had advanced through the passes, and was already deep in the enemy’s country. I followed, however, with many other officers who were in the same situation as myself, and succeeded in reaching Candahar in safety, where I found my regiment, and at once entered upon my new duties.
-                        <br>
-                        <img src="../static/svg/fanart.svg" class="fanartIcon">
-                    </p>
-                    <iframe src="pictures_iframe.html" class="picture" style="border:none; display:none"> </iframe>
-                    <br>
-                    <p class="paragraph">
-                        The campaign brought honours and promotion to many, but for me it had nothing but misfortune and disaster. I was removed from my brigade and attached to the Berkshires, with whom I served at the fatal battle of Maiwand. There I was struck on the shoulder by a Jezail bullet, which shattered the bone and grazed the subclavian artery. I should have fallen into the hands of the murderous Ghazis had it not been for the devotion and courage shown by Murray, my orderly, who threw me across a pack-horse, and succeeded in bringing me safely to the British lines.
-                        <br>
-                        <img src="../static/svg/fanart.svg" class="fanartIcon">
-                    </p>
-                    <iframe src="pictures_iframe.html" class="picture" style="border:none; display:none"> </iframe>
-                    <br>
-                    <p class="paragraph">
-                        Worn with pain, and weak from the prolonged hardships which I had undergone, I was removed, with a great train of wounded sufferers, to the base hospital at Peshawar. Here I rallied, and had already improved so far as to be able to walk about the wards, and even to bask a little upon the verandah, when I was struck down by enteric fever, that curse of our Indian possessions. For months my life was despaired of, and when at last I came to myself and became convalescent, I was so weak and emaciated that a medical board determined that not a day should be lost in sending me back to England. I was dispatched, accordingly, in the troopship “Orontes,” and landed a month later on Portsmouth jetty, with my health irretrievably ruined, but with permission from a paternal government to spend the next nine months in attempting to improve it.
-                        <br>
-                        <img src="../static/svg/fanart.svg" class="fanartIcon">
-                    </p>
-                    <iframe src="pictures_iframe.html" class="picture" style="border:none; display:none"> </iframe>
-                    <br>
-                </div>
-            </div>
-            <!-- -->
-            <div class="col-md-2">
+            
+            <div class="col-md-1 logos">
                 <!-- Aa logo -->
-                <img src="../static/svg/Aa.svg" class="logo1">
+                <img src="../../../../static/svg/Aa.svg " class="logo1 ">
                 <br>
                 <!-- facebook logo -->
-                <img src="../static/svg/facebook.svg" class="logo2">
+                <img src="../../../../static/svg/facebook.svg " class="logo2 ">
                 <br>
                 <!-- twitter logo -->
-                <img src="../static/svg/twitter.svg" class="logo3">
+                <img src="../../../../static/svg/twitter.svg " class="logo3 ">
+            </div>
+	    
+            <div class="col-md-1 arrow"
+		 {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
+		 style="visibility:hidden"
+		 {% endif %}>
+              <a class="prev" href="{{pageData['pgNum']-1}}"		 
+		 
+		 ><!-- put it here to keep positioning -->
+		<img src="../../../../static/svg/leftarrow.svg">
+	      </a>
+            </div>
+
+        <!-- story stuff -->
+        <div class="col-md-8 ">
+            <div class="title ">
+              <!--CHAPTER 1: SHERLOCK HOLMES-->
+	      <h2>{{pageData["chData"]["title"]}}</h2>
+            </div>
+            <div class="story ">
+	      {% for line in pageData["pgData"]["text"] %}
+	      <p class="paragraph ">{{line}}</p>
+	      {% endfor %}
+	      <!--
+                <p class="paragraph ">IN the year 1878 I took my degree of Doctor of Medicine of the University of London, and proceeded to Netley to go through the course prescribed for surgeons in the army. Having completed my studies there, I was duly attached to the Fifth Northumberland Fusiliers as Assistant Surgeon. The regiment was stationed in India at the time, and before I could join it, the second Afghan war had broken out. On landing at Bombay, I learned that my corps had advanced through the passes, and was already deep in the enemy’s country. I followed, however, with many other officers who were in the same situation as myself, and succeeded in reaching Candahar in safety, where I found my regiment, and at once entered upon my new duties.
+                </p>
+                <p class="paragraph ">
+                    The campaign brought honours and promotion to many, but for me it had nothing but misfortune and disaster. I was removed from my brigade and attached to the Berkshires, with whom I served at the fatal battle of Maiwand. There I was struck on the shoulder by a Jezail bullet, which shattered the bone and grazed the subclavian artery. I should have fallen into the hands of the murderous Ghazis had it not been for the devotion and courage shown by Murray, my orderly, who threw me across a pack-horse, and succeeded in bringing me safely to the British lines.
+          		</p>
+                
+                <p class="paragraph ">
+                    Worn with pain, and weak from the prolonged hardships which I had undergone, I was removed, with a great train of wounded sufferers, to the base hospital at Peshawar. Here I rallied, and had already improved so far as to be able to walk about the wards, and even to bask a little upon the verandah, when I was struck down by enteric fever, that curse of our Indian possessions. For months my life was despaired of, and when at last I came to myself and became convalescent, I was so weak and emaciated that a medical board determined that not a day should be lost in sending me back to England. I was dispatched, accordingly, in the troopship “Orontes,” and landed a month later on Portsmouth jetty, with my health irretrievably ruined, but with permission from a paternal government to spend the next nine months in attempting to improve it.
+                  </p>
+		-->
             </div>
         </div>
-        <!-- progress bar -->
-        <div class="row">
-            <div class="column-md-12">
-            </div>
+        <!-- -->
+        <div class="col-md-1 arrow" {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
+		 style="visibility:hidden"
+	     {% endif %}>
+	  <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
+	  {% if pageData["pgNum"] == pageData["chLength"] %}
+	  <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
+	  {% else %}
+          <a class="next " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum']}}/{{pageData['pgNum']+1}}">
+	  {% endif %}
+	    <img src="../../../../static/svg/rightarrow.svg">
+	  </a>
         </div>
     </div>
-    <script src="../static/chapter.js">
-    </script>
+    <!-- progress bar -->
+    <div class="row ">
+        <div class="column-md-12 ">
+        <form id="image_upload" action="/upload/" method="post" enctype="multipart/form-data">
+	  <input type='file' class="form-control" name = "file" id="fileUpload"/>
+	  <input type='hidden' name="markerID" value="{{pageData['markerData']['markerID']}}">
+	  <button id="upload-button" class="btn btn default edit"> Upload picture </button>
+	</form>
+        </div>
+    </div>
+    </div>
+    {% elif pageData["status"] == 0 %}
+    <p> {{pageData["errMsg"]}} </p>
+    <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a>
+    {% else %}
+    <p> {{pageData["errMsg"]}} </p>
+    <a href="/">Back home</a>
+    {% endif %}
+   <!--  <script src="../static/chapter.js ">
+    </script> -->
 </body>
 
 </html>

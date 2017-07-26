@@ -27,3 +27,16 @@
 function myFunction(){
     console.log("HELP");
 }
+
+/*$(".scrollDown").click(function() {
+    $('html, body').animate({
+        scrollTop: $(".pagefivecontent").offset().top
+    }, 2000);
+    });*/
+
+$(document).on('click','.scrollDown', function(event) {
+    event.preventDefault();
+    $('html, body').animate({
+        scrollTop: $(".pagefivecontent").offset().top
+    }, 2000);
+});
