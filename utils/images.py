@@ -36,7 +36,7 @@ def getImageURL( imageID ):
 #for the reading page (non detailed)
 def getImageDisplay( imageID ):
     if exists(imageID ):
-        finder = cI.find_one({"imageID":int(imageID)}, {"url" : 1, "userID" : 1, "markerID" : 1})
+        finder = cI.find_one({"imageID":int(imageID)}, {"url" : 1, "userID" : 1, "markerID" : 1, "_id" : 0})
         finder["authortag"] = userDb.getTag( finder["userID"])
         finder["url"] = IMGDIR + finder["url"]
         return finder

@@ -3,7 +3,8 @@ import flask
 from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
-
+from bson import BSON
+from bson import json_util
 
 app = Flask(__name__)
 app.secret_key = "secrets"
@@ -75,13 +76,24 @@ def bookLanding(bookID):
 
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
-    return redirect("/books/" + str(bookID) + "/read/1/1")
+    return redirect("/books/" + str(bookID) + "/read/1")
 
 #How do i pass data about the page to the router if not in the url?
-@app.route("/books/<int:bookID>/read/<int:chNum>/<int:pgNum>")
-def bookPage(bookID, chNum, pgNum):
-    data = books.getPageData(bookID, chNum, pgNum)
+@app.route("/books/<int:bookID>/read/<int:chNum>")
+def bookPage(bookID, chNum):
+    data = books.getPageData( bookID, chNum, getUserID() )
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
+
+#How do i pass data about the page to the router if not in the url?
+@app.route("/getPage/", methods = ["POST"])
+def bookPageAJAX():
+    print "next page ajax"
+    bID = request.form.get("bookID")
+    chN = request.form.get("chNum")
+    pgN = request.form.get("pgNum")
+    data =  books.getPageAJAX(bID, chN, pgN)
+#    print jsonify(data)
+    return json.dumps(data)
 
     
 #=================== END SITE NAVIGATION =======================

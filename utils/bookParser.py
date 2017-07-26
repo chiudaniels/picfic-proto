@@ -84,7 +84,7 @@ def parseBook( textFilename, metaFilename ): #get the text formatted
     
 def newMarker( ):
     markerData = {
-        "imgs":[],
+        "imageIDs":[],
         "markerID": db.markers.count()
     }
     db.markers.insert_one(markerData)

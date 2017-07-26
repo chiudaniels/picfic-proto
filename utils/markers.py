@@ -19,7 +19,7 @@ def exists( markerID ):
 
 def getImages( markerID ):
     if exists(markerID):
-        finder = cM.find_one({"markerID": int(markerID)}, {"imageIDs": 1})
+        finder = cM.find_one({"markerID": int(markerID)}, {"imageIDs": 1, "_id": 0})
         return finder
     return false
 

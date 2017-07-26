@@ -50,3 +50,4 @@ fix url problem
 security for uploads - random filename, ensure uniqueness (well we have the ids, not necessary)
 more information in upload route so you're not redirected
 write get/set functions for userInfo key
+previous page button on beginning of second chapter + will link to first page
