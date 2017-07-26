@@ -1,0 +1,55 @@
+{% extends 'baseLayout.html' %}
+{% block content %}
+<div class="jumbotron vertical-center">
+  Tell us more about you!
+  <div class="container">
+    <p>
+      <form action="/signup/">
+	
+	<div class="form-group">
+	  <label for="makeUser">Username</label>
+	  <input type="text" name="makeUser" class="form-control" id="makeUser" aria-describedby="userMaking">
+	</div>
+	
+	<div class="form-group">
+	  <label for="birthday">Birthday</label>
+	  <input type="date" name="birthday" class="form-control" id="birthday">
+	</div>
+
+	<div class="form-group">
+	  <label for="gender">Gender</label>
+          <label class="radio-inline">
+            <input type="radio" name="femaleRadio" id="femaleRadio" value="Female">Female
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="maleRadio" id="maleRadio" value="Male">Male
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="otherRadio" id="other" value="other">Other
+          </label>
+	</div>
+      </form>
+
+      <h1 style="vertical-align:text-top">Tell us more about yourself!</h1>
+      <form action="/signup/">
+	<div class="form-group">
+	  <label for="links">Websites/Links</label>
+	  <input type="text" name="links" class="form-control" id="links" aria-describedby="linkStuff">
+	</div>
+
+	<div class="form-group">
+	  <label for="reading">Favorite books, series, and authors</label>
+	  <input type="text" name="reading" class="form-control" id="reading" aria-describedby="readingStuff">
+	</div>
+
+	<div class="form-group">
+	  <label for="hobbies">Other hobbies and interests</label>
+	  <input type="text" name="hobbies" class="form-control" id="hobbies" aria-describedby="hobbyStuff">
+	</div>
+      </form>
+
+      <button type="submit" class="btn btn-primary">Complete your account!</button>
+    </p>
+  </div>
+</div>
+{% endblock %}

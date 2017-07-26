@@ -98,28 +98,52 @@
     <!-- Page 5 -->
     <div class="pagefive">
     </div>
-    <div class="container-fluid pagefivecontent">
-      <h1 class="text-xs-center">Create an account with us</h1>
+    <div class="container pagefivecontent text-center">
+      <!--<div>
+	  <p> hello world</p>
+      </div>-->
+      <h1>Create an account with us</h1>
       <h2>Connect with</h2>
       <div class="row">
 	<div class="col-md-12">
-	  <i class="fa fa-facebook-square"></i>
-	  <i class="fa fa-google"></i>
-	  <i class="fa fa-twitter-square"></i>
+	  <i class="fa fa-facebook-square fa-fw" style="font-size:4em">     </i>
+	  <i class="fa fa-google fa-fw" style="font-size:4em">     </i>
+	  <i class="fa fa-twitter-square fa-fw" style="font-size:4em">     </i>
 	</div>
       </div>
+      <h3>or sign up with your email</h3>
+      <p>
+	<form action="/login/" class="pagefivetext">
+	  <div class="form-group">
+	    <label for="makeEmail">Email address</label>
+	    <input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="makePass">Password</label>
+	    <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	  </div>
+	  <div class="form-group">
+	    <label for="confirmPass">Password</label>
+	    <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Create account</button>
+	</form> <br>
+	<small class="form-text text-muted">Already have an account?</small>
+	<button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
+      </p>
     </div>
-    <div class="footer container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row logos">
-                    <img class="logo" id="logo1" src="../static/launchpad/png/facebook.png">
-                    <img class="logo" src="../static/launchpad/png/instagram.png">
-                    <img class="logo" src="../static/launchpad/png/twitter.png">
-                </div>
+    <!--<div class="footer container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row logos">
+            <img class="logo" id="logo1" src="../static/launchpad/png/facebook.png">
+                <img class="logo" src="../static/launchpad/png/instagram.png">
+                <img class="logo" src="../static/launchpad/png/twitter.png">
+              </div>
             </div>
         </div>
-    </div>
+    </div>-->
     {% endblock %}
     <!-- <footer>
         <div class="contactfooter">

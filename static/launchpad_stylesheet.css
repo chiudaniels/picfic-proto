@@ -138,13 +138,11 @@ body {
     padding-top: 5vh;
 }
 
-
 .pagefive {
     position: absolute;
     left: 0;
     right: 0;
     z-index: -1;
-
     top: 455.2vh;
     background-repeat: no-repeat;
     background-size: contain;
@@ -159,12 +157,20 @@ body {
 }
 
 .pagefivecontent {
-    """position: absolute;
-    text-align: center;"""
-    top: 493vh;
+    """position: absolute;"""
+    text-align: center;
+    top: 50vh;
     left: 26vw;
     max-width: 47vw;
     color: white;
+    vertical-align: text-top;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    margin:-10px;
 }
 
 .footer {
@@ -287,9 +293,4 @@ body {
         background-color: inherit;
         border-top:0 none;
     }
-}
-
-
-.fa-facebook-square {
-    font-size: 5em;
 }
