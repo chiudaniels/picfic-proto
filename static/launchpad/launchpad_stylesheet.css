@@ -15,6 +15,7 @@ body {
     background-image: url(../png/background1.png);
     height: 98vh;
     width: auto;
+    min-height:100vh;
 
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
@@ -157,7 +158,6 @@ body {
     top: 493vh;
     left: 26vw;
     max-width: 47vw;
-    color: white;
 }
 
 .footer {
