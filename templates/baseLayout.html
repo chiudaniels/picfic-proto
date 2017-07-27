@@ -11,316 +11,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
   <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='launchpad_stylesheet.css') }}">
   <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
   <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
   {% block head %}{% endblock %}
-
-  <style>
-    html{
-    width:100%; 
-    margin:0;
-    }
-
-    body {
-    position:relative;
-    max-width: 1920px;
-    margin: 0 auto;
-    }
-
-    .blah {
-    font-size: 400px;
-    color:red;
-    }
-
-    .pageone {
-    opacity: .4;
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url(../static/launchpad/png/background1.png);
-    height: 98vh;
-    width: 100%;
-    display:flex;
-    color: red;
-
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
-    }
-
-    #laptop1 {
-    padding-left: 5px;
-    top: 38.3vh;
-    left: 60vw;
-    position: absolute;
-    }
-
-
-    .text1 {
-    font-size: 2.3vw;
-    top: 50.5vh;
-    left: 16.2vw;
-    z-index: 1;
-    position: absolute;
-    }
-
-    .content {
-    width: 70%;
-    max-width: 1920px;
-    }
-
-    #page2 {
-    position: absolute;
-    top: 140vh;
-    width: 100%;
-    }
-
-    #bookgallery {
-    padding-right: 5%;
-    padding-left: 10%;
-    }
-
-    #startreading {
-    text-align: center;
-    font-size: 5vh;
-    padding-bottom: 5vh;
-    padding-top: 7vh;
-    }
-
-    .pagethree {
-    position: absolute;
-    top: 260vh;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url(../static/launchpad/png/background2.png);
-    height: 110vh;
-    width: 100%;
-    z-index: -1;
-    }
-
-    #laptop2 {
-    position: absolute;
-    top: 285vh;
-    left: 55vw;
-    z-index: 1;
-    }
-
-    .pagethreetext {
-    position: absolute;
-    top: 287vh;
-    left: 15vw;
-    z-index: 1;
-    }
-
-    #picficdesc {
-    font-size: 2.4vh;
-    max-width: 30vw;
-    }
-
-    .pagefour {
-    opacity: .17;
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-
-    top: 356.2vh;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url(../static/launchpad/png/background3.png);
-    height: 100vh;
-    width: 100%;
-    }
-
-    .pagefourtext {
-    font-size: 1.2em;
-    }
-
-    .pagefourcontainer {
-    position: absolute;
-    max-width: 52vw;
-    text-align: center;
-    align-content: center;
-    top: 365vh;
-    left: 24.3vw;
-    }
-
-    .picficLogo{
-    height: 6vw;
-    width: auto;
-    fill: black;
-    stroke: black;
-    opacity: 1;
-    }
-
-    .pagefourcontent {
-    padding-top: 5vh;
-    }
-
-    .pagefive {
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    top: 455.2vh;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url(../static/launchpad/png/background4.png);
-    height: 100vh;
-    width: 100%;
-    }
-
-    .pagefivetext {
-    font-size: 1.7em;
-    padding-top: 1em;
-    }
-
-    .pagefivecontent {
-    /*position: absolute;*/
-    text-align: center;
-    top: 50vh;
-    left: 26vw;
-    max-width: 47vw;
-    vertical-align: text-top;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    align-items: center;
-    }
-
-    .footer {
-    left: 41.5vw;
-    height: 13vh;
-    position: absolute;
-    top: 445vh;
-    }
-
-    .logo {
-    padding-right: 5vh;
-    }
-
-    .contactfooter {
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    width: 100%;
-    top: 570vh;
-    height: 13vh;
-    background: #EAEAEA;
-    max-width: 1920px;
-    }
-
-    .contactfootercontent {
-    z-index: -1;
-    left: 12vw;
-    position: absolute;
-    top: 575vh;
-    width:100%;
-    max-width: 1920px;
-    }
-
-    .footertext {
-    padding-left: 27vw;
-    }
-
-    #footerimg {
-    padding-left: 2vw;
-    height: 7vh;
-    width: auto;
-    }
-
-    .navbar {
-    background: #D1EBFF;
-    }
-
-    #aboutus {
-    position: absolute;
-    right: 15vw;
-    padding-top: 2.3vh;
-    }
-
-    #signup {
-    position: absolute;
-    right: 8vw;
-    padding-top: 2.3vh;
-    }
-
-    .navpicficLogo {
-    position: absolute;
-    height: 6vh;
-    width: auto;
-    top:.6vh;
-    left:6vw;
-    }
-
-    .navbar-inner ul.nav li {
-    text-align: center;
-    }
-
-    #login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
-    position: absolute;
-    }
-    #login-dp .help-block{
-    font-size:12px    
-    }
-    #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
-    }
-    #login-dp .social-buttons{
-    margin:12px 0    
-    }
-    #login-dp .social-buttons a{
-    width: 49%;
-    }
-    #login-dp .form-group {
-    margin-bottom: 10px;
-    }
-    .btn-fb{
-    color: #fff;
-    background-color:#3b5998;
-    }
-    .btn-fb:hover{
-    color: #fff;
-    background-color:#496ebc 
-    }
-    .btn-tw{
-    color: #fff;
-    background-color:#55acee;
-    }
-    .btn-tw:hover{
-    color: #fff;
-    background-color:#59b5fa;
-    }
-    @media(max-width:768px){
-    #login-dp{
-    background-color: inherit;
-    color: #fff;
-    }
-    #login-dp .bottom{
-    background-color: inherit;
-    border-top:0 none;
-    }
-    }
-
-  </style>
-  
   </head>
 
   <body>
@@ -463,15 +159,25 @@
 		      <p>
 
 			<h4>Connect with</h4>
-			<div class="row">
+			<!--<div class="row">-->
 			  <div class="col-md-12">
 			    <!--<a href="#" onclick="Login();"><i class="fa fa-facebook-square fa-fw" style="font-size:4em"></i></a>-->
 			    
-			    <span class="g-signin2" data-onsuccess="onSignIn"></span>
-			    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+			    <!--<div class="g-signin2" data-width="500" data-height="50" data-onsuccess="onSignIn"></div><br>-->
+			    <!--<div id="my-signin2" data-width="500" data-height="50"></div>-->
+			    <div id="gSignInWrapper">
+			      <span class="label">Sign in with:</span>
+			      <div id="customBtn" class="customGPlusSignIn">
+				<span class="icon"></span>
+				<span class="buttonText">Google</span>
+			      </div>
+			    </div>
+			    <div id="name"></div>
+			    <script>startApp();</script>
+			   <div class="fb-login-button" data-width="800" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div><br>
 			    <!--<i class="fa fa-google fa-fw" data-onsuccess="onSignIn" style="font-size:4em"></i>--->
 			    <i class="fa fa-twitter-square fa-fw" style="font-size:4em"></i>
-			  </div>
+			  <!--</div>-->
 			</div>
 			<h3>or sign up with your email</h3>
 		      <!--<p>
