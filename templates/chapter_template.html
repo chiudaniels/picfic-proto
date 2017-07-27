@@ -7,125 +7,105 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../../../static/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/chapter_style.css">
 </head>
 
 <body>
     <nav class="navbar">
         <!-- menu logo -->
-        <img src="../../../../static/svg/Menu.svg" class="menuLogo">
+        <img src="../static/svg/Menu.svg" class="menuLogo">
         <!-- picfic logo -->
-        <img src="../../../../static/svg/PicFic.svg" class="picficLogo">
+        <img src="../static/svg/PicFic.svg" class="picficLogo">
         <!-- search logo -->
-        <img src="../../../../static/svg/search.svg" class="searchLogo">
+        <img src="/../static/svg/search.svg" class="searchLogo">
     </nav>
-
     {% if pageData["status"] == 1 %}
     <div class="container">
         <div class="row">
-            
             <div class="col-md-1 logos">
                 <!-- Aa logo -->
-                <img src="../../../../static/svg/Aa.svg " class="logo1 ">
+                <img src="../static/svg/Aa.svg " class="logo1 ">
                 <br>
                 <!-- facebook logo -->
-                <img src="../../../../static/svg/facebook.svg " class="logo2 ">
+                <img src="../static/svg/facebook.svg " class="logo2 ">
                 <br>
                 <!-- twitter logo -->
-                <img src="../../../../static/svg/twitter.svg " class="logo3 ">
+                <img src="../static/svg/twitter.svg " class="logo3 ">
             </div>
-	    
             <div class="col-md-1 arrow" id="prevPgBtn">
-	      
-              <div class="prev ">
-		<img src="../../../../static/svg/leftarrow.svg">
-	      </div>
-	    </div>
-	      <!--
-		 {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
-		 style="visibility:hidden"
-		 {% endif %}>           
-	      
-	      {% if pageData["pgNum"] == 1 %}
-	      <a class="prev " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] - 1}}/1"> --><!--
-		<img src="../../../../static/svg/leftarrow.svg">
-	      </a>
-	      {% else %}
+                <div class="prev ">
+                    <img src="../static/svg/leftarrow.svg">
+                </div>
+            </div>
+            <!--
+     {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
+     style="visibility:hidden"
+     {% endif %}>           
+        
+        {% if pageData["pgNum"] == 1 %}
+        <a class="prev " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] - 1}}/1"> -->
+            <!--
+    <img src="../../../../static/svg/leftarrow.svg">
+        </a>
+        {% else %}
 -->
-	      <!--
-	      {% endif %}
-	      -->
-
-        <!-- story stuff -->
-        <div class="col-md-8 ">
-            <div class="title ">
-              <!--CHAPTER 1: SHERLOCK HOLMES-->
-	      <h2>{{pageData["chData"]["title"]}}</h2>
+            <!--
+        {% endif %}
+        -->
+            <!-- story stuff -->
+            <div class="col-md-8 ">
+                <div class="title ">
+                    <!--CHAPTER 1: SHERLOCK HOLMES-->
+                    <h2>{{pageData["chData"]["title"]}}</h2>
+                </div>
+                <div class="story " id="storyBody">
+                    {% for line in pageData["pgData"]["text"] %}
+                    <p class="paragraph ">{{line}}</p>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="story " id="storyBody">
-	      {% for line in pageData["pgData"]["text"] %}
-	      <p class="paragraph ">{{line}}</p>
-	      {% endfor %}
+            <!-- -->
+            <div class="col-md-1 arrow" id="nextPgBtn">
+                <!--
+       {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
+     style="visibility:hidden"
+       {% endif %}>-->
+                <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
+                <!--{% if pageData["pgNum"] == pageData["chLength"] %}
+    <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
+      <img src="../../../../static/svg/rightarrow.svg">
+    </a>
+    {% else %}-->
+                <div class="next ">
+                    <img src="../static/svg/rightarrow.svg">
+                </div>
+                <!--{% endif %}-->
             </div>
         </div>
-        <!-- -->
-        <div class="col-md-1 arrow" id="nextPgBtn">
-	  <!--
-	     {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
-		 style="visibility:hidden"
-	     {% endif %}>-->
-	  <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
-	  <!--{% if pageData["pgNum"] == pageData["chLength"] %}
-	  <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
-	    <img src="../../../../static/svg/rightarrow.svg">
-	  </a>
-	  {% else %}-->
-          <div class="next ">
-	    <img src="../../../../static/svg/rightarrow.svg">
-	  </div>
-	  <!--{% endif %}-->
-
+        <!-- progress bar -->
+        <!-- turn this into a login modal -->
+        {% if isLoggedIn %}
+        <div class="row ">
+            <div class="column-md-12 ">
+            </div>
         </div>
-    </div>
-	<!-- progress bar -->
-	<div class = "row" id = "imgGallery">
-	      {% for image in pageData["imageData"]  %}
-	      <img src="../../../../static/{{image['url']}}">
-	      {% endfor %}
-	      
-	</div>
-	<!-- turn this into a login modal -->
-	{% if isLoggedIn %}
-    <div class="row ">
-      <div class="column-md-12 ">
-        <form id="image_upload" action="/upload/" method="post" enctype="multipart/form-data">
-	  <input type='file' class="form-control" name = "file" id="fileUpload"/>
-	  <input type='text' name="caption">
-	  <input id="markerTracker" type='hidden' name="markerID" value="{{pageData['markerData']['markerID']}}">
-	  <button id="upload-button" class="btn btn default edit"> Upload picture </button>
-	</form>
-      </div>
-    </div>
-    {% endif %}
+        {% endif %}
     </div>
     {% elif pageData["status"] == 0 %}
     <p> {{pageData["errMsg"]}} </p>
-    <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a>
-    {% else %}
+    <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a> {% else %}
     <p> {{pageData["errMsg"]}} </p>
-    <a href="/">Back home</a>
-    {% endif %}
-   <!--  <script src="../static/chapter.js ">
-	 </script> -->
-   <script>
-     var bookID = {{pageData["bookID"]}};
-     var curChapter = {{pageData["chNum"]}};
-     var curPg = {{pageData["pgNum"]}};
-     var chLength = {{pageData["chLength"]}};
-     var bookLength = {{pageData["bookLength"]}};
-   </script>
-   <script src="/static/js/readingApplet.js"></script>
-   
+    <a href="/">Back home</a> {% endif %}
+    <!--  <script src="../static/chapter.js ">
+   </script> -->
+    <script>
+    var bookID = { { pageData["bookID"] } };
+    var curChapter = { { pageData["chNum"] } };
+    var curPg = { { pageData["pgNum"] } };
+    var chLength = { { pageData["chLength"] } };
+    var bookLength = { { pageData["bookLength"] } };
+    </script>
+    <script src="/static/js/readingApplet.js"></script>
 </body>
 
 </html>
