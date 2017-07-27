@@ -1,0 +1,3 @@
+just finish setting up tables
+test populate
+write methods

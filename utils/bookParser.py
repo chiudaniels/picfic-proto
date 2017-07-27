@@ -91,3 +91,6 @@ def newMarker( ):
     return markerData["markerID"]
 
 parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+
+#bcrypt pwd libraries
+#

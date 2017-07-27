@@ -34,6 +34,9 @@ Save user progress on page load
 
 
 TODO :
+CONVERTING TO SQL
+
+set up orm once established
 image liking
 highlighting modal
 convert to sql
@@ -50,3 +53,6 @@ security for uploads - random filename, ensure uniqueness (well we have the ids,
 more information in upload route so you're not redirected
 write get/set functions for userInfo key
 previous page button on beginning of second chapter + will link to first page
+
+
+secure database
