@@ -29,8 +29,8 @@ body {
 
 .navpicficLogo {
     position: absolute;
-    height: 30px;
-    width: auto;
+    height: auto;
+    width: 50px;
     top: 50%;
     margin-top:-15px;
     left:48%;
@@ -46,9 +46,9 @@ position: absolute;
     position:absolute;
     right: 7vw;
     top:50%;
-    margin-top:-25px;
-    width: 45px;
-    height: 45px;
+    margin-top:-20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -100,7 +100,7 @@ p {
     position:absolute;
     font-family: 'Avenir', sans-serif;
     left: 25vw;
-    top: 86vh;
+    top: 86xvh;
 }
 
 h3, h2, h4 {

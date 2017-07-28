@@ -1,0 +1,24 @@
+<svg width="25" height="25" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 3</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(2302 73)">
+<g id="Group 3">
+<g id="Oval">
+<use xlink:href="#path0_fill" transform="translate(-2302 -72.6191)" fill="#9B9B9B"/>
+</g>
+<g id="Group">
+<g id="Line 2">
+<use xlink:href="#path1_stroke" transform="translate(-2291.18 -67.466)" fill="#FFFFFF"/>
+</g>
+<g id="Line 2">
+<use xlink:href="#path2_stroke" transform="translate(-2296.68 -61.966)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 12.1052 24.2103C 18.7907 24.2103 24.2103 18.7907 24.2103 12.1052C 24.2103 5.41967 18.7907 0 12.1052 0C 5.41967 0 0 5.41967 0 12.1052C 0 18.7907 5.41967 24.2103 12.1052 24.2103Z"/>
+<path id="path1_stroke" d="M 1.5 0C 1.5 -0.276142 1.27614 -0.5 1 -0.5C 0.723858 -0.5 0.5 -0.276142 0.5 0L 1.5 0ZM 0.5 13C 0.5 13.2761 0.723858 13.5 1 13.5C 1.27614 13.5 1.5 13.2761 1.5 13L 0.5 13ZM 0.5 0L 0.5 13L 1.5 13L 1.5 0L 0.5 0Z"/>
+<path id="path2_stroke" d="M 13 1.5C 13.2761 1.5 13.5 1.27614 13.5 1C 13.5 0.723858 13.2761 0.5 13 0.5L 13 1.5ZM 0 0.5C -0.276142 0.5 -0.5 0.723858 -0.5 1C -0.5 1.27614 -0.276142 1.5 0 1.5L 0 0.5ZM 13 0.5L 0 0.5L 0 1.5L 13 1.5L 13 0.5Z"/>
+</defs>
+</svg>

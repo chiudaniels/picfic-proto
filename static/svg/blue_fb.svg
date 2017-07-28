@@ -1,0 +1,30 @@
+<svg width="21" height="20" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 4</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-599 -662)">
+<g id="Group 4">
+<g id="Oval" opacity="0.7">
+<use xlink:href="#path0_fill" transform="translate(599.566 662)" fill="url(#paint0_linear)"/>
+</g>
+<g id="Group 9">
+<g id="Page 1">
+<g id="Stroke 1">
+<use xlink:href="#path1_stroke" transform="translate(607.404 666.85)" fill="#FFFFFF"/>
+</g>
+<g id="Stroke 3">
+<use xlink:href="#path2_stroke" transform="translate(606.207 671.738)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20 10.2981 -10.2981 20 3.84466e-08 4.84779)">
+<stop offset="0" stop-color="#C2E9FB"/>
+<stop offset="1" stop-color="#A1C4FD"/>
+</linearGradient>
+<path id="path0_fill" fill-rule="evenodd" d="M 10 20C 15.5228 20 20 15.5228 20 10C 20 4.47715 15.5228 0 10 0C 4.47715 0 0 4.47715 0 10C 0 15.5228 4.47715 20 10 20Z"/>
+<path id="path1_stroke" d="M 4.9531 2.69244C 4.9531 2.96858 5.17695 3.19244 5.4531 3.19244C 5.72924 3.19244 5.9531 2.96858 5.9531 2.69244L 4.9531 2.69244ZM -0.5 10.7724C -0.5 11.0486 -0.276142 11.2724 0 11.2724C 0.276142 11.2724 0.5 11.0486 0.5 10.7724L -0.5 10.7724ZM 5.9531 2.69244C 5.9531 0.91953 4.48309 -0.5 2.72655 -0.5L 2.72655 0.5C 3.94724 0.5 4.9531 1.48811 4.9531 2.69244L 5.9531 2.69244ZM 2.72655 -0.5C 0.968533 -0.5 -0.5 0.927042 -0.5 2.6985L 0.5 2.6985C 0.5 1.49272 1.50733 0.5 2.72655 0.5L 2.72655 -0.5ZM -0.5 2.6985L -0.5 10.7724L 0.5 10.7724L 0.5 2.6985L -0.5 2.6985Z"/>
+<path id="path2_stroke" d="M 4.78767 0.5C 5.06382 0.5 5.28767 0.276142 5.28767 0C 5.28767 -0.276142 5.06382 -0.5 4.78767 -0.5L 4.78767 0.5ZM 0 -0.5C -0.276142 -0.5 -0.5 -0.276142 -0.5 0C -0.5 0.276142 -0.276142 0.5 0 0.5L 0 -0.5ZM 4.78767 -0.5L 0 -0.5L 0 0.5L 4.78767 0.5L 4.78767 -0.5Z"/>
+</defs>
+</svg>

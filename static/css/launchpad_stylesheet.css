@@ -1,12 +1,20 @@
+@font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
+
 html{
     width:100%; 
     margin:0;
+    font-family: Avenir;
 }
 
 body {
     position:relative;
     max-width: 1920px;
     margin: 0 auto;
+    font-family: Avenir;
+}
+
+span {
+    font-family: Avenir;
 }
 
 .blah {
@@ -15,7 +23,7 @@ body {
 }
 
 .pageone {
-    opacity: .4;
+    opacity: .35;
     position: absolute;
     left: 0;
     right: 0;
@@ -29,11 +37,12 @@ body {
     display:flex;
     color: red;
 
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    font-family: Avenir;
 }
 
 #laptop1 {
@@ -45,27 +54,31 @@ body {
 
 
 .text1 {
-    font-size: 2.3vw;
+    font-size: 2.7vw;
     top: 50.5vh;
     left: 16.2vw;
     z-index: 1;
     position: absolute;
+    font-family: Avenir;
 }
 
 .content {
     width: 70%;
     max-width: 1920px;
+    font-family: Avenir;
 }
 
 #page2 {
     position: absolute;
     top: 140vh;
     width: 100%;
+    font-family: Avenir;
 }
 
 #bookgallery {
     padding-right: 5%;
     padding-left: 10%;
+    font-family: Avenir;
 }
 
 #startreading {
@@ -73,6 +86,7 @@ body {
     font-size: 5vh;
     padding-bottom: 5vh;
     padding-top: 7vh;
+    font-family: Avenir;
 }
 
 .pagethree {
@@ -84,6 +98,7 @@ body {
     height: 110vh;
     width: 100%;
     z-index: -1;
+    font-family: Avenir;
 }
 
 #laptop2 {
@@ -98,11 +113,13 @@ body {
     top: 287vh;
     left: 15vw;
     z-index: 1;
+    font-family: Avenir;
 }
 
 #picficdesc {
     font-size: 2.4vh;
     max-width: 30vw;
+    font-family: Avenir;
 }
 
 .pagefour {
@@ -111,7 +128,7 @@ body {
     left: 0;
     right: 0;
     z-index: -1;
-
+    font-family: Avenir;
     top: 356.2vh;
     background-repeat: no-repeat;
     background-size: contain;
@@ -122,6 +139,7 @@ body {
 
 .pagefourtext {
     font-size: 1.2em;
+    font-family: Avenir;
 }
 
 .pagefourcontainer {
@@ -131,6 +149,7 @@ body {
     align-content: center;
     top: 365vh;
     left: 24.3vw;
+    font-family: Avenir;
 }
 
 .picficLogo{
@@ -143,6 +162,7 @@ body {
 
 .pagefourcontent {
     padding-top: 5vh;
+    font-family: Avenir;
 }
 
 .pagefive {
@@ -156,11 +176,13 @@ body {
     background-image: url(../launchpad/png/background4.png);
     height: 100vh;
     width: 100%;
+    font-family: Avenir;
 }
 
 .pagefivetext {
     font-size: 1.7em;
     padding-top: 1em;
+    font-family: Avenir;
 }
 
 /*.pagefivecontent {
@@ -182,8 +204,10 @@ body {
 }*/
 
 .footer {
+    top:500vh;
     left: 41.5vw;
-    /*position: absolute;*/
+    position: absolute;
+    font-family: Avenir;
 }
 
 .logo {
@@ -198,6 +222,7 @@ body {
     width: 100%;
     background: #EAEAEA;
     max-width: 1920px;
+    font-family: Avenir;
 }
 
 .contactfootercontent {
@@ -207,10 +232,12 @@ body {
     top: 575vh;
     width:100%;
     max-width: 1920px;
+    font-family: Avenir;
 }
 
 .footertext {
     padding-left: 27vw;
+    font-family: Avenir;
 }
 
 #footerimg {
@@ -221,6 +248,8 @@ body {
 
 .navbar {
     background: #D1EBFF;
+    margin: 0;
+    border-radius:0;
 }
 
 #aboutus {
@@ -237,7 +266,7 @@ body {
 
 .navpicficLogo {
     position: absolute;
-    height: 6vh;
+    height: 5vh;
     width: auto;
     top:.6vh;
     left:6vw;
@@ -268,7 +297,10 @@ body {
 }
 #login-dp .social-buttons a{
     width: 49%;
-}
+}/* Rectangle 2: */
+background: #FFFFFF;
+box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+border-radius: 10px;
 #login-dp .form-group {
     margin-bottom: 10px;
 }
@@ -297,4 +329,165 @@ body {
         background-color: inherit;
         border-top:0 none;
     }
+}
+
+.user {
+    position:absolute;
+    right: 7vw;
+    top:50%;
+    margin-top:-20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
+}
+
+.profileBackground {
+    position: relative;
+    background:#f3f3f3;
+    height:93vh;
+}
+
+.aboutMe {
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+    height: 550px;
+    width: 240px;
+    top: 5vh;
+    left: 8vw;
+    border-radius: 10px;
+}
+
+.activity {
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+    position: absolute;
+    background: white;
+    height: 550px;
+    width: 750px;
+    top: 5vh;
+    left: 31vw;
+    border-radius: 10px;
+    font-family: Avenir;
+}
+
+.bigProf {
+    position:absolute;
+    top:2vh;
+    left:50%;
+    margin-left:-60px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
+    border-style: solid;
+    border-color: #D1EBFF;   
+}
+
+.userNames {
+    position:relative;
+    text-align: center;
+    font-family: Avenir;
+    top: 18.2vh;
+}
+
+.about {
+    position:relative;
+    top: 20vh;
+}
+
+.about h5 {
+    display: inline;
+    font-weight: bolder;
+    letter-spacing: 0.28px;
+    line-height:16px;
+}
+
+.edit {
+    color: #85caff;
+    font-family: Avenir-Book;
+    display:inline;
+    text-align: right;
+    left:50vw;
+}
+
+.edit:before{
+    content:" "; 
+    display:inline-block; 
+    width:120px;
+}
+
+.eedit {
+    color: #85caff;
+    font-family: Avenir;
+    display:inline;
+    text-align: right;
+    left:50vw;
+}
+
+.eedit:before{
+    content:" "; 
+    display:inline-block; 
+    width:110px;
+}
+
+.about h5:before {
+    content:" "; 
+    display:inline-block; 
+    width:9px;
+}
+
+.about p {
+    font-family: Avenir;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+
+.activity h4:before {
+    content:" "; 
+    display:inline-block; 
+    width:30px;
+}
+
+.activity h4 {
+    padding-top: .5cm;
+    display:inline-block; 
+}
+
+.aedit:before{
+    content:" "; 
+    display:inline-block; 
+    width:570px;
+}
+
+.aedit {
+    color: #85caff;
+    font-family: Avenir;
+    display:inline;
+    text-align: right;
+    left:50vw;
+}
+
+.activity h5:before {
+    content:" ";
+    display:inline-block;
+    width:28px;
+}
+
+.bookshelf {
+    position: relative;
+    background: black;
+    height: 100px;
+    width: 600px;
+    left:50%;
+    margin-left:-300px;
 }

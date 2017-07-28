@@ -1,0 +1,37 @@
+@font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
+
+html {
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    margin: 0 auto;
+}
+
+.navbar {
+    background: #D1EBFF;
+}
+
+.navpicficLogo {
+    position: absolute;
+    height: 5vh;
+    width: auto;
+    top:.6vh;
+    left:6vw;
+}
+
+.user {
+    position:absolute;
+    right: 7vw;
+    top:50%;
+    margin-top:-20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
+}
