@@ -163,9 +163,8 @@ body {
     padding-top: 1em;
 }
 
-/*.pagefivecontent {
-/*position: absolute;*/
-/*
+.pagefivecontent {
+    """position: absolute;"""
     text-align: center;
     top: 50vh;
     left: 26vw;
@@ -178,12 +177,13 @@ body {
     align-items: center;
     justify-content: center;
     margin:-10px;
-    background-color:red;
-}*/
+}
 
 .footer {
     left: 41.5vw;
-    /*position: absolute;*/
+    height: 13vh;
+    position: absolute;
+    top: 560vh;
 }
 
 .logo {
@@ -196,6 +196,8 @@ body {
     right: 0;
     z-index: -1;
     width: 100%;
+    top: 570vh;
+    height: 13vh;
     background: #EAEAEA;
     max-width: 1920px;
 }
@@ -236,7 +238,7 @@ body {
 }
 
 .navpicficLogo {
-    position: absolute;
+	position: absolute;
     height: 6vh;
     width: auto;
     top:.6vh;

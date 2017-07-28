@@ -1,0 +1,121 @@
+@font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
+
+html {
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    margin: 0 auto;
+}
+
+.navbar {
+    position: relative;
+    background: white;
+    height: 18vh;
+    border-radius: 0px;
+    margin:0;
+}
+
+.navMenu {
+    position: absolute;
+    width: auto;
+    height:16px;
+    left: 3vw;
+    top: 50%;
+    margin-top:-8px;
+}
+
+.navpicficLogo {
+    position: absolute;
+    height: 30px;
+    width: auto;
+    top: 50%;
+    margin-top:-15px;
+    left:48%;
+/*
+position: absolute;
+    left: 50%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+/*display: block;
+ */
+}
+
+.user {
+    position:absolute;
+    right: 7vw;
+    top:50%;
+    margin-top:-25px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
+}
+
+.bookInfo {
+    height: 64vh;
+    position: relative;
+    background: black;
+    border-radius: 0px;
+}
+
+.coverArt {
+    position:absolute;
+    top: 10vh;
+    left:25vw;
+}
+
+.summary {
+    position:absolute;
+    left: 40vw;
+    top: 7vh;
+    color:white;
+    width: 40vw;
+    font-family: 'Avenir', sans-serif;
+}
+
+p {
+    font-size: 12px;
+    font-family: 'Avenir', sans-serif;
+}
+
+.toRead {
+    position:absolute;
+    width:250px;
+    background-color:white;
+    border-radius: 15px;
+    top: 50vh;
+    border: none;
+    height: 35px;
+    left:40vw;
+    font-size: 17px;
+    font-family: 'Avenir', sans-serif;
+}
+
+.viewArt{
+    position:absolute;
+    font-family: 'Avenir', sans-serif;
+    left: 25vw;
+    top: 86vh;
+}
+
+h3, h2, h4 {
+    font-family: 'Avenir', sans-serif;
+}
+
+
+.share { 
+  width: 190px; 
+  position: fixed;
+  top: 30vh;
+  left: 5vw;
+  z-index: 50000;
+}
+
+.logo {
+    padding-right: 5vh;
+}
