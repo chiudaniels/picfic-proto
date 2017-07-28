@@ -1,3 +1,5 @@
 just finish setting up tables
 test populate
 write methods
+
+enforce constraints and more detailed field descriptors (string length)
