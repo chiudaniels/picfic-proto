@@ -29,8 +29,8 @@ body {
 
 .navpicficLogo {
     position: absolute;
-    height: 30px;
-    width: auto;
+    height: auto;
+    width: 50px;
     top: 50%;
     margin-top:-15px;
     left:48%;
