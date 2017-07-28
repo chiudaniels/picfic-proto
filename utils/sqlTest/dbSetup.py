@@ -1,10 +1,10 @@
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
-from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, Table, CheckConstraint
+from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, Table, CheckConstraint, UniqueConstraint
 
 from sqlalchemy.orm import sessionmaker, relationship
-
-
+#from sqlalchemy.sql.functions import GenericFunction
+from datetime import datetime
 from sqlalchemy import create_engine
 
 Session = sessionmaker()
@@ -15,9 +15,15 @@ Concerns:
 userChapter / userBook - possible poor db design
 text/url in text storage? ("Chapters" table)
 pageCC : array or string? 
-do we are about who likes or just like count?
+do we care about who likes or just like count?
 do we care about who's reading? 
 following omitted for now (self referencing is scary)
+Constraints are not comprehensive
+#Not worrying about deletes right now
+#Fix datetime dera god
+
+Questions:
+What happens when user deletes account? (Set cascade delete on User class)
 
 Notes:
 back_populates - refers to attribute in noted relation's class
@@ -35,15 +41,15 @@ class User(Base):
     __tablename__ = "Users"
 
     userID = Column(Integer, primary_key = True)
-    username = Column(String)
-    tag = Column(String)
-    email = Column(String)
+    username = Column(String(32), unique = True)
+    tag = Column(String, unique = True) #is that a thing?
+    email = Column(String, unique = True)
     passData = Column(String)
-    usergroup = Column(Integer)
+    usergroup = Column(Integer, CheckConstraint("usergroup >= 0"))
     authTokens = Column(String)
 
     #Relationships
-    userProfile = relationship("UserProfile", back_populates="user") #one to one
+    userProfile = relationship("UserProfile", back_populates="user", cascade="all, delete, delete-orphan") #one to one
     art = relationship("Art", back_populates="uploader") #one to many
 
     #following = relationship("User", secondary="Following", back_populates="followed")
@@ -57,11 +63,19 @@ class User(Base):
         return "<User(name='%s', id='%d')>" % (
             self.username, self.userID)
 
+    def __init__(self, username, password, authtokens, email):
+        self.usergroup = 0
+        self.username = username
+        self.passData = password
+        self.authtokens = authtokens
+        self.email = email
+        
+        
 class UserProfile(Base):
     __tablename__ = "UserProfiles"
 
     userID = Column(Integer, ForeignKey("Users.userID"), primary_key = True) 
-    birthday = Column(Integer) #Edit
+    birthday = Column(Date) #Edit
     gender = Column(String) #Edit
     address = Column(String)
     reference = Column(String)
@@ -87,7 +101,7 @@ class Art(Base):
     ccStart = Column(Integer)
     ccEnd = Column(Integer)
     urlName = Column(String)
-    timestamp = Column(DateTime)
+    timestamp = Column(DateTime, default = 0)
 
     #Relationships
     uploader = relationship("User", back_populates="art") #many to one
@@ -102,17 +116,26 @@ class Art(Base):
     def __repr__(self):
         return "<Art(id='%d',uploader='%d'),>" % (
             self.artID, self.uploaderID)
+
+    def __init__(self, uID, caption, cStart, cEnd, url, bookID, chID):
+        self.uploaderID = uID
+        self.caption = caption
+        self.ccStart = cStart
+        self.ccEnd = cEnd
+        self.urlName = url
+        self.bookID = bookID
+        self.chapterID = chID
     
 class Book(Base):
     __tablename__ = "Books"
 
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
-    author = Column(String)
+    author = Column(String(50), nullable = False)
     release = Column(Date)
-    title = Column(String)
+    title = Column(String(200))
     misc = Column(String)
-    blurb = Column(String)
+    blurb = Column(String(2000))
 
     #Relationships
     art = relationship("Art", back_populates="book")
@@ -122,6 +145,13 @@ class Book(Base):
     def __repr__(self):
         return "<Book(id='%d')>" % (
             self.bookID )
+
+    def __init__(self, author, title, release, blurb):
+        self.author = author
+        self.title = title
+        self.release = release
+        self.blurb = blurb
+        self.misc = "FREE DOMAIN"
     
 class Chapter(Base):
     __tablename__ = "Chapters"
@@ -129,7 +159,7 @@ class Chapter(Base):
     chapterID = Column(Integer, primary_key = True)
     bookID = Column(Integer, ForeignKey("Books.bookID"))
     chapterNum = Column(Integer)
-    title = Column(String)
+    title = Column(String(200))
     charCount = Column(Integer)
     price = Column(Integer) #Change to money
     release = Column(Date)
@@ -142,11 +172,19 @@ class Chapter(Base):
     #revenue? maybe. (Analytics)
     readers = relationship("UserChapter", back_populates="chapter")
     
-    
     def __repr__(self):
         return "<Chapter(bookID='%d', chapterNum='%d')>" % (
             self.bookID, self.chapterNum )
 
+    def __init__(self, bookID, title, chNum, text):
+        self.bookID = bookID
+        self.title = title
+        self.chapterNum = chNum
+        self.text = text
+        price = 0
+        pageCC = "0" #import an algo from text
+        charCount = len(text)
+    
 #=== Many many relationships / Association tables / Association Objects =========================
 
 likeTable = Table('Likes', Base.metadata,
@@ -184,11 +222,12 @@ class UserBook(Base): #book-user config
 
     readerID = Column(Integer, ForeignKey("Users.userID"), primary_key = True)
     bookID = Column(Integer, ForeignKey("Books.bookID"), primary_key = True)
-    curChapter = Column(Integer)
-    curCC = Column(Integer)
+    curChapter = Column(Integer) #defaults as 0 anyway
+    curCC = Column(Integer) #defaults as 0
 
     reader = relationship("User", back_populates="books") #user's "books/reading list" are getting back populated when readers are edited
     book = relationship("Book", back_populates="readers") #the book has a "readers" list
+
     
 class UserChapter(Base):
     __tablename__ = "UserChapter"
