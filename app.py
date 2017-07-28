@@ -67,7 +67,7 @@ def galleryPage(pageNum):
 
 @app.route("/books/<int:bookID>")
 def bookLanding(bookID):
-    metadata = books.getBookMetadata(bookID)
+    metadata = books.getBookLanding(bookID)
     return render_template("bookLandingTemp.html", isLoggedIn = isLoggedIn(), data = metadata)
 
 

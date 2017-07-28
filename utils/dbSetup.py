@@ -20,7 +20,7 @@ do we care about who's reading?
 following omitted for now (self referencing is scary)
 Constraints are not comprehensive
 #Not worrying about deletes right now
-#Fix datetime dera god
+#Fix datetime dear god
 
 Questions:
 What happens when user deletes account? (Set cascade delete on User class)
@@ -132,7 +132,7 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
-    release = Column(Date)
+    release = Column(String) #lol fix this
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))
@@ -146,7 +146,7 @@ class Book(Base):
         return "<Book(id='%d')>" % (
             self.bookID )
 
-    def __init__(self, author, title, release, blurb):
+    def __init__(self, author, title, release, blurb, misc):
         self.author = author
         self.title = title
         self.release = release
@@ -168,6 +168,7 @@ class Chapter(Base):
     text = Column(String) #or use url
 
     book = relationship("Book", back_populates="chapters") #many to one
+    art = relationship("Art", back_populates="chapter") #one to many
     #readers = relationship("", back_populates="") #I don't really care about this...
     #revenue? maybe. (Analytics)
     readers = relationship("UserChapter", back_populates="chapter")
@@ -176,14 +177,15 @@ class Chapter(Base):
         return "<Chapter(bookID='%d', chapterNum='%d')>" % (
             self.bookID, self.chapterNum )
 
-    def __init__(self, bookID, title, chNum, text):
+    def __init__(self, bookID, title, chNum, text, pageCC):
         self.bookID = bookID
         self.title = title
         self.chapterNum = chNum
-        self.text = text
-        price = 0
-        pageCC = "0" #import an algo from text
-        charCount = len(text)
+        self.text = 0
+        self.price = 0
+        self.pageCC = pageCC #import an algo from text
+        self.charCount = len(text)
+
     
 #=== Many many relationships / Association tables / Association Objects =========================
 
@@ -238,7 +240,7 @@ class UserChapter(Base):
     config = Column(String)
 
     reader = relationship("User", back_populates="chapters") #user's "books/reading list" are getting back populated when readers are edited
-    chapter = relationship("Book", back_populates="readers") #the book has a "readers" list
+    chapter = relationship("Chapter", back_populates="readers") #the book has a "readers" list
 
     
 # END CLASS DEFINITIONS ======================================

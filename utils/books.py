@@ -1,190 +1,125 @@
-#import modules needed
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from dbSetup import *
+import string
 
-import datetime
-import time
-import userDb, markers, images
+Session = sessionmaker()
+engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
-#initialize mongo database
-import pymongo 
-from pymongo import MongoClient
+Session.configure(bind=engine)
 
-server = MongoClient( "127.0.0.1" )
-#server = MongoClient( "149.89.150.100" )
+def parseBook(textFilename, metaFilename):
+    session = Session()
 
-db = server.picfic
+    #Make book
+    metaFile = open(metaFilename, "r")
+    metaList = metaFile.readlines()
+    metaFile.close()
+    bT = metaList[0]
+    bA = metaList[1]
+    bR = metaList[2]
+    bB = metaList[3]
+    bM = metaList[4]
+    newBook = Book(bA, bT, bR, bB, bM)
 
-cB = db.books
+    session.add(newBook)
+    session.flush()
+    #retrieve that bookID!
+    bookID = newBook.bookID
+    print "DEBUGGING!!!\n\n"
+    print bookID
+    print "END DEBUG"
+    printable = set(string.printable)
+    #Distinguish chapters for parsing, modularized for future
+    textFile = open(textFilename, "r")
+    textText = textFile.readlines()
+    chapterMasterArr = []
+    curChDict = {}
+    curChDict["text"] = []
+    for ln in textText:
+        line = filter(lambda x: x in printable, ln)
+        if line.isspace():
+            continue
+        if "CHAPTER" in line:
+            print "Chapter detected"
+            #flush last chapter's text to array, reset
+            if len(curChDict["text"]) != 0:
+                if "title" in curChDict.keys():
+                    chapterMasterArr.append(curChDict)
+                curChDict = {"title": line, "text": []}
+                print "Title"
+                print curChDict["title"]
+        else: #regular or page break, whatever
+            curChDict["text"].append(line)
 
-#Book database functions
+    #done splitting, parse them all
+    for i in range(len(chapterMasterArr)):
+        ch = chapterMasterArr[i]
+        print ch
+        addNewChapter(ch["title"], ch["text"], bookID, i + 1)
 
-"""
-exists( bookID )
-Given:
-  bookID - unique id given to each map
-Returns:
-  boolean of whether a bookID exists
-"""
-def exists( bookID ):
-    finder = cB.find_one(
-        { "bookID" : int(bookID) }
-        )
-    return finder is not None
+    textFile.close()
+    return True
 
-"""
-getBookMetadata( bookID )
-Given:
-  bookID - unique id given to each map
-Returns:
-  data for book landing page
-"""    
-def getBookMetadata( bookID ):
-    if exists(bookID):
-        finder = cB.find_one(
-            { "bookID" : int(bookID) },
-            { "meta": 1, "bookID": 1 }
-            )
-        #NOT DONE NEEDS IMAGES
+def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
+    session = Session()
+    #chText is an array
+    curCC = 0
+    processedText = ""
+    pageCC = ""
+    curPageStartCC = 0
+    
+    """Current formatting for pageCC
+    <int>,<int>:<int>,<int>:...
+    
+    """
+    #off by one hell
+    for line in chText:
+        if "--------" in line:#page break
+            newCCStr = str(curPageStartCC) + "," + str(curCC) + ":"
+            curPageStartCC = curCC + 1
+            pageCC += newCCStr
+        else:
+            curCC += len(line)
+            processedText += line
+        pageCC = pageCC[:-1]
         
-        return finder
-    return None
+    newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
+    session.add(newChapter)
+    session.commit()
 
-def getTopImages( bookID ):
-    return None
 
-#For the gallery
-def getGalleryPage( pgNum, query, userID ):
+#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
 
-    #for every book
-    #finder = cB.find_one({}, {"galMeta":1, "bookID":1})
-    return None
+    
+def getBookLanding( bookID ):
+    bookID = int(bookID)
+    session = Session()
+    book = session.query(Book).filter_by(bookID = bookID).one()
 
-#Reading
-def getPageData( bookIDA, chNumA, userID ):
-    bookID = int(bookIDA)
-    chNum = int(chNumA) - 1
-    bookmark = userDb.getBookmark(userID, bookID )
-    if bookmark == None or bookmark[0] != chNum :
-        pgNum = 0 #turn into something loaded from userID
+    if book == None:
+        return { "bookID" : bookID, "status": 0 }
     else:
-        pgNum = bookmark[1]
-    ret = {}
-    if exists( bookID ):
-        ret["bookID"] = bookID
-        #ret["bookData"] =  cB.find_one({"bookID": bookID}) #just pass everything
-        ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
-        ret["pgData"] = ret["chData"]["pages"][pgNum] 
-        ret["markerData"] = db.markers.find_one(
-            {"markerID": ret["pgData"]["marker"]}
-        )
-        #probably needs to pull more data for sorting
-        ret["imageData"] = []
-        print markers.getImages(ret["markerData"]["markerID"])
-        for imgID in markers.getImages(ret["markerData"]["markerID"])["imageIDs"]:
-            ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
-            #attributes: authortag, url, userID, markerID
-        ret["pgNum"] = pgNum + 1 #for offset
-        ret["chNum"] = int(chNumA)
-        ret["bookID"] = int(bookIDA)
-        ret["chLength"] = len(ret["chData"]["pages"])
-        ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)})["chapters"])
+        ret = { "bookID" : bookID }
+        ret["meta"] = {
+            "title": book.title,
+            "author": book.author,
+            "misc": book.misc,
+            "blurb": book.blurb,
+            "release": book.release
+        }
         ret["status"] = 1
         return ret
-        """
-        try:
-            ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
-            ret["pgData"] = ret["chData"]["pages"][pgNum] 
-            ret["markerData"] = db.markers.find_one(
-                {"markerID": ret["pgData"]["marker"]}
-            )
-            #probably needs to pull more data for sorting
-            ret["imageData"] = []
-            print markers.getImages(ret["markerData"]["markerID"])
-            for imgID in markers.getImages(ret["markerData"]["markerID"]):
-                
-                ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
-                #attributes: authortag, url, userID, markerID
-            ret["pgNum"] = int(pgNumA)
-            ret["chNum"] = int(chNumA)
-            ret["bookID"] = int(bookIDA)
-            ret["chLength"] = len(ret["chData"]["pages"])
-            ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)})["chapters"])
-            ret["status"] = 1
-            return ret
-        except:
-            ret["status"] = 0
-            ret["errMsg"] = "This book doesn't have this page."
-            
-            return ret
-    ret["status"] = -1
-    ret["errMsg"] = "Book doesn't exist."
-    return ret
-"""
-
-def getPageAJAX( bookIDA, chNumA, pgNumA ):
-    print "ajaxing"
-    print bookIDA
-    print chNumA
-    print pgNumA
-    bookID = int(bookIDA)
-    chNum = int(chNumA) - 1
-    pgNum = int(pgNumA) - 1 #offset for list  indices
-    ret = {}
-    if exists( bookID ):
-        ret["bookID"] = bookID
-        chData = cB.find_one({"bookID": bookID }, {"_id": 0})["chapters"][chNum]
-        ret["pgData"] = chData["pages"][pgNum] 
-        ret["markerData"] = db.markers.find_one(
-            {"markerID": ret["pgData"]["marker"]}, {"_id": 0}
-        )
-        #probably needs to pull more data for sorting
-        ret["imageData"] = []
-        #print markers.getImages(ret["markerData"]["markerID"])
-        for imgID in markers.getImages(ret["markerData"]["markerID"])["imageIDs"]:
-            ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
-            #attributes: authortag, url, userID, markerID
-        ret["pgNum"] = int(pgNumA)
-        ret["chNum"] = int(chNumA)
-        ret["bookID"] = int(bookIDA)
-        ret["chLength"] = len(chData["pages"])
-        ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)}, {"_id": 0})["chapters"])
-        ret["status"] = 1
-        
-        return ret
-        """
-        try:
-            ret["chData"] = cB.find_one({"bookID": bookID })["chapters"][chNum]
-            ret["pgData"] = ret["chData"]["pages"][pgNum] 
-            ret["markerData"] = db.markers.find_one(
-                {"markerID": ret["pgData"]["marker"]}
-            )
-            #probably needs to pull more data for sorting
-            ret["imageData"] = []
-            print markers.getImages(ret["markerData"]["markerID"])
-            for imgID in markers.getImages(ret["markerData"]["markerID"]):
-                
-                ret["imageData"].append(images.getImageDisplay(imgID))#all images associated - do ajax for associated
-                #attributes: authortag, url, userID, markerID
-            ret["pgNum"] = int(pgNumA)
-            ret["chNum"] = int(chNumA)
-            ret["bookID"] = int(bookIDA)
-            ret["chLength"] = len(ret["chData"]["pages"])
-            ret["bookLength"] = len(cB.find_one({"bookID": int(bookID)})["chapters"])
-            ret["status"] = 1
-            return ret
-        except:
-            ret["status"] = 0
-            ret["errMsg"] = "This book doesn't have this page."
-            
-            return ret
-    ret["status"] = -1
-    ret["errMsg"] = "Book doesn't exist."
-    return ret
-"""
+    
+def getPageData( bookID, chNum, userID ):
+    return None
 
 
+def getBook( bookID ):
+    bookID = int(bookID)
+    session = Session()
+    book = session.query(Book).one()
+    print book
+    return book
 
-
-#helper functions
-
-def counter_cB():
-    return cB.count()
+getBook(8)
