@@ -1,14 +1,14 @@
 @font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
 
 html{
-    width:auto; 
+    width:100%; 
     margin:0;
     font-family: 'Nunito', sans-serif;
 }
 
 body {
     position:relative;
-    /*max-width: 1920px;*/
+    max-width: 1920px;
     margin: 0 auto;
     font-family: 'Nunito', sans-serif;
 }

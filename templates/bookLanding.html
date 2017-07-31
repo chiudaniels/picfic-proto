@@ -11,10 +11,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
     <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="../static/css/reading_stylesheet.css");
-	  <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
-	  <script src="https://apis.google.com/js/platform.js" async defer></script>
-	  <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
+    <link rel="stylesheet" type="text/css" href="../static/css/reading_stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
   </head>
 
   <body>
@@ -51,7 +52,60 @@
 	gggg<br>
 gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>gggg<br>
       </p>
+
+      <div class="container gallery">
+        <div class="nothumbnails">
+          <div class="row gallery-image">
+            <div class="col-md-12">
+              <div class="slideshow-container">
+                <span class="slideshow-images" id="slideMaster">
+                  
+                </span>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              </div>
+            </div>
+          </div>
+          <div class="row gallery-interact">
+            <div class="col-md-6">
+              <img src="../static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+            </div>
+            <div class="col-md-6">
+              <img class="blueicons fbicon" src="../static/svg/blue_fb.svg">
+              <img class="blueicons" src="../static/svg/blue_insta.svg">
+              <img class="blueicons" src="../static/svg/blue_twitter.svg">
+              <img class="blueicons" src="../static/svg/blue_tumblr.svg">
+              <img class="blueicons" src="../static/svg/blue_pin.svg">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 gallery-desc">
+              “His eyes were sharp and piercing, save during those intervals of torpor to which I have alluded; and his thin, hawk-like nose gave his whole expression an air of alertness and decision. His chin, too, had the prominence and squareness which mark the man of determination.”
+            </div>
+          </div>
+        </div>
+        <div class="row gallery-thumbnail">
+          <div class="col-md-1">
+            <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg"> </a>
+          </div>
+          <div class="col-md-3">
+            <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
+          </div>
+          <div class="col-md-3">
+            <img class="thumbnails" id="thumbnail2" thumbCount="" src="">
+          </div>
+          <div class="col-md-3">
+            <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
+          </div>
+          <div class="col-md-1">
+            <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg"> </a>
+          </div>
+        </div>
+      </div>
+
+      
     </div>
     
   </body>
+  <script src=../static/chapter.js>
 </html>

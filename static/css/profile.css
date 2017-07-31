@@ -1,13 +1,13 @@
 @font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
 
 html {
-    width: 100%;
+    width: auto;
     margin: 0;
 }
 
 body {
-    position: relative;
     margin: 0 auto;
+    width:auto;
 }
 
 .navbar {
