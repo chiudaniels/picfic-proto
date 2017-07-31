@@ -3,18 +3,18 @@
 html{
     width:100%; 
     margin:0;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
     position:relative;
     max-width: 1920px;
     margin: 0 auto;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 span {
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .blah {
@@ -42,7 +42,7 @@ span {
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #laptop1 {
@@ -59,26 +59,26 @@ span {
     left: 16.2vw;
     z-index: 1;
     position: absolute;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .content {
     width: 70%;
     max-width: 1920px;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #page2 {
     position: absolute;
     top: 140vh;
     width: 100%;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #bookgallery {
     padding-right: 5%;
     padding-left: 10%;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #startreading {
@@ -86,7 +86,7 @@ span {
     font-size: 5vh;
     padding-bottom: 5vh;
     padding-top: 7vh;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .pagethree {
@@ -98,7 +98,7 @@ span {
     height: 110vh;
     width: 100%;
     z-index: -1;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #laptop2 {
@@ -113,13 +113,13 @@ span {
     top: 287vh;
     left: 15vw;
     z-index: 1;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #picficdesc {
     font-size: 2.4vh;
     max-width: 30vw;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .pagefour {
@@ -128,7 +128,7 @@ span {
     left: 0;
     right: 0;
     z-index: -1;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
     top: 356.2vh;
     background-repeat: no-repeat;
     background-size: contain;
@@ -139,7 +139,7 @@ span {
 
 .pagefourtext {
     font-size: 1.2em;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .pagefourcontainer {
@@ -149,7 +149,7 @@ span {
     align-content: center;
     top: 365vh;
     left: 24.3vw;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .picficLogo{
@@ -162,7 +162,7 @@ span {
 
 .pagefourcontent {
     padding-top: 5vh;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .pagefive {
@@ -176,13 +176,13 @@ span {
     background-image: url(../launchpad/png/background4.png);
     height: 100vh;
     width: 100%;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .pagefivetext {
     font-size: 1.7em;
     padding-top: 1em;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 /*.pagefivecontent {
@@ -207,7 +207,7 @@ span {
     top:500vh;
     left: 41.5vw;
     position: absolute;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .logo {
@@ -222,7 +222,7 @@ span {
     width: 100%;
     background: #EAEAEA;
     max-width: 1920px;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .contactfootercontent {
@@ -232,12 +232,12 @@ span {
     top: 575vh;
     width:100%;
     max-width: 1920px;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .footertext {
     padding-left: 27vw;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 #footerimg {
@@ -266,9 +266,10 @@ span {
 
 .navpicficLogo {
     position: absolute;
-    height: 5vh;
+    height: 4vh;
     width: auto;
-    top:.6vh;
+    top: 50%;
+    margin-top: -2vh;
     left:6vw;
 }
 
@@ -372,7 +373,7 @@ border-radius: 10px;
     top: 5vh;
     left: 31vw;
     border-radius: 10px;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
 }
 
 .bigProf {
@@ -394,7 +395,7 @@ border-radius: 10px;
 .userNames {
     position:relative;
     text-align: center;
-    font-family: Avenir;
+    font-family: 'Nunito', sans-serif;
     top: 18.2vh;
 }
 
@@ -410,9 +411,19 @@ border-radius: 10px;
     line-height:16px;
 }
 
+.about p {
+    font-family: .AppleSystemUIFont;
+    font-size: 10px;
+    letter-spacing: 0.2px;
+    line-height:16px;
+}
+
 .edit {
-    color: #85caff;
-    font-family: Avenir-Book;
+    font-size: 11px;
+    color:#0092FF;
+    letter-spacing: 0.22px;
+    line-height:16px;
+    font-family: 'Nunito', sans-serif;
     display:inline;
     text-align: right;
     left:50vw;
@@ -425,8 +436,11 @@ border-radius: 10px;
 }
 
 .eedit {
-    color: #85caff;
-    font-family: Avenir;
+    font-size: 11px;
+    color:#0092FF;
+    letter-spacing: 0.22px;
+    line-height:16px;
+    font-family: 'Nunito', sans-serif;
     display:inline;
     text-align: right;
     left:50vw;
@@ -460,7 +474,10 @@ border-radius: 10px;
 
 .activity h4 {
     padding-top: .5cm;
-    display:inline-block; 
+    display:inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    letter-spacing: 0.4px;
 }
 
 .aedit:before{
@@ -470,8 +487,11 @@ border-radius: 10px;
 }
 
 .aedit {
-    color: #85caff;
-    font-family: Avenir;
+    font-size: 11px;
+    color:#0092FF;
+    letter-spacing: 0.22px;
+    line-height:16px;
+    font-family: 'Nunito', sans-serif;
     display:inline;
     text-align: right;
     left:50vw;
@@ -483,13 +503,11 @@ border-radius: 10px;
     width:28px;
 }
 
-.bookshelf {
-    position: relative;
-    background: black;
-    height: 100px;
-    width: 600px;
-    left:50%;
-    margin-left:-300px;
+.activity h5 {
+    font-family: .AppleSystemUIFont;
+    font-size: 14px;
+    color: #181818;
+    letter-spacing:0.28px;
 }
 
 .modal-dialog {
@@ -500,4 +518,54 @@ border-radius: 10px;
     top: 50%;
     margin-left: -200px;
     margin-top: -10px;
+}
+
+.bookshelf {
+    position: relative;
+    background-image: linear-gradient(-180deg, #FCFAF3 0%, #F5EED9 100%);
+    box-shadow: 0 1px 3px 0 rgba(107, 89, 34, 0.10);
+    height: 100px;
+    width: 600px;
+    left:50%;
+    margin-left:-300px;
+}
+
+.photoHolder {
+    position: relative;
+    box-shadow: 0 1px 3px 0 rgba(107, 89, 34, 0.10);
+    height: 100px;
+    width: 600px;
+    left:50%;
+    margin-left:-300px;
+}
+
+.title {
+    position: absolute;
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    color: #181818;
+    letter-spacing: 0.24px;
+    left: 130px;
+    top: 50%;
+    margin-top: -6px;
+}
+
+.coverArt {
+    left: 50px;
+    position: absolute;
+    border-radius: 3px;
+    display: inline-block;
+    height: 100px;
+    width: auto; 
+}
+
+.thumbnails {
+    height: 100px;
+    width: 100px;
+}
+
+.arr {
+    position: absolute;
+    padding-top: 35px;
 }

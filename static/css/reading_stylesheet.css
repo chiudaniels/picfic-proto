@@ -75,16 +75,16 @@ position: absolute;
     top: 7vh;
     color:white;
     width: 40vw;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 p {
     font-size: 12px;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .toRead {
-    position:absolute;
+    position:relative;
     width:250px;
     background-color:white;
     border-radius: 15px;
@@ -93,18 +93,18 @@ p {
     height: 35px;
     left:40vw;
     font-size: 17px;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .viewArt{
     position:absolute;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Nunito', sans-serif;
     left: 25vw;
     top: 86xvh;
 }
 
 h3, h2, h4 {
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 
