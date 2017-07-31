@@ -1,10 +1,10 @@
-html{
-	width:100%; 
-	margin:0;
+html {
+    width: 100%;
+    margin: 0;
 }
 
 body {
-	position:relative;
+    position: relative;
     max-width: 1920px;
     margin: 0 auto;
 }
@@ -16,11 +16,18 @@ body {
     right: 0;
     z-index: -1;
 
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(launchpad/png/background1.png);
     height: 98vh;
-    width: 100%;
+    width: auto;
+
+
+    -webkit-background-size: auto 100%;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: auto 100%;
 
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
@@ -38,7 +45,7 @@ body {
 
 
 .text1 {
-    font-size: 2.3vw;
+    font-size: 2.7vmax;
     top: 50.5vh;
     left: 16.2vw;
     z-index: 1;
@@ -70,13 +77,18 @@ body {
 
 .pagethree {
     position: absolute;
-    top: 260vh;
+    top: 257.5vh;
     background-repeat: no-repeat;
     background-size: contain;
+    background-position: center;
     background-image: url(launchpad/png/background2.png);
-    height: 110vh;
+    height: 99vh;
     width: 100%;
     z-index: -1;
+    -webkit-background-size: auto 100%;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: auto 100%;
 }
 
 #laptop2 {
@@ -110,7 +122,13 @@ body {
     background-size: contain;
     background-image: url(launchpad/png/background3.png);
     height: 100vh;
-	width: 100%;
+    width: 100%;
+    background-position: center;
+
+    -webkit-background-size: auto 100%;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: auto 100%;
 }
 
 .pagefourtext {
@@ -151,6 +169,12 @@ body {
     background-image: url(launchpad/png/background4.png);
     height: 100vh;
     width: 100%;
+    background-position: center;
+
+    -webkit-background-size: auto 100%;
+    -moz-background-size: auto 100%;
+    -o-background-size: auto 100%;
+    background-size: auto 100%;
 }
 
 .pagefivetext {
@@ -195,7 +219,7 @@ body {
     left: 12vw;
     position: absolute;
     top: 575vh;
-    width:100%;
+    width: 100%;
     max-width: 1920px;
 }
 
@@ -226,65 +250,122 @@ body {
 }
 
 .navpicficLogo {
-	position: absolute;
+    position: absolute;
     height: 6vh;
     width: auto;
-    top:.6vh;
-    left:6vw;
+    top: .6vh;
+    left: 6vw;
 }
 
 .navbar-inner ul.nav li {
     text-align: center;
 }
 
-#login-dp{
+#login-dp {
     min-width: 250px;
     padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .8);
     position: absolute;
 }
-#login-dp .help-block{
-    font-size:12px    
+
+#login-dp .help-block {
+    font-size: 12px
 }
-#login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+
+#login-dp .bottom {
+    background-color: rgba(255, 255, 255, .8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
 }
-#login-dp .social-buttons{
-    margin:12px 0    
+
+#login-dp .social-buttons {
+    margin: 12px 0
 }
-#login-dp .social-buttons a{
+
+#login-dp .social-buttons a {
     width: 49%;
 }
+
 #login-dp .form-group {
     margin-bottom: 10px;
 }
-.btn-fb{
+
+.btn-fb {
     color: #fff;
-    background-color:#3b5998;
+    background-color: #3b5998;
 }
-.btn-fb:hover{
+
+.btn-fb:hover {
     color: #fff;
-    background-color:#496ebc 
+    background-color: #496ebc
 }
-.btn-tw{
+
+.btn-tw {
     color: #fff;
-    background-color:#55acee;
+    background-color: #55acee;
 }
-.btn-tw:hover{
+
+.btn-tw:hover {
     color: #fff;
-    background-color:#59b5fa;
+    background-color: #59b5fa;
 }
-@media(max-width:768px){
-    #login-dp{
+
+#mobiletextbreak{
+    display:none;
+}
+
+@media(max-width:768px) {
+    #login-dp {
         background-color: inherit;
         color: #fff;
     }
-    #login-dp .bottom{
+    #login-dp .bottom {
         background-color: inherit;
-        border-top:0 none;
+        border-top: 0 none;
     }
+}
+
+@media only screen and (max-width: 1100px) {
+    .navbar{
+        display:none;
+    }
+
+    #laptop1 {
+        padding-left: 5px;
+        top: 59.3vh;
+        left: 25vw;
+        position: absolute;
+    }
+    
+    .text1 {
+    font-size: 5vmax;
+    text-align: center;
+    top: 25.5vh;
+    left: 18.2vw;
+    z-index: 1;
+    position: absolute;
+    }
+
+    #text1{
+        font-weight: bold;
+        font-size: 6vmax;;
+    }
+
+    .text1 #text2{
+        top:15vh;
+    }
+
+    #laptop1 .laptop1{
+        height: 25vh;
+        width:auto;
+    }
+    
+    #mobiletextbreak{
+    padding-top: 15vh;
+    display:inline;
+}
+
+
 }
