@@ -181,7 +181,7 @@ class Chapter(Base):
         self.bookID = bookID
         self.title = title
         self.chapterNum = chNum
-        self.text = 0
+        self.text = text
         self.price = 0
         self.pageCC = pageCC #import an algo from text
         self.charCount = len(text)

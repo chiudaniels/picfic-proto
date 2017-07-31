@@ -28,7 +28,7 @@ def parseBook(textFilename, metaFilename):
     bookID = newBook.bookID
     print "DEBUGGING!!!\n\n"
     print bookID
-    print "END DEBUG"
+    print "END DEBUG\n\n"
     printable = set(string.printable)
     #Distinguish chapters for parsing, modularized for future
     textFile = open(textFilename, "r")
@@ -43,19 +43,23 @@ def parseBook(textFilename, metaFilename):
         if "CHAPTER" in line:
             print "Chapter detected"
             #flush last chapter's text to array, reset
-            if len(curChDict["text"]) != 0:
-                if "title" in curChDict.keys():
-                    chapterMasterArr.append(curChDict)
-                curChDict = {"title": line, "text": []}
-                print "Title"
-                print curChDict["title"]
+            if "title" in curChDict.keys():
+                print "last chapter appended"
+                #print curChDict
+                chapterMasterArr.append(curChDict)
+            curChDict = {"title": line, "text": []}
+            #print "Title"
+            print curChDict["title"]
         else: #regular or page break, whatever
             curChDict["text"].append(line)
-
+    #flush last chapter
+    if "title" in curChDict.keys():
+        chapterMasterArr.append(curChDict)
+    session.commit()
     #done splitting, parse them all
     for i in range(len(chapterMasterArr)):
         ch = chapterMasterArr[i]
-        print ch
+        #print ch
         addNewChapter(ch["title"], ch["text"], bookID, i + 1)
 
     textFile.close()
@@ -87,9 +91,13 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
     session.add(newChapter)
     session.commit()
+    print "Chapter added"
+    print "CHapter stats"
+    print chTitle
+    print chText
+    print chNum
 
-
-#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
 
     
 def getBookLanding( bookID ):
@@ -122,4 +130,4 @@ def getBook( bookID ):
     print book
     return book
 
-getBook(8)
+#getBook(11)
