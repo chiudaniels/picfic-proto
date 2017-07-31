@@ -491,3 +491,13 @@ border-radius: 10px;
     left:50%;
     margin-left:-300px;
 }
+
+.modal-dialog {
+    position: fixed;
+    width:400px;
+    height:370px;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -10px;
+}
