@@ -1,0 +1,160 @@
+{% extends 'baseLayout.html' %}
+{% block content %}
+    <!-- FIRST PAGE-->
+    <div class="pageone">
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7 text1">
+                <span id="text1"> Read different</span>
+                <br>
+                <span id="text2"> Interact with your favorite stories</span>
+            </div>
+            <div class="col-md-4" id="laptop1">
+                <img src="../static/launchpad/png/laptop.png">
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <!-- SECOND PAGE -->
+    <div class="container content" id="page2">
+        <div class="row">
+            <div class="col-md-11">
+                <h1 id="startreading">Start reading</h1>
+            </div>
+        </div>
+        <div class="row" id="bookgallery">
+            <div class="col-md-3">
+                <a href="/books/0"><img src="../static/launchpad/png/study_in_scarlet.png"></a>
+                <br>
+                <span>A STUDY IN SCARLET</span>
+                <br>
+                <span>Arthur Conan Doyle</span>
+            </div>
+            <div class="col-md-3">
+                <img src="../static/launchpad/png/human_is.png">
+                <br>
+                <span>HUMAN IS</span>
+                <br>
+                <span>Philip K. Dick</span>
+            </div>
+            <div class="col-md-3">
+                <img src="../static/launchpad/png/pride_and_prejudice.png">
+                <br>
+                <span>PRIDE AND PREJUDICE</span>
+                <br>
+                <span>Jane Austen</span>
+            </div>
+            <div class="col-md-3">
+                <img src="../static/launchpad/png/great_gatsby.png">
+                <br>
+                <span>THE GREAT GATSBY</span>
+                <br>
+                <span>F. Scott Fitzgerald</span>
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <!-- Page 3 -->
+    <div class="pagethree">
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 pagethreetext">
+                <h1>What's a picfic?</h1>
+                <br>
+                <p id="picficdesc">Picfics are serialized, illustrated novels with chapters released weekly. Every picfic encourages a community where readers can interact within the stories by uploading their own art.</p>
+            </div>
+            <div class="col-md-5" id="laptop2">
+                <img src="../static/launchpad/png/laptop2.png">
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <!-- Page 4 -->
+    <div class="pagefour">
+    </div>
+    <div class="container-fluid pagefourcontainer pagefourcontent">
+        <div class="row">
+            <img src="../static/svg/PicFic.svg" class="picficLogo pagefourcontent">
+        </div>
+        <div class="row">
+            <div class="col-md-11 pagefourtext">
+                <p class="pagefourcontent">
+                    PicFic is an online publishing platform that serializes stories for readers to illustrate and interact with. We're rediscovering classics, but we'll be releasing science fiction and fantasy stories in the near-future.
+                </p>
+                <p class="pagefourcontent">
+                    We're a team of writers, artists, and developers from MIT. Our mission is to redefine reading as a truly social activity befitting the digital age.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11 pagefourcontent">
+                <img src="../static/launchpad/png/mitlogo.png" class="picficLogo">
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <!-- Page 5 -->
+    <!--<div class="pagefive">
+    </div>
+    <div class="container pagefivecontent text-center">
+      <!--<div>
+	  <p> hello world</p>
+      </div>-->
+      <!--<h1>Create an account with us</h1>
+      <h2>Connect with</h2>
+      <div class="row">
+	<div class="col-md-12">
+	  <i class="fa fa-facebook-square fa-fw" style="font-size:4em"></i></a>
+	  <i class="fa fa-google fa-fw" style="font-size:4em"></i>
+	  <i class="fa fa-twitter-square fa-fw" style="font-size:4em"></i>
+	</div>
+      </div>
+      <h3>or sign up with your email</h3>
+      <p>
+	<form action="/login/" class="pagefivetext">
+	  <div class="form-group">
+	    <label for="makeEmail">Email address</label>
+	    <input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="makePass">Password</label>
+	    <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	  </div>
+	  <div class="form-group">
+	    <label for="confirmPass">Password</label>
+	    <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Create account</button>
+	</form> <br>
+	<small class="form-text text-muted">Already have an account?</small>
+	<button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
+      </p>
+    </div>-->
+    <!--<div class="footer container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row logos">
+            <img class="logo" id="logo1" src="../static/launchpad/png/facebook.png">
+                <img class="logo" src="../static/launchpad/png/instagram.png">
+                <img class="logo" src="../static/launchpad/png/twitter.png">
+              </div>
+            </div>
+        </div>
+    </div>-->
+    {% endblock %}
+    <!-- <footer>
+        <div class="contactfooter">
+        </div>
+        <div class="contactfootercontent container-fluid">
+            <div class="row">
+                <div class="col-md-11">
+                    <img id="footerimg" src="../static/svg/PicFic.svg">
+                    <span class="footertext contact"> Contact</span>
+                    <span class="footertext copyright">Copyright © 2017 PicFic</span>
+                </div>
+            </div>
+        </div>
+    </footer> -->
