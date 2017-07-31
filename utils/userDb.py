@@ -79,3 +79,13 @@ def getChapter( uID, bookID ):
             return usr.one().curChapter
     return 1
 
+def isValidAccountInfo( username, hashedPass ):
+    session = Session()
+    usr = session.query(User).filter(User.username == username, User.passData == hashedPass)
+    return usr.count() != 0
+
+
+def getUserID( username ):
+    session = Session()
+    usr = session.query(User).filter(User.username == username)
+    return usr.one().userID

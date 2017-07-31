@@ -237,22 +237,26 @@
 		<div class="modal-content">
 		  <div class="modal-header" style="text-align: center">
 		    <button type="button" class="close" data-dismiss="modal">&times;</button>
+		    <!--
 		    <h3>Create an account with us</h3>
 		    <div class="modal-body">
 		      <p>
-
+			
 			<h4>Connect with</h4>
+			-->
 			<!--<div class="row">-->
+			<!--
 			<div class="col-md-12">
 			  <img src="../static/png/continueWithGoogle.png" id="customBtn"><br>
 			  <div id="name"></div>
 			  <script>startApp();</script>
 			  <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a><br>
-			  <img src="../static/png/continueWithTwitter.png"><br>
+			  <img src="../static/png/continueWithTwitter.png"><br>-->
 			  <!--<div id="my-signin2"></div><br>-->
 			  <!--<div id="my-signin2" data-width="500" data-height="50"></div>-->
 			  <!--<div class="fb-login-button" data-width="800" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" style="border-radius:0"></div><br>-->
-			</div>
+			<!--</div>
+			-->
 			<h3>or sign up with your email</h3>
 			<p>
 			  <form action="/register/" method = "POST" class="pagefivetext">
@@ -274,7 +278,18 @@
 				<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
 			      </div>
 			      <button type="submit" class="btn btn-primary">Create account</button>
-			    </form> <br>
+			  </form> <br>
+			  <form action="/login/" method = "POST" class="pagefivetext">
+			      <div class="form-group">
+				<label for="logUser">Username</label>
+				<input type="text" name="username" class="form-control" id="loginUser" aria-describedby="emailHelp" placeholder="Username">
+			      </div>
+			      <div class="form-group">
+				<label for="logPass"></label>
+				<input type="password" name="password" class="form-control" id="loginPass" aria-describedby="emailHelp" placeholder="Password">
+			      </div>
+			      <button type="submit" class="btn btn-primary">Login</button>
+			  </form><br>
 			    <small class="form-text text-muted">Already have an account?</small>
 			    <button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
 			</p>

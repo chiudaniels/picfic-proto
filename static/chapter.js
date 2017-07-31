@@ -1,6 +1,6 @@
 var slideIndex = 0;
 var thumbIndex = 0;
-var sourceArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg"];
+var sourceArray = ["/static/img1.jpg", "/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg"];
 var thumbs = document.getElementsByClassName("thumbnails");
 
 function source2img(path) {
@@ -173,29 +173,13 @@ for (var i = 0; i < sourceArray.length; i++) {
 //showSlides(slideIndex);
 setThumbnails();
 thumbnailClick();
-clickedThumbArrow()
+clickedThumbArrow();
 
-// function readImage() {
-//     if ( this.files && this.files[0] ) {
-//         var FR= new FileReader();
-//         FR.onload = function(e) {
-//            var img = new Image();
-//            img.src = e.target.result;
-//            img.onload = function() {
-//              makeNewSlide(img);
-//            };
-//         };       
-//         FR.readAsDataURL( this.files[0] );
-//     }
-// }
+var fanart = document.getElementsByClassName("fanartIcon");
+var paragraph = document.getElementsByClassName("paragraph");
+var picture = document.getElementsByClassName("picture");
 
-// fileUpload.onchange = readImage;
-
-
-var fanart = document.getElementsByClassName("fanartIcon")
-var paragraph = document.getElementsByClassName("paragraph")
-var picture = document.getElementsByClassName("picture")
-
+var upload = document.getElementById("upload");
 
 var iconClick = function(pos) {
     console.log(pos);
@@ -208,8 +192,10 @@ function clickedSomewhere() {
         var target = $(e.target);
         if (target.hasClass("upload")) {
             $("#upload-desc").text(t);
+	    console.log("clicked upload");
         } else {
             clearHighlight();
+	    console.log("clicked not upload")
         }
     });
 }
@@ -218,14 +204,14 @@ function highlight(e) {
     t = (document.all) ? document.selection.createRange().text : document.getSelection();
     if (t != '') {
         console.log("highlight worked")
-        document.getElementById("upload").style.display = "inline";
-        document.getElementById("upload").style.top = event.pageY - 100 + 'px';
+        upload.style.display = "inline";
+        upload.style.top = event.pageY - 100 + 'px';
     }
 }
 
 function clearHighlight() {
-    document.getElementById("upload").style.display = "none";
-    console.log(document.getElementById("upload").style.display);
+    upload.style.display = "none";
+    console.log(upload.style.display);
 }
 
 

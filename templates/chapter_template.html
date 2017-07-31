@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/chapter_style.css">
     <link rel="stylesheet" type="text/css" href="../static/dropzone.css">
-</head>
+  </head>
 
 <body>
     <nav class="navbar">
@@ -33,8 +38,8 @@
                 <!-- twitter logo -->
                 <img src="/static/svg/twitter.svg " class="logo3 ">
             </div>
-            <div class="col-md-1 arrow" id="prevPgBtn">
-                <div class="prev ">
+            <div class="col-md-1 arrow">
+                <div class="prev " id="prevPgBtn">
                     <img src="/static/svg/leftarrow.svg">
                 </div>
             </div>
@@ -50,8 +55,11 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-1 arrow" id="nextPgBtn">
-                <div class="next ">
+	    
+            <div class="col-md-1 arrow" >
+                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload"  src="/static/svg/upload.svg"></a>
+  
+	      <div class="next " id="nextPgBtn">
                     <img src="/static/svg/rightarrow.svg">
                 </div>
             </div>
@@ -71,14 +79,14 @@
                 </div>
                 <div class="row gallery-interact">
                     <div class="col-md-6">
-                        <img src="../static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+                        <img src="/static/svg/heart.svg"> <span id="likes"> 39 likes </span>
                     </div>
                     <div class="col-md-6">
-                        <img class="blueicons fbicon" src="../static/svg/blue_fb.svg">
-                        <img class="blueicons" src="../static/svg/blue_insta.svg">
-                        <img class="blueicons" src="../static/svg/blue_twitter.svg">
-                        <img class="blueicons" src="../static/svg/blue_tumblr.svg">
-                        <img class="blueicons" src="../static/svg/blue_pin.svg">
+                        <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
+                        <img class="blueicons" src="/static/svg/blue_insta.svg">
+                        <img class="blueicons" src="/static/svg/blue_twitter.svg">
+                        <img class="blueicons" src="/static/svg/blue_tumblr.svg">
+                        <img class="blueicons" src="/static/svg/blue_pin.svg">
                     </div>
                 </div>
                 <div class="row">
@@ -89,7 +97,7 @@
             </div>
             <div class="row gallery-thumbnail">
                 <div class="col-md-1">
-                    <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg"> </a>
+                    <a class="prev gallery-arrow gallery-prev"><img src="/static/svg/leftarrow.svg"> </a>
                 </div>
                 <div class="col-md-3">
                     <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
@@ -101,7 +109,7 @@
                     <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
                 </div>
                 <div class="col-md-1">
-                    <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg"> </a>
+                    <a class="next gallery-arrow gallery-next"><img src="/static/svg/rightarrow.svg"> </a>
                 </div>
             </div>
         </div>
@@ -118,7 +126,7 @@
                             <div class="dz-message" data-dz-message>
                                 <center> <span class="dropdesc">Drag & drop file <br>
 or click to upload</span>
-                                    <br> <img src="../static/svg/uploadPicture.svg"> </center>
+                                    <br> <img src="/static/svg/uploadPicture.svg"> </center>
                             </div>
                         </form>
                     </div>
@@ -149,15 +157,15 @@ or click to upload</span>
     <a href="/">Back home</a> {% endif %}
     <!--  <script src="../static/chapter.js ">
    </script> -->
-    <script src="../static/dropzone.js "></script>
-    <script src=../static/chapter.js></script>
+    <script src="/static/dropzone.js "></script>
+    <script src="/static/chapter.js"></script>
     <script>
-    var bookID = { { pageData["bookID"] } };
-    var curChapter = { { pageData["chNum"] } };
-    var curPg = { { pageData["pgData"]["pgNum"] } };
-    var chLength = { { pageData["pgData"]["chLength"] } };
-    var bookLength = { { pageData["bookLength"] } }
-    var curCC = { { pageData["pgData"]["curCC"] } };
+    var bookID = {{ pageData["bookID"] }};
+    var curChapter = {{ pageData["chNum"] }};
+    var curPg = {{ pageData["pgData"]["pgNum"] }};
+    var chLength = {{ pageData["pgData"]["chLength"] }};
+    var bookLength = {{ pageData["bookLength"] }}
+    var curCC = {{ pageData["pgData"]["curCC"] }};
     </script>
     <script src="/static/js/readingApplet.js"></script>
 </body>
