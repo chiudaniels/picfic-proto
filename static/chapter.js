@@ -128,6 +128,12 @@ function clickedThumbArrow() {
     });
 }
 
+function setProgressBar(percent){
+    $(function(){
+        $(".progress-bar").css("width",percent)
+    });
+}
+
 var fileUpload = document.getElementById('fileUpload');
 
 
@@ -156,6 +162,8 @@ var thumbnailClick = function() {
     });
 
 }
+
+
 
 for (var i = 0; i < sourceArray.length; i++) {
     makeNewSlide(source2img(sourceArray[i]));

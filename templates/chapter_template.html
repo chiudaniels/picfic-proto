@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="../static/dropzone.css">
 </head>
 
 <body>
@@ -49,20 +50,97 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-1 arrow" id="nextPgBtn">	      
+            <div class="col-md-1 arrow" id="nextPgBtn">
                 <div class="next ">
-		  <img src="/static/svg/rightarrow.svg">
+                    <img src="/static/svg/rightarrow.svg">
                 </div>
-	      </div>
-        </div>
-        <!-- progress bar -->
-        <!-- turn this into a login modal -->
-        {% if isLoggedIn %}
-        <div class="row ">
-            <div class="column-md-12 ">
             </div>
         </div>
-        {% endif %}
+        <div class="container gallery">
+            <div class="nothumbnails">
+                <div class="row gallery-image">
+                    <div class="col-md-12">
+                        <div class="slideshow-container">
+                            <span class="slideshow-images" id="slideMaster">
+                    
+                     </span>
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gallery-interact">
+                    <div class="col-md-6">
+                        <img src="../static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="blueicons fbicon" src="../static/svg/blue_fb.svg">
+                        <img class="blueicons" src="../static/svg/blue_insta.svg">
+                        <img class="blueicons" src="../static/svg/blue_twitter.svg">
+                        <img class="blueicons" src="../static/svg/blue_tumblr.svg">
+                        <img class="blueicons" src="../static/svg/blue_pin.svg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 gallery-desc">
+                        “His eyes were sharp and piercing, save during those intervals of torpor to which I have alluded; and his thin, hawk-like nose gave his whole expression an air of alertness and decision. His chin, too, had the prominence and squareness which mark the man of determination.”
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-thumbnail">
+                <div class="col-md-1">
+                    <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg"> </a>
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail2" thumbCount="" src="">
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
+                </div>
+                <div class="col-md-1">
+                    <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg"> </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                            <div class="dz-message" data-dz-message>
+                                <center> <span class="dropdesc">Drag & drop file <br>
+or click to upload</span>
+                                    <br> <img src="../static/svg/uploadPicture.svg"> </center>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p id="upload-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- progress bar -->
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+        </div>
+    </div>
+    <!-- turn this into a login modal -->
+    {% if isLoggedIn %}
+    <div class="row ">
+        <div class="column-md-12 ">
+        </div>
+    </div>
+    {% endif %}
     </div>
     {% elif pageData["status"] == 0 %}
     <p> {{pageData["errMsg"]}} </p>
@@ -71,14 +149,15 @@
     <a href="/">Back home</a> {% endif %}
     <!--  <script src="../static/chapter.js ">
    </script> -->
+    <script src="../static/dropzone.js "></script>
+    <script src=../static/chapter.js></script>
     <script>
-    var bookID = {{ pageData["bookID"] }};
-    var curChapter = {{ pageData["chNum"] }};
-    var curPg = {{ pageData["pgData"]["pgNum"] }};
-    var chLength = {{ pageData["pgData"]["chLength"] }};
-    var bookLength = {{ pageData["bookLength"] }}
-    var curCC = {{ pageData["pgData"]["curCC"]}};
-    
+    var bookID = { { pageData["bookID"] } };
+    var curChapter = { { pageData["chNum"] } };
+    var curPg = { { pageData["pgData"]["pgNum"] } };
+    var chLength = { { pageData["pgData"]["chLength"] } };
+    var bookLength = { { pageData["bookLength"] } }
+    var curCC = { { pageData["pgData"]["curCC"] } };
     </script>
     <script src="/static/js/readingApplet.js"></script>
 </body>
