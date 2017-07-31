@@ -13,50 +13,35 @@
 <body>
     <nav class="navbar">
         <!-- menu logo -->
-        <img src="../static/svg/Menu.svg" class="menuLogo">
+        <img src="/static/svg/Menu.svg" class="menuLogo">
         <!-- picfic logo -->
-        <img src="../static/svg/PicFic.svg" class="picficLogo">
+        <img src="/static/svg/PicFic.svg" class="picficLogo">
         <!-- search logo -->
-        <img src="/../static/svg/search.svg" class="searchLogo">
+        <img src="/static/svg/search.svg" class="searchLogo">
     </nav>
     {% if pageData["status"] == 1 %}
     <div class="container">
         <div class="row">
             <div class="col-md-1 logos">
                 <!-- Aa logo -->
-                <img src="../static/svg/Aa.svg " class="logo1 ">
+                <img src="/static/svg/Aa.svg " class="logo1 ">
                 <br>
                 <!-- facebook logo -->
-                <img src="../static/svg/facebook.svg " class="logo2 ">
+                <img src="/static/svg/facebook.svg " class="logo2 ">
                 <br>
                 <!-- twitter logo -->
-                <img src="../static/svg/twitter.svg " class="logo3 ">
+                <img src="/static/svg/twitter.svg " class="logo3 ">
             </div>
             <div class="col-md-1 arrow" id="prevPgBtn">
                 <div class="prev ">
-                    <img src="../static/svg/leftarrow.svg">
+                    <img src="/static/svg/leftarrow.svg">
                 </div>
             </div>
-            <!--
-     {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
-     style="visibility:hidden"
-     {% endif %}>           
-        
-        {% if pageData["pgNum"] == 1 %}
-        <a class="prev " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] - 1}}/1"> -->
-            <!--
-    <img src="../../../../static/svg/leftarrow.svg">
-        </a>
-        {% else %}
--->
-            <!--
-        {% endif %}
-        -->
             <!-- story stuff -->
             <div class="col-md-8 ">
                 <div class="title ">
                     <!--CHAPTER 1: SHERLOCK HOLMES-->
-                    <h2>{{pageData["chData"]["title"]}}</h2>
+                    <h2>{{pageData["chTitle"]}}</h2>
                 </div>
                 <div class="story " id="storyBody">
                     {% for line in pageData["pgData"]["text"] %}
@@ -64,23 +49,11 @@
                     {% endfor %}
                 </div>
             </div>
-            <!-- -->
-            <div class="col-md-1 arrow" id="nextPgBtn">
-                <!--
-       {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
-     style="visibility:hidden"
-       {% endif %}>-->
-                <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
-                <!--{% if pageData["pgNum"] == pageData["chLength"] %}
-    <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
-      <img src="../../../../static/svg/rightarrow.svg">
-    </a>
-    {% else %}-->
+            <div class="col-md-1 arrow" id="nextPgBtn">	      
                 <div class="next ">
-                    <img src="../static/svg/rightarrow.svg">
+		  <img src="/static/svg/rightarrow.svg">
                 </div>
-                <!--{% endif %}-->
-            </div>
+	      </div>
         </div>
         <!-- progress bar -->
         <!-- turn this into a login modal -->
@@ -99,11 +72,11 @@
     <!--  <script src="../static/chapter.js ">
    </script> -->
     <script>
-    var bookID = { { pageData["bookID"] } };
-    var curChapter = { { pageData["chNum"] } };
-    var curPg = { { pageData["pgNum"] } };
-    var chLength = { { pageData["chLength"] } };
-    var bookLength = { { pageData["bookLength"] } };
+    var bookID = {{ pageData["bookID"] }};
+    var curChapter = {{ pageData["chNum"] }};
+    var curPg = {{ pageData["pgData"]["pgNum"] }};
+    var chLength = {{ pageData["pgData"]["chLength"] }};
+    <!--var bookLength = {{ pageData["bookLength"] }};-->
     </script>
     <script src="/static/js/readingApplet.js"></script>
 </body>

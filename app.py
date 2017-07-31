@@ -76,9 +76,13 @@ def bookLanding(bookID):
 
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
-    #get user progress
-    return redirect("/books/" + str(bookID) + "/read/" + userDb.getBookmark(getUserID(), bookID)[0])
+    #get user progress - get appropriate chapter
+    #temp - 
+    if not isLoggedIn():
+        return redirect("/books/" + str(bookID) + "/read/1")
+    return redirect("/books/" + str(bookID) + "/read/" + userDb.getChapter(getUserID(), bookID))
 
+                    #Kill chNum?
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
