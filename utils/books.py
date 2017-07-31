@@ -121,12 +121,12 @@ def getPageData( bookID, chNum, userID ):
     bookmark = userDb.getCC(userID, bookID) #gets character count
     
     ret = {"status": 0}
-
+    
     book = getBook(bookID)
     if book != None:
         chapterID = getChapterID(bookID, chNum)
         ret["bookID"] = bookID
-        #ret["bookLength"] = None #don't need rn
+        ret["bookLength"] = getBookLength(bookID)
         ret["chNum"] = chNum
         ret["chTitle"] = getChapterTitle(chapterID)
         ret["pgData"] = getPageInfo(bookmark, chapterID)
@@ -136,6 +136,23 @@ def getPageData( bookID, chNum, userID ):
     return ret
 
 
+def getPageAJAX(bID, chN, pgN):
+    session = Session()
+    bookID = int(bID)
+    chNum = int(chN)
+    pgNum = int(pgN)
+    ret = {"status": 0}
+    book = getBook(bookID)
+    if book != None:
+        chapterID = getChapterID(bookID, chNum)
+        ret["bookID"] = bookID
+        ret["chNum"] = chNum
+        ret["pgData"] = getPageInfoAJAX(pgNum, chapterID)
+        ret["imageData"] = []
+        ret["status"] = 1
+        ret["bookLength"] = getBookLength(bookID)
+    return ret
+        
 #Helpers ======================================
 def getBook( bookID ):
     bookID = int(bookID)
@@ -143,38 +160,62 @@ def getBook( bookID ):
     book = session.query(Book).filter_by(bookID = bookID).one()
     return book
 
-#Returns {"pgNum", "text", "chLength"}
+def getBookLength( bookID ):
+    session = Session()
+    return session.query(Chapter).filter_by(bookID = bookID).count()
+                                                             
+#Returns {"pgNum", "text", "chLength", "curCC"}
 def getPageInfo( cc, chID ):
+
     ret = {}
     session = Session()
     chapter = session.query(Chapter).filter_by(chapterID = chID).one()
     pageCCStrArr = chapter.pageCC.split(":")
     pageCCArr = []
+    for pair in pageCCStrArr:
+        strPair = pair.split(",")
+        pageCCArr.append([int(strPair[0]), int(strPair[1])])
 
-    
+    ret["chLength"] = len(pageCCArr)
+    thePairIndex = 0
+    ret["pgNum"] = 1 #default
+    for i in range(ret["chLength"]):
+        pair = pageCCArr[i]
+        print pair
+        if cc >= pair[0] and cc < pair[1]:
+            ret["pgNum"] = i + 1 #user index friendly af
+            thePairIndex = i
+            break
+    textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
+    ret["text"] = textStr.split("\r\n")
+    ret["curCC"] = cc
+    #note: you're gonna hate urself
+    return ret
+
+def getPageInfoAJAX( pgN, chID ):
+    ret = {}
+    session = Session()
+    chapter = session.query(Chapter).filter_by(chapterID = chID).one()
+    pageCCStrArr = chapter.pageCC.split(":")
+    pageCCArr = []
+    ret["pgNum"] = pgN
     
     for pair in pageCCStrArr:
         strPair = pair.split(",")
         pageCCArr.append([int(strPair[0]), int(strPair[1])])
-    #now algo wise, find the page i'm on...
 
-    debug(pageCCArr)
-    
     ret["chLength"] = len(pageCCArr)
-    thePairIndex = 0
-    for i in range(ret["chLength"]):
-        pair = pageCCArr[i]
-        if cc >= pair[0] and cc < pair[1]:
-            ret["pgNum"] = i + 1 #user index friendly af
-            thePairindex = i
-            break
+    thePairIndex = pgN - 1
     textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
     ret["text"] = textStr.split("\r\n")
+    ret["curCC"] = pageCCArr[thePairIndex][0]
+    print "curCC retrieved from db"
+    print ret["curCC"]
+    print "end"
     #note: you're gonna hate urself
-    print len(ret["text"])
     return ret
 
-
+    
 def getChapterID( bookID, chNum ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.bookID == bookID, Chapter.chapterNum == chNum) #should only give one
@@ -189,6 +230,7 @@ def getChapterTitle( chapterID ):
     if res.count() != 1:
         return None #something's wrong
     return res.one().title
+    
 
 def debug(s):
     print "DEBUG"

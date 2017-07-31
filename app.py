@@ -80,13 +80,14 @@ def bookRedir(bookID):
     #temp - 
     if not isLoggedIn():
         return redirect("/books/" + str(bookID) + "/read/1")
-    return redirect("/books/" + str(bookID) + "/read/" + userDb.getChapter(getUserID(), bookID))
+    return redirect("/books/" + str(bookID) + "/read/" + str(userDb.getChapter(getUserID(), bookID)))
 
                     #Kill chNum?
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
+    print data["pgData"]
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
 
 #How do i pass data about the page to the router if not in the url?
@@ -97,7 +98,6 @@ def bookPageAJAX():
     chN = request.form.get("chNum")
     pgN = request.form.get("pgNum")
     data =  books.getPageAJAX(bID, chN, pgN)
-#    print jsonify(data)
     return json.dumps(data)
 
 #How do i pass data about the page to the router if not in the url?
@@ -105,9 +105,11 @@ def bookPageAJAX():
 def bookmark():
     bID = request.form.get("bookID")
     chN = request.form.get("chNum")
-    pgN = request.form.get("pgNum")
+    ccStart = request.form.get("ccStart")
+    pgNum = request.form.get("pgNum")
     if isLoggedIn():
-        data =  userDb.bookmark(getUserID(), bID, chN, pgN)
+        data =  userDb.bookmark(getUserID(), bID, chN, ccStart, pgNum)
+        return json.dumps({"status":1})
     return None
 
 
@@ -140,14 +142,14 @@ def logout():
 @app.route("/register/", methods=["POST"])
 def register():
     # request
-    uN = request.form["username"]
-    pwd = request.form["password"]
-    pwd2 = request.form["password2"]
+    uN = request.form["makeUsername"]
+    email = request.form["makeEmail"]
+    pwd = request.form["makePass"]
+    pwd2 = request.form["confirmPass"]
     #reg
     msg = ""
     if users.canRegister(uN):
-        users.registerAccountInfo( uN, pwd )
-        session['uID'] = users.getUserID( uN )
+        session['uID'] = users.registerAccountInfo( uN, pwd, email )
     else:
         msg = "User already exists"
     return redirect( url_for('root', message=msg) )

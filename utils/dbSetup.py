@@ -230,7 +230,12 @@ class UserBook(Base): #book-user config
     reader = relationship("User", back_populates="books") #user's "books/reading list" are getting back populated when readers are edited
     book = relationship("Book", back_populates="readers") #the book has a "readers" list
 
-    
+    def __init__(self, uID, bookID):
+        self.bookID = bookID
+        self.readerID = uID
+        self.curCC = 0
+        self.curChapter = 0
+        
 class UserChapter(Base):
     __tablename__ = "UserChapter"
 
@@ -241,6 +246,11 @@ class UserChapter(Base):
 
     reader = relationship("User", back_populates="chapters") #user's "books/reading list" are getting back populated when readers are edited
     chapter = relationship("Chapter", back_populates="readers") #the book has a "readers" list
+
+    def __init__(self, uID, chID):
+        self.chapterID = chID
+        self.readerID = uID
+        self.config = ""
 
     
 # END CLASS DEFINITIONS ======================================

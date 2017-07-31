@@ -9,8 +9,8 @@ def isValidAccountInfo( uN, pwd ):
 def canRegister( uN ):
     return not userDb.doesUserExist( uN )
 
-def registerAccountInfo( uN, pwd ):
-    return userDb.registerAccountInfo( uN, hasher(pwd) )
+def registerAccountInfo( uN, pwd, email ):
+    return userDb.addUser( uN, hasher(pwd), email )
 
 def getUserID( uN ):
     return userDb.getUserID( uN )

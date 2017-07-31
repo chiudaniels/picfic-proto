@@ -254,7 +254,11 @@
 			</div>
 			<h3>or sign up with your email</h3>
 			<p>
-			    <form action="/login/" class="pagefivetext">
+			  <form action="/register/" method = "POST" class="pagefivetext">
+			      <div class="form-group">
+				<label for="makeUser">Username</label>
+				<input type="text" name="makeUsername" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
+			      </div>
 			      <div class="form-group">
 				<label for="makeEmail">Email address</label>
 				<input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
