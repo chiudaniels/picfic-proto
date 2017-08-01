@@ -233,7 +233,7 @@ body {
 
 .thumbnails {
     border-radius: 3px;
-    width: 12vw;
+    width: 9.7vw;
     height: 12vh;
 }
 
@@ -270,7 +270,7 @@ body {
 }
 
 .slideshow-container {
-    max-width: 60vw;
+    /*max-width: 60vw;*/
     max-height: 60vh;
     background-color: #f4f4f4;
 }
@@ -300,7 +300,9 @@ body {
     padding: 0 3vw 0 3vw;
 }
 
-
+.endThumb{
+    position:relative;
+}
 /*.gallery-thumbnails{
   padding-top:3vh;
 }
@@ -434,4 +436,40 @@ input[type="text"].form-control {
 
 .modal-footer{
     text-align: left;
+}
+
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
 }

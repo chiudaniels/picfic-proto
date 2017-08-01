@@ -571,6 +571,7 @@ border-radius: 10px;
     left: 50%;
     top: 50%;
     margin-left: -200px;
+<<<<<<< HEAD
     margin-top: -200px;
     text-align: center;
     font-family: .AppleSystemUIFont;
@@ -636,6 +637,9 @@ border-radius: 10px;
     margin-left: -150px;
     width: 300px;
     border-radius:2px;
+=======
+    margin-top: -400px;
+>>>>>>> e81785685cbda78e8a52b3720d742176312ff0f1
 }
 
 .bookshelf {

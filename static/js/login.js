@@ -1,67 +1,35 @@
+$(document).ready(function(){
 
+  //When the user click on the login button    
+  $("#submit").click(function(){
 
+    //Get each input value in a veriable.
+    var username = $("#inputUSer").val();
+    var password = $("#inputPass").val();
 
-/*$(function() {
- 
-    // if the function argument is given to overlay,
-    // it is assumed to be the onBeforeLoad event listener
-    $("a[rel]").overlay({
- 
-        mask: 'darkred',
-        effect: 'apple',
- 
-        onBeforeLoad: function() {
- 
-            // grab wrapper element inside content
-            var wrap = this.getOverlay().find(".contentWrap");
- 
-            // load the page specified in the trigger
-            wrap.load(this.getTrigger().attr("href"));
+    //Check if the username and/or the password input are empty.
+    if((username == "") || (password == "")) {
+      $("#message").html("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Please enter a username and a password</div>");
+    }
+    else {
+      $.ajax({
+        type: "POST",
+        url: "../utils/users.py",
+        data: "uN="+username+"pwd="+password,
+        success: function(html){    
+          if(html=='true') { //if the return value = 'true' then redirect to 'login_success.php
+            window.location="/";
+          }
+          else { //if the return value != 'true' then add the error message to the div.#message
+            $("#message").html(html);
+          }
+        },
+        beforeSend:function()
+        { //loading gif 
+          $("#message").html("<p class='text-center'><img src='images/ajax-loader.gif'></p>")
         }
- 
-    });
-});*/
-
-
-/*$(document).ready(function() {
-    $("#sign-in-button").click(function() {
-	document.getElementById("errorMess").innerHTML = "HelloWorld";
-    });
-});
-  */  
-	/*
-
-	  $.ajax({
-	  type: "POST",
-	  url: '/login/',
-	  username: username;
-	  password: password;
-	  dataType: 'json',
-	  })
-	  .done(function(resp){
-	  if (resp == "fail"){
-	  document.getElementById("errorRegion").innerHTML = "
-	  <div class='alert alert-danger'>
-	  <strong>Whoops!</strong> Seems like your username or password is wrong.</div>"
-	  }
-	  })*/
-   /* });
-});
- */
-
-function myFunction(){
-    console.log("HELP");
-}
-
-/*$(".scrollDown").click(function() {
-    $('html, body').animate({
-        scrollTop: $(".pagefivecontent").offset().top
-    }, 2000);
-    });*/
-
-$(document).on('click','.scrollDown', function(event) {
-    event.preventDefault();
-    $('html, body').animate({
-        scrollTop: $(".pagefivecontent").offset().top
-    }, 2000);
+      });
+    }
+    return false;
+  });
 });

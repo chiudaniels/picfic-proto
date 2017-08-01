@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, Tabl
 
 from sqlalchemy.orm import sessionmaker, relationship
 #from sqlalchemy.sql.functions import GenericFunction
-from datetime import datetime
+import datetime
 from sqlalchemy import create_engine
 
 Session = sessionmaker()
@@ -101,7 +101,7 @@ class Art(Base):
     ccStart = Column(Integer)
     ccEnd = Column(Integer)
     urlName = Column(String)
-    timestamp = Column(DateTime, default = 0)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
 
     #Relationships
     uploader = relationship("User", back_populates="art") #many to one
@@ -125,6 +125,7 @@ class Art(Base):
         self.urlName = url
         self.bookID = bookID
         self.chapterID = chID
+        #self.timestamp = 0
     
 class Book(Base):
     __tablename__ = "Books"
@@ -230,7 +231,12 @@ class UserBook(Base): #book-user config
     reader = relationship("User", back_populates="books") #user's "books/reading list" are getting back populated when readers are edited
     book = relationship("Book", back_populates="readers") #the book has a "readers" list
 
-    
+    def __init__(self, uID, bookID):
+        self.bookID = bookID
+        self.readerID = uID
+        self.curCC = 0
+        self.curChapter = 0
+        
 class UserChapter(Base):
     __tablename__ = "UserChapter"
 
@@ -241,6 +247,11 @@ class UserChapter(Base):
 
     reader = relationship("User", back_populates="chapters") #user's "books/reading list" are getting back populated when readers are edited
     chapter = relationship("Chapter", back_populates="readers") #the book has a "readers" list
+
+    def __init__(self, uID, chID):
+        self.chapterID = chID
+        self.readerID = uID
+        self.config = ""
 
     
 # END CLASS DEFINITIONS ======================================

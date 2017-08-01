@@ -1,62 +1,53 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/chapter_style.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/dropzone.css">
+  </head>
 
 <body>
     <nav class="navbar">
         <!-- menu logo -->
-        <img src="../static/svg/Menu.svg" class="menuLogo">
+        <img src="/static/svg/Menu.svg" class="menuLogo">
         <!-- picfic logo -->
-        <img src="../static/svg/PicFic.svg" class="picficLogo">
+        <img src="/static/svg/PicFic.svg" class="picficLogo">
         <!-- search logo -->
-        <img src="/../static/svg/search.svg" class="searchLogo">
+        <img src="/static/svg/search.svg" class="searchLogo">
     </nav>
     {% if pageData["status"] == 1 %}
     <div class="container">
         <div class="row">
             <div class="col-md-1 logos">
                 <!-- Aa logo -->
-                <img src="../static/svg/Aa.svg " class="logo1 ">
+                <img src="/static/svg/Aa.svg " class="logo1 ">
                 <br>
                 <!-- facebook logo -->
-                <img src="../static/svg/facebook.svg " class="logo2 ">
+                <img src="/static/svg/facebook.svg " class="logo2 ">
                 <br>
                 <!-- twitter logo -->
-                <img src="../static/svg/twitter.svg " class="logo3 ">
+                <img src="/static/svg/twitter.svg " class="logo3 ">
             </div>
-            <div class="col-md-1 arrow" id="prevPgBtn">
-                <div class="prev ">
-                    <img src="../static/svg/leftarrow.svg">
+            <div class="col-md-1 arrow">
+                <div class="prev " id="prevPgBtn">
+                    <img src="/static/svg/leftarrow.svg">
                 </div>
             </div>
-            <!--
-     {% if pageData["chNum"] == 1 and pageData["pgNum"] == 1 %}
-     style="visibility:hidden"
-     {% endif %}>           
-        
-        {% if pageData["pgNum"] == 1 %}
-        <a class="prev " href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] - 1}}/1"> -->
-            <!--
-    <img src="../../../../static/svg/leftarrow.svg">
-        </a>
-        {% else %}
--->
-            <!--
-        {% endif %}
-        -->
             <!-- story stuff -->
             <div class="col-md-8 ">
                 <div class="title ">
                     <!--CHAPTER 1: SHERLOCK HOLMES-->
-                    <h2>{{pageData["chData"]["title"]}}</h2>
+                    <h2>{{pageData["chTitle"]}}</h2>
                 </div>
                 <div class="story " id="storyBody">
                     {% for line in pageData["pgData"]["text"] %}
@@ -64,32 +55,109 @@
                     {% endfor %}
                 </div>
             </div>
-            <!-- -->
-            <div class="col-md-1 arrow" id="nextPgBtn">
-                <!--
-       {% if pageData["chNum"] == pageData["bookLength"] and pageData["pgNum"] == pageData["chLength"] %}
-     style="visibility:hidden"
-       {% endif %}>-->
-                <!-- it's fine to give nonsensical chapters since this'll be hidden, right?? -->
-                <!--{% if pageData["pgNum"] == pageData["chLength"] %}
-    <a class="next" href="/books/{{pageData['bookID']}}/read/{{pageData['chNum'] + 1}}/1">
-      <img src="../../../../static/svg/rightarrow.svg">
-    </a>
-    {% else %}-->
-                <div class="next ">
-                    <img src="../static/svg/rightarrow.svg">
+	    
+            <div class="col-md-1 arrow" >
+                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload" src="/static/svg/upload.svg"></a>
+  
+	      <div class="next " id="nextPgBtn">
+                    <img src="/static/svg/rightarrow.svg">
                 </div>
-                <!--{% endif %}-->
             </div>
         </div>
-        <!-- progress bar -->
-        <!-- turn this into a login modal -->
-        {% if isLoggedIn %}
-        <div class="row ">
-            <div class="column-md-12 ">
+        <div class="container gallery">
+            <div class="nothumbnails">
+                <div class="row gallery-image">
+                    <div class="col-md-12">
+                        <div class="slideshow-container">
+                            <span class="slideshow-images" id="slideMaster">
+                    
+                     </span>
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gallery-interact">
+                    <div class="col-md-6">
+                        <img src="/static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
+                        <img class="blueicons" src="/static/svg/blue_insta.svg">
+                        <img class="blueicons" src="/static/svg/blue_twitter.svg">
+                        <img class="blueicons" src="/static/svg/blue_tumblr.svg">
+                        <img class="blueicons" src="/static/svg/blue_pin.svg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 gallery-desc" id="galDesc">
+                        “His eyes were sharp and piercing, save during those intervals of torpor to which I have alluded; and his thin, hawk-like nose gave his whole expression an air of alertness and decision. His chin, too, had the prominence and squareness which mark the man of determination.”
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-thumbnail">
+                <div class="col-md-1">
+                    <a class="prev gallery-arrow gallery-prev"><img src="/static/svg/leftarrow.svg"> </a>
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail2" thumbCount="" src="">
+                </div>
+                <div class="col-md-3">
+                    <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
+                </div>
+                <div class="col-md-1">
+                    <a class="next gallery-arrow gallery-next"><img src="/static/svg/rightarrow.svg"> </a>
+                </div>
             </div>
         </div>
-        {% endif %}
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Upload Art</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
+                            <div class="dz-message" data-dz-message>
+                                <center> <span class="dropdesc">Drag & drop file <br>
+				    or click to upload</span>
+                                    <br> <img src="/static/svg/uploadPicture.svg"> </center>
+                            </div>
+			    
+			    <input type="hidden" name="bookID" id="artUploadBookID"></input>
+			    <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+			    <input type="hidden" name="caption" id="artUploadCaption"></input>
+			    <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+			    <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+			    
+			    <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+			    <!-- jokes it's not an html form -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <p id="upload-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- progress bar -->
+    <div class="progress">
+        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+        </div>
+    </div>
+    <!-- turn this into a login modal -->
+    {% if isLoggedIn %}
+    <div class="row ">
+        <div class="column-md-12 ">
+        </div>
+    </div>
+    {% endif %}
     </div>
     {% elif pageData["status"] == 0 %}
     <p> {{pageData["errMsg"]}} </p>
@@ -99,13 +167,17 @@
     <!--  <script src="../static/chapter.js ">
    </script> -->
     <script>
-    var bookID = { { pageData["bookID"] } };
-    var curChapter = { { pageData["chNum"] } };
-    var curPg = { { pageData["pgNum"] } };
-    var chLength = { { pageData["chLength"] } };
-    var bookLength = { { pageData["bookLength"] } };
+    var bookID = {{ pageData["bookID"] }};
+    var curChapter = {{ pageData["chNum"] }};
+    var curPg = {{ pageData["pgData"]["pgNum"] }};
+    var chLength = {{ pageData["pgData"]["chLength"] }};
+    var bookLength = {{ pageData["bookLength"] }}
+    var curCC = {{ pageData["pgData"]["curCC"] }};
     </script>
     <script src="/static/js/readingApplet.js"></script>
+    <script src="/static/js/dropzone.js "></script>
+    <script src="/static/js/chapter.js"></script>
+
 </body>
 
 </html>

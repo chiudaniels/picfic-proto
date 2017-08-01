@@ -1,10 +1,12 @@
 //variable divs
 var storyBody = document.getElementById('storyBody'); 
-var markerTracker = document.getElementById('markerTracker');
+var progressBar = document.getElementById('progressBar'); 
 var imgGallery = document.getElementById('imageGallery'); 
 //interactive
 var prevPgBtn = document.getElementById('prevPgBtn'); 
 var nextPgBtn = document.getElementById('nextPgBtn'); 
+
+//var storyText = "";
 
 var loadPage = function(data){
 //    console.log(data);
@@ -13,7 +15,7 @@ var loadPage = function(data){
     while (storyBody.hasChildNodes()){
 	storyBody.removeChild(storyBody.lastChild);
     }
-    //console.log(data["pgData"]);
+    console.log(data);
     var i;
     
     for (i = 0; i < data["pgData"]["text"].length; i++){
@@ -31,23 +33,41 @@ var loadPage = function(data){
     }
     
 
-    //misc
-    if (data["chNum"] == data["bookLength"] && data["pgNum"] == data["chLength"]){
+    //update globals and misc
+    console.log(data["pgData"]);
+    curCC = data["pgData"]["curCC"];
+    
+    if (data["chNum"] == data["bookLength"] && data["pgData"]["pgNum"] == data["pgData"]["chLength"]){
 	nextPgBtn.setAttribute("style", "visibility:hidden");
     }
     else {
 	nextPgBtn.setAttribute("style", "visibility:visible");
     }
-    if (data["chNum"] == 1 && data["pgNum"] == 1){
+    if (data["chNum"] == 1 && data["pgData"]["pgNum"] == 1){
 	prevPgBtn.setAttribute("style", "visibility:hidden");
     }
     else {
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
-
-    if (markerTracker)
-	markerTracker.setAttribute("value", data["markerData"]["markerID"]);
     
+    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * data["pgData"]["pgNum"] / data["pgData"]["chLength"]));
+    
+}
+
+var initializeButtons = function(){
+    if (curChapter == bookLength && curPg == chLength){
+	nextPgBtn.setAttribute("style", "visibility:hidden");
+    }
+    else {
+	nextPgBtn.setAttribute("style", "visibility:visible");
+    }
+    if (curChapter == 1 && curPg == 1){
+	prevPgBtn.setAttribute("style", "visibility:hidden");
+    }
+    else {
+	prevPgBtn.setAttribute("style", "visibility:visible");
+    }
+    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * curPg / chLength));
 }
 
 //for refactoring
@@ -62,6 +82,7 @@ var nextPage = function(){
 	curChapter += 1;
 	console.log(curChapter);
 	window.location.href = "/books/" + bookID + "/read/" + curChapter; 
+	bookmark();
     }
     else {
 	curPg += 1;
@@ -77,13 +98,13 @@ var nextPage = function(){
 	    success: function(response){
 		console.log("next paged");
 		loadPage(response);
+		bookmark();
 	    },
 	    error: function(data){
 		console.log("nextpage error");
 	    }
 	});
     }
-    bookmark();
     return null;
 }
 
@@ -91,6 +112,7 @@ var prevPage = function(){
     if (curPg == 1){
 	curChapter -= 1;
 	window.location.href = "/books/" + bookID + "/read/" + curChapter; 
+	bookmark();
     }
     else{
 	curPg -= 1;
@@ -101,18 +123,21 @@ var prevPage = function(){
 	    data: {
 		"bookID": bookID,
 		"chNum": curChapter,
-		"pgNum": curPg
+		"pgNum": curPg,
+		"ccStart": curCC
 	    },
 	    success: function(response){
 		console.log("next paged");
 		loadPage(response);
+		bookmark();
 	    },
 	    error: function(data){
 		console.log("nextpage error");
 	    }
 	});
     }
-    bookmark();
+
+    return null;
 }
 
 
@@ -123,7 +148,9 @@ var bookmark = function(){
 	type: "POST",
 	data: {
 	    "chNum": curChapter,
-	    "pgNum": curPg
+	    "pgNum": curPg,
+	    "ccStart": curCC,
+	    "bookID": bookID
 	},
 	dataType: "json",
 	success: function(response) {
@@ -140,6 +167,10 @@ var bookmark = function(){
 prevPgBtn.addEventListener("click", prevPage);
 nextPgBtn.addEventListener("click", nextPage);
 
+initializeButtons();
+
+
 
 
 console.log("alive!");
+//Change it to onpageload

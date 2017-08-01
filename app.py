@@ -76,13 +76,18 @@ def bookLanding(bookID):
 
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
-    #get user progress
-    return redirect("/books/" + str(bookID) + "/read/" + userDb.getBookmark(getUserID(), bookID)[0])
+    #get user progress - get appropriate chapter
+    #temp - 
+    if not isLoggedIn():
+        return redirect("/books/" + str(bookID) + "/read/1")
+    return redirect("/books/" + str(bookID) + "/read/" + str(userDb.getChapter(getUserID(), bookID)))
 
+                    #Kill chNum?
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
+    #print data["pgData"]
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
 
 #How do i pass data about the page to the router if not in the url?
@@ -93,7 +98,6 @@ def bookPageAJAX():
     chN = request.form.get("chNum")
     pgN = request.form.get("pgNum")
     data =  books.getPageAJAX(bID, chN, pgN)
-#    print jsonify(data)
     return json.dumps(data)
 
 #How do i pass data about the page to the router if not in the url?
@@ -101,9 +105,11 @@ def bookPageAJAX():
 def bookmark():
     bID = request.form.get("bookID")
     chN = request.form.get("chNum")
-    pgN = request.form.get("pgNum")
+    ccStart = request.form.get("ccStart")
+    pgNum = request.form.get("pgNum")
     if isLoggedIn():
-        data =  userDb.bookmark(getUserID(), bID, chN, pgN)
+        data =  userDb.bookmark(getUserID(), bID, chN, ccStart, pgNum)
+        return json.dumps({"status":1})
     return None
 
 
@@ -138,13 +144,13 @@ def register():
     # request
     # IDS: name, makeEmail, confirmEmail, month, day, year, gender
     uN = request.form["username"]
+    email = request.form["makeEmail"]
     pwd = request.form["makePass"]
     pwd2 = request.form["confirmPass"]
     #reg
     msg = ""
     if users.canRegister(uN):
-        users.registerAccountInfo( uN, pwd )
-        session['uID'] = users.getUserID( uN )
+        session['uID'] = users.registerAccountInfo( uN, pwd, email )
     else:
         msg = "User already exists"
     return redirect( url_for('root', message=msg) )
@@ -181,7 +187,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/upload/', methods=['POST'])
+@app.route('/uploadArt/', methods=['POST'])
 def upload_file():
     # check if the post request has the file part
     if 'file' not in request.files:
@@ -197,11 +203,15 @@ def upload_file():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        markerID = request.form["markerID"]
         caption = request.form["caption"]
+        bID = request.form["bookID"]
+        chN = request.form["chapterNum"]
+        cStart = request.form["startCC"]
+        cEnd = request.form["endCC"]
+        print "RECEIVING DATA FROM FORM"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        images.saveImage(filename, markerID, getUserID(), caption)
-        url = request.url.replace("/upload/", "")
+        images.uploadArt(filename, getUserID(), caption, cStart, cEnd, bID, chN)
+        url = request.url.replace("/uploadArt/", "")
         return redirect(url)
     return None
 
