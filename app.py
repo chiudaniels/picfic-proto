@@ -136,9 +136,10 @@ def logout():
 @app.route("/register/", methods=["POST"])
 def register():
     # request
+    # IDS: name, makeEmail, confirmEmail, month, day, year, gender
     uN = request.form["username"]
-    pwd = request.form["password"]
-    pwd2 = request.form["password2"]
+    pwd = request.form["makePass"]
+    pwd2 = request.form["confirmPass"]
     #reg
     msg = ""
     if users.canRegister(uN):

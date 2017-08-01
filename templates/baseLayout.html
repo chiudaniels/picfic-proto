@@ -226,79 +226,27 @@
 
 	    {% else %}
 
-	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#myModal">SIGN UP or LOG IN</a></p></li>
+	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p></li>
 
 
-	    <!-- Modal -->
-	    <div class="modal fade" id="myModal" role="dialog">
-	      <div class="modal-dialog">
-		
-		<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header" style="text-align: center">
-		    <button type="button" class="close" data-dismiss="modal">&times;</button>
-		    <h3>Create an account with us</h3>
-		    <div class="modal-body">
-		      <p>
 
-			<h4>Connect with</h4>
-			<!--<div class="row">-->
-			<div class="col-md-12">
-			  <img src="../static/png/continueWithGoogle.png" id="customBtn"><br>
-			  <div id="name"></div>
-			  <script>startApp();</script>
-			  <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a><br>
-			  <img src="../static/png/continueWithTwitter.png"><br>
-			  <!--<div id="my-signin2"></div><br>-->
-			  <!--<div id="my-signin2" data-width="500" data-height="50"></div>-->
-			  <!--<div class="fb-login-button" data-width="800" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" style="border-radius:0"></div><br>-->
-			</div>
-			<h3>or sign up with your email</h3>
-			<p>
-			    <form action="/login/" class="pagefivetext">
-			      <div class="form-group">
-				<label for="makeEmail">Email address</label>
-				<input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
-				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-			      </div>
-			      <div class="form-group">
-				<label for="makePass">Password</label>
-				<input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
-			      </div>
-			      <div class="form-group">
-				<label for="confirmPass">Password</label>
-				<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
-			      </div>
-			      <button type="submit" class="btn btn-primary">Create account</button>
-			    </form> <br>
-			    <small class="form-text text-muted">Already have an account?</small>
-			    <button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
-			</p>
-		      </p>
-		    </div>
-		    <div class="modal-footer">
+		<!--
+		    <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
+		      <!-- remember that you can use any element inside the trigger -->
+		      <!--<button type="button">SIGN UP or LOG IN</button>
+			  </a>
+		    
+		    <!-- overlayed element -->
+		    <!--<div class="apple_overlay" id="overlay">
+			<!-- the external content is loaded inside this tag -->
+			<!--<div class="contentWrap"></div>
+			    </div>-->
 
-		    </div>
-		  </div>
-		</div>
-	      </div>
-	      <!--
-		  <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
-		    <!-- remember that you can use any element inside the trigger -->
-		    <!--<button type="button">SIGN UP or LOG IN</button>
-			</a>
-		  
-		  <!-- overlayed element -->
-		  <!--<div class="apple_overlay" id="overlay">
-		      <!-- the external content is loaded inside this tag -->
-		      <!--<div class="contentWrap"></div>
-			  </div>-->
-
-		      
-		      {% endif %}
-		  </div><!-- /.navbar-collapse -->
-		  
-	    </div><!-- /.container-fluid -->
+			
+			{% endif %}
+		    </div><!-- /.navbar-collapse -->
+		    
+	      </div><!-- /.container-fluid -->
     </nav>
     {% block content %}{% endblock %}
     <div class="footer">
@@ -308,6 +256,225 @@
         <a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
       </div>
     </div>
+
+
+
+    <!-- CLASS: firstM --------- ID: firstModal ------------------------------------>
+
+    
+    <div class="modal fade" id="firstModal" role="dialog">
+      <div class="modal-dialog firstM">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br>
+	    <p>
+	      <br><div class="modaldesc">Sign in to PicFic to read and participate in your favorite stories, serialized.</div><br>
+	      <!--<div class="row">-->
+	      <!--<div class="col-md-12">-->
+	      <img src="../static/png/continueWithGoogle.png" id="customBtn"><br><br>
+	      <div id="name"></div>
+	      <script>startApp();</script>
+	      <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a><br><br>
+	      <img src="../static/png/continueWithTwitter.png"><br><br>
+
+	      
+	      <div class="emailSignButton">
+		<a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Sign in </a>or
+		<a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal"> sign up with email.</a></div>
+	    </p>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  
+	</div>
+      </div>
+    </div>
+
+
+    <!----------------CLASS: signUpM ------- ID: signUpModal --------------------->
+
+    
+    <div class="modal fade" id="signUpModal" role="dialog">
+      <div class="modal-dialog signUpM">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br>
+
+	    <form action="/register/" class="formStyle">
+	      <div class="form-group">
+		<input type="text" name="name" class="form-control" id="name" placeholder="Name">
+	      </div>
+	      <div class="form-group">
+		<input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
+	      </div>
+	      <div class="form-group">
+		<input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email">
+	      </div>
+	      <div class="form-group">
+		<input type="text" name="username" class="form-control" id="username" placeholder="Username">
+	      </div>
+	      <div class="form-group">
+		<input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	      </div>
+	      <div class="form-group">
+		<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
+	      </div>
+	      <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
+		<select class="form-control" id="sel1" placeholder="Month">
+		  <option>January</option>
+		  <option>February</option>
+		  <option>March</option>
+		  <option>April</option>
+		  <option>May</option>
+		  <option>June</option>
+		  <option>July</option>
+		  <option>August</option>
+		  <option>September</option>
+		  <option>October</option>
+		  <option>November</option>
+		  <option>December</option>
+		</select>
+	      </div>
+	      <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
+		<input type="number" name="day" class="form-control" id="day" placeholder="Day">
+	      </div>
+	      <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
+		<input type="number" name="year" class="form-control" id="year" placeholder="Year">
+	      </div><br>
+	      <div class="form-group" style="display:inline-block;" name="gender" id="gender">
+		<div class="checkbox" style="display:inline-block;">
+		  <label><input type="checkbox" value="">Female</label>
+		</div>
+		<div class="checkbox" style="display:inline-block;margin-left:30px;">
+		  <label><input type="checkbox" value="">Male</label>
+		</div>
+		<div class="checkbox" style="display:inline-block;margin-left:30px">
+		  <label><input type="checkbox" value="">Non-binary</label>
+		</div>
+	      </div>
+	      <p>
+		<stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
+	      </p>
+	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
+	    </form> <br>
+	    <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a><br>
+	    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
+	</div>
+      </div>
+    </div>
+
+
+
+    <!-- CLASS: signInM ----------------- IDL signInModal -------------------------->
+    <div class="modal fade" id="signInModal" role="dialog">
+      <div class="modal-dialog signInM">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <form action="/login/" class="formStyle">
+	      <div class="form-group">
+		<input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
+	      </div>
+	      <div class="form-group">
+		<input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password">
+	      </div>
+	      <button type="submit" class="btn submitButton">Sign In</button><br><br><br>
+	    </form>
+	    <a href="#" data-toggle="modal" data-target="#forgot" data-dismiss="modal">Forgot your password?</a><br>
+	    <a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Create new account</a><br>
+	    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div><br>
+	</div>
+      </div>
+      <div class="modal-footer">
+	
+      </div>
+    </div>
+
+    <!-- CLASS: forgotPass --------- ID: forgot ------------------------------------>
+
+    
+    <div class="modal fade" id="forgot" role="dialog">
+      <div class="modal-dialog forgotPass">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <p style="left:15px;right:15px;"> Enter the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p><br><br>
+	    <form class="formStyle">
+	      <div class="form-group">
+		<input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
+	      </div>
+	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#forgotEmail" data-dismiss="modal">Send</button><br><br><br><br>
+	    </form>
+	     <a href="#">Contact PicFic for further support</a><br>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  
+	</div>
+      </div>
+    </div>
+
+
+    <!-- CLASS: accMadeModal --------- ID: accMade ---------------------------------->
+
+
+    <div class="modal fade" id="accMade" role="dialog">
+      <div class="modal-dialog accMadeModal">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <p>Thanks for creating an account with us. <br><br>Please check your inbox for a link to confirm your email.</p><br><br><br>
+	    <a href="#">Contact PicFic for further support</a><br>	    
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  
+	</div>
+      </div>
+    </div>
+
+
+     <!-- CLASS: forgotEmailModal --------- ID: forgotEmail ------------------------>
+
+    <div class="modal fade" id="forgotEmail" role="dialog">
+      <div class="modal-dialog forgotEmailModal">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <p>Email sent!<br><br>Please check your inbox for a link to reset your password.</p><br><br><br>
+	    <a href="#" data-toggle="modal" data-target="#forgot" data-dismiss="modal">Contact PicFic for further support</a><br>	    
+	  </div>
+	</div>
+	<div class="modal-footer">
+	</div>
+      </div>
+    </div>
+
+
   </body>
   <script src="../static/js/login.js"></script>
   <script src="/static/js/jquery.min.js"></script>
