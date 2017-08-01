@@ -2,7 +2,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
 import string
-import userDb
+import userDb, images
 
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
@@ -130,8 +130,9 @@ def getPageData( bookID, chNum, userID ):
         ret["chNum"] = chNum
         ret["chTitle"] = getChapterTitle(chapterID)
         ret["pgData"] = getPageInfo(bookmark, chapterID)
-        ret["imageData"] = []
-        ret["markerData"] = None #Phase out
+        start = ret["pgData"]["startCC"]
+        end = ret["pgData"]["endCC"]
+        ret["imageData"] = images.getImageData(chapterID, start, end)
         ret["status"] = 1
     return ret
 
@@ -148,7 +149,9 @@ def getPageAJAX(bID, chN, pgN):
         ret["bookID"] = bookID
         ret["chNum"] = chNum
         ret["pgData"] = getPageInfoAJAX(pgNum, chapterID)
-        ret["imageData"] = []
+        start = ret["pgData"]["startCC"]
+        end = ret["pgData"]["endCC"]
+        ret["imageData"] = images.getImageData(chapterID, start, end)
         ret["status"] = 1
         ret["bookLength"] = getBookLength(bookID)
     return ret
@@ -189,6 +192,8 @@ def getPageInfo( cc, chID ):
     textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
     ret["text"] = textStr.split("\r\n")
     ret["curCC"] = cc
+    ret["startCC"] = pageCCArr[thePairIndex][0]
+    ret["endCC"] = pageCCArr[thePairIndex][1]
     #note: you're gonna hate urself
     return ret
 

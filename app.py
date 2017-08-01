@@ -87,7 +87,7 @@ def bookRedir(bookID):
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
-    print data["pgData"]
+    #print data["pgData"]
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
 
 #How do i pass data about the page to the router if not in the url?
@@ -186,7 +186,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/upload/', methods=['POST'])
+@app.route('/uploadArt/', methods=['POST'])
 def upload_file():
     # check if the post request has the file part
     if 'file' not in request.files:
@@ -202,11 +202,15 @@ def upload_file():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        markerID = request.form["markerID"]
         caption = request.form["caption"]
+        bID = request.form["bookID"]
+        chN = request.form["chapterNum"]
+        cStart = request.form["startCC"]
+        cEnd = request.form["endCC"]
+        print "RECEIVING DATA FROM FORM"
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        images.saveImage(filename, markerID, getUserID(), caption)
-        url = request.url.replace("/upload/", "")
+        images.uploadArt(filename, getUserID(), caption, cStart, cEnd, bID, chN)
+        url = request.url.replace("/uploadArt/", "")
         return redirect(url)
     return None
 

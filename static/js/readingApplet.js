@@ -1,6 +1,6 @@
 //variable divs
 var storyBody = document.getElementById('storyBody'); 
-var markerTracker = document.getElementById('markerTracker');
+var progressBar = document.getElementById('progressBar'); 
 var imgGallery = document.getElementById('imageGallery'); 
 //interactive
 var prevPgBtn = document.getElementById('prevPgBtn'); 
@@ -32,8 +32,8 @@ var loadPage = function(data){
     
 
     //update globals and misc
-    console.log(data["pgData"])
-    curCC = data["pgData"]["curCC"]
+    console.log(data["pgData"]);
+    curCC = data["pgData"]["curCC"];
     
     if (data["chNum"] == data["bookLength"] && data["pgData"]["pgNum"] == data["pgData"]["chLength"]){
 	nextPgBtn.setAttribute("style", "visibility:hidden");
@@ -47,9 +47,8 @@ var loadPage = function(data){
     else {
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
-
-    if (markerTracker)
-	markerTracker.setAttribute("value", data["markerData"]["markerID"]);
+    
+    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * data["pgData"]["pgNum"] / data["pgData"]["chLength"]));
     
 }
 
@@ -66,6 +65,7 @@ var initializeButtons = function(){
     else {
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
+    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * curPg / chLength));
 }
 
 //for refactoring

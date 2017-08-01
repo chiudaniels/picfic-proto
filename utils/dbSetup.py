@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey, Tabl
 
 from sqlalchemy.orm import sessionmaker, relationship
 #from sqlalchemy.sql.functions import GenericFunction
-from datetime import datetime
+import datetime
 from sqlalchemy import create_engine
 
 Session = sessionmaker()
@@ -101,7 +101,7 @@ class Art(Base):
     ccStart = Column(Integer)
     ccEnd = Column(Integer)
     urlName = Column(String)
-    timestamp = Column(DateTime, default = 0)
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
 
     #Relationships
     uploader = relationship("User", back_populates="art") #many to one
@@ -125,6 +125,7 @@ class Art(Base):
         self.urlName = url
         self.bookID = bookID
         self.chapterID = chID
+        #self.timestamp = 0
     
 class Book(Base):
     __tablename__ = "Books"

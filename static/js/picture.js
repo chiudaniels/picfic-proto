@@ -12,6 +12,8 @@ function source2img(path) {
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
+    thumbIndex = slideIndex;
+    setThumbnails();
 }
 
 function currentSlide(n) {
@@ -21,8 +23,7 @@ function currentSlide(n) {
 function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
-    console.log(slides.length);
-    if (n > slides.length - 1) { slideIndex = 0 }
+    if (n > slides.length-1) { slideIndex = 0 }
     if (n < 0) { slideIndex = slides.length - 1 }
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
@@ -31,13 +32,12 @@ function showSlides(n) {
 }
 
 var makeNewSlide = function(img) {
-    console.log(document.getElementsByClassName("mySlides"));
     newSlide = document.createElement("div");
     newSlide.setAttribute("class", "mySlides");
     newSlide.appendChild(img);
     document.getElementById("slideMaster").appendChild(newSlide);
     showSlides(slideIndex);
-    console.log(document.getElementById.childNodes);
+    //console.log(document.getElementById.childNodes);
     /*
     $(document).ready(function() {
         $(".slideshow-images").append(newSlide)
@@ -46,8 +46,8 @@ var makeNewSlide = function(img) {
         showSlides(slideIndex);
     });
     */
-    console.log("slide made");
-    console.log(document.getElementsByClassName("mySlides"));
+    //console.log("slide made");
+    //console.log(document.getElementsByClassName("mySlides"));
 }
 
 function setThumbnails() {
@@ -115,13 +115,13 @@ function clickedThumbArrow() {
     $(document).ready(function() {
         $(".gallery-prev").click(function() {
             if (thumbIndex != 0 && sourceArray.length > 3) {
-                thumbindex--;
+                thumbIndex--;
                 setThumbnails();
             }
         })
         $(".gallery-next").click(function() {
-            if (thumbIndex != sourceArray.length - 1 && sourceArray.length > 3) {
-                thumbindex++;
+            if (thumbIndex != sourceArray.length - 3 && sourceArray.length > 3) {
+                thumbIndex++;
                 setThumbnails()
             }
         })
@@ -135,18 +135,21 @@ var thumbnailClick = function() {
     $(function() {
         $("#thumbnail1").click(function() {
             slideIndex = parseInt($("#thumbnail1").attr("thumbCount"));
+            console.log(slideIndex);
             showSlides(slideIndex);
         })
     });
     $(function() {
         $("#thumbnail2").click(function() {
             slideIndex = parseInt($("#thumbnail2").attr("thumbCount"));
+            console.log(slideIndex);
             showSlides(slideIndex);
         })
     });
     $(function() {
         $("#thumbnail3").click(function() {
             slideIndex = parseInt($("#thumbnail3").attr("thumbCount"));
+            console.log(slideIndex);
             showSlides(slideIndex);
 
         })
@@ -162,6 +165,8 @@ for (var i = 0; i < sourceArray.length; i++) {
 //showSlides(slideIndex);
 setThumbnails();
 thumbnailClick();
+clickedThumbArrow()
+
 // function readImage() {
 //     if ( this.files && this.files[0] ) {
 //         var FR= new FileReader();

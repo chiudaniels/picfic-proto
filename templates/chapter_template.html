@@ -12,8 +12,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/chapter_style.css">
-    <link rel="stylesheet" type="text/css" href="../static/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/dropzone.css">
   </head>
 
 <body>
@@ -57,7 +57,7 @@
             </div>
 	    
             <div class="col-md-1 arrow" >
-                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload"  src="/static/svg/upload.svg"></a>
+                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload" src="/static/svg/upload.svg"></a>
   
 	      <div class="next " id="nextPgBtn">
                     <img src="/static/svg/rightarrow.svg">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 gallery-desc">
+                    <div class="col-md-12 gallery-desc" id="galDesc">
                         “His eyes were sharp and piercing, save during those intervals of torpor to which I have alluded; and his thin, hawk-like nose gave his whole expression an air of alertness and decision. His chin, too, had the prominence and squareness which mark the man of determination.”
                     </div>
                 </div>
@@ -119,15 +119,24 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Upload Art</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                        <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
                             <div class="dz-message" data-dz-message>
                                 <center> <span class="dropdesc">Drag & drop file <br>
-or click to upload</span>
+				    or click to upload</span>
                                     <br> <img src="/static/svg/uploadPicture.svg"> </center>
                             </div>
+			    
+			    <input type="hidden" name="bookID" id="artUploadBookID"></input>
+			    <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+			    <input type="hidden" name="caption" id="artUploadCaption"></input>
+			    <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+			    <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+			    
+			    <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+			    <!-- jokes it's not an html form -->
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -139,7 +148,7 @@ or click to upload</span>
     </div>
     <!-- progress bar -->
     <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:90%">
         </div>
     </div>
     <!-- turn this into a login modal -->
@@ -157,8 +166,6 @@ or click to upload</span>
     <a href="/">Back home</a> {% endif %}
     <!--  <script src="../static/chapter.js ">
    </script> -->
-    <script src="/static/dropzone.js "></script>
-    <script src="/static/chapter.js"></script>
     <script>
     var bookID = {{ pageData["bookID"] }};
     var curChapter = {{ pageData["chNum"] }};
@@ -168,6 +175,9 @@ or click to upload</span>
     var curCC = {{ pageData["pgData"]["curCC"] }};
     </script>
     <script src="/static/js/readingApplet.js"></script>
+    <script src="/static/js/dropzone.js "></script>
+    <script src="/static/js/chapter.js"></script>
+
 </body>
 
 </html>
