@@ -121,8 +121,8 @@ def bookmark():
 def login():
 
     # request
-    uN = request.form["username"]
-    pwd = request.form["password"]
+    email = request.form["loginEmail"]
+    pwd = request.form["loginPass"]
     #auth
     msg = ""
     
