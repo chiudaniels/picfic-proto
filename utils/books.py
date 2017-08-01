@@ -93,8 +93,6 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session.add(newChapter)
     session.commit()
 
-#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
-
     
 def getBookLanding( bookID ):
     bookID = int(bookID)
@@ -244,3 +242,6 @@ def debug(s):
     print "DEBUG"
     print s
     print "END DEBUG"
+
+
+parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
