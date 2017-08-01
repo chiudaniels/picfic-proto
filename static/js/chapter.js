@@ -179,8 +179,10 @@ function clickedSomewhere() {
 
 function highlight(e) {
     //highlightedText = (document.all) ? document.selection.createRange().text : document.getSelection();
-    if (document.getSelection()){
-	highlightedText = document.getSelection().toString();
+    if (window.getSelection) {
+        highlightedText = window.getSelection().toString();
+    } else if (document.selection && document.selection.type == "Text") {
+        highlightedText = document.selection.createRange().text;
     }
     // if (window.getSelection) {
     //    text = window.getSelection().toString();
@@ -221,8 +223,32 @@ var augmentForm = function(){
     
     formBookID.setAttribute("value", bookID);
     formCaption.setAttribute("value", highlightedText);
-    formStartCC.setAttribute("value", 1); //figure this out
-    formEndCC.setAttribute("value", 2);
+    //console.log(highlightedText.indexOf("\n"));
+    //console.log(highlightedText);
+    //console.log(storyBody.innerHTML);
+    //scrape text
+    var i;
+    var bodyText = "";
+    for (i = 0; i < storyBody.childNodes.length; i++){
+	if (storyBody.childNodes[i].innerHTML){
+	    bodyText += storyBody.childNodes[i].innerHTML;
+	    bodyText += "\n\n";
+	}
+    }
+
+    //console.log(bodyText);
+    var index = bodyText.indexOf(highlightedText);
+    console.log(highlightedText.indexOf("\n"));
+    console.log(index);
+    console.log(JSON.stringify(highlightedText));
+    console.log(JSON.stringify(bodyText));
+    console.log("That's the index");
+    formStartCC.setAttribute("value", curCC + index); //figure this out
+    formEndCC.setAttribute("value", curCC + index + highlightedText.length); //doesn't include end index
+    console.log(curCC);
+    console.log(curCC + index);
+    console.log(curCC + index + highlightedText.length);
+    //console.log(ccEnd);
     formChNum.setAttribute("value", curChapter);
 }
 

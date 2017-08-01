@@ -6,6 +6,8 @@ var imgGallery = document.getElementById('imageGallery');
 var prevPgBtn = document.getElementById('prevPgBtn'); 
 var nextPgBtn = document.getElementById('nextPgBtn'); 
 
+//var storyText = "";
+
 var loadPage = function(data){
 //    console.log(data);
     data = JSON.parse(data);

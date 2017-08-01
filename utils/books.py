@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
-import string
+import string, re
 import userDb, images
 
 Session = sessionmaker()
@@ -84,6 +84,7 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
             curPageStartCC = curCC + 1
             pageCC += newCCStr
         else:
+            line = line.strip()
             curCC += len(line)
             processedText += line
     pageCC = pageCC[:-1]
@@ -190,7 +191,9 @@ def getPageInfo( cc, chID ):
             thePairIndex = i
             break
     textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
-    ret["text"] = textStr.split("\r\n")
+    
+    ret["text"] = re.split("\r\n|\n",textStr)
+    #RESUME EDITING WHITE SPACE IS A NIGHTMARE
     ret["curCC"] = cc
     ret["startCC"] = pageCCArr[thePairIndex][0]
     ret["endCC"] = pageCCArr[thePairIndex][1]
