@@ -170,11 +170,11 @@ function clickedSomewhere() {
         var target = $(e.target);
         if (target.hasClass("upload")) {
             $("#upload-desc").text(highlightedText);
-	    console.log("clicked upload");
+	    //console.log("clicked upload");
 	    augmentForm();
         } else {
             clearHighlight();
-	    console.log("clicked not upload")
+	   // console.log("clicked not upload")
         }
     });
 }
@@ -189,14 +189,14 @@ function highlight(e) {
     // if (window.getSelection) {
     //    text = window.getSelection().toString();
     if (highlightedText != '') {
-        console.log("highlight worked")
+        //console.log("highlight worked")
         upload.style.display = "inline";
         upload.style.top = event.pageY - 100 + 'px';
     }
 }
 
 function clearHighlight() {
-    upload.style.display = "none";
+    //upload.style.display = "none";
     console.log(upload.style.display);
 }
 
@@ -237,19 +237,15 @@ var augmentForm = function(){
 	    bodyText += "\n\n";
 	}
     }
-
+    
     //console.log(bodyText);
+    highlightedText = $.trim(highlightedText);
     var index = bodyText.indexOf(highlightedText);
-    console.log(highlightedText.indexOf("\n"));
-    console.log(index);
-    console.log(JSON.stringify(highlightedText));
-    console.log(JSON.stringify(bodyText));
+    //modify...
+    g = "\n\n";
     console.log("That's the index");
     formStartCC.setAttribute("value", curCC + index); //figure this out
-    formEndCC.setAttribute("value", curCC + index + highlightedText.length); //doesn't include end index
-    console.log(curCC);
-    console.log(curCC + index);
-    console.log(curCC + index + highlightedText.length);
+    formEndCC.setAttribute("value", curCC + index + highlightedText.length - (highlightedText.match(/is/g) || []).length);
     //console.log(ccEnd);
     formChNum.setAttribute("value", curChapter);
 }
