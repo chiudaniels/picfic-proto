@@ -36,6 +36,7 @@ var loadPage = function(data){
 	captionArray.push(data["imageData"][i]["caption"]);
     }
     slideIndex = 0;
+    thumbIndex=0;
     setThumbnails();
     for (i = 0; i < sourceArray.length; i++){
 	makeNewSlide(source2img(sourceArray[i]));
