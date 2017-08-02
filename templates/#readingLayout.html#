@@ -24,12 +24,11 @@
       <div class="dropdown-container">
 	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
 	</button>
-	  <ul class="dropdown-menu-right dropdown-menu" role="menu">
-            <li>
-              <a href="/logout/">Log out</a>
-            </li>
-            </li>
-	  </ul>
+	<ul class="dropdown-menu-right dropdown-menu" role="menu">
+          <li>
+            <a href="/logout/">Log out</a>
+          </li>
+	</ul>
       </div>
 
       <!--<div class="user">make variable so that other images can be put in -->
