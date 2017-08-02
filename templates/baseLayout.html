@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/launchpad_stylesheet.css') }}">
-    <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
+    {% block css %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -194,7 +194,22 @@
       document.getElementById('fb-root').appendChild(e);
       }());
     </script>
+    
+    {% if isLoggedIn %}
+     <nav class="navbar">
+      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
+      <div class="dropdown-container">
+	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
+	</button>
+	<ul class="dropdown-menu-right dropdown-menu" role="menu">
+          <li>
+            <a href="/logout/">Log out</a>
+          </li>
+	</ul>
+      </div> <!-- make variable so that other images can be put in -->
+    </nav>
 
+     {% else %}
     <nav class="navbar"> <!-- THERE SHOULD BE A DIFFERENT NAVBAR ENTIRELY FOR IF SOMEONE IS LOGGED IN -->
       <a href="/">
 	<img src="../static/svg/PicFic.svg" class="navpicficLogo">
@@ -214,14 +229,6 @@
 	    
             <li><p class="navbar-text"><a href="/about/">ABOUT US</a></p></li>
 	    <li><p class="navbar-text"><a href="/gallery/">COMMUNITY</a></p></li>
-
-	    {% if isLoggedIn %}
-	    
-	    <li><p class="navbar-text"><a href="/settings/">SETTINGS</a></p></li>
-	    <li><p class="navbar-text"><a href="/logout/">LOG OUT</a></p></li>
-
-	    {% else %}
-
 	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p></li>
 
 
