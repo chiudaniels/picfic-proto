@@ -231,35 +231,15 @@
 	    {% endif %}
 	</div><!-- /.navbar-collapse -->
 	
-      </div><!-- /.container-fluid -->
-
-
-<!--
-    <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
-      <!-- remember that you can use any element inside the trigger -->
-      <!--<button type="button">SIGN UP or LOG IN</button>
-	  </a>
-    
-    <!-- overlayed element -->
-    <!--<div class="apple_overlay" id="overlay">
-	<!-- the external content is loaded inside this tag -->
-	<!--<div class="contentWrap"></div>
-	    </div>-->
-
-	
-	{% endif %}
-    </div><!-- /.navbar-collapse -->
-    
-</div><!-- /.container-fluid -->
-</nav>
-{% block content %}{% endblock %}
-<div class="footer">
-  <div class="row logos">
-    <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
-    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
-    <a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
-  </div>
-</div>
+    </nav>
+    {% block content %}{% endblock %}
+    <div class="footer">
+      <div class="row logos">
+	<a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
+	<a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
+	<a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
+      </div>
+    </div>
 
 
 
@@ -304,7 +284,6 @@
 
 <div class="modal fade" id="signUpModal" role="dialog">
   <div class="modal-dialog signUpM">
-    
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header" style="text-align: center" hidden="true"></div>
@@ -371,6 +350,80 @@
 	</form> <br>
 	<a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a><br>
 	<a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
+    <div class="modal fade" id="signUpModal" role="dialog">
+      <div class="modal-dialog signUpM">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br>
+
+	    <form action="/register/" class="formStyle">
+	      <div class="form-group">
+		<input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
+	      </div>
+	      <div class="form-group">
+		<input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name">
+	      </div>	      
+	      <div class="form-group">
+		<input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
+	      </div>
+	      <div class="form-group">
+		<input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email">
+	      </div>
+	      <div class="form-group">
+		<input type="text" name="username" class="form-control" id="username" placeholder="Username">
+	      </div>
+	      <div class="form-group">
+		<input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+	      </div>
+	      <div class="form-group">
+		<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
+	      </div>
+	      <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
+		<select class="form-control" id="sel1" name="bMonth" placeholder="Month">
+		  <option value="January">January</option>
+		  <option value="February">February</option>
+		  <option>March</option>
+		  <option>April</option>
+		  <option>May</option>
+		  <option>June</option>
+		  <option>July</option>
+		  <option>August</option>
+		  <option>September</option>
+		  <option>October</option>
+		  <option>November</option>
+		  <option>December</option>
+		</select>
+	      </div>
+	      <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
+		<input type="number" name="day" class="form-control" id="day" placeholder="Day">
+	      </div>
+	      <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
+		<input type="number" name="year" class="form-control" id="year" placeholder="Year">
+	      </div><br>
+	      <div class="form-group" style="display:inline-block;" name="gender" id="gender">
+		<div class="checkbox" style="display:inline-block;">
+		  <label><input type="checkbox" value="f">Female</label>
+		</div>
+		<div class="checkbox" style="display:inline-block;margin-left:30px;">
+		  <label><input type="checkbox" value="m">Male</label>
+		</div>
+		<div class="checkbox" style="display:inline-block;margin-left:30px">
+		  <label><input type="checkbox" value="n">Non-binary</label>
+		</div>
+	      </div>
+	      <p>
+		<stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
+	      </p>
+	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
+	    </form> <br>
+	    <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a><br>
+	    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
+	</div>
+      </div>
     </div>
   </div>
 </div>

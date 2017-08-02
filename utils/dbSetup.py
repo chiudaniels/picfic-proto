@@ -74,7 +74,9 @@ class User(Base):
 class UserProfile(Base):
     __tablename__ = "UserProfiles"
 
-    userID = Column(Integer, ForeignKey("Users.userID"), primary_key = True) 
+    userID = Column(Integer, ForeignKey("Users.userID"), primary_key = True)
+    firstName = Column(String)
+    lastName = Column(String)
     birthday = Column(Date) #Edit
     gender = Column(String) #Edit
     address = Column(String)
@@ -89,6 +91,18 @@ class UserProfile(Base):
         return "<UserProfile(id='%d')>" % (
             self.userID)
 
+    def __init__(self, uID, fN, lN, bM, bD, bY, gender):
+        self.userID = uID
+        self.firstName = fN
+        self.lastName = lN
+        #package birthday
+        bday = DateTime.date()
+        bday.year = bY
+        bday.month = bM
+        bday.day = bD
+        self.birthday = bday
+        self.gender = "" #figure this out
+        
 class Art(Base):
     __tablename__ = "Art"
 

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory
 import flask
-from utils import users, books, gallery, images, userDb
+from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
@@ -80,7 +80,7 @@ def bookRedir(bookID):
     #temp - 
     if not isLoggedIn():
         return redirect("/books/" + str(bookID) + "/read/1")
-    return redirect("/books/" + str(bookID) + "/read/" + str(userDb.getChapter(getUserID(), bookID)))
+    return redirect("/books/" + str(bookID) + "/read/" + str(users.getChapter(getUserID(), bookID)))
 
                     #Kill chNum?
 #How do i pass data about the page to the router if not in the url?
@@ -108,7 +108,7 @@ def bookmark():
     ccStart = request.form.get("ccStart")
     pgNum = request.form.get("pgNum")
     if isLoggedIn():
-        data =  userDb.bookmark(getUserID(), bID, chN, ccStart, pgNum)
+        data =  users.bookmark(getUserID(), bID, chN, ccStart, pgNum)
         return json.dumps({"status":1})
     return None
 
@@ -126,8 +126,8 @@ def login():
     #auth
     msg = ""
     
-    if users.isValidAccountInfo( uN, pwd ):
-        session['uID'] = users.getUserID( uN )
+    if users.isValidAccountInfo( email, pwd ):
+        session['uID'] = users.getUserID( email )
         print 'logged in!'
         return redirect( url_for('root'))
     else:
@@ -143,14 +143,20 @@ def logout():
 def register():
     # request
     # IDS: name, makeEmail, confirmEmail, month, day, year, gender
+    fN = request.form["fName"]
+    lN = request.form["lName"]
     uN = request.form["username"]
     email = request.form["makeEmail"]
     pwd = request.form["makePass"]
-    pwd2 = request.form["confirmPass"]
+    bM = requests.form["bMonth"]
+    bD= request.form["day"]
+    bY = request.form["year"]
+    gender = request.form["gender"]
     #reg
-    msg = ""
-    if users.canRegister(uN):
-        session['uID'] = users.registerAccountInfo( uN, pwd, email )
+    print "trying to register"
+    if not users.isNameTaken(uN): #and email
+        print "adding user"
+        session['uID'] = users.addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender)
     else:
         msg = "User already exists"
     return redirect( url_for('root', message=msg) )
@@ -161,10 +167,9 @@ def register():
 def changePass():
     if isLoggedIn():
         d = request.form
-        old = d["pass"]
-        new1 = d["pass1"]
-        new2 = d["pass2"]
-        users.changePass( getUserID(), old, new1, new2 )
+        old = d["oldPass"]
+        new = d["newPass"]
+        users.changePass( getUserID(), old, new )
     return redirect(url_for('settings'))
 
 @app.route('/changeTag/', methods = ['POST'])
