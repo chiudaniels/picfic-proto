@@ -45,11 +45,21 @@ def about():
 
 
 # == User Profile ===================================
+@app.route("/user/myProfile/")
+def myProfileRedir():
+    if isLoggedIn():
+        return redirect('/user/' + str(users.getUsername(getUserID())))
+    else:
+        return redirect(url_for('root'))
 
 @app.route("/user/<username>")
 def userProfilePage(username):
     profileData = users.getProfile( username )
-    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData )
+    profileData.update( users.getProfileSensitive( username ) )
+    userVis = 0
+    if isLoggedIn() and username == users.getUsername( getUserID() ):
+        userVis = 1
+    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
 
 # == Book Gallery Browsing ==========================

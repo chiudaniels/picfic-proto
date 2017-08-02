@@ -95,6 +95,21 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session.add(newChapter)
     session.commit()
 
+def setImage( bookID, url ):
+    session = Session()
+    book = session.query(Book).filter(Book.bookID = bookID).one()
+    book.coverUrl = url
+    session.commit()
+
+def getBookPreview( bookID ):
+    session = Session()
+    book = session.query(Book).filter(Book.bookID = bookID).one()
+    return {
+        "bookID" : bookID,
+        "title" : book.title,
+        "coverUrl" : book.coverUrl
+    }
+    
     
 def getBookLanding( bookID ):
     bookID = int(bookID)

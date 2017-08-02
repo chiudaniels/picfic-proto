@@ -31,11 +31,19 @@ def getUser( uID ):
     usr = session.query(User).filter_by(userID = uID).one()
     return usr
 
-def getUserProfile( username ):
+def getProfile( username ):
     session = Session()
-    userID = session.query(User.id).filter_by(User.username == username).one()
-    profileInfo = session.query(UserProfile).filter_by(UserProfile.userID == userID).one().asDict()
+    userID = session.query(User.userID).filter(User.username == username).one()[0]
+    profileInfo = session.query(UserProfile).filter(UserProfile.userID == userID).one().asDict()
     return profileInfo
+
+def getProfileSensitive( username ):
+    session = Session()
+    usr = session.query(User).filter(User.username == username).one()
+    return {"email" : usr.email,
+            "username" : username
+    }
+
 
 def isNameTaken( username ):
     session = Session()
@@ -102,7 +110,15 @@ def getUserID( email ):
     usr = session.query(User).filter(User.email == email)
     return usr.one().userID
 
-
+def getUserIDFromUsername( uN ):
+    session = Session()
+    usr = session.query(User.userID).filter(User.username == uN)
+    return usr.one()[0]
+    
+def getUsername( uID ):
+    session = Session()
+    usr = session.query(User.username).filter(User.userID == uID)
+    return usr.one()[0]
 
 def changePass( uN, old, new ):
     return True
