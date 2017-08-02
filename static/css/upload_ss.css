@@ -11,6 +11,8 @@ body {
     max-width: 1920px;
     margin: 0 auto;
     font-family: 'Nunito', sans-serif;
+    background-color: #F8F8F8;
+    height: 1350px;
 }
 
 span {
@@ -366,6 +368,8 @@ border-radius: 10px;
     background-position: center center;
     background-size: cover;
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
+    padding: 0;
+    border: none;
 }
 
 .profileBackground {
@@ -714,7 +718,7 @@ border-radius: 10px;
 
 .main {
     position: absolute;
-    height: 1200px;
+    height: 1240px;
     width: 785px;
     max-width:100%;
     background: #FFFFFF;
@@ -726,10 +730,12 @@ border-radius: 10px;
 }
 
 .back {
-    background: #F8F8F8;
-    height:100vh;
+    background-color: #F8F8F8;
+    height:100%;
     position: relative;
 }
+
+button:focus {outline:0;}
 
 .h {
     margin-left: 42.5px;
@@ -750,21 +756,85 @@ border-radius: 10px;
     line-height: 15px;
 }
 
-.checkbox-grid li {
-    text-align: center;
-    display: block;
-    float: left;
-    width: 25%;
-    font-family: .AppleSystemUIFont;
-    font-size: 12px;
-    color:#181818;
-    margin-right: 10px
-}
-
 .check {
     margin-right:10px;
     font-family: .AppleSystemUIFont;
     font-size: 12px;
     color:#181818;
     letter-spacing: 0.24px;
+}
+
+.xboxGrid {
+    display: inline-block;
+    margin-left:7vw;
+}
+
+label {
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color:#181818;
+    letter-spacing:0.24px;
+}
+
+td {
+    padding-right:90px;
+}
+
+.uC {
+    position:absolute;
+    width:200px;
+    background-color:black;
+    color:white;
+    border-radius: 15px;
+    top: 48vh;
+    border: none;
+    height: 35px;
+    left:50%;
+    margin-left: -100px;
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    font-family: .AppleSystemUIFont;
+}
+
+.pText {
+    position: absolute;
+    height: 200px;
+    width: 700px;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border: 1px solid #E3E3E3;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.sText {
+    position:absolute;
+    height: 400px;
+    width: 700px;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border: 1px solid #E3E3E3;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.prev {
+    z-index: 10000000000000;
+    position:relative;
+    width:200px;
+    background-color:black;
+    color:white;
+    border-radius: 15px;
+    top: 60vh;
+    border: none;
+    height: 35px;
+    left:50%;
+    margin-left: -100px;
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    font-family: .AppleSystemUIFont;
 }
