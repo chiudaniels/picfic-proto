@@ -1,30 +1,108 @@
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from dbSetup import *
 import hashlib
-import userDb
 
-#any potential security code also goes in here
+Session = sessionmaker()
+engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
-def isValidAccountInfo( uN, pwd ):
-    return userDb.isValidAccountInfo( uN, hasher(pwd) )
+Session.configure(bind=engine)
 
-def canRegister( uN ):
-    return not userDb.doesUserExist( uN )
+def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
+    session = Session()
+    pwd = hasher(passData)
+    newUser = User(uN, pwd, "", email)
+    session.add(newUser)
+    session.flush()
+    uID = newUser.userID
+    newUserProfile = UserProfile(uID, fN, lN, bM, bD, bY, gender)
+    session.add(newUserProfile)
+    session.commit()
+    return uID
 
-def registerAccountInfo( uN, pwd, email ):
-    return userDb.addUser( uN, hasher(pwd), email )
+def deleteUser( uID ):
+    session = Session()
+    usr = session.query(User).filter_by(userID = uID).one()
+    session.delete(usr)
+    session.commit()
 
-def getUserID( uN ):
-    return userDb.getUserID( uN )
+def getUser( uID ):
+    session = Session()
+    usr = session.query(User).filter_by(userID = uID).one()
+    return usr
 
-def getUsername( uID ):
-    return userDb.getUserName( uID )
-
-def changePass( uID, old, new1, new2 ):
-    if isValidAccountInfo( getUsername( uID ), old  ) and new1 == new2:
-        userDb.changePass( uID, hasher( new1 ))
+def isNameTaken( username ):
+    session = Session()
+    usr = session.query(User).filter_by(username = username)   
+    if usr.count() == 0:
+        print "usr is none"
+        return False
     return True
 
+def getCC( uID, bookID ):
+    session = Session()
+    usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bookID)
+    if usr.count() == 0:
+        #wtf
+        newUserBook = UserBook(uID, bookID)
+        session.commit()
+        return 0
+    else:
+        entry = usr.one()
+        return entry.curCC
+    return 0
+
+def bookmark( uID, bID, chN, ccStart, pgN ):
+    session = Session()
+    usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bID)
+    if usr.count() == 0:
+        #wtf
+        newUserBook = UserBook(uID, bID)
+        session.add(newUserBook)
+        session.commit()
+        return False
+    else:
+        print "commiting bookmark"
+        entry = usr.one()
+        entry.curChapter = chN
+        entry.curCC = ccStart
+        session.commit()
+    return True
+
+#UserBook junction
+def getChapter( uID, bookID ):
+    session = Session()
+    if uID != None:
+        uID = int(uID)
+        bookID = int(bookID)
+        usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bookID)
+        if usr.count() == 0:
+            newUserBook = UserBook(uID, bookID)
+            session.add(newUserBook)
+            session.commit()
+            return 1
+        else:
+            return usr.one().curChapter
+    return 1
+
+def isValidAccountInfo( email, pwd ):
+    hashedPass = hasher(pwd)
+    session = Session()
+    usr = session.query(User).filter(User.email == email, User.passData == hashedPass)
+    return usr.count() != 0
+
+
+def getUserID( email ):
+    session = Session()
+    usr = session.query(User).filter(User.email == email)
+    return usr.one().userID
+
+
+
+def changePass( uN, old, new ):
+    return True
+    
 def changeTag( uID, tag ):
-    userDb.changeTag(uID, tag)
     return True
 
 def hasher(unhashed):

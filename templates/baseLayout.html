@@ -226,7 +226,6 @@
 
 	    {% else %}
 
-<<<<<<< HEAD
 	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p></li>
 
 
@@ -248,100 +247,6 @@
 		    </div><!-- /.navbar-collapse -->
 		    
 	      </div><!-- /.container-fluid -->
-=======
-	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#myModal">SIGN UP or LOG IN</a></p></li>
-
-
-	    <!-- Modal -->
-	    <div class="modal fade" id="myModal" role="dialog">
-	      <div class="modal-dialog">
-		
-		<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header" style="text-align: center">
-		    <button type="button" class="close" data-dismiss="modal">&times;</button>
-		    <!--
-		    <h3>Create an account with us</h3>
-		    <div class="modal-body">
-		      <p>
-			
-			<h4>Connect with</h4>
-			-->
-			<!--<div class="row">-->
-			<!--
-			<div class="col-md-12">
-			  <img src="../static/png/continueWithGoogle.png" id="customBtn"><br>
-			  <div id="name"></div>
-			  <script>startApp();</script>
-			  <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a><br>
-			  <img src="../static/png/continueWithTwitter.png"><br>-->
-			  <!--<div id="my-signin2"></div><br>-->
-			  <!--<div id="my-signin2" data-width="500" data-height="50"></div>-->
-			  <!--<div class="fb-login-button" data-width="800" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" style="border-radius:0"></div><br>-->
-			<!--</div>
-			-->
-			<h3>or sign up with your email</h3>
-			<p>
-			  <form action="/register/" method = "POST" class="pagefivetext">
-			      <div class="form-group">
-				<label for="makeUser">Username</label>
-				<input type="text" name="makeUsername" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
-			      </div>
-			      <div class="form-group">
-				<label for="makeEmail">Email address</label>
-				<input type="email" name="makeEmail" class="form-control" id="makeEmail" aria-describedby="emailHelp" placeholder="Enter email">
-				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-			      </div>
-			      <div class="form-group">
-				<label for="makePass">Password</label>
-				<input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
-			      </div>
-			      <div class="form-group">
-				<label for="confirmPass">Password</label>
-				<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Re-enter your password">
-			      </div>
-			      <button type="submit" class="btn btn-primary">Create account</button>
-			  </form> <br>
-			  <form action="/login/" method = "POST" class="pagefivetext">
-			      <div class="form-group">
-				<label for="logUser">Username</label>
-				<input type="text" name="username" class="form-control" id="loginUser" aria-describedby="emailHelp" placeholder="Username">
-			      </div>
-			      <div class="form-group">
-				<label for="logPass"></label>
-				<input type="password" name="password" class="form-control" id="loginPass" aria-describedby="emailHelp" placeholder="Password">
-			      </div>
-			      <button type="submit" class="btn btn-primary">Login</button>
-			  </form><br>
-			    <small class="form-text text-muted">Already have an account?</small>
-			    <button class="btn btn-primary btn-xs text-white"><a href="/login/">Log in</a></button>
-			</p>
-		      </p>
-		    </div>
-		    <div class="modal-footer">
-
-		    </div>
-		  </div>
-		</div>
-	      </div>
-	      <!--
-		  <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
-		    <!-- remember that you can use any element inside the trigger -->
-		    <!--<button type="button">SIGN UP or LOG IN</button>
-			</a>
-		  
-		  <!-- overlayed element -->
-		  <!--<div class="apple_overlay" id="overlay">
-		      <!-- the external content is loaded inside this tag -->
-		      <!--<div class="contentWrap"></div>
-			  </div>-->
-
-		      
-		      {% endif %}
-		  </div><!-- /.navbar-collapse -->
-		  
-	    </div><!-- /.container-fluid -->
->>>>>>> e81785685cbda78e8a52b3720d742176312ff0f1
     </nav>
     {% block content %}{% endblock %}
     <div class="footer">
@@ -405,8 +310,11 @@
 
 	    <form action="/register/" class="formStyle">
 	      <div class="form-group">
-		<input type="text" name="name" class="form-control" id="name" placeholder="Name">
+		<input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
 	      </div>
+	      <div class="form-group">
+		<input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name">
+	      </div>	      
 	      <div class="form-group">
 		<input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
 	      </div>
@@ -423,9 +331,9 @@
 		<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
 	      </div>
 	      <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
-		<select class="form-control" id="sel1" placeholder="Month">
-		  <option>January</option>
-		  <option>February</option>
+		<select class="form-control" id="sel1" name="bMonth" placeholder="Month">
+		  <option value="January">January</option>
+		  <option value="February">February</option>
 		  <option>March</option>
 		  <option>April</option>
 		  <option>May</option>
@@ -446,13 +354,13 @@
 	      </div><br>
 	      <div class="form-group" style="display:inline-block;" name="gender" id="gender">
 		<div class="checkbox" style="display:inline-block;">
-		  <label><input type="checkbox" value="">Female</label>
+		  <label><input type="checkbox" value="f">Female</label>
 		</div>
 		<div class="checkbox" style="display:inline-block;margin-left:30px;">
-		  <label><input type="checkbox" value="">Male</label>
+		  <label><input type="checkbox" value="m">Male</label>
 		</div>
 		<div class="checkbox" style="display:inline-block;margin-left:30px">
-		  <label><input type="checkbox" value="">Non-binary</label>
+		  <label><input type="checkbox" value="n">Non-binary</label>
 		</div>
 	      </div>
 	      <p>

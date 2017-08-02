@@ -2,7 +2,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
 import string, re
-import userDb, images
+import users, images
 
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
@@ -81,14 +81,14 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
             #print "page break reee"
             newCCStr = str(curPageStartCC) + "," + str(curCC) + ":"
             #print newCCStr
-            curPageStartCC = curCC + 1
+            curPageStartCC = curCC #like list, non-last inclusive
             pageCC += newCCStr
         else:
             line = line.strip()
             curCC += len(line)
-            processedText += line
+            processedText += line + "|"
     pageCC = pageCC[:-1]
-    
+    processedText = processedText[:-1]
     newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
     session.add(newChapter)
     session.commit()
@@ -117,7 +117,7 @@ def getBookLanding( bookID ):
 def getPageData( bookID, chNum, userID ):
     bookID = int(bookID)
     chNum = int(chNum)
-    bookmark = userDb.getCC(userID, bookID) #gets character count
+    bookmark = users.getCC(userID, bookID) #gets character count
     
     ret = {"status": 0}
     
@@ -131,7 +131,7 @@ def getPageData( bookID, chNum, userID ):
         ret["pgData"] = getPageInfo(bookmark, chapterID)
         start = ret["pgData"]["startCC"]
         end = ret["pgData"]["endCC"]
-        ret["imageData"] = images.getImageData(chapterID, start, end)
+        ret["imageData"] = images.getImageDataPage(chapterID, start, end)
         ret["status"] = 1
     return ret
 
@@ -150,7 +150,7 @@ def getPageAJAX(bID, chN, pgN):
         ret["pgData"] = getPageInfoAJAX(pgNum, chapterID)
         start = ret["pgData"]["startCC"]
         end = ret["pgData"]["endCC"]
-        ret["imageData"] = images.getImageData(chapterID, start, end)
+        ret["imageData"] = images.getImageDataPage(chapterID, start, end)
         ret["status"] = 1
         ret["bookLength"] = getBookLength(bookID)
     return ret
@@ -188,9 +188,9 @@ def getPageInfo( cc, chID ):
             ret["pgNum"] = i + 1 #user index friendly af
             thePairIndex = i
             break
-    textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
-    
-    ret["text"] = re.split("\r\n|\n",textStr)
+    textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1]]
+    #ugh...
+    ret["text"] = textStr.split("|")
     #RESUME EDITING WHITE SPACE IS A NIGHTMARE
     ret["curCC"] = cc
     ret["startCC"] = pageCCArr[thePairIndex][0]
@@ -212,12 +212,12 @@ def getPageInfoAJAX( pgN, chID ):
 
     ret["chLength"] = len(pageCCArr)
     thePairIndex = pgN - 1
-    textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1] + 1] #don't drop the last char
-    ret["text"] = textStr.split("\r\n")
+    textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1]]
+    ret["text"] = textStr.split("|")
     ret["curCC"] = pageCCArr[thePairIndex][0]
-    print "curCC retrieved from db"
-    print ret["curCC"]
-    print "end"
+    #print "curCC retrieved from db"
+    #print ret["curCC"]
+    #print "end"
     #note: you're gonna hate urself
     return ret
 
@@ -244,4 +244,4 @@ def debug(s):
     print "END DEBUG"
 
 
-parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
