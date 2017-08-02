@@ -1,35 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <!-- THIS STUFF IS FROM readingLayout.html!!!!!!!!!!!!!!!!!!!!-->
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <title>{% block title %}{% endblock%}</title>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css")>
-    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  </head>
-
-  <body>
-    <nav class="navbar">
-      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
-      <div class="dropdown-container">
-	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
-	</button>
-	<ul class="dropdown-menu-right dropdown-menu" role="menu">
-          <li>
-            <a href="/logout/">Log out</a>
-          </li>
-	</ul>
-      </div><!-- make variable so that other images can be put in -->
-    </nav>
+{% extends 'readingLayout.html' %}
+{% block content %}
 
     <div class="profileBackground">
       <div class="aboutMe">
@@ -40,7 +10,7 @@
 	</div>
 
 	<div class="about">
-	  <h5> About Me</h5><a href="#" class="edit">Edit</a> <br><br>
+	  <h5 class="f"> About Me</h5><a href="#" class="edit">Edit</a> <br><br>
 	  <p>Hi, my name is Christine. I'm a user of PicFic. This is going to be an about me text that is maximmum 50 words.
 	    <br><br>
 	    Genres: Fantasy, Sci-fi.
@@ -49,7 +19,7 @@
 	    <br><br>
 	    Authors: J.K. Rowling, Stephen King<br>
 	  </p>
-	  <h5>My Account</h5><a href="#" class="eedit">Edit</a> <br><br>
+	  <h5 class="e">My Account</h5><a href="#" class="eedit">Edit</a> <br><br>
 	  <p>
 	    Email: yehjinoh@gmail.com<br>
 	    Birthday: <br>
@@ -59,6 +29,13 @@
       </div>
       
       <div class="activity">
+	<h4 class="g"><b>My Stories</b></h4> <a href="3" class="newEdit">Edit</a><br>
+	<h5>My Stories</h5>
+	<div class="bookshelf">
+	  <img src="../static/launchpad/png/study_in_scarlet.png" class="coverArt img-fluid">
+	  <div class="title"> A Study in Scarlet</div>
+	</div>
+	
 	<h4><b>My Activity</b></h4> <a href="#" class="aedit">Edit</a>
 	<br>
 	<h5> Continue Reading</h5>
@@ -111,5 +88,4 @@
       </div>
     </div>
     <script src="../static/js/profile.js"></script>
-  </body>
-</html>
+  {% endblock %}

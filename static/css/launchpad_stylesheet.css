@@ -437,6 +437,18 @@ button:focus {outline:0;}
     line-height:16px;
 }
 
+/*.about h5:after {
+    content:" "; 
+    display:inline-block; 
+    width:120px;
+}*/
+
+.about .f:after {
+    content:" "; 
+    display:inline-block; 
+    width:130px;
+}
+
 .about p {
     font-family: .AppleSystemUIFont;
     font-size: 10px;
@@ -455,12 +467,6 @@ button:focus {outline:0;}
     left:50vw;
 }
 
-.edit:before{
-    content:" "; 
-    display:inline-block; 
-    width:120px;
-}
-
 .eedit {
     font-size: 11px;
     color:#0092FF;
@@ -472,10 +478,27 @@ button:focus {outline:0;}
     left:50vw;
 }
 
-.eedit:before{
+.newEdit {
+    font-size: 11px;
+    color:#0092FF;
+    letter-spacing: 0.22px;
+    line-height:16px;
+    font-family: 'Nunito', sans-serif;
+    display:inline;
+    text-align: right;
+    left:50vw;
+}
+
+.activity .g:after {
     content:" "; 
     display:inline-block; 
-    width:110px;
+    width:575px;
+}
+
+.e:after{
+    content:" "; 
+    display:inline-block; 
+    width:120px;
 }
 
 .about h5:before {
@@ -506,11 +529,17 @@ button:focus {outline:0;}
     letter-spacing: 0.4px;
 }
 
-.aedit:before{
+.activity h4:after {
     content:" "; 
     display:inline-block; 
     width:570px;
 }
+
+/*.aedit:before{
+    content:" "; 
+    display:inline-block; 
+    width:570px;
+}*/
 
 .aedit {
     font-size: 11px;
@@ -558,7 +587,7 @@ button:focus {outline:0;}
     left: 50%;
     top: 50%;
     margin-left: -200px;
-    margin-top: -300px;
+    margin-top: -330px;
     text-align: center;
     font-family: .AppleSystemUIFont;
     font-size: 12px;
