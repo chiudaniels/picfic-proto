@@ -18,8 +18,7 @@
 
   <body>
     <nav class="navbar">
-      
-      <img src="../static/png/Menu.png" class="navMenu">
+      <a href="#" data-toggle="modal" data-target="#tocModal"><img src="../static/png/Menu.png" class="navMenu"></a>
       <a href="/"><img src="../static/svg/PicFic.svg" class="navpicficLogo"></a>
 
       <div class="dropdown-container">
@@ -31,11 +30,43 @@
           </li>
 	</ul>
       </div>
-
       <!--<div class="user">make variable so that other images can be put in -->
     </nav>
 
+    <!-- CLASS: toc --------- ID: tocModal ------------------------------------>
+
+    <div class="modal fade" id="tocModal" role="dialog">
+      <div class="modal-dialog toc">
+	<div class="modal-content">
+	  <div class="blurrify"></div>
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <br><p class="taboc">TABLE OF CONTENTS</p><br><br><br>
+	    <br>
+	    <p class="bookParts">
+	      PART I<br><br>
+	      Chapter I. Sherlock Holmes<br>
+	      Chapter II. The Science of Deduction<br>
+	      Chapter III. The Lauriston Garden Mystery<br>
+	      Chapter IV. What John Rance Had to Tell<br>
+	      Chapter V. Our Advertisement Brings a Visitor<br>
+	      Chapter VI. Tobias Gregson Shows What He Can Do<br><br><br>
+	      PART II<br><br>
+	      Chapter I. On the Great Alkali Plain<br>
+	      Chapter II. The Flower of Utah<br>
+	      Chapter III. John Ferrier Talks with the Prophet<br>
+	      b<br> b<br> b<br> b<br> b<br> b<br> b<br> b<br>
+	    </p>
+	  </div>
+	</div>
+	<div class="modal-footer">
+	</div>
+      </div>
+    </div>
+
     {% block content %}{% endblock %}
+    
+    
     
   </body>
 </html>
