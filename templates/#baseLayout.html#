@@ -301,7 +301,7 @@
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br>
 
-	    <form action="/register/" class="formStyle" method="POST">
+	    <form action="/register/" class="formStyle">
 	      <div class="form-group">
 		<input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
 	      </div>
@@ -325,18 +325,18 @@
 	      </div>
 	      <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
 		<select class="form-control" id="sel1" name="bMonth" placeholder="Month">
-		  <option value="1">January</option>
-		  <option value="2">February</option>
-		  <option value="3">March</option>
-		  <option value="4">April</option>
-		  <option value="5">May</option>
-		  <option value="6">June</option>
-		  <option value="7">July</option>
-		  <option value="8">August</option>
-		  <option value="9">September</option>
-		  <option value="10">October</option>
-		  <option value="11">November</option>
-		  <option value="12">December</option>
+		  <option value="January">January</option>
+		  <option value="February">February</option>
+		  <option>March</option>
+		  <option>April</option>
+		  <option>May</option>
+		  <option>June</option>
+		  <option>July</option>
+		  <option>August</option>
+		  <option>September</option>
+		  <option>October</option>
+		  <option>November</option>
+		  <option>December</option>
 		</select>
 	      </div>
 	      <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
@@ -345,21 +345,20 @@
 	      <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
 		<input type="number" name="year" class="form-control" id="year" placeholder="Year">
 	      </div><br>
-	      <div class="form-group" style="display:inline-block;" id="gender">
+	      <div class="form-group" style="display:inline-block;" name="gender" id="gender">
 		<div class="checkbox" style="display:inline-block;">
-		  <label><input type="checkbox" name="gender" value="f">Female</label>
+		  <label><input type="checkbox" value="f">Female</label>
 		</div>
 		<div class="checkbox" style="display:inline-block;margin-left:30px;">
-		  <label><input type="checkbox" name="gender" value="m">Male</label>
+		  <label><input type="checkbox" value="m">Male</label>
 		</div>
 		<div class="checkbox" style="display:inline-block;margin-left:30px">
-		  <label><input type="checkbox" name="gender" value="n">Non-binary</label>
+		  <label><input type="checkbox" value="n">Non-binary</label>
 		</div>
 	      </div>
 	      <p>
 		<stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
 	      </p>
-	      <button type="submit" class="btn submitButton">Test btn</button>
 	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
 	    </form> <br>
 	    <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a><br>
@@ -380,7 +379,7 @@
 	  <div class="modal-body">
 	    <button type="button" class="close" data-dismiss="modal">&times;</button>
 	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <form action="/login/" class="formStyle" method="POST">
+	    <form action="/login/" class="formStyle">
 	      <div class="form-group">
 		<input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
 	      </div>

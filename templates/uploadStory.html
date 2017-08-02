@@ -1,0 +1,75 @@
+<!-- THIS PAGE IS ONLY FOR ADMINS ------------------------------------------------>
+
+<!DOCTYPE html>
+<html>
+  <!-- THIS STUFF IS FROM readingLayout.html!!!!!!!!!!!!!!!!!!!!-->
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <title>{% block title %}{% endblock%}</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
+    <link rel="stylesheet" type="text/css" href="../static/css/upload_ss.css")>
+    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
+      <div class="dropdown-container">
+	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
+	</button>
+	<ul class="dropdown-menu-right dropdown-menu" role="menu">
+          <li>
+            <a href="/logout/">Log out</a>
+          </li>
+	</ul>
+      </div> <!-- make variable so that other images can be put in -->
+    </nav>
+
+    <div class="back">
+      <div class="main">
+	<div class="h">Upload New Picfic</div><br>
+	<div class="descriptiveText">Title</div>
+	<div class="descriptiveText" style="margin-left: 400px">Author</div><br><br>
+	<input type="text" class="descriptiveText" placeholder="Title" style="width:370px;">
+	<input type="text" class="descriptiveText" placeholder="Author" style="margin-left:50px; width:230px;"><br><br>
+	<div class="descriptiveText">Genres<br><br>
+
+	  <table class="xboxGrid">
+	    <tr>
+	      <td><input type="checkbox" class="check" name="adventure" value="adventure" style="margin-right:10px;"/><label for="adventure">Adventure</label></td>
+	      <td><input type="checkbox" class="check" name="lgbt" value="lgbt" style="margin-right:10px;"/><label for="lgbt">LGBT+</label></td>
+	      <td><input type="checkbox" class="check" name="scifi" value="scifi" style="margin-right:10px;"/><label for="scifi">Science Fiction</label></td>
+	    </tr>
+	    <tr>
+	      <td><input type="checkbox" class="check" name="fantasy" value="fantasy" style="margin-right:10px;"/><label for="fantasy">Fantasy</label></td>
+	      <td><input type="checkbox" class="check" name="literary" value="literary" style="margin-right:10px;"/><label for="literary">Literary</label></td>
+	      <td><input type="checkbox" class="check" name="thrill" value="thrill" style="margin-right:10px;"/><label for="thrill">Thriller/Suspense</label></td>
+	    </tr>
+	    <tr>
+	      <td><input type="checkbox" class="check" name="historical" value="historical" style="margin-right:10px;"/><label for="historical">Historical</label></td>
+	      <td><input type="checkbox" class="check" name="mainstream" value="mainstream" style="margin-right:10px;"/><label for="mainstream">Mainstream</label></td>
+	      <td><input type="checkbox" class="check" name="ya" value="ya" style="margin-right:10px;"/><label for="ya">Young Adult</label></td>
+	    </tr>
+	    <tr>
+	      <td><input type="checkbox" class="check" name="horror" value="horror" style="margin-right:10px;"/><label for="horror">Horror</label></td>
+	      <td><input type="checkbox" class="check" name="rom" value="rom" style="margin-right:10px; margin-right:10px;"/><label for="rom">Romance</label></td>
+	    </tr>
+	  </table>
+	</div><br><br>
+	<div class="descriptiveText">Upload Cover</div><br>
+	<button class="uC">Select File</button><br><br><br><br>
+	<div class="descriptiveText">Preview Text (max. 150 words)</div><br><br>
+	<input type="text" class="pText"><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="descriptiveText">Story (separate pages with ***)</div><br><br>
+	<input type=text" class="sText">
+	<button class="prev">Preview</button>
+	
+    </div>

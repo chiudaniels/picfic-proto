@@ -19,8 +19,19 @@
     <nav class="navbar">
       
       <img src="../static/png/Menu.png" class="navMenu">
-      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
-      <div class="user"><!-- make variable so that other images can be put in -->
+      <a href="/"><img src="../static/svg/PicFic.svg" class="navpicficLogo"></a>
+
+      <div class="dropdown-container">
+	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
+	</button>
+	<ul class="dropdown-menu-right dropdown-menu" role="menu">
+          <li>
+            <a href="/logout/">Log out</a>
+          </li>
+	</ul>
+      </div>
+
+      <!--<div class="user">make variable so that other images can be put in -->
     </nav>
   </body>
 </html>

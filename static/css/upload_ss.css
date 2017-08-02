@@ -11,6 +11,8 @@ body {
     max-width: 1920px;
     margin: 0 auto;
     font-family: 'Nunito', sans-serif;
+    background-color: #F8F8F8;
+    height: 1350px;
 }
 
 span {
@@ -370,11 +372,9 @@ border-radius: 10px;
     border: none;
 }
 
-button:focus {outline:0;}
-
 .profileBackground {
     position: relative;
-    background:#f8f8f8;
+    background:#f3f3f3;
     height:93vh;
 }
 
@@ -714,4 +714,127 @@ button:focus {outline:0;}
 
 .mainLoginInput:-moz-placeholder {
   font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;
+}
+
+.main {
+    position: absolute;
+    height: 1240px;
+    width: 785px;
+    max-width:100%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
+    border-radius: 10px;
+    left:50%;
+    margin-left: -392.5px;
+    top: 8vh;
+}
+
+.back {
+    background-color: #F8F8F8;
+    height:100%;
+    position: relative;
+}
+
+button:focus {outline:0;}
+
+.h {
+    margin-left: 42.5px;
+    margin-top: 25px;
+    font-family: .SFNSDisplay-Regular;
+    font-size:20px;
+    color:#000000;
+    letter-spacing: 0.4px;
+}
+
+.descriptiveText {
+    display: inline-block;
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color:#181818;
+    letter-spacing:0.24px;
+    margin-left: 42.5px;
+    line-height: 15px;
+}
+
+.check {
+    margin-right:10px;
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color:#181818;
+    letter-spacing: 0.24px;
+}
+
+.xboxGrid {
+    display: inline-block;
+    margin-left:7vw;
+}
+
+label {
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color:#181818;
+    letter-spacing:0.24px;
+}
+
+td {
+    padding-right:90px;
+}
+
+.uC {
+    position:absolute;
+    width:200px;
+    background-color:black;
+    color:white;
+    border-radius: 15px;
+    top: 48vh;
+    border: none;
+    height: 35px;
+    left:50%;
+    margin-left: -100px;
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    font-family: .AppleSystemUIFont;
+}
+
+.pText {
+    position: absolute;
+    height: 200px;
+    width: 700px;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border: 1px solid #E3E3E3;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.sText {
+    position:absolute;
+    height: 400px;
+    width: 700px;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.15);
+    border: 1px solid #E3E3E3;
+    left: 50%;
+    margin-left: -350px;
+}
+
+.prev {
+    z-index: 10000000000000;
+    position:relative;
+    width:200px;
+    background-color:black;
+    color:white;
+    border-radius: 15px;
+    top: 60vh;
+    border: none;
+    height: 35px;
+    left:50%;
+    margin-left: -100px;
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    font-family: .AppleSystemUIFont;
 }
