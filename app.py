@@ -142,24 +142,26 @@ def logout():
 @app.route("/register/", methods=["POST"])
 def register():
     # request
-    # IDS: name, makeEmail, confirmEmail, month, day, year, gender
+    d = request.form
+    print d
+    
     fN = request.form["fName"]
     lN = request.form["lName"]
     uN = request.form["username"]
     email = request.form["makeEmail"]
     pwd = request.form["makePass"]
-    bM = requests.form["bMonth"]
-    bD= request.form["day"]
-    bY = request.form["year"]
+    bM = int(request.form["bMonth"])
+    bD= int(request.form["day"])
+    bY = int(request.form["year"])
     gender = request.form["gender"]
     #reg
     print "trying to register"
     if not users.isNameTaken(uN): #and email
         print "adding user"
-        session['uID'] = users.addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender)
+        session['uID'] = users.addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, "")
     else:
         msg = "User already exists"
-    return redirect( url_for('root', message=msg) )
+    return redirect( url_for('root') )
 
 # Setting Routes ======================================
 

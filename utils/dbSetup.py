@@ -96,10 +96,7 @@ class UserProfile(Base):
         self.firstName = fN
         self.lastName = lN
         #package birthday
-        bday = DateTime.date()
-        bday.year = bY
-        bday.month = bM
-        bday.day = bD
+        bday = datetime.datetime(bY, bM, bD)
         self.birthday = bday
         self.gender = "" #figure this out
         
@@ -140,7 +137,14 @@ class Art(Base):
         self.bookID = bookID
         self.chapterID = chID
         #self.timestamp = 0
-    
+
+    def asDict(self):
+        return {"uploaderID" : self.uploaderID,
+                "caption" : self.caption,
+                "urlName" : self.urlName,
+                "bookID" : self.bookID
+        }
+        
 class Book(Base):
     __tablename__ = "Books"
 

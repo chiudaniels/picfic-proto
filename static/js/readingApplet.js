@@ -6,10 +6,11 @@ var imgGallery = document.getElementById('imageGallery');
 var prevPgBtn = document.getElementById('prevPgBtn'); 
 var nextPgBtn = document.getElementById('nextPgBtn'); 
 
+
 //var storyText = "";
 
 var loadPage = function(data){
-//    console.log(data);
+    //console.log(data);
     data = JSON.parse(data);
     //update body
     while (storyBody.hasChildNodes()){
@@ -26,15 +27,32 @@ var loadPage = function(data){
     }
     
     //update images
+    console.log("doing images");
+    sourceArray = [];
+    captionArray = [];
     for (i = 0; i < data["imageData"].length; i++){
-	var img = document.createElement("img");
-	img.setAttribute("src", "../../../../static/" + data["imageData"][i]["url"]);
-	storyBody.appendChild(img);
+	//console.log(data);
+	sourceArray.push('/static/data/images/' + data["imageData"][i]["urlName"]);
+	captionArray.push(data["imageData"][i]["caption"]);
+    }
+    slideIndex = 0;
+    setThumbnails();
+    for (i = 0; i < sourceArray.length; i++){
+	makeNewSlide(source2img(sourceArray[i]));
+    }
+    if (sourceArray.length != 0)
+	showSlides(slideIndex);
+    //gotta reset the gallery...
+    if (sourceArray.length == 0){
+	imgGallery.setAttribute("style", "display:none");
+    }
+    else {
+	imgGallery.setAttribute("style", "display:inline");
     }
     
 
     //update globals and misc
-    console.log(data["pgData"]);
+    //console.log(data["pgData"]);
     curCC = data["pgData"]["curCC"];
     
     if (data["chNum"] == data["bookLength"] && data["pgData"]["pgNum"] == data["pgData"]["chLength"]){
@@ -50,10 +68,10 @@ var loadPage = function(data){
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
     
-    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * data["pgData"]["pgNum"] / data["pgData"]["chLength"]));
-    
+    progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * curPg / chLength));
+    progressBar.setAttribute("style", "width:" + String(Math.ceil(100.0 * curPg/ chLength)) + "%");
 }
-
+/*
 var initializeButtons = function(){
     if (curChapter == bookLength && curPg == chLength){
 	nextPgBtn.setAttribute("style", "visibility:hidden");
@@ -68,8 +86,9 @@ var initializeButtons = function(){
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
     progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * curPg / chLength));
+    progressBar.setAttribute("style", "width:" + String(Math.ceil(100.0 * curPg/ chLength)) + "%");
 }
-
+*/
 //for refactoring
 var changePg = function(){
 
@@ -86,6 +105,7 @@ var nextPage = function(){
     }
     else {
 	curPg += 1;
+	
 	//need ajax call
 	$.ajax({
 	    url: "/getPage/",
@@ -104,6 +124,9 @@ var nextPage = function(){
 		console.log("nextpage error");
 	    }
 	});
+	
+	//getPageData(bookID, curChapter, curPg );
+	//bookmark();
     }
     return null;
 }
@@ -117,6 +140,7 @@ var prevPage = function(){
     else{
 	curPg -= 1;
 	//need ajax call
+	
 	$.ajax({
 	    url: "/getPage/",
 	    type: "POST",
@@ -135,6 +159,9 @@ var prevPage = function(){
 		console.log("nextpage error");
 	    }
 	});
+	
+	//getPageData(bookID, curChapter, curPg);
+	//bookmark();
     }
 
     return null;
@@ -167,10 +194,52 @@ var bookmark = function(){
 prevPgBtn.addEventListener("click", prevPage);
 nextPgBtn.addEventListener("click", nextPage);
 
-initializeButtons();
-
-
-
+//refactoring
+//window.onload = function(){
+ //   loadPage();
+//}
 
 console.log("alive!");
 //Change it to onpageload
+/*
+var getPageData = function( bID, chN, pgN ){
+    $.ajax({
+	url: "/getPage/",
+	type: "POST",
+	data: {
+	    "bookID": bID,
+	    "chNum": chN,
+	    "pgNum": pgN,
+	},
+	success: function(response){
+	    console.log("page data gotten");
+	    return response;
+	},
+	error: function(data){
+	    console.log("page data error");
+	}
+    });
+}
+*/
+var initializePage = function(){
+    $.ajax({
+	url: "/getPage/",
+	type: "POST",
+	data: {
+	    "bookID": bookID,
+	    "chNum": curChapter,
+	    "pgNum": curPg,
+	},
+	success: function(response){
+	    console.log("page data gotten");
+	    loadPage(response);	
+	},
+	error: function(data){
+	    console.log("page data error");
+	}
+    });
+
+}
+
+initializePage();
+//update galDesc

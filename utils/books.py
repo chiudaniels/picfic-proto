@@ -85,9 +85,11 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
             pageCC += newCCStr
         else:
             line = line.strip()
-            curCC += len(line)
+            curCC += len(line) + 1 #put in the extra character count for the bar. Image cc is gonna get screwweeedddd :((
             processedText += line + "|"
-    pageCC = pageCC[:-1]
+    #PUSH LAST CHAPTER BOOKMARKS!
+    newCCStr = str(curPageStartCC) + "," + str(curCC)
+    pageCC += newCCStr
     processedText = processedText[:-1]
     newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
     session.add(newChapter)
@@ -166,7 +168,7 @@ def getBookLength( bookID ):
     session = Session()
     return session.query(Chapter).filter_by(bookID = bookID).count()
                                                              
-#Returns {"pgNum", "text", "chLength", "curCC"}
+#Returns {"pgNum", "text", "chLength", "curCC", "startCC", "endCC"}
 def getPageInfo( cc, chID ):
 
     ret = {}
@@ -215,6 +217,8 @@ def getPageInfoAJAX( pgN, chID ):
     textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1]]
     ret["text"] = textStr.split("|")
     ret["curCC"] = pageCCArr[thePairIndex][0]
+    ret["startCC"] = pageCCArr[thePairIndex][0]
+    ret["endCC"] = pageCCArr[thePairIndex][1]
     #print "curCC retrieved from db"
     #print ret["curCC"]
     #print "end"

@@ -25,9 +25,9 @@ def uploadArt(url, uID, caption, cS, cE, bID, chN ):
 #Raw, img table
 #Returns: {url, artistID, artistTag, caption, timestamp} #replace caption with cc?
 #Get timestamp later
-def getImageDataPage(chID, startCC, endCC):
+def getImageDataPage(chID, ccStart, ccEnd):
     session = Session()
-    imgQ = session.query(Art.uploaderID, Art.caption, Art.urlName).filter(Art.chapterID == chID, Art.startCC > ccStart, Art.ccEnd < endCC)
+    imgQ = session.query(Art).filter(Art.chapterID == chID, Art.ccStart > ccStart, Art.ccEnd < ccEnd)
     #print imgQ
     
     if imgQ.count() != 0:
@@ -35,7 +35,7 @@ def getImageDataPage(chID, startCC, endCC):
         print imgList
         retList = []
         for entry in imgList:
-            retList.append(entry.__dict__)
+            retList.append(entry.asDict())
         return retList
     
     return []
@@ -43,7 +43,7 @@ def getImageDataPage(chID, startCC, endCC):
 #For a chapter
 def getImageDataChapter(chID):
     session = Session()
-    imgQ = session.query(Art.uploaderID, Art.caption, Art.urlName).filter(Art.chapterID == chID)
+    imgQ = session.query(Art).filter(Art.chapterID == chID)
     #print imgQ
     
     if imgQ.count() != 0:
@@ -52,7 +52,7 @@ def getImageDataChapter(chID):
         print "chapter data retrieval"
         retList = []
         for entry in imgList:
-            retList.append(entry.__dict__)
+            retList.append(entry.asDict())
         return retList
 
     return []
@@ -61,7 +61,7 @@ def getImageDataChapter(chID):
 #For a book
 def getImageDataBook(bID):
     session = Session()
-    imgQ = session.query(Art.uploaderID, Art.caption, Art.ccStart, Art.ccEnd, Art.urlName).filter(Art.bookID == bID)
+    imgQ = session.query(Art).filter(Art.bookID == bID)
     #print imgQ
     
     if imgQ.count() != 0:
@@ -70,7 +70,7 @@ def getImageDataBook(bID):
         print "book data retrieval"
         retList = []
         for entry in imgList:
-            retList.append(entry.__dict__)
+            retList.append(entry.asDict())
         return retList
     return []
 
@@ -78,7 +78,7 @@ def getImageDataBook(bID):
 #For a user
 def getImageDataUser(uID):
     session = Session()
-    imgQ = session.query(Art.caption, Art.bookID, Art.urlName).filter(Art.uploaderID == uID)
+    imgQ = session.query(Art).filter(Art.uploaderID == uID)
     #print imgQ
     
     if imgQ.count() != 0:
@@ -86,7 +86,7 @@ def getImageDataUser(uID):
         print imgList
         retList = []
         for entry in imgList:
-            retList.append(entry.__dict__)
+            retList.append(entry.asDict())
             retList[-1]["bookTitle"] = books.getBook(retList[-1]["bookID"]).title
         print "user data retrieval"
         return retList

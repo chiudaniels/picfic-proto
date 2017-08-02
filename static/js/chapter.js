@@ -1,6 +1,8 @@
 var slideIndex = 0;
 var thumbIndex = 0;
-var sourceArray = ["/static/img1.jpg", "/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg"];
+//var sourceArray = ["/static/img1.jpg", "/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg","/static/img2.jpg"];
+var sourceArray = [];
+var captionArray = [];
 var thumbs = document.getElementsByClassName("thumbnails");
 
 function source2img(path) {
@@ -29,6 +31,8 @@ function showSlides(n) {
         slides[i].style.display = "none";
     }
     slides[slideIndex].style.display = "block";
+    document.getElementById("galDesc").innerHTML = captionArray[n];
+    console.log(captionArray[n]);
 }
 
 var makeNewSlide = function(img) {
@@ -148,8 +152,6 @@ for (var i = 0; i < sourceArray.length; i++) {
 
 //showSlides(slideIndex);
 setThumbnails();
-thumbnailClick();
-clickedThumbArrow();
 
 var fanart = document.getElementsByClassName("fanartIcon");
 var paragraph = document.getElementsByClassName("paragraph");

@@ -18,12 +18,14 @@
 
 <body>
     <nav class="navbar">
-        <!-- menu logo -->
-        <img src="/static/svg/Menu.svg" class="menuLogo">
-        <!-- picfic logo -->
-        <img src="/static/svg/PicFic.svg" class="picficLogo">
-        <!-- search logo -->
-        <img src="/static/svg/search.svg" class="searchLogo">
+      <!-- menu logo -->
+      <img src="/static/svg/Menu.svg" class="menuLogo">
+      <!-- picfic logo -->
+      <a href="/">
+	 <img src="/static/svg/PicFic.svg" class="picficLogo">
+      </a>
+      <!-- search logo -->
+      <img src="/static/svg/search.svg" class="searchLogo">
     </nav>
     {% if pageData["status"] == 1 %}
     <div class="container">
@@ -50,9 +52,10 @@
                     <h2>{{pageData["chTitle"]}}</h2>
                 </div>
                 <div class="story " id="storyBody">
-                    {% for line in pageData["pgData"]["text"] %}
+		  <!--
+		  {% for line in pageData["pgData"]["text"] %}
                     <p class="paragraph ">{{line}}</p>
-                    {% endfor %}
+                    {% endfor %}-->
                 </div>
             </div>
 	    
@@ -64,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="container gallery">
+        <div class="container gallery" id="imageGallery">
             <div class="nothumbnails">
                 <div class="row gallery-image">
                     <div class="col-md-12">
@@ -90,8 +93,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 gallery-desc" id="galDesc">
-                        “His eyes were sharp and piercing, save during those intervals of torpor to which I have alluded; and his thin, hawk-like nose gave his whole expression an air of alertness and decision. His chin, too, had the prominence and squareness which mark the man of determination.”
+                  <div class="col-md-12 gallery-desc" id="galDesc">
                     </div>
                 </div>
             </div>
@@ -174,10 +176,9 @@
     var bookLength = {{ pageData["bookLength"] }}
     var curCC = {{ pageData["pgData"]["curCC"] }};
     </script>
-    <script src="/static/js/readingApplet.js"></script>
     <script src="/static/js/dropzone.js "></script>
     <script src="/static/js/chapter.js"></script>
-
+    <script src="/static/js/readingApplet.js"></script>
 </body>
 
 </html>

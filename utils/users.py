@@ -10,7 +10,7 @@ Session.configure(bind=engine)
 
 def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
     session = Session()
-    pwd = hasher(passData)
+    pwd = hasher(pwd)
     newUser = User(uN, pwd, "", email)
     session.add(newUser)
     session.flush()
@@ -35,7 +35,7 @@ def isNameTaken( username ):
     session = Session()
     usr = session.query(User).filter_by(username = username)   
     if usr.count() == 0:
-        print "usr is none"
+        print "usr DNE"
         return False
     return True
 
