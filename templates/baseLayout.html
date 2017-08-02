@@ -211,7 +211,9 @@
 
      {% else %}
     <nav class="navbar"> <!-- THERE SHOULD BE A DIFFERENT NAVBAR ENTIRELY FOR IF SOMEONE IS LOGGED IN -->
-      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
+      <a href="/">
+	<img src="../static/svg/PicFic.svg" class="navpicficLogo">
+      </a>
       <!--<span id="aboutus">
 	  <a href="/about/">ABOUT US</a>
       </span>-->
@@ -394,7 +396,7 @@
 	      <div class="form-group">
 		<input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password">
 	      </div>
-	      <button type="submit" class="btn submitButton">Sign In</button><br><br><br>
+	      <button type="button" class="btn submitButton" id="signInButton">Sign In</button><br><br><br>
 	    </form>
 	    <a href="#" data-toggle="modal" data-target="#forgot" data-dismiss="modal">Forgot your password?</a><br>
 	    <a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Create new account</a><br>
@@ -480,7 +482,7 @@
 
 
   </body>
-  <script src="../static/js/login.js"></script>
+  <script src="/static/js/login.js"></script>
   <script src="/static/js/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
