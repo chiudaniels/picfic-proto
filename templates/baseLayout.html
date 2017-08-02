@@ -194,7 +194,22 @@
       document.getElementById('fb-root').appendChild(e);
       }());
     </script>
+    
+    {% if isLoggedIn %}
+     <nav class="navbar">
+      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
+      <div class="dropdown-container">
+	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
+	</button>
+	<ul class="dropdown-menu-right dropdown-menu" role="menu">
+          <li>
+            <a href="/logout/">Log out</a>
+          </li>
+	</ul>
+      </div> <!-- make variable so that other images can be put in -->
+    </nav>
 
+     {% else %}
     <nav class="navbar"> <!-- THERE SHOULD BE A DIFFERENT NAVBAR ENTIRELY FOR IF SOMEONE IS LOGGED IN -->
       <img src="../static/svg/PicFic.svg" class="navpicficLogo">
       <!--<span id="aboutus">
@@ -212,14 +227,6 @@
 	    
             <li><p class="navbar-text"><a href="/about/">ABOUT US</a></p></li>
 	    <li><p class="navbar-text"><a href="/gallery/">COMMUNITY</a></p></li>
-
-	    {% if isLoggedIn %}
-	    
-	    <li><p class="navbar-text"><a href="/settings/">SETTINGS</a></p></li>
-	    <li><p class="navbar-text"><a href="/logout/">LOG OUT</a></p></li>
-
-	    {% else %}
-
 	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p></li>
 
 
