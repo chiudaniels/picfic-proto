@@ -31,6 +31,12 @@ def getUser( uID ):
     usr = session.query(User).filter_by(userID = uID).one()
     return usr
 
+def getUserProfile( username ):
+    session = Session()
+    userID = session.query(User.id).filter_by(User.username == username).one()
+    profileInfo = session.query(UserProfile).filter_by(UserProfile.userID == userID).one().asDict()
+    return profileInfo
+
 def isNameTaken( username ):
     session = Session()
     usr = session.query(User).filter_by(username = username)   
@@ -90,7 +96,6 @@ def isValidAccountInfo( email, pwd ):
     session = Session()
     usr = session.query(User).filter(User.email == email, User.passData == hashedPass)
     return usr.count() != 0
-
 
 def getUserID( email ):
     session = Session()

@@ -13,15 +13,20 @@
 <div class="bookInfo">
     <img src="../static/launchpad/png/study_in_scarlet.png" class="coverArt">
     <div class="summary">
-        <h2>A Study in Scarlet</h2>
-        <h4><i>By Athur Conan Doyle</i></h4>
+        <h2>{{data["meta"]["title"]}}</h2>
+        <h4><i>{{data["meta"]["author"]}}</i></h4>
         <p>
-            A Study in Scarlet begins with Dr. John Watson, the narrator, settling in Longon to recover from a wound and illness he sustained while acting as a military doctor during the Second Afghan War.
-            <br> One day he runs into an acquaintance, Stamford, while at a bar. Watson confides in his friend that he needs a new living arrangement, as his previous one was too expensive. Stamford responds that another friend of his has also expressed this desire, and takes Watson to the university laboratory where his friend - Sherlock Holmes - is working on an experiment.
+	  {% for p in data["meta"]["blurb"]%}
+	  {{p}}
+	  <br>
+	  {% endfor %}
         </p>
+	<p>
+	  {{data["meta"]["misc"]}}
+	</p>
     </div>
-    <button class="toRead"><b>START READING</b></button>
-</div>
+    <button class="toRead"><b><a href="{{data['bookID']}}/read">START READING</a></b></button>
+    </div>
 <div class="viewArt">
     <h3>VIEW FANART FOR A Study in Scarlet</h3>
     <div class="container gallery">
@@ -60,4 +65,4 @@
 </div>
 <script src=../static/endofchapter.js></script>
 <script src=../static/chapter.js>
-{ % endblock % }
+{% endblock %}

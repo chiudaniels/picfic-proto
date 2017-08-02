@@ -99,6 +99,17 @@ class UserProfile(Base):
         bday = datetime.datetime(bY, bM, bD)
         self.birthday = bday
         self.gender = "" #figure this out
+
+    #add permission levels    
+    def asDict(self):
+        return {
+            "firstName" : self.firstName,
+            "lastName" : self.lastName,
+            "favorites" : self.favorites,
+            "interest" : self.interest,
+            "birthday" : self.birthday.strftime("%B %d, %Y"),
+            "gender" : self.gender
+        }
         
 class Art(Base):
     __tablename__ = "Art"

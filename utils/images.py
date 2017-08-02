@@ -90,7 +90,6 @@ def getImageDataUser(uID):
             retList[-1]["bookTitle"] = books.getBook(retList[-1]["bookID"]).title
         print "user data retrieval"
         return retList
-
     return []
 
 #Conglomerate with like data

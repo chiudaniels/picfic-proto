@@ -109,9 +109,10 @@ def getBookLanding( bookID ):
             "title": book.title,
             "author": book.author,
             "misc": book.misc,
-            "blurb": book.blurb,
+            "blurb": book.blurb.split("|"),
             "release": book.release
         }
+        ret["imageData"] = images.getImageDataBook(bookID)
         ret["status"] = 1
         return ret
 
@@ -156,7 +157,15 @@ def getPageAJAX(bID, chN, pgN):
         ret["status"] = 1
         ret["bookLength"] = getBookLength(bookID)
     return ret
-        
+
+
+#Returns: images. that's it. and chN 
+def getChapterSummary(bID, chN):
+    ret = {}
+    ret["imageData"] = images.getImageDataChapter(getChapter(bID, chN))
+    ret["bookID"] = bID
+    ret["chapterNum"] = chN
+    
 #Helpers ======================================
 def getBook( bookID ):
     bookID = int(bookID)

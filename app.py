@@ -44,6 +44,13 @@ def about():
     return render_template( "about.html", isLoggedIn = isLoggedIn() )
 
 
+# == User Profile ===================================
+
+@app.route("/user/<username>")
+def userProfilePage(username):
+    profileData = users.getProfile( username )
+    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData )
+
 
 # == Book Gallery Browsing ==========================
 
@@ -68,7 +75,13 @@ def galleryPage(pageNum):
 @app.route("/books/<int:bookID>")
 def bookLanding(bookID):
     metadata = books.getBookLanding(bookID)
-    return render_template("bookLandingTemp.html", isLoggedIn = isLoggedIn(), data = metadata)
+    return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata)
+
+# == Chapter End page ===============================
+@app.route("/books/<int:bookID>/read/<int:chNum>/gallery")
+def chapterGallery(bookID, chNum):
+    chapterGalData = books.getChapterSummary(bookID, chNum)
+    return render_template("endOfChapterMockup.html", isLoggedIn = isLoggedIn(), data = chapterGalData)
 
 
 # == reading =====
