@@ -375,7 +375,7 @@ button:focus {outline:0;}
 .profileBackground {
     position: relative;
     background:#f8f8f8;
-    height:93vh;
+    height:115vh;
 }
 
 .aboutMe {
@@ -394,7 +394,7 @@ button:focus {outline:0;}
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
     position: absolute;
     background: white;
-    height: 550px;
+    height: 750px;
     width: 750px;
     top: 5vh;
     left: 31vw;
