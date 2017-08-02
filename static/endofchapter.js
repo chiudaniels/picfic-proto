@@ -1,10 +1,6 @@
 var slideIndex = 0;
 var thumbNum = 0;
-var sourceArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/brockcrock.jpg", "../static/img2.jpg"
-, "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"
-, "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"
-, "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"
-, "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
+var sourceArray = [];
 var imageArray = [];
 var numRows = Math.ceil(sourceArray.length / 5);
 
@@ -63,6 +59,14 @@ function makeThumbsCol() {
     }
     console.log("made row")
     $(".gallery-thumbnail").append(newRow);
+}
+
+setGalleryDesc(text){
+	$(".gallery-desc").text=text;
+}
+
+setGalleryLikes(num){
+	$(".gallery-desc").text=num + " likes";
 }
 
 for (var i = 0; i < sourceArray.length; i++) {
