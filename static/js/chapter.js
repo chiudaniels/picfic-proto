@@ -1,9 +1,9 @@
 var slideIndex = 0;
 var thumbIndex = 0;
-var sourceArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
-var captionArray = ["", "", "", "", "", ""];
-//var sourceArray = [];
-//var captionArray = [];
+//var sourceArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
+//var captionArray = ["", "", "", "", "", ""];
+var sourceArray = [];
+var captionArray = [];
 imageArray = [];
 imageArray2 = [];
 var thumbs = document.getElementsByClassName("thumbnails");
