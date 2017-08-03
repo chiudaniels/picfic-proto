@@ -1,12 +1,17 @@
-from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory
+from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory, abort, flash
+from flask_mail import Mail, Message
+frmo threading import Thread
+from itsdangerous import URLSageSerializer, BadSignature
 import flask
 from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
 from bson import json_util
+from .decorators import async
 
 app = Flask(__name__)
+mail=Mail(app)
 app.secret_key = "secrets"
 
 UPLOAD_FOLDER = "static/data/images/"
@@ -286,6 +291,77 @@ if __name__ == "__main__":
     #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
     
 print __name__
+
+
+
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'jealocker@gmail.com'
+app.config['MAIL_DEFAULT_SENDER'] = 'jealocker@gmail.com'
+app.config['MAIL_PASSWORD'] = 'lockeryolo1'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+
+####################################################### SENDING EMAIL BASICS
+@app.route("/")
+def index():
+   #confirm_account();
+   get_activation_link()
+   return "Sent"
+
+
+#@async - important but im confused
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+
+##################################################### ACCOUNT CONFIRMATION; USER ACTIVATION URL STUFF
+def confirm_account(payload):
+    send_email("Confirm your account with PicFic",
+               "jealocker@gmail.com",
+               ["altermuse3@gmail.com"],
+               render_template("testText.txt", payload=payload),
+               render_template("testHtml.html", payload = payload))
+
+def get_serializer(secret_key=None):
+    if secret_key is None:
+        secret_key = app.secret_key
+    return URLSafeSerializer(secret_key)
+
+@app.route('/users/activate/<payload>')
+def activate_user(payload):
+    s = get_serializer()
+    try:
+        user_id = s.loads(payload)
+    except BadSignature:
+        abort(404)
+
+    user = User.query.get_or_404(user_id)
+    user.activate()
+    flash('User activated')
+    return redirect(url_for('index'))
+
+def get_activation_link(user): #user
+    s = get_serializer()
+    payload = s.dumps(user.id) # payload = s.dumps(user.id)
+    return url_for('confirm_account', payload=payload, _external=True)
+
+
+    
+if __name__ == '__main__':
+   app.run(debug = True)
+
 
 
 
