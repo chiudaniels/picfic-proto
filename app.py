@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory, abort, flash
 from flask_mail import Mail, Message
-frmo threading import Thread
-from itsdangerous import URLSageSerializer, BadSignature
+from threading import Thread
+from itsdangerous import URLSafeSerializer, BadSignature
 import flask
 from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
 from bson import json_util
-from .decorators import async
+#from .decorators import async
 
 app = Flask(__name__)
 mail=Mail(app)

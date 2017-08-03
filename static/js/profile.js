@@ -238,3 +238,10 @@ document.onmousedown = clickedSomewhere;
 document.onmouseup = highlight;
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
+
+
+$(document).ready(function(){
+    $("#editMe").on("click", function(){
+        $("#editAboutMe").attr("contenteditable","true").focus();
+    });
+});

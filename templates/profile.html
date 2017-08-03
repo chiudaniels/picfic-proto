@@ -11,7 +11,8 @@
 	</div>
 
 	<div class="about">
-	  <h5 class="f"> About Me</h5><a href="#" class="edit">Edit</a> <br><br>
+	  <h5 class="f"> About Me</h5><a href="#" class="edit" id="editMe">Edit</a> <br><br>
+	  <div id="editAboutMe">
 	  <p>{{data["about"]}}
 	    <br><br>
 	    Genres: {{data["favGenres"]}}
@@ -20,29 +21,30 @@
 	    <br><br>
 	    Authors: {{data["favAuthors"]}}
 	    <br>
-	  </p>
+	  </p></div>
 	  {% if perm == 1 %}
-	  <h5 class="e">My Account</h5><a href="#" class="edit">Edit</a> <br><br>
-	  <p>
+	  <h5 class="e">My Account</h5><a href="#" class="edit" id="editAccount">Edit</a> <br><br>
+	  <div id="editMyAccount">
+	    <p>
 	    Email: {{data["email"]}}
 	    <br>
 	    Birthday: {{data["birthday"]}}
 	    <br>
 	    Gender: {{data["gender"]}}
-	  </p>
+	  </p></div>
 	  {% endif %}
 	</div>
       </div>
       
       <div class="activity">
-	<h4 class="g"><b>My Stories</b></h4> <a href="3" class="newEdit">Edit</a><br>
+	<h4 class="g"><b>My Stories</b></h4> <a href="#" class="newEdit" id="editStories">Edit</a><br>
 	<h5>My Stories</h5>
 	<div class="bookshelf">
 	  <img src="/static/launchpad/png/study_in_scarlet.png" class="coverArt img-fluid">
 	  <div class="title"> A Study in Scarlet</div>
 	</div>
 	
-	<h4><b>Shelf</b></h4> <a href="#" class="edit">Edit</a>
+	<h4><b>Shelf</b></h4> <a href="#" class="edit" id="editShelf">Edit</a>
 	<br>
 	<h5> Continue Reading</h5>
 	<div class="bookshelf">
@@ -52,7 +54,7 @@
 	  <img src="{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
 	  <div class="{{ bookData['title'] }}"> A Study in Scarlet</div>
 	  </a>
-	  {% endif %}
+	  {% endfor %}
 	</div>
 	<br
 	<h5> Uploaded by me</h5>
