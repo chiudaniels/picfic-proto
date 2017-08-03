@@ -1,0 +1,8 @@
+Dear Jeanne,
+
+Thanks for signing up! Click on this link to complete your registration.
+{{ payload }}
+
+Regards,
+
+PicFic
