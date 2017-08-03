@@ -96,3 +96,22 @@ def getImageDataUser(uID):
 #def getImageData():
 
 
+# == Likes ======================================================
+
+def getNumLikes(artID):
+    session = Session()
+    imgQ = session.query(Art).filter(Art.artID == artID)
+    return len(imgQ.one().likers)
+
+def isLiked(uID, artID):    
+    session = Session()
+    return session.query(Art).filter(Art.likers.any(userID = uID).count()).count() != 0
+    
+def likeImage(uID, artID):
+    session = Session()
+    if isActive(uID):
+        user = session.query(User).filter(User.userID == uID).one()
+        art = session.query(Art).filter(Art.artID == artID).one().likers.append(user)
+        return True
+    else:
+        return False

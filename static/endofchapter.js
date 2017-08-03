@@ -10,6 +10,9 @@ function source2img(path) {
     return newImage;
 }
 
+
+////slide ////
+
 function plusSlides(n) {
     showSlides(slideIndex += n);
     thumbIndex = slideIndex;
@@ -39,7 +42,9 @@ var makeNewSlide = function(img) {
     showSlides(slideIndex);
 }
 
+////
 
+//thumbnails//
 function makeThumbsCol() {
     newRow = document.createElement("div");
     newRow.setAttribute("class", "row");
@@ -60,6 +65,7 @@ function makeThumbsCol() {
     console.log("made row")
     $(".gallery-thumbnail").append(newRow);
 }
+///
 
 setGalleryDesc(text){
 	$(".gallery-desc").text=text;

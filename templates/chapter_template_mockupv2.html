@@ -12,12 +12,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="../static/css/chapter_style.css">
     <link rel="stylesheet" type="text/css" href="../static/css/dropzone.css">
-
-    <link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-
+    <link rel="stylesheet" type="text/css" href="../static/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="../static/slick/slick-theme.css" />
 </head>
 
 <body>
@@ -62,7 +60,7 @@
             </div>
             <!-- -->
             <div class="col-md-1 arrow">
-                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload"class="upload" src="../static/svg/upload.svg"></a>
+                <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload" src="../static/svg/upload.svg"></a>
                 <a class="next "><img src="../static/svg/rightarrow.svg"></a>
             </div>
         </div>
@@ -75,8 +73,6 @@
                             <span class="slideshow-images" id="slideMaster">
                     
                      </span>
-                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
                         </div>
                     </div>
                 </div>
@@ -98,50 +94,36 @@
                     </div>
                 </div>
             </div>
-            <div class="row gallery-thumbnail">
-                <div class="col-md-1">
-                    <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg"> </a>
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail2" thumbCount="" src="">
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
-                </div>
-                <div class="col-md-1">
-                    <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg"> </a>
-                </div>
+            <div class="gallery-thumbnail">
             </div>
         </div>
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
-                            <div class="dz-message" data-dz-message>
-                                <center> <span class="dropdesc">Drag & drop file <br>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                        <div class="dz-message" data-dz-message>
+                            <center> <span class="dropdesc">Drag & drop file <br>
 or click to upload</span>
-                                    <br> <img src="../static/svg/uploadPicture.svg"> </center>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <p id="upload-desc"></p>
-                    </div>
+                                <br> <img src="../static/svg/uploadPicture.svg"> </center>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p id="upload-desc"></p>
                 </div>
             </div>
         </div>
-        <script src="../static/dropzone.js "></script>
-        <script src=../static/chapter.js></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> 
+    </div>
+    <script src="../static/js/dropzone.js "></script>
+    <script src=../static/js/chapter.js></script>
+    <script type="text/javascript" src="../static/slick/slick.min.js"></script>
 </body>
 
 </html>

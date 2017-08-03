@@ -37,6 +37,20 @@ using ch ID (for PK) and ch Num
 
 """
 
+
+followingTable = Table('Following', Base.metadata,
+    Column('followerID', Integer, ForeignKey('Users.userID')),
+    Column('followedID', Integer, ForeignKey('Users.userID'))
+)
+
+"""
+usergroup key:
+0 - unactivated
+1 - activated
+2 - admin/editor
+
+Bcrypt used for hash
+"""
 class User(Base):
     __tablename__ = "Users"
 
@@ -52,8 +66,16 @@ class User(Base):
     userProfile = relationship("UserProfile", back_populates="user", cascade="all, delete, delete-orphan") #one to one
     art = relationship("Art", back_populates="uploader") #one to many
 
-    #following = relationship("User", secondary="Following", back_populates="followed")
-    #followed = relationship("User", secondary="Following", back_populates="following")
+    #people (list) this user is following
+    following = relationship("User", secondary= "Following",
+                             primaryjoin = "User.userID == Following.c.followerID",
+                             secondaryjoin = "User.userID == Following.c.followedID",
+                             back_populates="followedBy") #back_populates Following.followed
+    followedBy = relationship("User", secondary="Following",
+                              primaryjoin = "User.userID == Following.c.followedID",
+                              secondaryjoin = "User.userID == Following.c.followerID",
+                              back_populates="following")
+    
     liked = relationship("Art", secondary = "Likes", back_populates="likers") #many to many
     
     books = relationship("UserBook", back_populates="reader") #many to many
@@ -69,7 +91,12 @@ class User(Base):
         self.passData = password
         self.authtokens = authtokens
         self.email = email
-        
+
+    def activate():
+        self.usergroup = 1
+
+    def promote():
+        self.usergroup = 2
         
 class UserProfile(Base):
     __tablename__ = "UserProfiles"
@@ -242,12 +269,20 @@ likeTable = Table('Likes', Base.metadata,
     Column('userID', Integer, ForeignKey('Users.userID')),
     Column('artID', Integer, ForeignKey('Art.artID'))
 )
+
+#need a class to configure relationship
 """
-followingTable = Table('Following', Base.metadata,
-    Column('followerID', Integer, ForeignKey('Users.userID')),
-    Column('followedID', Integer, ForeignKey('Users.userID'))
-)
-"""
+class Following(Base):
+    __tablename__ = "Following"
+
+    followerID = Column(Integer, ForeignKey("Users.userID"), primary_key = True)
+    followedID = Column(Integer, ForeignKey("Users.userID"), primary_key = True)
+
+    follower = relationship("User", back_populates="followedBy", foreign_keys=[followerID]) #user's "books/reading list" are getting back populated when readers are edited
+    followed = relationship("User", back_populates="following", foreign_keys=[followedID]) #the book has a "readers" list
+   
+"""    
+
 """
 class Like(Base):
     __tablename__ = "Likes"
@@ -309,26 +344,3 @@ def makeTables():
     Base.metadata.create_all(engine)
 
 makeTables()
-
-
-"""
-import psycopg2
-
-conn = psycopg2.connect("dbname=picfic user=postgres")
-cur = conn.cursor()
-
-makeUserTable = "CREATE TABLE Users (
-userID INT PRIMARY KEY,
-username character varying(32) UNIQUE,
-pSalt TEXT,
-pHash TEXT,
-userGroup INT NOT NULL
-);"
-
-makeAuthTable = "CREATE TABLE UserAuth (
-
-);"
-
-conn.commit()
-conn.close()
-"""

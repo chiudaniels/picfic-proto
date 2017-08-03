@@ -1,7 +1,6 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
-import hashlib
 
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
@@ -10,7 +9,6 @@ Session.configure(bind=engine)
 
 def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
     session = Session()
-    pwd = hasher(pwd)
     newUser = User(uN, pwd, "", email)
     session.add(newUser)
     session.flush()
@@ -104,11 +102,10 @@ def getChapter( uID, bookID ):
             return usr.one().curChapter
     return 1
 
-def isValidAccountInfo( email, pwd ):
-    hashedPass = hasher(pwd)
+def getHashed( email ):
     session = Session()
-    usr = session.query(User).filter(User.email == email, User.passData == hashedPass)
-    return usr.count() != 0
+    usr = session.query(User).filter(User.email == email)
+    return usr.one().passData
 
 def getUserID( email ):
     session = Session()
@@ -131,5 +128,12 @@ def changePass( uN, old, new ):
 def changeTag( uID, tag ):
     return True
 
-def hasher(unhashed):
-    return hashlib.md5(unhashed).hexdigest()
+
+def isActive(uID):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    return usr.usergroup != 0
+
+def isAdmin(uID):
+    usr = session.query(User).filter(User.userID == uID)
+    return usr.usergroup == 2
