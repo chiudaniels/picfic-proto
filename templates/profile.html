@@ -1,5 +1,6 @@
 {% extends 'baseLayout.html' %}
-{% block css %} <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css")> {% endblock %}
+{% block css %} <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css")>   <link rel="stylesheet" type="text/css" href="../static/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="../static/slick/slick-theme.css" /> {% endblock %}
 {% block content %}
 
     <div class="profileBackground">
@@ -56,47 +57,18 @@
 	</div>
 	<br
 	<h5> Uploaded by me</h5>
-	<div class="photoHolder">
+	<div class="row uploaded">
 	  <div class="row gallery-thumbnail">
-            <div class="col-md-1">
-              <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg" class="arr"> </a>
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail1" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail2" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail3" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-1">
-              <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg" class="arr"> </a>
-            </div>
-          </div>
+            
 	</div>
 	<br>
 	<h5> Liked by me</h5>
-	<div class="photoHolder">
+	<div class="row liked">
 	  <div class="row gallery-thumbnail">
-            <div class="col-md-1">
-              <a class="prev gallery-arrow gallery-prev"><img src="../static/svg/leftarrow.svg" class="arr"> </a>
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail1" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail2" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-3">
-              <img class="thumbnails" id="thumbnail3" thumbCount="" src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Samoyed-sweetjedysamoyeds.jpg">
-            </div>
-            <div class="col-md-1">
-              <a class="next gallery-arrow gallery-next"><img src="../static/svg/rightarrow.svg" class="arr"> </a>
-            </div>
-          </div>
+     
 	</div>
       </div>
     </div>
     <script src="../static/js/profile.js"></script>
+    <script type="text/javascript" src="../static/slick/slick.min.js"></script>
   {% endblock %}
