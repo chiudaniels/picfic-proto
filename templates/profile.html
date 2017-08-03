@@ -24,14 +24,14 @@
 	  </p>
 	  {% if perm == 1 %}
 	  <h5 class="e">My Account</h5><button class="edit" id="editAccount">Edit</button> <br><br>
-	  <div id="editMyAccount">
+	  
 	    <p>
-	    Email: {{data["email"]}}
+	    Email: <div id="editMyAccount">{{data["email"]}}</div>
 	    <br>
-	    Birthday: {{data["birthday"]}}
+	    Birthday: <div id="editMyAccount2">{{data["birthday"]}}</div>
 	    <br>
-	    Gender: {{data["gender"]}}
-	  </p></div>
+	    Gender: <div id="editMyAccount3">{{data["gender"]}}</div>
+	  </p>
 	  {% endif %}
 	</div>
       </div>

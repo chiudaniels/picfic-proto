@@ -10,8 +10,9 @@ var eAM2 = document.getElementById('editAboutMe2');
 var eAM3 = document.getElementById('editAboutMe3');
 var editAccountBtn = document.getElementById('editAccount');
 var eMA = document.getElementById('editMyAccount');
-var editBtn = document.getElementById('editMe');
-var element = document.getElementById('editAboutMe');
+var eMA2 = document.getElementById('editMyAccount2');
+var eMA3 = document.getElementById('editMyAccount3');
+
 
 editAccountBtn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -22,6 +23,10 @@ editAccountBtn.addEventListener('click', function(e) {
 	editAccountBtn.innerHTML = 'Edit';
 	// You could save any changes here.
     } else {
+	eMA3.contentEditable = 'true';
+	eMA3.focus();
+	eMA2.contentEditable = 'true';
+	eMA2.focus();
 	eMA.contentEditable = 'true';
 	eMA.focus();
 	editAccountBtn.innerHTML = 'Save';
