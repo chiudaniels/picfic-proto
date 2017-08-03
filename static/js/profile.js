@@ -4,6 +4,45 @@ var uploadArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jp
 var likedArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg"];
 var thumbs = document.getElementsByClassName("thumbnails");
 
+var editMeBtn = document.getElementById('editMe');
+var eAM = document.getElementById('editAboutMe');
+var editAccountBtn = document.getElementById('editAccount');
+var eMA = document.getElementById('editMyAccount');
+var editBtn = document.getElementById('editMe');
+var element = document.getElementById('editAboutMe');
+
+editAccountBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    if (eMA.isContentEditable) {
+	// Disable Editing
+	eMA.contentEditable = 'false';
+	editAccountBtn.innerHTML = 'Edit';
+	// You could save any changes here.
+    } else {
+	eMA.contentEditable = 'true';
+	eMA.focus();
+	editAccountBtn.innerHTML = 'Save changes';
+    }
+});
+
+editMeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    if (eAM.isContentEditable) {
+	// Disable Editing
+	eAM.contentEditable = 'false';
+	editMeBtn.innerHTML = 'Edit';
+	// You could save any changes here.
+    } else {
+	eAM.contentEditable = 'true';
+	eAM.focus();
+	editMeBtn.innerHTML = 'Save changes';
+    }
+});
+
+
+
 function source2img(path) {
     var newImage = new Image();
     newImage.src = path;
@@ -53,9 +92,3 @@ $(document).ready(function() {
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
-
-$(document).ready(function(){
-    $("#editMe").on("click", function(){
-        $("#editAboutMe").attr("contenteditable","true").focus();
-    });
-});
