@@ -299,4 +299,4 @@ def debug(s):
     print "END DEBUG"
 
 
-parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")

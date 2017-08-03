@@ -54,9 +54,6 @@ def isNameTaken( username ):
 def getCC( uID, bookID ):
     session = Session()
     usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bookID)
-    print "checkmate"
-    print usr.count()
-    print usr.one().curCC
     if usr.count() == 0:
         #wtf
         newUserBook = UserBook(uID, bookID)
@@ -107,6 +104,17 @@ def getHashed( email ):
     usr = session.query(User).filter(User.email == email)
     return usr.one().passData
 
+def getHashedFromID( uID ):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    return usr.one().passData
+
+def setPass( uID, newHash ):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    usr.passData = newHash
+    session.commit()
+
 def getUserID( email ):
     session = Session()
     usr = session.query(User).filter(User.email == email)
@@ -122,18 +130,40 @@ def getUsername( uID ):
     usr = session.query(User.username).filter(User.userID == uID)
     return usr.one()[0]
 
-def changePass( uN, old, new ):
-    return True
-    
-def changeTag( uID, tag ):
-    return True
-
-
 def isActive(uID):
     session = Session()
-    usr = session.query(User).filter(User.userID == uID)
+    usr = session.query(User).filter(User.userID == uID).one()
     return usr.usergroup != 0
 
 def isAdmin(uID):
-    usr = session.query(User).filter(User.userID == uID)
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID).one()
     return usr.usergroup == 2
+
+def activate(uID):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    usr.one().activate()
+    return uID
+
+def promote(uID):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    usr.one().promote()
+    return uID
+
+def getUsergroup(uID):
+    session = Session()
+    usr = session.query(User).filter(User.userID == uID)
+    return uID.usergroup
+    
+def follow(uID, toFollowID):
+    session = Session()
+    if isActive(uID):
+        follower = session.query(User).filter(User.userID == uID).one()
+        toFollow = session.query(User).filter(User.userID == toFollowID).one()
+        follower.following.append(toFollow)
+        toFollow.followedBy.append(follower) #possibly redundant/bad because of back_populate...
+        return True
+    else:
+        return False

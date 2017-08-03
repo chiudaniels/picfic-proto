@@ -1,15 +1,15 @@
 from flask import Flask, render_template, request, session, url_for, redirect, send_from_directory, abort, flash
 from flask_mail import Mail, Message
-frmo threading import Thread
-from itsdangerous import URLSageSerializer, BadSignature
+from threading import Thread
+from itsdangerous import URLSafeSerializer, BadSignature
 import flask
 from utils import users, books, gallery, images
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
 from bson import json_util
-from .decorators import async
-from flask.ext.bcrypt import Bcrypt
+#from utils import decorators import async
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -176,7 +176,7 @@ def logout():
     return redirect( url_for('root') )
 
 @app.route("/register/", methods=["POST"])
-def register()
+def register():
     # request
     d = request.form
     print d
@@ -198,6 +198,8 @@ def register()
         msg = "User already exists"
     return redirect( url_for('root') )
 
+
+
 # Setting Routes ======================================
 
 @app.route('/changePass/', methods = ['POST'])
@@ -206,8 +208,13 @@ def changePass():
         d = request.form
         old = d["oldPass"]
         new = d["newPass"]
-        users.changePass( getUserID(), old, new )
+        if bcrypt.check_password_hash(users.getHashedFromID(getUserID()), old):
+            users.setPass( getUserID(), bcrypt.generate_password_hash(new) )
     return redirect(url_for('settings'))
+
+@app.route('/forgotPass/', methods = ['POST'])
+def forgotPass():
+    return redirect(url_for('root'))
 
 @app.route('/changeTag/', methods = ['POST'])
 def changeTag():
@@ -327,11 +334,6 @@ def get_activation_link(uID): #user
     payload = s.dumps(uID) # payload = s.dumps(user.id)
     return url_for('confirm_account', payload=payload, _external=True)
 #why is this a url_for
-
-    
-if __name__ == '__main__':
-   app.run(debug = True)
-
 
 
 
