@@ -12,27 +12,26 @@
 	</div>
 
 	<div class="about">
-	  <h5 class="f"> About Me</h5><a href="#" class="edit" id="editMe">Edit</a> <br><br>
-	  <div id="editAboutMe">
+	  <h5 class="f"> About Me</h5><button class="edit" id="editMe">Edit</button> <br><br>
 	  <p>{{data["about"]}}
 	    <br><br>
-	    Genres: {{data["favGenres"]}}
+	    Genres: <div id="editAboutMe"> {{data["favGenres"]}}</div>
 	    <br><br>
-	    Books/Series: {{data["favBooks"]}}
+	    Books/Series: <div id="editAboutMe2">{{data["favBooks"]}}</div>
 	    <br><br>
-	    Authors: {{data["favAuthors"]}}
+	    Authors: <div id="editAboutMe3"> {{data["favAuthors"]}}</div>
 	    <br>
-	  </p></div>
+	  </p>
 	  {% if perm == 1 %}
-	  <h5 class="e">My Account</h5><a href="#" class="edit" id="editAccount">Edit</a> <br><br>
-	  <div id="editMyAccount">
+	  <h5 class="e">My Account</h5><button class="edit" id="editAccount">Edit</button> <br><br>
+	  
 	    <p>
-	    Email: {{data["email"]}}
+	    Email: <div id="editMyAccount">{{data["email"]}}</div>
 	    <br>
-	    Birthday: {{data["birthday"]}}
+	    Birthday: <div id="editMyAccount2">{{data["birthday"]}}</div>
 	    <br>
-	    Gender: {{data["gender"]}}
-	  </p></div>
+	    Gender: <div id="editMyAccount3">{{data["gender"]}}</div>
+	  </p>
 	  {% endif %}
 	</div>
       </div>

@@ -4,6 +4,56 @@ var uploadArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jp
 var likedArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg"];
 var thumbs = document.getElementsByClassName("thumbnails");
 
+var editMeBtn = document.getElementById('editMe');
+var eAM = document.getElementById('editAboutMe');
+var eAM2 = document.getElementById('editAboutMe2');
+var eAM3 = document.getElementById('editAboutMe3');
+var editAccountBtn = document.getElementById('editAccount');
+var eMA = document.getElementById('editMyAccount');
+var eMA2 = document.getElementById('editMyAccount2');
+var eMA3 = document.getElementById('editMyAccount3');
+
+
+editAccountBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    if (eMA.isContentEditable) {
+	// Disable Editing
+	eMA.contentEditable = 'false';
+	editAccountBtn.innerHTML = 'Edit';
+	// You could save any changes here.
+    } else {
+	eMA3.contentEditable = 'true';
+	eMA3.focus();
+	eMA2.contentEditable = 'true';
+	eMA2.focus();
+	eMA.contentEditable = 'true';
+	eMA.focus();
+	editAccountBtn.innerHTML = 'Save';
+    }
+});
+
+editMeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    if (eAM.isContentEditable) {
+	// Disable Editing
+	eAM.contentEditable = 'false';
+	editMeBtn.innerHTML = 'Edit';
+	// You could save any changes here.
+    } else {
+	eAM3.contentEditable = 'true';
+	eAM3.focus();
+	eAM2.contentEditable = 'true';
+	eAM2.focus();
+	eAM.contentEditable = 'true';
+	eAM.focus();
+	editMeBtn.innerHTML = 'Save';
+    }
+});
+
+
+
 function source2img(path) {
     var newImage = new Image();
     newImage.src = path;
@@ -53,9 +103,3 @@ $(document).ready(function() {
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
-
-$(document).ready(function(){
-    $("#editMe").on("click", function(){
-        $("#editAboutMe").attr("contenteditable","true").focus();
-    });
-});
