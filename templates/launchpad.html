@@ -25,13 +25,23 @@
             </div>
         </div>
         <div class="row" id="bookgallery">
+	  {% for book in data["books"] %}
+	  <div class="col-md-3">
+	    <a href="/books/{{book['bookID']}}"><img src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
+	    <br>
+	    <span>{{book['title']}}</span>
+	    <br>
+	    <span>{{book['author']}}</span>	    
+	  </div>
+	  {% endfor %}
+	  <!--
             <div class="col-md-3">
                 <a href="/books/1"><img src="../static/launchpad/png/study_in_scarlet.png"></a>
                 <br>
                 <span>A STUDY IN SCARLET</span>
                 <br>
                 <span>Arthur Conan Doyle</span>
-            </div>
+            </div>	 
             <div class="col-md-3">
                 <img src="../static/launchpad/png/human_is.png">
                 <br>
@@ -53,6 +63,7 @@
                 <br>
                 <span>F. Scott Fitzgerald</span>
             </div>
+	    -->
         </div>
     </div>
     <!-- -->

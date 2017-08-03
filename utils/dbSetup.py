@@ -136,7 +136,7 @@ class UserProfile(Base):
         self.favoriteBooks = "Nothing written yet!"
         self.favoriteAuthors = "Nothing written yet!"
         self.favoriteGenres = "Nothing written yet!"
-        self.picUrl = "defaultProfilePic.png"
+        self.picUrl = "defaultProfilePic.jpg"
         
     #add permission levels    
     def asDict(self):
@@ -226,7 +226,7 @@ class Book(Base):
         self.release = release
         self.blurb = blurb
         self.misc = "FREE DOMAIN"
-        self.coverUrl = "defaultBookPic.png"
+        self.coverUrl = "defaultBookPic.jpg"
         self.backgroundUrl = ""
         
 class Chapter(Base):

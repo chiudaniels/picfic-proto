@@ -95,19 +95,26 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session.add(newChapter)
     session.commit()
 
-def setImage( bookID, url ):
+def setCover( bookID, url ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     book.coverUrl = url
     session.commit()
 
+def setBackground( bookID, url ):
+    session = Session()
+    book = session.query(Book).filter(Book.bookID == bookID).one()
+    book.backgroundUrl = url
+    session.commit()
+    
 def getBookPreview( bookID ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     return {
         "bookID" : bookID,
         "title" : book.title,
-        "coverUrl" : book.coverUrl
+        "coverUrl" : book.coverUrl,
+        "author" : book.author
     }
     
     
@@ -128,6 +135,8 @@ def getBookLanding( bookID ):
             "release": book.release
         }
         ret["imageData"] = images.getImageDataBook(bookID)
+        ret["coverUrl"] = book.coverUrl
+        ret["backgroundUrl"] = book.backgroundUrl
         ret["status"] = 1
         return ret
 

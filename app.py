@@ -34,7 +34,8 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 @app.route("/")
 def root():
-    return render_template("launchpad.html", isLoggedIn = isLoggedIn() )
+    print gallery.getGallery()
+    return render_template("launchpad.html", isLoggedIn = isLoggedIn(), data ={"books": gallery.getGallery()} )
 
 # == Settings =======================================
 

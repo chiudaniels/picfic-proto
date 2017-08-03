@@ -220,7 +220,6 @@ var augmentForm = function() {
     var index = bodyText.indexOf(highlightedText);
     //modify...
     g = "\n\n";
-    console.log("That's the index");
     formStartCC.setAttribute("value", curCC + index); //figure this out
     formEndCC.setAttribute("value", curCC + index + highlightedText.length - (highlightedText.match(/is/g) || []).length);
     //console.log(ccEnd);

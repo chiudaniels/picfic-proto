@@ -167,3 +167,10 @@ def follow(uID, toFollowID):
         return True
     else:
         return False
+
+#Implement a cleaning mechanism for old profile pictures...    
+def setImage( uID, url ):
+    session = Session()
+    p = session.query(User).filter(User.userID == userID).one()
+    p.picUrl = url
+    session.commit()
