@@ -56,6 +56,9 @@ def isNameTaken( username ):
 def getCC( uID, bookID ):
     session = Session()
     usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bookID)
+    print "checkmate"
+    print usr.count()
+    print usr.one().curCC
     if usr.count() == 0:
         #wtf
         newUserBook = UserBook(uID, bookID)
@@ -66,7 +69,7 @@ def getCC( uID, bookID ):
         return entry.curCC
     return 0
 
-def bookmark( uID, bID, chN, ccStart, pgN ):
+def bookmark( uID, bID, chN, ccStart ):
     session = Session()
     usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bID)
     if usr.count() == 0:
@@ -80,6 +83,8 @@ def bookmark( uID, bID, chN, ccStart, pgN ):
         entry = usr.one()
         entry.curChapter = chN
         entry.curCC = ccStart
+        print "entry set"
+        print entry.curCC
         session.commit()
     return True
 

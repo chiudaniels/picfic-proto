@@ -87,6 +87,7 @@ class UserProfile(Base):
     hobbies = Column(String(250))
     about = Column(String(250))
     picUrl = Column(String(250))
+    joinDate = Column(Date, default=datetime.datetime.now())
     
     #Relationships
     user = relationship("User", back_populates="userProfile", uselist = False) #one to one
@@ -176,7 +177,7 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
-    release = Column(String) #lol fix this
+    release = Column(Date) #lol fix this
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))

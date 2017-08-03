@@ -97,13 +97,13 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
 
 def setImage( bookID, url ):
     session = Session()
-    book = session.query(Book).filter(Book.bookID = bookID).one()
+    book = session.query(Book).filter(Book.bookID == bookID).one()
     book.coverUrl = url
     session.commit()
 
 def getBookPreview( bookID ):
     session = Session()
-    book = session.query(Book).filter(Book.bookID = bookID).one()
+    book = session.query(Book).filter(Book.bookID == bookID).one()
     return {
         "bookID" : bookID,
         "title" : book.title,
@@ -133,9 +133,20 @@ def getBookLanding( bookID ):
 
 
 def getPageData( bookID, chNum, userID ):
+    session = Session()
     bookID = int(bookID)
     chNum = int(chNum)
     bookmark = users.getCC(userID, bookID) #gets character count
+    properChQ = session.query(UserBook).filter(UserBook.readerID == userID, UserBook.bookID == bookID)
+    if properChQ.count() == 0:
+        properCh = 0
+    else:
+        properCh = properChQ.one().curChapter
+    if chNum != properCh:
+        bookmark = 0
+        properChQ.one().curChapter = chNum
+        properChQ.one().curCC = 0
+        session.commit()
     
     ret = {"status": 0}
     
@@ -147,25 +158,28 @@ def getPageData( bookID, chNum, userID ):
         ret["chNum"] = chNum
         ret["chTitle"] = getChapterTitle(chapterID)
         ret["pgData"] = getPageInfo(bookmark, chapterID)
+        ret["pgData"]["curCC"] = bookmark
         start = ret["pgData"]["startCC"]
         end = ret["pgData"]["endCC"]
         ret["imageData"] = images.getImageDataPage(chapterID, start, end)
         ret["status"] = 1
+
     return ret
 
 
-def getPageAJAX(bID, chN, pgN):
+def getPageAJAX(bID, chN, curCC, curPg):
     session = Session()
     bookID = int(bID)
     chNum = int(chN)
-    pgNum = int(pgN)
+    curCC = int(curCC)
+    curPg = int(curPg)
     ret = {"status": 0}
     book = getBook(bookID)
     if book != None:
         chapterID = getChapterID(bookID, chNum)
         ret["bookID"] = bookID
         ret["chNum"] = chNum
-        ret["pgData"] = getPageInfoAJAX(pgNum, chapterID)
+        ret["pgData"] = getPageInfoAJAX(curPg, chapterID)
         start = ret["pgData"]["startCC"]
         end = ret["pgData"]["endCC"]
         ret["imageData"] = images.getImageDataPage(chapterID, start, end)
@@ -173,6 +187,16 @@ def getPageAJAX(bID, chN, pgN):
         ret["bookLength"] = getBookLength(bookID)
     return ret
 
+def getEndOfChCC(bID, chN):
+    #i'm lazy
+    session = Session()
+    chapter = session.query(Chapter).filter(Chapter.chapterID == getChapterID(bID, chN)).one()
+    pageCCStrArr = chapter.pageCC.split(":")
+    print "endof ch cc retrieved"
+    lastPair = pageCCStrArr[-1].split(",")
+    print lastPair[1]
+    return int(lastPair[1]) - 1
+#return getPageInfo(  , getChapterID(bID, chN))["endCC"] - 1
 
 #Returns: images. that's it. and chN 
 def getChapterSummary(bID, chN):
@@ -209,17 +233,17 @@ def getPageInfo( cc, chID ):
     ret["pgNum"] = 1 #default
     for i in range(ret["chLength"]):
         pair = pageCCArr[i]
-        print pair
         if cc >= pair[0] and cc < pair[1]:
             ret["pgNum"] = i + 1 #user index friendly af
             thePairIndex = i
             break
+    print pageCCArr[thePairIndex]
     textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1]]
     #ugh...
     ret["text"] = textStr.split("|")
     #RESUME EDITING WHITE SPACE IS A NIGHTMARE
-    ret["curCC"] = cc
-    ret["startCC"] = pageCCArr[thePairIndex][0]
+    ret["curCC"] = pageCCArr[thePairIndex][0]
+    ret["startCC"] = ret["curCC"]
     ret["endCC"] = pageCCArr[thePairIndex][1]
     #note: you're gonna hate urself
     return ret
@@ -231,6 +255,9 @@ def getPageInfoAJAX( pgN, chID ):
     pageCCStrArr = chapter.pageCC.split(":")
     pageCCArr = []
     ret["pgNum"] = pgN
+
+    debug(pgN)
+    print "\n\n\n"
     
     for pair in pageCCStrArr:
         strPair = pair.split(",")
@@ -249,7 +276,7 @@ def getPageInfoAJAX( pgN, chID ):
     #note: you're gonna hate urself
     return ret
 
-    
+
 def getChapterID( bookID, chNum ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.bookID == bookID, Chapter.chapterNum == chNum) #should only give one
