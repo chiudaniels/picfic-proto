@@ -8,7 +8,7 @@ import datetime
 from sqlalchemy import create_engine
 
 Session = sessionmaker()
-engine = create_engine('postgresql+psycopg2://jlock:picfic@localhost/picfic')
+engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 """
 Concerns:

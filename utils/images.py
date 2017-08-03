@@ -109,7 +109,7 @@ def isLiked(uID, artID):
     
 def likeImage(uID, artID):
     session = Session()
-    if isActive(uID):
+    if users.isActive(uID):
         user = session.query(User).filter(User.userID == uID).one()
         art = session.query(Art).filter(Art.artID == artID).one().likers.append(user)
         return True
