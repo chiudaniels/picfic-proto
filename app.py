@@ -9,8 +9,10 @@ import json, os
 from bson import BSON
 from bson import json_util
 from .decorators import async
+from flask.ext.bcrypt import Bcrypt
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 mail=Mail(app)
 app.secret_key = "secrets"
 
@@ -161,10 +163,8 @@ def login():
     pwd = request.form["loginPass"]
     #auth
     msg = ""
-    
-    if users.isValidAccountInfo( email, pwd ):
+    if bcrypt.check_password_hash(users.getHashed(email), pwd) :
         session['uID'] = users.getUserID( email )
-        print 'logged in!'
         return redirect( url_for('root'))
     else:
         return flask.Response("fail")
@@ -176,7 +176,7 @@ def logout():
     return redirect( url_for('root') )
 
 @app.route("/register/", methods=["POST"])
-def register():
+def register()
     # request
     d = request.form
     print d
@@ -190,11 +190,10 @@ def register():
     bD= int(request.form["day"])
     bY = int(request.form["year"])
     gender = request.form["gender"]
+    hashedPwd = bcrypt.generate_password_hash(pwd)
     #reg
-    print "trying to register"
     if not users.isNameTaken(uN): #and email
-        print "adding user"
-        session['uID'] = users.addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, "")
+        session['uID'] = users.addUser( fN, lN, uN, email, hashedPwd, bM, bD, bY, gender, "")
     else:
         msg = "User already exists"
     return redirect( url_for('root') )
@@ -266,34 +265,6 @@ def uploaded_file(filename):
 
 
 
-# General Helpers =====================================
-
-# Login Helpers
-def isLoggedIn():
-    return "uID" in session
-
-def getUserID():
-    if isLoggedIn():
-        return session["uID"]
-    else:
-        return None
-
-# Error Handling =======================================
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html')
-
-
-    
-if __name__ == "__main__":
-    app.debug = True
-    app.run()
-    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
-    
-print __name__
-
-
-
 
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -343,20 +314,19 @@ def get_serializer(secret_key=None):
 def activate_user(payload):
     s = get_serializer()
     try:
-        user_id = s.loads(payload)
+        uID = s.loads(payload)
     except BadSignature:
         abort(404)
 
-    user = User.query.get_or_404(user_id)
-    user.activate()
+    users.activate(uID)
     flash('User activated')
-    return redirect(url_for('index'))
+    return redirect(url_for('root'))
 
-def get_activation_link(user): #user
+def get_activation_link(uID): #user
     s = get_serializer()
-    payload = s.dumps(user.id) # payload = s.dumps(user.id)
+    payload = s.dumps(uID) # payload = s.dumps(user.id)
     return url_for('confirm_account', payload=payload, _external=True)
-
+#why is this a url_for
 
     
 if __name__ == '__main__':
@@ -365,3 +335,31 @@ if __name__ == '__main__':
 
 
 
+
+
+
+# General Helpers =====================================
+
+# Login Helpers
+def isLoggedIn():
+    return "uID" in session
+
+def getUserID():
+    if isLoggedIn():
+        return session["uID"]
+    else:
+        return None
+
+# Error Handling =======================================
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+
+    
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
+    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    
+print __name__
