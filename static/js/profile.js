@@ -6,6 +6,8 @@ var thumbs = document.getElementsByClassName("thumbnails");
 
 var editMeBtn = document.getElementById('editMe');
 var eAM = document.getElementById('editAboutMe');
+var eAM2 = document.getElementById('editAboutMe2');
+var eAM3 = document.getElementById('editAboutMe3');
 var editAccountBtn = document.getElementById('editAccount');
 var eMA = document.getElementById('editMyAccount');
 var editBtn = document.getElementById('editMe');
@@ -22,7 +24,7 @@ editAccountBtn.addEventListener('click', function(e) {
     } else {
 	eMA.contentEditable = 'true';
 	eMA.focus();
-	editAccountBtn.innerHTML = 'Save changes';
+	editAccountBtn.innerHTML = 'Save';
     }
 });
 
@@ -35,9 +37,13 @@ editMeBtn.addEventListener('click', function(e) {
 	editMeBtn.innerHTML = 'Edit';
 	// You could save any changes here.
     } else {
+	eAM3.contentEditable = 'true';
+	eAM3.focus();
+	eAM2.contentEditable = 'true';
+	eAM2.focus();
 	eAM.contentEditable = 'true';
 	eAM.focus();
-	editMeBtn.innerHTML = 'Save changes';
+	editMeBtn.innerHTML = 'Save';
     }
 });
 

@@ -465,6 +465,11 @@ button:focus {outline:0;}
     display:inline;
     text-align: right;
     left:50vw;
+    background:none!important;
+    border:none; 
+    padding:0!important;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .eedit {
