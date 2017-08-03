@@ -11,6 +11,9 @@ body {
   background: #D6EDFF; /* Gecko Browsers */
 }
 
+.slick-prev:before, .slick-next:before { 
+    color:black !important;
+}
 
 .menuLogo {
     position: absolute;
@@ -233,8 +236,10 @@ body {
 
 .thumbnails {
     border-radius: 3px;
-    width: 12vw;
-    height: 12vh;
+    left:2vw;
+    width: 15vw;
+    height: 15vh;
+    position:relative;
 }
 
 .gallery {
@@ -435,3 +440,4 @@ input[type="text"].form-control {
 .modal-footer{
     text-align: left;
 }
+
