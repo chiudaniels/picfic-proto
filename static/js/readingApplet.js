@@ -100,6 +100,7 @@ var nextPage = function(){
     //do next page logic
     if (curPg == chLength){
 	curChapter += 1;
+	curCC = 0;
 	console.log(curChapter);
 	window.location.href = "/books/" + bookID + "/read/" + curChapter; 
 	bookmark();
@@ -114,7 +115,8 @@ var nextPage = function(){
 	    data: {
 		"bookID": bookID,
 		"chNum": curChapter,
-		"pgNum": curPg
+		"curCC": curCC,
+		"curPg": curPg
 	    },
 	    success: function(response){
 		console.log("next paged");
@@ -135,8 +137,21 @@ var nextPage = function(){
 var prevPage = function(){
     if (curPg == 1){
 	curChapter -= 1;
-	window.location.href = "/books/" + bookID + "/read/" + curChapter; 
-	bookmark();
+	//get end of last chapter
+	$.ajax({
+	    url: "/getEndOfChPage/",
+	    type: "POST",
+	    data: {
+		"bookID": bookID,
+		"chNum": curChapter,
+	    },
+	    success: function(response){
+		curCC = JSON.parse(response)["endOfChCC"];
+		bookmark();
+		window.location.href = "/books/" + bookID + "/read/" + curChapter; 		
+	    }
+	});	
+	
     }
     else{
 	curPg -= 1;
@@ -148,8 +163,8 @@ var prevPage = function(){
 	    data: {
 		"bookID": bookID,
 		"chNum": curChapter,
-		"pgNum": curPg,
-		"ccStart": curCC
+		"curCC": curCC,
+		"curPg": curPg
 	    },
 	    success: function(response){
 		console.log("next paged");
@@ -176,7 +191,6 @@ var bookmark = function(){
 	type: "POST",
 	data: {
 	    "chNum": curChapter,
-	    "pgNum": curPg,
 	    "ccStart": curCC,
 	    "bookID": bookID
 	},
@@ -229,7 +243,8 @@ var initializePage = function(){
 	data: {
 	    "bookID": bookID,
 	    "chNum": curChapter,
-	    "pgNum": curPg,
+	    "curCC": curCC,
+	    "curPg": curPg
 	},
 	success: function(response){
 	    console.log("page data gotten");

@@ -45,11 +45,21 @@ def about():
 
 
 # == User Profile ===================================
+@app.route("/user/myProfile/")
+def myProfileRedir():
+    if isLoggedIn():
+        return redirect('/user/' + str(users.getUsername(getUserID())))
+    else:
+        return redirect(url_for('root'))
 
 @app.route("/user/<username>")
 def userProfilePage(username):
     profileData = users.getProfile( username )
-    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData )
+    profileData.update( users.getProfileSensitive( username ) )
+    userVis = 0
+    if isLoggedIn() and username == users.getUsername( getUserID() ):
+        userVis = 1
+    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
 
 # == Book Gallery Browsing ==========================
@@ -99,6 +109,7 @@ def bookRedir(bookID):
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
+    
     data = books.getPageData( bookID, chNum, getUserID() )
     #print data["pgData"]
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
@@ -109,11 +120,12 @@ def bookPageAJAX():
     print "next page ajax"
     bID = request.form.get("bookID")
     chN = request.form.get("chNum")
-    pgN = request.form.get("pgNum")
-    data =  books.getPageAJAX(bID, chN, pgN)
+    curCC =  request.form.get("curCC")
+    curPg = request.form.get("curPg")
+    data =  books.getPageAJAX(bID, chN, curCC, curPg)
     return json.dumps(data)
 
-#How do i pass data about the page to the router if not in the url?
+#dat do i pass data about the page to the router if not in the url?
 @app.route("/bookmark/", methods = ["POST"])
 def bookmark():
     bID = request.form.get("bookID")
@@ -121,10 +133,16 @@ def bookmark():
     ccStart = request.form.get("ccStart")
     pgNum = request.form.get("pgNum")
     if isLoggedIn():
-        data =  users.bookmark(getUserID(), bID, chN, ccStart, pgNum)
+        data =  users.bookmark(getUserID(), bID, chN, ccStart)
         return json.dumps({"status":1})
     return None
 
+@app.route("/getEndOfChPage/", methods = ["POST"])
+def endOfCh():
+    bID = request.form.get("bookID")
+    chN = request.form.get("chNum")
+    data = {"endOfChCC" : books.getEndOfChCC(bID, chN)}
+    return json.dumps(data)
 
 #=================== END SITE NAVIGATION =======================
 

@@ -42,7 +42,7 @@ class User(Base):
 
     userID = Column(Integer, primary_key = True)
     username = Column(String(32), unique = True)
-    tag = Column(String, unique = True) #is that a thing?
+    #tag = Column(String, unique = True) #is that a thing?
     email = Column(String, unique = True)
     passData = Column(String)
     usergroup = Column(Integer, CheckConstraint("usergroup >= 0"))
@@ -75,15 +75,20 @@ class UserProfile(Base):
     __tablename__ = "UserProfiles"
 
     userID = Column(Integer, ForeignKey("Users.userID"), primary_key = True)
-    firstName = Column(String)
-    lastName = Column(String)
+    firstName = Column(String(20))
+    lastName = Column(String(20))
     birthday = Column(Date) #Edit
     gender = Column(String) #Edit
     address = Column(String)
     reference = Column(String)
-    favorites = Column(String)
-    interest = Column(String)
-
+    favoriteBooks = Column(String(200))
+    favoriteAuthors = Column(String(200))
+    favoriteGenres = Column(String(200))
+    hobbies = Column(String(250))
+    about = Column(String(250))
+    picUrl = Column(String(250))
+    joinDate = Column(Date, default=datetime.datetime.now())
+    
     #Relationships
     user = relationship("User", back_populates="userProfile", uselist = False) #one to one
     
@@ -99,16 +104,26 @@ class UserProfile(Base):
         bday = datetime.datetime(bY, bM, bD)
         self.birthday = bday
         self.gender = "" #figure this out
-
+        self.about = "Nothing about me just yet!"
+        self.hobbies = "Nothing written yet!"
+        self.favoriteBooks = "Nothing written yet!"
+        self.favoriteAuthors = "Nothing written yet!"
+        self.favoriteGenres = "Nothing written yet!"
+        self.picUrl = "defaultProfilePic.png"
+        
     #add permission levels    
     def asDict(self):
         return {
             "firstName" : self.firstName,
             "lastName" : self.lastName,
-            "favorites" : self.favorites,
-            "interest" : self.interest,
             "birthday" : self.birthday.strftime("%B %d, %Y"),
-            "gender" : self.gender
+            "gender" : self.gender,
+            "about" : self.about,
+            "hobbies" : self.hobbies,
+            "favBooks" : self.favoriteBooks,
+            "favAuthors" : self.favoriteAuthors,
+            "favGenres" : self.favoriteGenres,
+            "picUrl" : self.picUrl
         }
         
 class Art(Base):
@@ -124,7 +139,7 @@ class Art(Base):
     ccEnd = Column(Integer)
     urlName = Column(String)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
-
+    
     #Relationships
     uploader = relationship("User", back_populates="art") #many to one
     book = relationship("Book", back_populates="art") #many to one
@@ -162,11 +177,13 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
-    release = Column(String) #lol fix this
+    release = Column(Date) #lol fix this
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))
-
+    coverUrl = Column(String)
+    backgroundUrl = Column(String)
+    
     #Relationships
     art = relationship("Art", back_populates="book")
     chapters = relationship("Chapter", back_populates="book") #one to many
@@ -182,7 +199,9 @@ class Book(Base):
         self.release = release
         self.blurb = blurb
         self.misc = "FREE DOMAIN"
-    
+        self.coverUrl = "defaultBookPic.png"
+        self.backgroundUrl = ""
+        
 class Chapter(Base):
     __tablename__ = "Chapters"
 

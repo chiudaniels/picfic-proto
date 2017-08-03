@@ -6,26 +6,31 @@
       <div class="aboutMe">
 	<div class="bigProf"></div>
 	<div class="userNames">
-	  <h4><b>Christine Oh</b></h4>
-	  <h6>yehjinoh</h6>
+	  <h4><b>{{data["firstName"]}} {{data["lastName"]}}</b></h4>
+	  <h6>{{data["username"]}}</h6>
 	</div>
 
 	<div class="about">
 	  <h5 class="f"> About Me</h5><a href="#" class="edit">Edit</a> <br><br>
-	  <p>Hi, my name is Christine. I'm a user of PicFic. This is going to be an about me text that is maximmum 50 words.
+	  <p>{{data["about"]}}
 	    <br><br>
-	    Genres: Fantasy, Sci-fi.
+	    Genres: {{data["favGenres"]}}
 	    <br><br>
-	    Books/Series: Harry Potter, Lord of the Rings
+	    Books/Series: {{data["favBooks"]}}
 	    <br><br>
-	    Authors: J.K. Rowling, Stephen King<br>
+	    Authors: {{data["favAuthors"]}}
+	    <br>
 	  </p>
-	  <h5 class="e">My Account</h5><a href="#" class="eedit">Edit</a> <br><br>
+	  {% if perm == 1 %}
+	  <h5 class="e">My Account</h5><a href="#" class="edit">Edit</a> <br><br>
 	  <p>
-	    Email: yehjinoh@gmail.com<br>
-	    Birthday: <br>
-	    Gender: Female
+	    Email: {{data["email"]}}
+	    <br>
+	    Birthday: {{data["birthday"]}}
+	    <br>
+	    Gender: {{data["gender"]}}
 	  </p>
+	  {% endif %}
 	</div>
       </div>
       
@@ -33,16 +38,21 @@
 	<h4 class="g"><b>My Stories</b></h4> <a href="3" class="newEdit">Edit</a><br>
 	<h5>My Stories</h5>
 	<div class="bookshelf">
-	  <img src="../static/launchpad/png/study_in_scarlet.png" class="coverArt img-fluid">
+	  <img src="/static/launchpad/png/study_in_scarlet.png" class="coverArt img-fluid">
 	  <div class="title"> A Study in Scarlet</div>
 	</div>
 	
-	<h4><b>My Activity</b></h4> <a href="#" class="aedit">Edit</a>
+	<h4><b>Shelf</b></h4> <a href="#" class="edit">Edit</a>
 	<br>
 	<h5> Continue Reading</h5>
 	<div class="bookshelf">
-	  <img src="../static/launchpad/png/study_in_scarlet.png" class="coverArt img-fluid">
-	  <div class="title"> A Study in Scarlet</div>
+	  <!-- put a for loop in here -->
+	  {% for bookData in data %}
+	  <a href="/books/{{ bookData['bookID'] }}/read">
+	  <img src="{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
+	  <div class="{{ bookData['title'] }}"> A Study in Scarlet</div>
+	  </a>
+	  {% endif %}
 	</div>
 	<br
 	<h5> Uploaded by me</h5>
