@@ -35,14 +35,9 @@ var loadPage = function(data){
 	sourceArray.push('/static/data/images/' + data["imageData"][i]["urlName"]);
 	captionArray.push(data["imageData"][i]["caption"]);
     }
-    slideIndex = 0;
-    thumbIndex=0;
-    setThumbnails();
-    for (i = 0; i < sourceArray.length; i++){
-	makeNewSlide(source2img(sourceArray[i]));
-    }
+    
     if (sourceArray.length != 0)
-	showSlides(slideIndex);
+	setGallery();
     //gotta reset the gallery...
     if (sourceArray.length == 0){
 	imgGallery.setAttribute("style", "display:none");

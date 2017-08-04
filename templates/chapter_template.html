@@ -1,5 +1,8 @@
 {% extends 'readingLayout.html' %}
-{% block css %} <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">{% endblock %}
+{% block css %} <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css">
+{% endblock %}
 {% block content %}
 
     {% if pageData["status"] == 1 %}
@@ -154,4 +157,6 @@
     <script src="/static/js/dropzone.js "></script>
     <script src="/static/js/chapter.js"></script>
     <script src="/static/js/readingApplet.js"></script>
+    <script type="text/javascript" src="/static/slick/slick.min.js"></script>
+
 {% endblock %}

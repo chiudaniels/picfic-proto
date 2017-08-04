@@ -167,3 +167,53 @@ def follow(uID, toFollowID):
         return True
     else:
         return False
+
+#Implement a cleaning mechanism for old profile pictures...    
+def setImage( uID, url ):
+    session = Session()
+    p = session.query(User).filter(User.userID == userID).one()
+    p.picUrl = url
+    session.commit()
+
+
+#for profile page
+def getActivity( username ):
+    uID = getUserIDFromUsername(username)
+    ret = {}
+    ret.update(getStories(uID))
+    ret.update(getReading(uID))
+    ret.update(getLikedArt(uID))
+    ret.update(getUploadedArt(uID))
+    return ret
+    
+def getStories( uID ):
+    session = Session()
+    myStories = []
+    q = session.query(Books.bookID).filter(Books.authorID == uID).all()
+    for bID in q:
+        myStories.append(books.getBookPreview(bID))
+    return {"myStories": myStories}
+    
+def getReading( uID ):
+    session = Session()
+    myShelf = []
+    q = session.query(User.books).filter(userID == uID).one()
+    for bID in q:
+        myShelf.append(books.getBookPreview(bID))
+    return {"myShelf": myShelf}
+
+def getUploadedArt( uID ):
+    session = Session()
+    myUploads = []
+    q = session.query(Art).filter(uploaderID == uID).all()
+    for aID in q:
+        myUploads.append(images.getArtPreview(aID))
+    return {"uploadedArt": myUploads}
+
+def getLikedArt( uID ):
+    session = Session()
+    myLiked = []        
+    q = session.query(User.liked).filter(userID == uID).one()
+    for aID in q:
+        myLiked.append(images.getArtPreview(aID))
+    return {"uploadedArt": myLiked}

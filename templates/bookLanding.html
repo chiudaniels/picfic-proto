@@ -1,18 +1,18 @@
 {% extends 'readingLayout.html' %} {% block css %}
-<link rel="stylesheet" type="text/css" href="../static/css/reading_stylesheet.css">
-<link rel="stylesheet" type="text/css" href="../static/endofchapter_stylesheet.css"> {% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/reading_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="/static/endofchapter_stylesheet.css"> {% endblock %} {% block content %}
 <div class="share">
-    <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
+    <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="/static/launchpad/png/facebook.png"></a>
     <br>
     <br>
-    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
+    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="/static/launchpad/png/instagram.png"></a>
     <br>
     <br>
-    <a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
+    <a href="https://twitter.com/ThePicFic"><img class="logo" src="/static/launchpad/png/twitter.png"></a>
 </div>
 <div class="bookInfo">
-    <img src="../static/launchpad/png/study_in_scarlet.png" class="coverArt">
-    <div class="summary">
+  <img src="/static/data/bookCovers/{{data['coverUrl']}}" class="coverArt">
+  <div class="summary">
         <h2>{{data["meta"]["title"]}}</h2>
         <h4><i>{{data["meta"]["author"]}}</i></h4>
         <p>
@@ -44,14 +44,14 @@
             </div>
             <div class="row gallery-interact">
                 <div class="col-md-6">
-                    <img src="../static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+                    <img src="/static/svg/heart.svg"> <span id="likes"> 39 likes </span>
                 </div>
                 <div class="col-md-6">
-                    <img class="blueicons fbicon" src="../static/svg/blue_fb.svg">
-                    <img class="blueicons" src="../static/svg/blue_insta.svg">
-                    <img class="blueicons" src="../static/svg/blue_twitter.svg">
-                    <img class="blueicons" src="../static/svg/blue_tumblr.svg">
-                    <img class="blueicons" src="../static/svg/blue_pin.svg">
+                    <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
+                    <img class="blueicons" src="/static/svg/blue_insta.svg">
+                    <img class="blueicons" src="/static/svg/blue_twitter.svg">
+                    <img class="blueicons" src="/static/svg/blue_tumblr.svg">
+                    <img class="blueicons" src="/static/svg/blue_pin.svg">
                 </div>
             </div>
             <div class="row">
@@ -63,6 +63,6 @@
         </div>
     </div>
 </div>
-<script src=../static/endofchapter.js></script>
-<script src=../static/chapter.js>
+<script src="/static/endofchapter.js"></script>
+<script src="/static/chapter.js"></script>
 {% endblock %}

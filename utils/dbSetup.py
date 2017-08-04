@@ -136,7 +136,7 @@ class UserProfile(Base):
         self.favoriteBooks = "Nothing written yet!"
         self.favoriteAuthors = "Nothing written yet!"
         self.favoriteGenres = "Nothing written yet!"
-        self.picUrl = "defaultProfilePic.png"
+        self.picUrl = "defaultProfilePic.jpg"
         
     #add permission levels    
     def asDict(self):
@@ -204,12 +204,14 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
+    authorID = Column(Integer, default = 0)
     release = Column(Date) #lol fix this
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))
     coverUrl = Column(String)
     backgroundUrl = Column(String)
+    approval = Column(Integer, default = 0) #suggestion for automatic chapter base approval inheriting from approval of '2'
     
     #Relationships
     art = relationship("Art", back_populates="book")
@@ -226,8 +228,11 @@ class Book(Base):
         self.release = release
         self.blurb = blurb
         self.misc = "FREE DOMAIN"
-        self.coverUrl = "defaultBookPic.png"
+        self.coverUrl = "defaultBookPic.jpg"
         self.backgroundUrl = ""
+
+    def approve(self):
+        self.approval = 1
         
 class Chapter(Base):
     __tablename__ = "Chapters"

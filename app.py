@@ -34,7 +34,8 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 @app.route("/")
 def root():
-    return render_template("launchpad.html", isLoggedIn = isLoggedIn() )
+    print gallery.getGallery()
+    return render_template("launchpad.html", isLoggedIn = isLoggedIn(), data ={"books": gallery.getGallery()} )
 
 # == Settings =======================================
 
@@ -62,10 +63,13 @@ def myProfileRedir():
 @app.route("/user/<username>")
 def userProfilePage(username):
     profileData = users.getProfile( username )
-    profileData.update( users.getProfileSensitive( username ) )
+    #"myShelf", "myStories", "likedArt", "uploadedArt"
+    profileData.update( users.getActivity(username) )
+    #get visibility options - add in later
     userVis = 0
     if isLoggedIn() and username == users.getUsername( getUserID() ):
         userVis = 1
+        profileData.update( users.getProfileSensitive( username ) )
     return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
 
