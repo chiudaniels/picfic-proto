@@ -15,23 +15,21 @@
 	  <h5 class="f"> About Me</h5><button class="edit" id="editMe">Edit</button> <br><br>
 	  <p>{{data["about"]}}
 	    <br><br>
-	    Genres: <div id="editAboutMe"> {{data["favGenres"]}}</div>
-	    <br><br>
-	    Books/Series: <div id="editAboutMe2">{{data["favBooks"]}}</div>
-	    <br><br>
-	    Authors: <div id="editAboutMe3"> {{data["favAuthors"]}}</div>
-	    <br>
-	  </p>
+	    Genres: <div id="editAboutMe"> {{data["favGenres"]}}</div></p>
+	  <br>
+	  <p>Books/Series: <div id="editAboutMe2">{{data["favBooks"]}}</div></p>
+	  <br>
+	  <p>Authors: <div id="editAboutMe3"> {{data["favAuthors"]}}</div>
+	  </p><br>
 	  {% if perm == 1 %}
 	  <h5 class="e">My Account</h5><button class="edit" id="editAccount">Edit</button> <br><br>
 	  
 	    <p>
-	    Email: <div id="editMyAccount">{{data["email"]}}</div>
+	    Email: <div id="editMyAccount">{{data["email"]}}</div></p>
 	    <br>
-	    Birthday: <div id="editMyAccount2">{{data["birthday"]}}</div>
+	    <p>Birthday: <div id="editMyAccount2">{{data["birthday"]}}</div></p>
 	    <br>
-	    Gender: <div id="editMyAccount3">{{data["gender"]}}</div>
-	  </p>
+	    <p>Gender: <div id="editMyAccount3">{{data["gender"]}}</div></p>
 	  {% endif %}
 	</div>
       </div>
@@ -46,7 +44,7 @@
 	      <img src="/static/data/bookCovers/{{bookDat['coverUrl']}}" class="coverArt img-fluid">
 	      <div class="title"> {{bookData['title']}}</div>
 	    </a>
-	    </div>
+	  </div>
 	    {% endfor %}
 	</div>
 	
