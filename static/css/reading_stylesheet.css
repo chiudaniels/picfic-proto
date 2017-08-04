@@ -74,7 +74,9 @@ button:focus {outline:0;}
 .bookInfo {
     height: 64vh;
     position: relative;
-    background: black;
+    /*background: black;*/
+    -webkit-filter: brightness(1);
+    filter: brightness(.1);
     border-radius: 0px;
 }
 
@@ -82,6 +84,8 @@ button:focus {outline:0;}
     position:absolute;
     top: 10vh;
     left:25vw;
+    height: 249px;
+    width: 162px;
 }
 
 .summary {

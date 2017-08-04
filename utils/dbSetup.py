@@ -189,14 +189,21 @@ class Art(Base):
         self.urlName = url
         self.bookID = bookID
         self.chapterID = chID
-        #self.timestamp = 0
 
     def asDict(self):
         return {"uploaderID" : self.uploaderID,
                 "caption" : self.caption,
                 "urlName" : self.urlName,
-                "bookID" : self.bookID
+                "bookID" : self.bookID,
+                "timestamp" : self.timestamp,
+                "artID" : self.artID
         }
+"""
+    def asPreview(self):
+        return {
+# it's easier to pass excessive data for now... optimization comes later...
+        }
+   """     
         
 class Book(Base):
     __tablename__ = "Books"
@@ -204,12 +211,14 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
+    authorID = Column(Integer, default = 0)
     release = Column(Date) #lol fix this
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))
     coverUrl = Column(String)
     backgroundUrl = Column(String)
+    approval = Column(Integer, default = 0) #suggestion for automatic chapter base approval inheriting from approval of '2'
     
     #Relationships
     art = relationship("Art", back_populates="book")
@@ -228,6 +237,9 @@ class Book(Base):
         self.misc = "FREE DOMAIN"
         self.coverUrl = "defaultBookPic.jpg"
         self.backgroundUrl = ""
+
+    def approve(self):
+        self.approval = 1
         
 class Chapter(Base):
     __tablename__ = "Chapters"

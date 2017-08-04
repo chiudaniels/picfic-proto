@@ -9,7 +9,10 @@ engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 Session.configure(bind=engine)
 
-def parseBook(textFilename, metaFilename):
+def parseBookAuto(textFile):
+    return None
+
+def parseBookMetafile(textFilename, metaFilename):
     session = Session()
 
     #Make book

@@ -57,7 +57,6 @@ def getImageDataChapter(chID):
 
     return []
 
-
 #For a book
 def getImageDataBook(bID):
     session = Session()
@@ -75,7 +74,7 @@ def getImageDataBook(bID):
     return []
 
 
-#For a user
+#For a user - unused lmao
 def getImageDataUser(uID):
     session = Session()
     imgQ = session.query(Art).filter(Art.uploaderID == uID)
@@ -92,9 +91,18 @@ def getImageDataUser(uID):
         return retList
     return []
 
-#Conglomerate with like data
-#def getImageData():
-
+def getArtPreview(artID, uID):
+    session = Session()
+    art = session.query(Art).filter(Art.artID == artID).one()
+    prev = art.asDict()
+    prev["bookTitle"] = books.getBook(prev["bookID"]).title
+    prev["uploaderName"] = users.getUsername( prev["uploaderID"] )
+    prev["isLiked"] = 0#not liked
+    if uID == None || not isActive(uID):
+        prev["isLiked"] = -1 #can't like
+    elif isLiked(uID, artID):
+        prev["isLiked"] = 1
+    return prev
 
 # == Likes ======================================================
 
