@@ -1,7 +1,8 @@
 {% extends 'readingLayout.html' %}
-{% block css %} <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
+{% block css %}
     <link rel="stylesheet" type="text/css" href="/static/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
 {% endblock %}
 {% block content %}
 
@@ -53,14 +54,12 @@
                             <span class="slideshow-images" id="slideMaster">
                     
                      </span>
-                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
                         </div>
                     </div>
                 </div>
                 <div class="row gallery-interact">
                     <div class="col-md-6">
-                        <img src="/static/svg/heart.svg"> <span id="likes"> 39 likes </span>
+                        <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
                     </div>
                     <div class="col-md-6">
                         <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
@@ -76,24 +75,13 @@
                 </div>
             </div>
             <div class="row gallery-thumbnail">
-                <div class="col-md-1">
-                    <a class="prev gallery-arrow gallery-prev"><img src="/static/svg/leftarrow.svg"> </a>
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail1" thumbCount="" src="">
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail2" thumbCount="" src="">
-                </div>
-                <div class="col-md-3">
-                    <img class="thumbnails" id="thumbnail3" thumbCount="" src="">
-                </div>
-                <div class="col-md-1">
-                    <a class="next gallery-arrow gallery-next"><img src="/static/svg/rightarrow.svg"> </a>
-                </div>
+
+		<div id = "gallery-thumbnail">
+ 
+		</div>
             </div>
         </div>
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal" id="myModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">

@@ -92,10 +92,10 @@ class User(Base):
         self.authtokens = authtokens
         self.email = email
 
-    def activate():
+    def activate(self):
         self.usergroup = 1
 
-    def promote():
+    def promote(self):
         self.usergroup = 2
         
 class UserProfile(Base):
@@ -195,7 +195,7 @@ class Art(Base):
                 "caption" : self.caption,
                 "urlName" : self.urlName,
                 "bookID" : self.bookID,
-                "timestamp" : self.timestamp,
+                "timestamp" : self.timestamp.isoformat(),
                 "artID" : self.artID
         }
 """

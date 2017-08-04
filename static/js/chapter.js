@@ -2,10 +2,10 @@ var slideIndex = 0;
 var thumbIndex = 0;
 //var sourceArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
 //var captionArray = ["", "", "", "", "", ""];
-var sourceArray = [];
-var captionArray = [];
-imageArray = [];
-imageArray2 = [];
+var artArray = [];
+
+var imageArray = [];
+var imageArray2 = [];
 var thumbs = document.getElementsByClassName("thumbnails");
 
 function source2img(path) {
@@ -15,9 +15,11 @@ function source2img(path) {
     return newImage;
 }
 
-for (var i = 0; i < sourceArray.length; i++) {
-    imageArray.push(source2img(sourceArray[i]));
-    imageArray2.push(source2img(sourceArray[i]));
+var loadArt = function(){
+    for (var i = 0; i < artArray.length; i++) {
+	imageArray.push(source2img(artArray[i]["urlName"]));
+	imageArray2.push(source2img(artArray[i]["urlName"]));
+    }
 }
 
 // slideshow //
@@ -72,7 +74,7 @@ function makeThumbnail(img) {
     newThumb = document.createElement("div");
     img.setAttribute("class", "thumbnails")
     newThumb.appendChild(img);
-    $(".gallery-thumbnail").append(newThumb);
+    $("#gallery-thumbnail").append(newThumb);
 }
 
 /*
@@ -84,12 +86,14 @@ function makeSlides(img) {
     newSlide = document.createElement("div");
     img.setAttribute("class", "mySlides")
     newSlide.appendChild(img);
-    $(".slideshow-images").append(newSlide);
+    $("#slideshow-images").append(newSlide);
 }
 
 function resetImages() {
-    $('.gallery-thumbnail').html("");
-    $('.slideshow-images').html("");
+    //remove all children
+    $('#gallery-thumbnail').empty();
+    $('#slideshow-images').empty();
+    console.log("images emptied...");
 }
 
 
@@ -98,6 +102,8 @@ function setGallery() {
     for (var i = 0; i < imageArray.length; i++) {
         makeThumbnail(imageArray2[i]);
         makeSlides(imageArray[i]);
+	//this better come in soon...
+	$('#').innerHTML();
     }
 }
 

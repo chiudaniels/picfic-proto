@@ -50,14 +50,16 @@
 	    <th>OPTIONS</th>
 	    <th>TAGS</th>
 	  </tr>
+	  {% for story in data["stories"] %}
 	  <tr>
-	    <td>A Study in Scarlet</td>
-	    <td>jlock</td>
-	    <td>8/4/17</td>
-	    <td>Pending</td>
+	    <td>{{story["title"]}}</td>
+	    <td>{{story["authorID"]}}</td>
+	    <td>{{story["timestamp"]}}</td> <!-- hol'up -->
+	    <td>{{story["approval"]}}</td>
 	    <td><button>Approve</button><br><button>Delete</button></td>
 	    <td>mystery</td>
 	  </tr>
+	  {% endfor %}
 	</table>
       </div>
       
@@ -68,16 +70,16 @@
 	    <th>TITLE</th>
 	    <th>USER</th>
 	    <th>DATE SUBMITTED</th>
-	    <th>STATUS</th>
 	    <th>OPTIONS</th>
 	  </tr>
+	  {% for art in data["art"] %}
 	  <tr>
-	    <td>A Study in Scarlet</td>
-	    <td>jlock</td>
-	    <td>8/4/17</td>
-	    <td>Pending</td>
+	    <td>{{art["bookID"]}}</td>
+	    <td>{{art["uploaderID"]}}</td>
+	    <td>{{art["timestamp"]}}</td>
 	    <td><button>Delete</button></td>
 	  </tr>
+	  {% endfor %}
 	</table>
       </div>
       
@@ -95,17 +97,19 @@
 	    <th>STATUS</th>
 	    <th>OPTIONS</th>
 	  </tr>
+	  {% for user in data["users"] %}
 	  <tr>
-	    <td>JEANNE</td>
-	    <td>LOCKER</td>
-	    <td>JLOCK</td>
-	    <td>06/26/1998</td>
-	    <td>jealocker@gmail.com</td>
-	    <td>USA</td>
-	    <td>F</td>
-	    <td>Pending</td>
+	    <td>{{user["firstName"]}}</td>
+	    <td>{{user["lastName"]}}</td>
+	    <td>{{user["username"]}}</td>
+	    <td>{{user["birthday"]}}</td>
+	    <td>{{user["email"]}}</td>
+	    <td>{{user["country"]}}</td>
+	    <td>{{user["gender"]}}</td>
+	    <td>{{user["usergroup"]}}</td>
 	    <td><button>Approve</button><br><button>Delete</button><br><button>Block</button></td>
 	  </tr>
+	  {% endfor %}
 	</table>
       </div>
     </div>
