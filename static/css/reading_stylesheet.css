@@ -205,10 +205,17 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    position: absolute;
+    top:40vh;
 }
 
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+}
+
+.tab-pane h2 {
+    position: absolute;
+    top: 31vh;
 }
