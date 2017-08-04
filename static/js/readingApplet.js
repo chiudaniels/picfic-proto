@@ -28,12 +28,11 @@ var loadPage = function(data){
     
     //update images
     console.log("doing images");
-    sourceArray = [];
-    captionArray = [];
-    for (i = 0; i < data["imageData"].length; i++){
+
+    artArray = data["imageData"]
+    for (i = 0; i < artArray.length; i++){
 	//console.log(data);
-	sourceArray.push('/static/data/images/' + data["imageData"][i]["urlName"]);
-	captionArray.push(data["imageData"][i]["caption"]);
+	artArray[i]["urlName"] = '/static/data/images/' + artArray[i]["urlName"];
     }
     
     if (sourceArray.length != 0)

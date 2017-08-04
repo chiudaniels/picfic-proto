@@ -211,7 +211,7 @@ class Book(Base):
     bookID = Column(Integer, primary_key = True)
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
-    authorID = Column(Integer, default = 0)
+    authorID = Column(Integer, ForeignKey("Users.userID"), default = 0)
     release = Column(Date) #lol fix this
     title = Column(String(200))
     misc = Column(String)
@@ -229,7 +229,7 @@ class Book(Base):
         return "<Book(id='%d')>" % (
             self.bookID )
 
-    def __init__(self, author, title, release, blurb, misc):
+    def __init__(self, author, title, release, blurb, misc, authorID):
         self.author = author
         self.title = title
         self.release = release
@@ -237,6 +237,7 @@ class Book(Base):
         self.misc = "FREE DOMAIN"
         self.coverUrl = "defaultBookPic.jpg"
         self.backgroundUrl = ""
+        self.authorID = authorID
 
     def approve(self):
         self.approval = 1

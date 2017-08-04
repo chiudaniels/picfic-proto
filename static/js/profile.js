@@ -103,3 +103,28 @@ $(document).ready(function() {
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
+//LOAD GALLERIES
+
+var loadProfile = function(){
+    $.ajax({
+	url: "/getProfileImages/",
+	type: "POST",
+	data: {
+	    "username": username //I'll figure this out somehow...
+	},
+	success: function(response){
+	    likedArray = response["liked"];
+	    uploadArray = respsonse["uploaded"];
+	    setGalleries();
+	},
+	error: function(data){
+	    console.log("book landing error");
+	}
+    });
+    
+   
+}
+
+$(document).ready(function() {
+    loadProfile();
+});

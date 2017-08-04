@@ -1,6 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
+import books, images
 
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
@@ -189,23 +190,23 @@ def getActivity( username ):
 def getStories( uID ):
     session = Session()
     myStories = []
-    q = session.query(Books.bookID).filter(Books.authorID == uID).all()
+    q = session.query(Book.bookID).filter(Book.authorID == uID).all()
     for bID in q:
-        myStories.append(books.getBookPreview(bID))
+        myStories.append(books.getBookPreview(bID[0]))
     return {"myStories": myStories}
     
 def getReading( uID ):
     session = Session()
     myShelf = []
-    q = session.query(User.books).filter(userID == uID).one()
-    for bID in q:
+    q = session.query(User).filter(User.userID == uID).one()
+    for bID in q.books:
         myShelf.append(books.getBookPreview(bID))
     return {"myShelf": myShelf}
 
 def getUploadedArt( uID ):
     session = Session()
     myUploads = []
-    q = session.query(Art).filter(uploaderID == uID).all()
+    q = session.query(Art).filter(Art.uploaderID == uID).all()
     for aID in q:
         myUploads.append(images.getArtPreview(aID, uID))
     return {"uploadedArt": myUploads}
@@ -213,7 +214,7 @@ def getUploadedArt( uID ):
 def getLikedArt( uID ):
     session = Session()
     myLiked = []        
-    q = session.query(User.liked).filter(userID == uID).one()
-    for aID in q:
+    q = session.query(User).filter(User.userID == uID).one()
+    for aID in q.liked:
         myLiked.append(images.getArtPreview(aID, uID))
     return {"uploadedArt": myLiked}

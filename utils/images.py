@@ -98,7 +98,7 @@ def getArtPreview(artID, uID):
     prev["bookTitle"] = books.getBook(prev["bookID"]).title
     prev["uploaderName"] = users.getUsername( prev["uploaderID"] )
     prev["isLiked"] = 0#not liked
-    if uID == None || not isActive(uID):
+    if uID == None or not isActive(uID):
         prev["isLiked"] = -1 #can't like
     elif isLiked(uID, artID):
         prev["isLiked"] = 1

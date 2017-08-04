@@ -12,7 +12,7 @@ Session.configure(bind=engine)
 def parseBookAuto(textFile):
     return None
 
-def parseBookMetafile(textFilename, metaFilename):
+def parseBookManual(textFilename, metaFilename):
     session = Session()
 
     #Make book
@@ -24,8 +24,9 @@ def parseBookMetafile(textFilename, metaFilename):
     bR = metaList[2]
     bB = metaList[3]
     bM = metaList[4]
-    newBook = Book(bA, bT, bR, bB, bM)
-
+    aID = 1
+    newBook = Book(bA, bT, bR, bB, bM, aID)
+    
     session.add(newBook)
     session.flush()
     #retrieve that bookID!
@@ -62,7 +63,6 @@ def parseBookMetafile(textFilename, metaFilename):
         ch = chapterMasterArr[i]
         #print ch["text"]
         addNewChapter(ch["title"], ch["text"], bookID, i + 1)
-
     textFile.close()
     return True
 
@@ -119,7 +119,6 @@ def getBookPreview( bookID ):
         "coverUrl" : book.coverUrl,
         "author" : book.author
     }
-    
     
 def getBookLanding( bookID ):
     bookID = int(bookID)
@@ -311,4 +310,4 @@ def debug(s):
     print "END DEBUG"
 
 
-#parseBook("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+#parseBookManual("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
