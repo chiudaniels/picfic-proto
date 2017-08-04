@@ -219,3 +219,9 @@ td, th {
     position: absolute;
     top: 31vh;
 }
+
+.padder {
+    left: 2vw;
+    position: relative;
+    width: 95%;
+}
