@@ -203,11 +203,36 @@ span {
     background-color:red;
 }*/
 
-.footer {
-    top:500vh;
+.socialMedia {
+    top:480vh;
     left: 41.5vw;
     position: absolute;
     font-family: 'Nunito', sans-serif;
+}
+
+.footer {
+    top: 490vh;
+    position: absolute;
+    font-family: 'Nunita', sans-serif;
+    font-size: 12px;
+    background: #F3F3F3;
+    height: 50px;
+    width: 100%;
+}
+
+.contactUs {
+    position: absolute;
+    left: 50%;
+    margin-left: -46px;
+    color: black;
+    top: 40%;
+}
+
+.cpyright {
+    left: 87%;
+    top: 40%;
+    position: absolute;
+    color: black;
 }
 
 .logo {
@@ -582,6 +607,12 @@ button:focus {outline:0;}
     margin-top: -200px;
     text-align: center;
 }
+
+
+.contactModal {
+
+}
+
 
 .signUpM {
     position: fixed;
