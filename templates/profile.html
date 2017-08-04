@@ -34,7 +34,7 @@
 	    <p>Gender: <div id="editMyAccount3">{{data["gender"]}}</div></p>
 	  {% endif %}
 	</div>
-	<a class="cPass">Change your password</a>
+	 <a href="#" class="cPas cPass" data-toggle="modal" data-target="#changePas" data-dismiss="modal">Change your password</a><br>	    
       </div>
       
       <div class="activity">
@@ -75,6 +75,69 @@
 	</div>
       </div>
     </div>
+
+
+
+
+    <!-- CLASS: cPas --------- ID: changePas ---------------------------------->
+
+
+    <div class="modal fade" id="changePas" role="dialog">
+      <div class="modal-dialog cPas">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <p style="color:red;">Make sure you're ready to change your password before proceeding.<br><br>
+	      <form>
+		Enter your old password:
+		<input type="password" name="oldPass"><br>
+		Enter your new password:
+		<input type="password" name="newPass"><br>
+		Re-enter your new password:
+		<input type="password" name="confirmnewPass">
+		<button type="submit" class="btn submitButton" data-toggle="modal" data-target="#cpc" data-dismiss="modal">Reset my password</button><br><br><br><br>
+	      </form> 
+	      <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a><br>	    
+	  </div>
+	</div>
+	<div class="modal-footer">
+	</div>
+      </div>
+    </div>
+
+
+    <!-- CLASS: cPas --------- ID: cpc ---------------------------------->
+
+
+    <div class="modal fade" id="cpc" role="dialog">
+      <div class="modal-dialog cPas">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <div class="modal-body">
+	    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
+	    <p>You've successfully changed your password.<br><br></p><br><br><br>
+	     <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a><br>	    
+	  </div>
+	</div>
+	<div class="modal-footer">
+	  
+	</div>
+      </div>
+    </div>
+    
+
+
+
+
+
+    
     <script src="/static/js/profile.js"></script>
     <script type="text/javascript" src="/static/slick/slick.min.js"></script>
   {% endblock %}
