@@ -719,6 +719,12 @@ button:focus {outline:0;}
     margin-left:-300px;
 }
 
+.book {
+    position: absolute;
+    display: inline-block;
+    left: 15px;
+}
+
 .photoHolder {
     position: relative;
     box-shadow: 0 1px 3px 0 rgba(107, 89, 34, 0.10);
@@ -778,4 +784,19 @@ button:focus {outline:0;}
 
 .mainLoginInput:-moz-placeholder {
   font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;
+}
+
+#editAboutMe, editAboutMe2, editAboutMe3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.showName {
+    position: relative;
+    left: 15px;
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    top: 46%;
 }

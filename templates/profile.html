@@ -41,11 +41,13 @@
 	<h5>My Stories</h5>
 	<div class="bookshelf">
 	  {% for bookData in data["myStories"] %}
-	  <a href="/books/{{bookData['bookID']}}/read"}>
-	  <img src="/static/data/bookCovers/{{bookDat['coverUrl']}}" class="coverArt img-fluid">
-	  <div class="title"> {{bookData['title']}}</div>
-	  </a>
-	  {% endfor %}
+	  <div class="book">
+	    <a href="/books/{{bookData['bookID']}}/read"}>
+	      <img src="/static/data/bookCovers/{{bookDat['coverUrl']}}" class="coverArt img-fluid">
+	      <div class="title"> {{bookData['title']}}</div>
+	    </a>
+	    </div>
+	    {% endfor %}
 	</div>
 	
 	<h4><b>Shelf</b></h4> <a href="#" class="edit" id="editShelf">Edit</a>

@@ -20,6 +20,8 @@ editAccountBtn.addEventListener('click', function(e) {
     if (eMA.isContentEditable) {
 	// Disable Editing
 	eMA.contentEditable = 'false';
+	eMA2.contentEditable = 'false';
+	eMA3.contentEditable = 'false';
 	editAccountBtn.innerHTML = 'Edit';
 	// You could save any changes here.
     } else {
@@ -39,6 +41,8 @@ editMeBtn.addEventListener('click', function(e) {
     if (eAM.isContentEditable) {
 	// Disable Editing
 	eAM.contentEditable = 'false';
+	eAM2.contentEditable = 'false';
+	eAM3.contentEditable = 'false';
 	editMeBtn.innerHTML = 'Edit';
 	// You could save any changes here.
     } else {
