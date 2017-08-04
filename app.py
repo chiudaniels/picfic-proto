@@ -63,10 +63,13 @@ def myProfileRedir():
 @app.route("/user/<username>")
 def userProfilePage(username):
     profileData = users.getProfile( username )
-    profileData.update( users.getProfileSensitive( username ) )
+    #"myShelf", "myStories", "likedArt", "uploadedArt"
+    profileData.update( users.getActivity(username) )
+    #get visibility options - add in later
     userVis = 0
     if isLoggedIn() and username == users.getUsername( getUserID() ):
         userVis = 1
+        profileData.update( users.getProfileSensitive( username ) )
     return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
 
