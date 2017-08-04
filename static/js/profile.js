@@ -86,14 +86,11 @@ function makeLiked(img) {
     $(".liked").append(newSlide);
 }
 
-function setUploads() {
+function setGalleries() {
     for (var i = 0; i < uploadArray.length; i++) {
         makeUploads(source2img(uploadArray[i]));
     }
-}
-
-function setLiked() {
-    for (var i = 0; i < likedArray.length; i++) {
+     for (var i = 0; i < likedArray.length; i++) {
         makeLiked(source2img(likedArray[i]));
     }
 }
