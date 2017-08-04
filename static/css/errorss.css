@@ -1,0 +1,39 @@
+.picficLogo {
+    height: 4vh;
+    width: auto;
+    left: 50%;
+    margin-left: -3vw;
+    top: 50%;
+    /*margin-top: -2vh;*/
+    background-color:white;
+    position: absolute;
+}
+
+h1 {
+    position: relative;
+    font-size: 50%;
+    font-family: 'Nunito', sans-serif;
+    left: 12vw;
+}
+
+h2 {
+    position: relative;
+    font-size: 30%;
+    font-family: 'Nunito', sans-serif;
+    left: 12vw;
+}
+
+h3 {
+    position: relative;
+    font-size: 30%;
+    font-family: 'Nunito', sans-serif;
+    left: 12vw;
+}
+
+.errorPhoto {
+    position: relative;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    height: auto;
+}

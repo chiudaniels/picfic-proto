@@ -75,6 +75,8 @@ button:focus {outline:0;}
     height: 64vh;
     position: relative;
     /*background: black;*/
+    background-repeat: no-repeat;
+    background-size: cover;
     -webkit-filter: brightness(1);
     filter: brightness(.1);
     border-radius: 0px;
