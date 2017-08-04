@@ -332,6 +332,11 @@ class UserBook(Base): #book-user config
         self.readerID = uID
         self.curCC = 0
         self.curChapter = 0
+
+    def __repr__(self):
+        return "<UserBook(bookID='%d', readerID='%d')>" % (
+            self.bookID, self.readerID )
+
         
 class UserChapter(Base):
     __tablename__ = "UserChapter"

@@ -157,9 +157,9 @@ function clickedSomewhere() {
 }
 
 function highlight(e) {
-    storyEle= $("#story")
+    storyEle= $("#storyBody")
     offset= storyEle.offset();
-    story = document.getElementById("story").getBoundingClientRect();
+    story = document.getElementById("storyBody").getBoundingClientRect();
     bottom =offset.top + storyEle.height();
     //highlightedText = (document.all) ? document.selection.createRange().text : document.getSelection();
     if (window.getSelection) {

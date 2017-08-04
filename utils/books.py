@@ -111,6 +111,8 @@ def setBackground( bookID, url ):
     session.commit()
     
 def getBookPreview( bookID ):
+    print "getting book preview"
+    print bookID
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     return {
