@@ -157,6 +157,10 @@ function clickedSomewhere() {
 }
 
 function highlight(e) {
+    storyEle= $("#story")
+    offset= storyEle.offset();
+    story = document.getElementById("story").getBoundingClientRect();
+    bottom =offset.top + storyEle.height();
     //highlightedText = (document.all) ? document.selection.createRange().text : document.getSelection();
     if (window.getSelection) {
         highlightedText = window.getSelection().toString();
@@ -166,15 +170,29 @@ function highlight(e) {
     // if (window.getSelection) {
     //    text = window.getSelection().toString();
     if (highlightedText != '') {
-        //console.log("highlight worked")
-        upload.style.display = "inline";
-        upload.style.top = event.pageY - 100 + 'px';
+        if (event.pageY > bottom) {
+            console.log(1)
+            upload.style.display = "inline";
+            upload.style.top = bottom;
+            // upload.style.bottom = bottom 'px';
+        } else if (event.pageY < story.top) {
+            console.log(2)
+            upload.style.display = "inline";
+            upload.style.bottom = 0;
+            upload.style.top = story.top-100 + 'px';
+        } else {
+            console.log(3)
+            //console.log("highlight worked")
+            upload.style.display = "inline";
+            upload.style.bottom = 0;
+            upload.style.top = event.pageY - 100 + 'px';
+        }
     }
 }
 
 function clearHighlight() {
-    //upload.style.display = "none";
-    console.log(upload.style.display);
+    upload.style.display = "none";
+    //console.log(upload.style.display);
 }
 
 

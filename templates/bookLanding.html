@@ -10,7 +10,7 @@
     <br>
     <a href="https://twitter.com/ThePicFic"><img class="logo" src="/static/launchpad/png/twitter.png"></a>
 </div>
-<div class="bookInfo">
+<div class="bookInfo" style="background-image: url('/static/data/bookCovers/{{data['coverUrl']}}')" >
   <img src="/static/data/bookCovers/{{data['coverUrl']}}" class="coverArt">
   <div class="summary">
         <h2>{{data["meta"]["title"]}}</h2>
@@ -28,7 +28,7 @@
     <a href="{{data['bookID']}}/read"><button class="toRead"><b>START READING</b></button></a>
     </div>
 <div class="viewArt">
-    <h3>VIEW FANART FOR A Study in Scarlet</h3>
+    <h3>VIEW FANART FOR {{data["meta"]["title"]}}</h3>
     <div class="container gallery">
         <div class="nothumbnails">
             <div class="row gallery-image">

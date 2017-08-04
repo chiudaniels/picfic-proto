@@ -418,6 +418,9 @@ button:focus {outline:0;}
     border-radius: 10px;
 }
 
+.aboutMe p {
+    font-family: 'Nunito', sans-serif;
+}
 .activity {
     background: #FFFFFF;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.15);
@@ -478,13 +481,6 @@ button:focus {outline:0;}
     width:130px;
 }
 
-.about p {
-    font-family: .AppleSystemUIFont;
-    font-size: 10px;
-    letter-spacing: 0.2px;
-    line-height:16px;
-}
-
 .edit {
     font-size: 11px;
     color:#0092FF;
@@ -539,14 +535,6 @@ button:focus {outline:0;}
     content:" "; 
     display:inline-block; 
     width:9px;
-}
-
-.about p {
-    font-family: Avenir;
-    font-size: 12px;
-    margin-left: 11px;
-    margin-right: 5px;
-    margin-top: 0px;
 }
 
 .activity h4:before {
@@ -719,6 +707,12 @@ button:focus {outline:0;}
     margin-left:-300px;
 }
 
+.book {
+    position: absolute;
+    display: inline-block;
+    left: 15px;
+}
+
 .photoHolder {
     position: relative;
     box-shadow: 0 1px 3px 0 rgba(107, 89, 34, 0.10);
@@ -778,4 +772,37 @@ button:focus {outline:0;}
 
 .mainLoginInput:-moz-placeholder {
   font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;
+}
+
+#editAboutMe, #editAboutMe2, #editAboutMe3, #editMyAccount, #editMyAccount2, #editMyAccount3 {
+    line-height: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+
+.showName {
+    position: relative;
+    left: 15px;
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    top: 46%;
+}
+
+/*.about p {
+    font-family: .AppleSystemUIFont;
+    font-size: 10px;
+    letter-spacing: 0.2px;
+    line-height:16px;
+}
+*/
+.about p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
 }
