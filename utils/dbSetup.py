@@ -189,14 +189,21 @@ class Art(Base):
         self.urlName = url
         self.bookID = bookID
         self.chapterID = chID
-        #self.timestamp = 0
 
     def asDict(self):
         return {"uploaderID" : self.uploaderID,
                 "caption" : self.caption,
                 "urlName" : self.urlName,
-                "bookID" : self.bookID
+                "bookID" : self.bookID,
+                "timestamp" : self.timestamp,
+                "artID" : self.artID
         }
+"""
+    def asPreview(self):
+        return {
+# it's easier to pass excessive data for now... optimization comes later...
+        }
+   """     
         
 class Book(Base):
     __tablename__ = "Books"

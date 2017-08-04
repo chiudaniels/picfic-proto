@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 from threading import Thread
 from itsdangerous import URLSafeSerializer, BadSignature
 import flask
-from utils import users, books, gallery, images
+from utils import users, books, gallery, images, admin
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON
@@ -228,8 +228,21 @@ def changeTag():
         users.changeTag( getUserID(), newTag )
     return redirect(url_for('settings'))
 
+# Story Upload ==================================================================
+@app.route('/uploadStory/')
+def uploadStoryPage():
+    if isLoggedIn() and isActive(getUserID()):
+        return render_template('uploadStory.html', isLoggedIn = isLoggedIn())
+    return redirect('/')
 
+@app.route('/uploadStoryFile/', methods = ['POST'])
+def uploadStoryFile():
+    return True
 
+@app.route('/uploadStoryText/', methods = ['POST'])
+def uploadStoryText():
+    
+    return True
 
 # Photo Upload ==================================================================
 
@@ -275,7 +288,26 @@ def uploaded_file(filename):
 
 
 
+# Admin ==================================================================
+@app.route('/admin/')
+def adminPage():
+    if isLoggedIn():
+        uID = getUserID()
+        if isAdmin(uID):
+            return render_template("admin.html", data = admin.getAdminPageDate())
+    return redirect(url_for('page_not_found', e = None))
 
+@app.route('/adminAction/', methods = ['POST'])
+def adminAction():
+    if isLoggedIn():
+        uID = getUserID()
+        if isAdmin(uID):
+            #action here
+            return True
+    return redirect(url_for('page_not_found', e = None))
+
+
+#Emailing and business below
 
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -343,7 +375,6 @@ def get_activation_link(uID): #user
 
 
 
-
 # General Helpers =====================================
 
 # Login Helpers
@@ -362,7 +393,7 @@ def page_not_found(e):
     return render_template('404.html')
 
 
-    
+# RUN APP - NO FUNCTIONS AFTER THIS POINT ============================================    
 if __name__ == "__main__":
     app.debug = True
     app.run()

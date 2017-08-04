@@ -207,7 +207,7 @@ def getUploadedArt( uID ):
     myUploads = []
     q = session.query(Art).filter(uploaderID == uID).all()
     for aID in q:
-        myUploads.append(images.getArtPreview(aID))
+        myUploads.append(images.getArtPreview(aID, uID))
     return {"uploadedArt": myUploads}
 
 def getLikedArt( uID ):
@@ -215,5 +215,5 @@ def getLikedArt( uID ):
     myLiked = []        
     q = session.query(User.liked).filter(userID == uID).one()
     for aID in q:
-        myLiked.append(images.getArtPreview(aID))
+        myLiked.append(images.getArtPreview(aID, uID))
     return {"uploadedArt": myLiked}
