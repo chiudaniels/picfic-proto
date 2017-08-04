@@ -129,6 +129,7 @@ var loadProfile = function(){
 	    likedArray = response["liked"];
 	    uploadArray = respsonse["uploaded"];
 	    setGalleries();
+	    console.log("Galleries set");
 	},
 	error: function(data){
 	    console.log("book landing error");

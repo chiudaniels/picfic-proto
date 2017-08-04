@@ -192,6 +192,8 @@ def getStories( uID ):
     myStories = []
     q = session.query(Book.bookID).filter(Book.authorID == uID).all()
     for bID in q:
+        print "story"
+        print bID
         myStories.append(books.getBookPreview(bID[0]))
     return {"myStories": myStories}
     
@@ -199,8 +201,8 @@ def getReading( uID ):
     session = Session()
     myShelf = []
     q = session.query(User).filter(User.userID == uID).one()
-    for bID in q.books:
-        myShelf.append(books.getBookPreview(bID))
+    for book in q.books:
+        myShelf.append(books.getBookPreview(book.bookID))
     return {"myShelf": myShelf}
 
 def getUploadedArt( uID ):
