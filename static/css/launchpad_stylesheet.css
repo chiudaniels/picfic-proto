@@ -785,7 +785,7 @@ button:focus {outline:0;}
 
 .showName {
     position: relative;
-    left: 15px;
+    left: 97vw;
     display: inline-block;
     font-family: 'Nunito', sans-serif;
     font-size: 12px;
@@ -805,4 +805,16 @@ button:focus {outline:0;}
     margin-left: 11px;
     margin-right: 5px;
     margin-top: 0px;
+}
+
+
+.cPass {
+    line-height: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+    position: relative;
+    color: red;
 }
