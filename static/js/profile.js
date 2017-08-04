@@ -1,7 +1,7 @@
 var slideIndex = 0;
 var thumbIndex = 0;
-var uploadArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg"];
-var likedArray = ["../static/img1.jpg", "../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg","../static/img2.jpg"];
+var uploadArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
+var likedArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
 var thumbs = document.getElementsByClassName("thumbnails");
 
 var editMeBtn = document.getElementById('editMe');
@@ -18,18 +18,18 @@ editAccountBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
     if (eMA.isContentEditable) {
-	// Disable Editing
-	eMA.contentEditable = 'false';
-	editAccountBtn.innerHTML = 'Edit';
-	// You could save any changes here.
+        // Disable Editing
+        eMA.contentEditable = 'false';
+        editAccountBtn.innerHTML = 'Edit';
+        // You could save any changes here.
     } else {
-	eMA3.contentEditable = 'true';
-	eMA3.focus();
-	eMA2.contentEditable = 'true';
-	eMA2.focus();
-	eMA.contentEditable = 'true';
-	eMA.focus();
-	editAccountBtn.innerHTML = 'Save';
+        eMA3.contentEditable = 'true';
+        eMA3.focus();
+        eMA2.contentEditable = 'true';
+        eMA2.focus();
+        eMA.contentEditable = 'true';
+        eMA.focus();
+        editAccountBtn.innerHTML = 'Save';
     }
 });
 
@@ -37,18 +37,18 @@ editMeBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
     if (eAM.isContentEditable) {
-	// Disable Editing
-	eAM.contentEditable = 'false';
-	editMeBtn.innerHTML = 'Edit';
-	// You could save any changes here.
+        // Disable Editing
+        eAM.contentEditable = 'false';
+        editMeBtn.innerHTML = 'Edit';
+        // You could save any changes here.
     } else {
-	eAM3.contentEditable = 'true';
-	eAM3.focus();
-	eAM2.contentEditable = 'true';
-	eAM2.focus();
-	eAM.contentEditable = 'true';
-	eAM.focus();
-	editMeBtn.innerHTML = 'Save';
+        eAM3.contentEditable = 'true';
+        eAM3.focus();
+        eAM2.contentEditable = 'true';
+        eAM2.focus();
+        eAM.contentEditable = 'true';
+        eAM.focus();
+        editMeBtn.innerHTML = 'Save';
     }
 });
 
@@ -74,12 +74,16 @@ function makeLiked(img) {
     $(".liked").append(newSlide);
 }
 
-for(var i=0; i<uploadArray.length;i++){
-    makeUploads(source2img(uploadArray[i]));
+function setUploads() {
+    for (var i = 0; i < uploadArray.length; i++) {
+        makeUploads(source2img(uploadArray[i]));
+    }
 }
 
-for(var i=0; i<likedArray.length;i++){
-    makeLiked(source2img(likedArray[i]));
+function setLiked() {
+    for (var i = 0; i < likedArray.length; i++) {
+        makeLiked(source2img(likedArray[i]));
+    }
 }
 
 $(document).ready(function() {
@@ -102,4 +106,3 @@ $(document).ready(function() {
 });
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
-
