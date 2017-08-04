@@ -228,6 +228,10 @@ span {
     top: 40%;
 }
 
+.contactUs:focus {
+    outline:0;
+}
+
 .cpyright {
     left: 87%;
     top: 40%;
@@ -606,11 +610,6 @@ button:focus {outline:0;}
     margin-left: -200px;
     margin-top: -200px;
     text-align: center;
-}
-
-
-.contactModal {
-
 }
 
 
