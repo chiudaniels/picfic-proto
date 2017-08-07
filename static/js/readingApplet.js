@@ -62,8 +62,10 @@ var loadPage = function(data){
     }
     if (data["chNum"] == 1 && data["pgData"]["pgNum"] == 1){
 	prevPgBtn.setAttribute("style", "visibility:hidden");
+	console.log("HIDE");
     }
     else {
+	console.log("pgood");
 	prevPgBtn.setAttribute("style", "visibility:visible");
     }
     
@@ -118,6 +120,7 @@ var nextPage = function(){
 	    },
 	    success: function(response){
 		console.log("next paged");
+		console.log(response);
 		loadPage(response);
 		bookmark();
 	    },

@@ -38,7 +38,7 @@ def getAdminPageData():
     for art in artDataL:
         d = art.adminDict()
         d["title"] = books.getBookTitle(d["bookID"])
-        d["username"] = users.getUsername(d["userID"])
+        d["username"] = users.getUsername(d["uploaderID"])
  	artData.append(d)  	
     ret = {
    	"stories": storyData,
@@ -56,7 +56,6 @@ def adminAction(dat):
         data[key] = int(dat[key])
     print data
     if data["type"] == 0: #story
-        print "LITTTT"
         story = session.query(Book).filter(Book.bookID == data["rowID"])
         if data["act"] == 1: #approve
             story.one().approve()
