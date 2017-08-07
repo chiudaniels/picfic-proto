@@ -1,2 +1,3 @@
 *.pyc
 *~
+templates/chapter_template.html

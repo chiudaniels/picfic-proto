@@ -198,6 +198,14 @@ class Art(Base):
                 "timestamp" : self.timestamp.isoformat(),
                 "artID" : self.artID
         }
+
+    def adminDict(self):
+        return {"artID" : self.artID,
+                "bookID": self.bookID,
+                "uploaderID": self.uploaderID,
+                "timestamp": self.timestamp.isoformat()
+        }
+
 """
     def asPreview(self):
         return {
@@ -219,7 +227,8 @@ class Book(Base):
     coverUrl = Column(String)
     backgroundUrl = Column(String)
     approval = Column(Integer, default = 0) #suggestion for automatic chapter base approval inheriting from approval of '2'
-    
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+
     #Relationships
     art = relationship("Art", back_populates="book")
     chapters = relationship("Chapter", back_populates="book") #one to many
@@ -241,6 +250,14 @@ class Book(Base):
 
     def approve(self):
         self.approval = 1
+
+    def adminDict(self):
+        return {"storyID" : self.bookID,
+                "title": self.title,
+                "author": self.author,
+                "timestamp": self.timestamp.isoformat(),
+                "approval": self.approval
+        }
         
 class Chapter(Base):
     __tablename__ = "Chapters"
