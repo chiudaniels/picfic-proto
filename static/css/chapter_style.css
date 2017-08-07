@@ -481,3 +481,15 @@ input[type="text"].form-control {
 .modal-footer {
     text-align: left;
 }
+
+//PROGRESS BAR
+.progress{
+    width: 25vw;
+    background-color: lightgrey;
+}
+
+#progressBar{
+    border-radius: 10px;
+    height:7px;
+    background-color: #969696FF;
+}

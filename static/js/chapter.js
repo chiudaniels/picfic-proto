@@ -15,10 +15,10 @@ function source2img(path) {
     return newImage;
 }
 
-var loadArt = function(){
+var loadArt = function() {
     for (var i = 0; i < artArray.length; i++) {
-	imageArray.push(source2img(artArray[i]["urlName"]));
-	imageArray2.push(source2img(artArray[i]["urlName"]));
+        imageArray.push(source2img(artArray[i]["urlName"]));
+        imageArray2.push(source2img(artArray[i]["urlName"]));
     }
 }
 
@@ -102,14 +102,15 @@ function setGallery() {
     for (var i = 0; i < imageArray.length; i++) {
         makeThumbnail(imageArray2[i]);
         makeSlides(imageArray[i]);
-	console.log("gallery debug");
-//	console.log($();
-	//this better come in soon...
-	//$('#gallery-thumbnail').innerHTML;
+        console.log("gallery debug");
+        //  console.log($();
+        //this better come in soon...
+        //$('#gallery-thumbnail').innerHTML;
     }
 }
 
 $(document).ready(function() {
+    setGallery();
     $('.slideshow-images').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -126,8 +127,7 @@ $(document).ready(function() {
         focusOnSelect: true
     });
 
-    setGallery();
-    
+
 });
 
 //
@@ -164,10 +164,10 @@ function clickedSomewhere() {
 }
 
 function highlight(e) {
-    storyEle= $("#storyBody")
-    offset= storyEle.offset();
+    storyEle = $("#storyBody")
+    offset = storyEle.offset();
     story = document.getElementById("storyBody").getBoundingClientRect();
-    bottom =offset.top + storyEle.height();
+    bottom = offset.top + storyEle.height();
     //highlightedText = (document.all) ? document.selection.createRange().text : document.getSelection();
     if (window.getSelection) {
         highlightedText = window.getSelection().toString();
@@ -186,7 +186,7 @@ function highlight(e) {
             console.log(2)
             upload.style.display = "inline";
             upload.style.bottom = 0;
-            upload.style.top = story.top-100 + 'px';
+            upload.style.top = story.top - 100 + 'px';
         } else {
             console.log(3)
             //console.log("highlight worked")

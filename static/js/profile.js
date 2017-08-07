@@ -22,12 +22,12 @@ editAccountBtn.addEventListener('click', function(e) {
         eMA.contentEditable = 'false';
         editAccountBtn.innerHTML = 'Edit';
         // You could save any changes here.
-	// Disable Editing
-	eMA.contentEditable = 'false';
-	eMA2.contentEditable = 'false';
-	eMA3.contentEditable = 'false';
-	editAccountBtn.innerHTML = 'Edit';
-	// You could save any changes here.
+        // Disable Editing
+        eMA.contentEditable = 'false';
+        eMA2.contentEditable = 'false';
+        eMA3.contentEditable = 'false';
+        editAccountBtn.innerHTML = 'Edit';
+        // You could save any changes here.
     } else {
         eMA3.contentEditable = 'true';
         eMA3.focus();
@@ -47,12 +47,12 @@ editMeBtn.addEventListener('click', function(e) {
         eAM.contentEditable = 'false';
         editMeBtn.innerHTML = 'Edit';
         // You could save any changes here.
-	// Disable Editing
-	eAM.contentEditable = 'false';
-	eAM2.contentEditable = 'false';
-	eAM3.contentEditable = 'false';
-	editMeBtn.innerHTML = 'Edit';
-	// You could save any changes here.
+        // Disable Editing
+        eAM.contentEditable = 'false';
+        eAM2.contentEditable = 'false';
+        eAM3.contentEditable = 'false';
+        editMeBtn.innerHTML = 'Edit';
+        // You could save any changes here.
     } else {
         eAM3.contentEditable = 'true';
         eAM3.focus();
@@ -90,53 +90,55 @@ function setGalleries() {
     for (var i = 0; i < uploadArray.length; i++) {
         makeUploads(source2img(uploadArray[i]));
     }
-     for (var i = 0; i < likedArray.length; i++) {
+    for (var i = 0; i < likedArray.length; i++) {
         makeLiked(source2img(likedArray[i]));
     }
+
+    $(document).ready(function() {
+        $('.uploaded').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            focusOnSelect: true
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('.liked').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            focusOnSelect: true
+        });
+    });
+
 }
 
-$(document).ready(function() {
-    $('.uploaded').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        focusOnSelect: true
-    });
-});
-
-
-$(document).ready(function() {
-    $('.liked').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        focusOnSelect: true
-    });
-});
 
 if (!document.all) document.captureEvents(Event.MOUSEUP);
 
 //LOAD GALLERIES
 
-var loadProfile = function(){
+var loadProfile = function() {
     $.ajax({
-	url: "/getProfileImages/",
-	type: "POST",
-	data: {
-	    "username": username //I'll figure this out somehow...
-	},
-	success: function(response){
-	    likedArray = response["liked"];
-	    uploadArray = respsonse["uploaded"];
-	    setGalleries();
-	    console.log("Galleries set");
-	},
-	error: function(data){
-	    console.log("book landing error");
-	}
+        url: "/getProfileImages/",
+        type: "POST",
+        data: {
+            "username": username //I'll figure this out somehow...
+        },
+        success: function(response) {
+            likedArray = response["liked"];
+            uploadArray = respsonse["uploaded"];
+            setGalleries();
+            console.log("Galleries set");
+        },
+        error: function(data) {
+            console.log("book landing error");
+        }
     });
-    
-   
+
+
 }
 
 $(document).ready(function() {

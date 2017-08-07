@@ -140,16 +140,18 @@ body {
     max-width: 52vw;
     text-align: center;
     align-content: center;
-    top: 365vh;
-    left: 24.3vw;
+    left: 26vw;
+    top: 355vh;
 }
 
 .picficLogo {
-    height: 6vw;
+    padding-left: 20vw;
+    height: 12vh;
     width: auto;
     fill: black;
     stroke: black;
     opacity: 1;
+    text-align: center;
 }
 
 .pagefourcontent {
@@ -341,7 +343,7 @@ body {
         padding-left: 5px;
         margin: auto;
         text-align: center;
-        left: 0;
+        left: 5vw;
         top: 59.3vh;
         position: relative;
     }
@@ -350,7 +352,8 @@ body {
         font-size: 5vmax;
         text-align: center;
         top: 25.5vh;
-        left: 1vw;
+        /*        left: 15vw;
+*/
         z-index: 1;
         position: absolute;
     }
@@ -392,8 +395,16 @@ body {
         width: 27vw;
         margin: auto;
         text-align: center;
-        left: -10vw;
+        left: 2vw;
         top: 275vh;
         position: relative;
+    }
+    .pagefourcontainer {
+        position: relative;
+        max-width: 52vw;
+        text-align: center;
+        align-content: center;
+        top: 285vh;
+        left:0;
     }
 }
