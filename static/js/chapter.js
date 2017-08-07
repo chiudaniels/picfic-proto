@@ -86,13 +86,13 @@ function makeSlides(img) {
     newSlide = document.createElement("div");
     img.setAttribute("class", "mySlides")
     newSlide.appendChild(img);
-    $("#slideshow-images").append(newSlide);
+    $("#slideMaster").append(newSlide);
 }
 
 function resetImages() {
     //remove all children
     $('#gallery-thumbnail').empty();
-    $('#slideshow-images').empty();
+    $('#slideMaster').empty();
     console.log("images emptied...");
 }
 
@@ -102,8 +102,10 @@ function setGallery() {
     for (var i = 0; i < imageArray.length; i++) {
         makeThumbnail(imageArray2[i]);
         makeSlides(imageArray[i]);
+	console.log("gallery debug");
+//	console.log($();
 	//this better come in soon...
-	$('#').innerHTML();
+	//$('#gallery-thumbnail').innerHTML;
     }
 }
 
@@ -116,9 +118,6 @@ $(document).ready(function() {
         asNavFor: '.gallery-thumbnail'
     });
 
-});
-
-$(document).ready(function() {
     $('.gallery-thumbnail').slick({
         infinite: true,
         slidesToShow: 3,
@@ -126,8 +125,10 @@ $(document).ready(function() {
         asNavFor: '.slideshow-images',
         focusOnSelect: true
     });
-});
 
+    setGallery();
+    
+});
 
 //
 
