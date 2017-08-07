@@ -45,9 +45,9 @@ followingTable = Table('Following', Base.metadata,
 
 """
 usergroup key:
-0 - unactivated
-1 - activated
-2 - admin/editor
+1 - unactivated
+2 - activated
+3 - admin/editor
 
 Bcrypt used for hash
 """
@@ -86,17 +86,24 @@ class User(Base):
             self.username, self.userID)
 
     def __init__(self, username, password, authtokens, email):
-        self.usergroup = 0
+        self.usergroup = 1
         self.username = username
         self.passData = password
         self.authtokens = authtokens
         self.email = email
 
     def activate(self):
-        self.usergroup = 1
+        self.usergroup = 2
 
     def promote(self):
-        self.usergroup = 2
+        self.usergroup = 3
+
+    def adminDict(self):
+        return {"userID" : self.userID,
+                "username" : self.username,
+                "email" : self.email,
+                "usergroup" : self.usergroup            
+        }
         
 class UserProfile(Base):
     __tablename__ = "UserProfiles"
@@ -106,7 +113,7 @@ class UserProfile(Base):
     lastName = Column(String(20))
     birthday = Column(Date) #Edit
     gender = Column(String) #Edit
-    address = Column(String)
+    address = Column(String) #Serves as country for now
     reference = Column(String)
     favoriteBooks = Column(String(200))
     favoriteAuthors = Column(String(200))
@@ -137,6 +144,7 @@ class UserProfile(Base):
         self.favoriteAuthors = "Nothing written yet!"
         self.favoriteGenres = "Nothing written yet!"
         self.picUrl = "defaultProfilePic.jpg"
+        self.address = "USA"
         
     #add permission levels    
     def asDict(self):
@@ -152,7 +160,16 @@ class UserProfile(Base):
             "favGenres" : self.favoriteGenres,
             "picUrl" : self.picUrl
         }
-        
+
+    def adminDict(self):
+        return {
+            "firstName" : self.firstName,
+            "lastName" : self.lastName,
+            "birthday" : self.birthday.strftime("%B %d, %Y"),
+            "gender" : self.gender,
+            "country" : self.address
+        }
+    
 class Art(Base):
     __tablename__ = "Art"
 
@@ -255,6 +272,7 @@ class Book(Base):
         return {"storyID" : self.bookID,
                 "title": self.title,
                 "author": self.author,
+                "authorID": self.authorID, #take note...
                 "timestamp": self.timestamp.isoformat(),
                 "approval": self.approval
         }

@@ -35,15 +35,15 @@
       <h1> ADMIN DASHBOARD</h1>
       
       <ul class="nav nav-pills">
-	<li class="active"><a data-toggle="pill" href="#stors">STORIES</a></li>
-	<li><a data-toggle="pill" href="#fanas">FANART</a></li>
-	<li><a data-toggle="pill" href="#uses">USERS</a></li>
+	<li class="active"><a data-toggle="pill" href="#stors" class="customTab">STORIES</a></li>
+	<li><a data-toggle="pill" href="#fanas" class="customTab">FANART</a></li>
+	<li><a data-toggle="pill" href="#uses" class="customTab">USERS</a></li>
       </ul>
-      <div id="stors" class="tab-pane fade in active">
+      <div id="stors" class="tab-pane fade in active customTabDOM">
 	<h2>STORIES</h2>
 	<table>
 	  <tr>
-	  	<th>StoryID</th>
+	    <th>StoryID</th>
 	    <th>TITLE</th>
 	    <th>USER</th>
 	    <th>DATE SUBMITTED</th>
@@ -53,23 +53,30 @@
 	  </tr>
 	  {% for story in data["stories"] %}
 	  <tr>
-	  	<td>{{story["storyID"]}}</td>
+	    <td>{{story["storyID"]}}</td>
 	    <td>{{story["title"]}}</td>
-	    <td>{{story["authorID"]}}</td>
+	    <td>{{story["username"]}}</td>
 	    <td>{{story["timestamp"]}}</td> <!-- hol'up -->
 	    <td>{{story["approval"]}}</td>
-	    <td><button>Approve</button><br><button>Delete</button></td>
-	    <td>mystery</td>
+	  
+	    <td>
+	      {% if story["approval"] == 0 %}
+	      <button class="btn adminForm" type="0" act="1" rowID="{{story['storyID']}}">Approve</button>
+	      <br>
+	      {% endif %}
+	      <button class="btn adminForm" type="0" act="2" rowID="{{story['storyID']}}">Delete</button>
+	    </td>
+	    <td>Unimplemented</td>
 	  </tr>
 	  {% endfor %}
 	</table>
       </div>
       
-      <div id="fanas" class="tab-pane fade">
+      <div id="fanas" class="tab-pane fade customTabDOM">
 	<h2>FANART</h2>
 	<table>
 	  <tr>
-	  	<th>ArtID</th>	
+	    <th>ArtID</th>	
 	    <th>TITLE</th>
 	    <th>USER</th>
 	    <th>DATE SUBMITTED</th>
@@ -78,20 +85,22 @@
 	  {% for art in data["art"] %}
 	  <tr>
 	    <td>{{art["artID"]}}</td>
-	    <td>{{art["bookID"]}}</td>
-	    <td>{{art["uploaderID"]}}</td>
+	    <td>{{art["title"]}}</td>
+	    <td>{{art["username"]}}</td>
 	    <td>{{art["timestamp"]}}</td>
-	    <td><button>Delete</button></td>
+	    <td>
+	      <button class="btn adminForm" type="1" act="1" rowID="{{art['artID']}}">Delete</button>
+	    </td>
 	  </tr>
 	  {% endfor %}
 	</table>
       </div>
       
-      <div id="uses" class="tab-pane fade">
+      <div id="uses" class="tab-pane fade customTabDOM">
 	<h2>USERS</h2>
 	<table>
 	  <tr>
-	  	<th>UserID</th>
+	    <th>UserID</th>
 	    <th>FIRST NAME</th>
 	    <th>LAST NAME</th>
 	    <th>USERNAME</th>
@@ -104,7 +113,7 @@
 	  </tr>
 	  {% for user in data["users"] %}
 	  <tr>
-	  	<td>{{user["userID"]}}</td>
+	    <td>{{user["userID"]}}</td>
 	    <td>{{user["firstName"]}}</td>
 	    <td>{{user["lastName"]}}</td>
 	    <td>{{user["username"]}}</td>
@@ -113,12 +122,22 @@
 	    <td>{{user["country"]}}</td>
 	    <td>{{user["gender"]}}</td>
 	    <td>{{user["usergroup"]}}</td>
-	    <td><button>Approve</button><br><button>Delete</button><br><button>Block</button></td>
+	    <td>
+	     
+	      {% if user["usergroup"] == 2 %}
+	      <button class="btn adminForm" type="2" act="1" rowID="{{user['userID']}}">Promote</button>
+	      <br>
+	      {% endif %}
+	      {% if user["usergroup"] != "admin" %}
+	      <button class="btn adminForm" type="2" act="2" rowID="{{user['userID']}}">Delete</button>
+	      {% endif %}
+	    </td>
 	  </tr>
 	  {% endfor %}
 	</table>
       </div>
     </div>
+    <script src="/static/js/admin.js"></script>
   </body>
 </html>
 

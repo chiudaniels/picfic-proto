@@ -156,14 +156,14 @@ def getUsername( uID ):
 def isActive(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID).one()
-    ret = usr.usergroup != 0
+    ret = usr.usergroup > 1
     session.close()
     return ret
 
 def isAdmin(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID).one()
-    ret = usr.usergroup == 2
+    ret = usr.usergroup == 3
     session.close()
     return ret
     

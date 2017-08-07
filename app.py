@@ -35,6 +35,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/")
 def root():
     print gallery.getGallery()
+    print isLoggedIn()
     return render_template("launchpad.html", isLoggedIn = isLoggedIn(), data ={"books": gallery.getGallery()} )
 
 # == Settings =======================================
@@ -294,6 +295,7 @@ def adminPage():
     if isLoggedIn():
         uID = getUserID()
         if users.isAdmin(uID):
+            print admin.getAdminPageData()
             return render_template("admin.html", data = admin.getAdminPageData(), isLoggedIn = isLoggedIn())
     return redirect(url_for('page_not_found', e = None))
 
@@ -302,8 +304,7 @@ def adminAction():
     if isLoggedIn():
         uID = getUserID()
         if users.isAdmin(uID):
-            #action here
-            return True
+            return json.dumps(admin.adminAction(request.form))
     return redirect(url_for('page_not_found', e = None))
 
 
@@ -321,7 +322,7 @@ mail = Mail(app)
 
 
 ####################################################### SENDING EMAIL BASICS
-@app.route("/")
+@app.route("/nogoof")
 def index():
    #confirm_account();
    get_activation_link()

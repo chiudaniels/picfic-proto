@@ -313,8 +313,9 @@ def getChapterID( bookID, chNum ):
     if res.count() != 1:
         session.close()
         return None #something's wrong
+    ret =res.one().chapterID
     session.close()
-    return res.one().chapterID
+    return ret
 
 
 def getChapterTitle( chapterID ):
@@ -323,10 +324,17 @@ def getChapterTitle( chapterID ):
     if res.count() != 1:
         session.close()
         return None #something's wrong
+    ret = res.one().title
     session.close()
-    return res.one().title
+    return ret
     
-
+def getBookTitle( bookID ):
+    session = Session()
+    res = session.query(Book).filter(Book.bookID == bookID)
+    ret = res.one().title
+    session.close()
+    return ret
+    
 def debug(s):
     print "DEBUG"
     print s
