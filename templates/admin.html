@@ -43,6 +43,7 @@
 	<h2>STORIES</h2>
 	<table>
 	  <tr>
+	  	<th>StoryID</th>
 	    <th>TITLE</th>
 	    <th>USER</th>
 	    <th>DATE SUBMITTED</th>
@@ -52,6 +53,7 @@
 	  </tr>
 	  {% for story in data["stories"] %}
 	  <tr>
+	  	<td>{{story["storyID"]}}</td>
 	    <td>{{story["title"]}}</td>
 	    <td>{{story["authorID"]}}</td>
 	    <td>{{story["timestamp"]}}</td> <!-- hol'up -->
@@ -67,6 +69,7 @@
 	<h2>FANART</h2>
 	<table>
 	  <tr>
+	  	<th>ArtID</th>	
 	    <th>TITLE</th>
 	    <th>USER</th>
 	    <th>DATE SUBMITTED</th>
@@ -74,6 +77,7 @@
 	  </tr>
 	  {% for art in data["art"] %}
 	  <tr>
+	    <td>{{art["artID"]}}</td>
 	    <td>{{art["bookID"]}}</td>
 	    <td>{{art["uploaderID"]}}</td>
 	    <td>{{art["timestamp"]}}</td>
@@ -87,6 +91,7 @@
 	<h2>USERS</h2>
 	<table>
 	  <tr>
+	  	<th>UserID</th>
 	    <th>FIRST NAME</th>
 	    <th>LAST NAME</th>
 	    <th>USERNAME</th>
@@ -99,6 +104,7 @@
 	  </tr>
 	  {% for user in data["users"] %}
 	  <tr>
+	  	<td>{{user["userID"]}}</td>
 	    <td>{{user["firstName"]}}</td>
 	    <td>{{user["lastName"]}}</td>
 	    <td>{{user["username"]}}</td>

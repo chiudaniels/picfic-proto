@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+<<<<<<< HEAD {% extends 'readingLayout.html' %} {% block css %} <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css">
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css"> {% endblock %} {% block content %} {% if pageData["status"] == 1 %}
+=======
 {% extends 'readingLayout.html' %}
 {% block css %}
     <link rel="stylesheet" type="text/css" href="/static/slick/slick.css" />
@@ -7,6 +12,7 @@
 {% block content %}
 
     {% if pageData["status"] == 1 %}
+>>>>>>> 711161a0a651b51e995901971904b2c22f4969f6
     <div class="container">
         <div class="row">
             <div class="col-md-1 logos">
@@ -21,20 +27,77 @@
             </div>
             <div class="col-md-1 arrow">
                 <div class="prev " id="prevPgBtn">
-                    <img src="/static/svg/leftarrow.svg">
-                </div>
-            </div>
-            <!-- story stuff -->
-            <div class="col-md-8 ">
-                <div class="title ">
-                    <!--CHAPTER 1: SHERLOCK HOLMES-->
-                    <h2>{{pageData["chTitle"]}}</h2>
-                </div>
-                <div class="story " id="storyBody">
-		  <!--
-		  {% for line in pageData["pgData"]["text"] %}
+                    <img src="/static/svg/leftarrow.svg"> ======= {% extends 'readingLayout.html' %} {% block css %}
+                    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css" />
+                    <link rel="stylesheet" type="text/css" href="/static/slick/slick-theme.css">
+                    <link rel="stylesheet" type="text/css" href="/static/css/chapter_style.css"> {% endblock %} {% block content %} {% if pageData["status"] == 1 %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 logos">
+                                <!-- Aa logo -->
+                                <img src="/static/svg/Aa.svg " class="logo1 ">
+                                <br>
+                                <!-- facebook logo -->
+                                <img src="/static/svg/facebook.svg " class="logo2 ">
+                                <br>
+                                <!-- twitter logo -->
+                                <img src="/static/svg/twitter.svg " class="logo3 "> >>>>>>> 711161a0a651b51e995901971904b2c22f4969f6
+                            </div>
+                        </div>
+                        <!-- story stuff -->
+                        <div class="col-md-8 ">
+                            <div class="title ">
+                                <!--CHAPTER 1: SHERLOCK HOLMES-->
+                                <h2>{{pageData["chTitle"]}}</h2>
+                            </div>
+                            <div class="story " id="storyBody">
+                                <!--
+          {% for line in pageData["pgData"]["text"] %}
                     <p class="paragraph ">{{line}}</p>
                     {% endfor %}-->
+<<<<<<< HEAD
+                            </div>
+                        </div>
+                        <div class="col-md-1 arrow">
+                            <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload" src="/static/svg/upload.svg"></a>
+                            <div class="next " id="nextPgBtn">
+                                <img src="/static/svg/rightarrow.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container gallery" id="imageGallery">
+                        <div class="nothumbnails">
+                            <div class="row gallery-image">
+                                <div class="col-md-12">
+                                    <div class="slideshow-container">
+                                        <span class="slideshow-images" id="slideMaster">
+                    
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row gallery-interact">
+                                <div class="col-md-6">
+                                    <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
+                                    <img class="blueicons" src="/static/svg/blue_insta.svg">
+                                    <img class="blueicons" src="/static/svg/blue_twitter.svg">
+                                    <img class="blueicons" src="/static/svg/blue_tumblr.svg">
+                                    <img class="blueicons" src="/static/svg/blue_pin.svg">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 gallery-desc" id="galDesc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gallery-thumbnail">
+                            <div id="gallery-thumbnail">
+                            </div>
+                        </div>
+=======
                 </div>
             </div>
 	    
@@ -60,20 +123,89 @@
                 <div class="row gallery-interact">
                     <div class="col-md-6">
                         <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
+>>>>>>> 711161a0a651b51e995901971904b2c22f4969f6
                     </div>
-                    <div class="col-md-6">
-                        <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
-                        <img class="blueicons" src="/static/svg/blue_insta.svg">
-                        <img class="blueicons" src="/static/svg/blue_twitter.svg">
-                        <img class="blueicons" src="/static/svg/blue_tumblr.svg">
-                        <img class="blueicons" src="/static/svg/blue_pin.svg">
+                    <div class="modal" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Upload Art</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
+                                        <div class="dz-message" data-dz-message>
+                                            <center> <span class="dropdesc">Drag & drop file <br>
+                    or click to upload</span>
+                                                <br> <img src="/static/svg/uploadPicture.svg"> </center>
+                                        </div>
+                                        <input type="hidden" name="bookID" id="artUploadBookID"></input>
+                                        <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+                                        <input type="hidden" name="caption" id="artUploadCaption"></input>
+                                        <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+                                        <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+                                        <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+                                        <!-- jokes it's not an html form -->
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <p id="upload-desc"></p>
+                                </div>
+                            </div>
+                            >>>>>>> 711161a0a651b51e995901971904b2c22f4969f6
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-12 gallery-desc" id="galDesc">
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                                    <div class="dz-message" data-dz-message>
+                                        <center> <span class="dropdesc">Drag & drop file <br>
+or click to upload</span>
+                                            <br> <img src="../static/svg/uploadPicture.svg"> </center>
+                                    </div>
+                                </form>
+                                <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
+                                    <div class="dz-message" data-dz-message>
+                                        <center> <span class="dropdesc">Drag & drop file <br>
+                    or click to upload</span>
+                                            <br> <img src="/static/svg/uploadPicture.svg"> </center>
+                                    </div>
+                                    <input type="hidden" name="bookID" id="artUploadBookID"></input>
+                                    <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+                                    <input type="hidden" name="caption" id="artUploadCaption"></input>
+                                    <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+                                    <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+                                    <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+                                    <!-- jokes it's not an html form -->
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <p id="upload-desc"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+            <!-- progress bar -->
+            <div class="progress">
+                <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+                </div>
+            </div>
+            <!-- turn this into a login modal -->
+            {% if isLoggedIn %}
+            <div class="row ">
+                <div class="column-md-12 ">
+=======
             <div class="row gallery-thumbnail">
 
 		<div id = "gallery-thumbnail">
@@ -110,41 +242,26 @@
                     <div class="modal-footer">
                         <p id="upload-desc"></p>
                     </div>
+>>>>>>> 711161a0a651b51e995901971904b2c22f4969f6
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- progress bar -->
-    <div class="progress">
-        <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-        </div>
-    </div>
-    <!-- turn this into a login modal -->
-    {% if isLoggedIn %}
-    <div class="row ">
-        <div class="column-md-12 ">
-        </div>
-    </div>
-    {% endif %}
-    </div>
-    {% elif pageData["status"] == 0 %}
-    <p> {{pageData["errMsg"]}} </p>
-    <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a> {% else %}
-    <p> {{pageData["errMsg"]}} </p>
-    <a href="/">Back home</a> {% endif %}
-    <!--  <script src="../static/chapter.js ">
+            {% endif %} {% elif pageData["status"] == 0 %}
+            <p> {{pageData["errMsg"]}} </p>
+            <a href="/books/{{pageData['bookID']}}/read"> Back to the start </a> {% else %}
+            <p> {{pageData["errMsg"]}} </p>
+            <a href="/">Back home</a> {% endif %}
+            <!--  <script src="../static/chapter.js ">
    </script> -->
-    <script>
-    var bookID = {{ pageData["bookID"] }};
-    var curChapter = {{ pageData["chNum"] }};
-    var curPg = {{ pageData["pgData"]["pgNum"] }};
-    var chLength = {{ pageData["pgData"]["chLength"] }};
-    var bookLength = {{ pageData["bookLength"] }}
-    var curCC = {{ pageData["pgData"]["curCC"] }};
-    </script>
-    <script src="/static/js/dropzone.js "></script>
-    <script src="/static/js/chapter.js"></script>
-    <script src="/static/js/readingApplet.js"></script>
-    <script type="text/javascript" src="/static/slick/slick.min.js"></script>
-
-{% endblock %}
+            <script>
+            var bookID = { { pageData["bookID"] } };
+            var curChapter = { { pageData["chNum"] } };
+            var curPg = { { pageData["pgData"]["pgNum"] } };
+            var chLength = { { pageData["pgData"]["chLength"] } };
+            var bookLength = { { pageData["bookLength"] } }
+            var curCC = { { pageData["pgData"]["curCC"] } };
+            </script>
+            <script src="/static/js/dropzone.js "></script>
+            <script src="/static/js/chapter.js"></script>
+            <script src="/static/js/readingApplet.js"></script>
+            <script type="text/javascript" src="/static/slick/slick.min.js"></script>
+            {% endblock %}
