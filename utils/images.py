@@ -18,6 +18,7 @@ def uploadArt(url, uID, caption, cS, cE, bID, chN ):
     session.flush()
     aID = newImg.artID
     session.commit()
+    session.close()
     return aID
 
 # Retrieving Images
@@ -36,8 +37,9 @@ def getImageDataPage(chID, ccStart, ccEnd):
         retList = []
         for entry in imgList:
             retList.append(entry.asDict())
+        session.close()
         return retList
-    
+    session.close()
     return []
 
 #For a chapter
@@ -53,8 +55,9 @@ def getImageDataChapter(chID):
         retList = []
         for entry in imgList:
             retList.append(entry.asDict())
+        session.close()
         return retList
-
+    session.close()
     return []
 
 #For a book
@@ -70,7 +73,9 @@ def getImageDataBook(bID):
         retList = []
         for entry in imgList:
             retList.append(entry.asDict())
+        session.close()
         return retList
+    session.close()
     return []
 
 
@@ -88,7 +93,9 @@ def getImageDataUser(uID):
             retList.append(entry.asDict())
             retList[-1]["bookTitle"] = books.getBook(retList[-1]["bookID"]).title
         print "user data retrieval"
+        session.close()
         return retList
+    session.close()
     return []
 
 def getArtPreview(artID, uID):
@@ -98,10 +105,11 @@ def getArtPreview(artID, uID):
     prev["bookTitle"] = books.getBook(prev["bookID"]).title
     prev["uploaderName"] = users.getUsername( prev["uploaderID"] )
     prev["isLiked"] = 0#not liked
-    if uID == None or not isActive(uID):
+    if uID == None or not users.isActive(uID):
         prev["isLiked"] = -1 #can't like
     elif isLiked(uID, artID):
         prev["isLiked"] = 1
+    session.close()
     return prev
 
 # == Likes ======================================================
@@ -109,17 +117,24 @@ def getArtPreview(artID, uID):
 def getNumLikes(artID):
     session = Session()
     imgQ = session.query(Art).filter(Art.artID == artID)
-    return len(imgQ.one().likers)
-
+    ret = len(imgQ.one().likers)
+    session.close()
+    return ret
+    
 def isLiked(uID, artID):    
     session = Session()
-    return session.query(Art).filter(Art.likers.any(userID = uID).count()).count() != 0
-    
+    ret = session.query(Art).filter(Art.likers.any(userID = uID)).count() != 0
+    session.close()
+    return ret
+
 def likeImage(uID, artID):
     session = Session()
     if users.isActive(uID):
         user = session.query(User).filter(User.userID == uID).one()
         art = session.query(Art).filter(Art.artID == artID).one().likers.append(user)
+        session.commit()
+        session.close()
         return True
     else:
+        session.close()
         return False

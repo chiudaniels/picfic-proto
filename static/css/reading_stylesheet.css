@@ -200,3 +200,28 @@ h3, h2, h4 {
     text-align: left;
     left: 10px;
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    position: absolute;
+    top:40vh;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.tab-pane h2 {
+    position: absolute;
+    top: 31vh;
+}
+
+.padder {
+    left: 2vw;
+    position: relative;
+    width: 95%;
+}

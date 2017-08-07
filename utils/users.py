@@ -17,6 +17,7 @@ def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
     newUserProfile = UserProfile(uID, fN, lN, bM, bD, bY, gender)
     session.add(newUserProfile)
     session.commit()
+    session.close()
     return uID
 
 def deleteUser( uID ):
@@ -24,32 +25,38 @@ def deleteUser( uID ):
     usr = session.query(User).filter_by(userID = uID).one()
     session.delete(usr)
     session.commit()
-
+    session.close()
+    
 def getUser( uID ):
     session = Session()
     usr = session.query(User).filter_by(userID = uID).one()
+    session.close()
     return usr
 
 def getProfile( username ):
     session = Session()
     userID = session.query(User.userID).filter(User.username == username).one()[0]
     profileInfo = session.query(UserProfile).filter(UserProfile.userID == userID).one().asDict()
+    session.close()
     return profileInfo
 
 def getProfileSensitive( username ):
     session = Session()
     usr = session.query(User).filter(User.username == username).one()
-    return {"email" : usr.email,
+    ret = {"email" : usr.email,
             "username" : username
     }
+    session.close()
+    return ret
 
 
 def isNameTaken( username ):
     session = Session()
     usr = session.query(User).filter_by(username = username)   
     if usr.count() == 0:
-        print "usr DNE"
+        session.close()
         return False
+    session.close()
     return True
 
 def getCC( uID, bookID ):
@@ -59,9 +66,11 @@ def getCC( uID, bookID ):
         #wtf
         newUserBook = UserBook(uID, bookID)
         session.commit()
+        session.close()
         return 0
     else:
         entry = usr.one()
+        session.close()
         return entry.curCC
     return 0
 
@@ -73,15 +82,14 @@ def bookmark( uID, bID, chN, ccStart ):
         newUserBook = UserBook(uID, bID)
         session.add(newUserBook)
         session.commit()
+        session.close()
         return False
     else:
-        print "commiting bookmark"
         entry = usr.one()
         entry.curChapter = chN
         entry.curCC = ccStart
-        print "entry set"
-        print entry.curCC
         session.commit()
+        session.close()
     return True
 
 #UserBook junction
@@ -95,69 +103,93 @@ def getChapter( uID, bookID ):
             newUserBook = UserBook(uID, bookID)
             session.add(newUserBook)
             session.commit()
+            session.close()
             return 1
         else:
-            return usr.one().curChapter
+            ret = usr.one().curChapter
+            session.close()
+            return ret     
     return 1
 
 def getHashed( email ):
     session = Session()
     usr = session.query(User).filter(User.email == email)
-    return usr.one().passData
+    ret =  usr.one().passData
+    session.close()
+    return ret
 
 def getHashedFromID( uID ):
     session = Session()
     usr = session.query(User).filter(User.userID == uID)
-    return usr.one().passData
+    ret = usr.one().passData
+    session.close()
+    return ret
 
 def setPass( uID, newHash ):
     session = Session()
     usr = session.query(User).filter(User.userID == uID)
     usr.passData = newHash
     session.commit()
-
+    session.close()
+    
 def getUserID( email ):
     session = Session()
     usr = session.query(User).filter(User.email == email)
-    return usr.one().userID
-
+    ret = usr.one().userID
+    session.close()
+    return ret
+    
 def getUserIDFromUsername( uN ):
     session = Session()
     usr = session.query(User.userID).filter(User.username == uN)
-    return usr.one()[0]
-    
+    ret = usr.one()[0]
+    session.close()
+    return ret
+
 def getUsername( uID ):
     session = Session()
     usr = session.query(User.username).filter(User.userID == uID)
-    return usr.one()[0]
-
+    ret = usr.one()[0]
+    session.close()
+    return ret
+    
 def isActive(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID).one()
-    return usr.usergroup != 0
+    ret = usr.usergroup != 0
+    session.close()
+    return ret
 
 def isAdmin(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID).one()
-    return usr.usergroup == 2
-
-def activate(uID):
+    ret = usr.usergroup == 2
+    session.close()
+    return ret
+    
+def activateByID(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID)
     usr.one().activate()
+    session.commit()
+    session.close()
     return uID
 
-def promote(uID):
+def promoteByID(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID)
     usr.one().promote()
+    session.commit()
+    session.close()
     return uID
 
 def getUsergroup(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID)
-    return uID.usergroup
-    
+    ret = usr.one().usergroup
+    session.close()
+    return ret
+
 def follow(uID, toFollowID):
     session = Session()
     if isActive(uID):
@@ -165,6 +197,8 @@ def follow(uID, toFollowID):
         toFollow = session.query(User).filter(User.userID == toFollowID).one()
         follower.following.append(toFollow)
         toFollow.followedBy.append(follower) #possibly redundant/bad because of back_populate...
+        session.commit()
+        session.close()
         return True
     else:
         return False
@@ -175,6 +209,7 @@ def setImage( uID, url ):
     p = session.query(User).filter(User.userID == userID).one()
     p.picUrl = url
     session.commit()
+    session.close()
 
 
 #for profile page
@@ -195,6 +230,7 @@ def getStories( uID ):
         print "story"
         print bID
         myStories.append(books.getBookPreview(bID[0]))
+    session.close()
     return {"myStories": myStories}
     
 def getReading( uID ):
@@ -203,20 +239,23 @@ def getReading( uID ):
     q = session.query(User).filter(User.userID == uID).one()
     for book in q.books:
         myShelf.append(books.getBookPreview(book.bookID))
+    session.close()
     return {"myShelf": myShelf}
 
 def getUploadedArt( uID ):
     session = Session()
     myUploads = []
     q = session.query(Art).filter(Art.uploaderID == uID).all()
-    for aID in q:
-        myUploads.append(images.getArtPreview(aID, uID))
+    for art in q:
+        myUploads.append(images.getArtPreview(art.uploaderID, uID))
+    session.close()
     return {"uploadedArt": myUploads}
 
 def getLikedArt( uID ):
     session = Session()
     myLiked = []        
     q = session.query(User).filter(User.userID == uID).one()
-    for aID in q.liked:
-        myLiked.append(images.getArtPreview(aID, uID))
+    for like in q.liked:
+        myLiked.append(images.getArtPreview(like.uploaderID, uID))
+    session.close()
     return {"uploadedArt": myLiked}

@@ -15,4 +15,5 @@ def getGallery():
     for book in bookList:
         if book.approval != 0:
             ret.append(books.getBookPreview(book.bookID))
+    session.close()
     return ret

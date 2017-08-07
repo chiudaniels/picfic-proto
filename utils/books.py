@@ -64,6 +64,9 @@ def parseBookManual(textFilename, metaFilename):
         #print ch["text"]
         addNewChapter(ch["title"], ch["text"], bookID, i + 1)
     textFile.close()
+
+    session.close()
+    
     return True
 
 def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
@@ -97,37 +100,44 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
     session.add(newChapter)
     session.commit()
+    session.close()
 
 def setCover( bookID, url ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     book.coverUrl = url
     session.commit()
+    session.close()
 
 def setBackground( bookID, url ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     book.backgroundUrl = url
     session.commit()
+    session.close()
     
 def getBookPreview( bookID ):
     print "getting book preview"
     print bookID
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
-    return {
+    ret =  {
         "bookID" : bookID,
         "title" : book.title,
         "coverUrl" : book.coverUrl,
         "author" : book.author
     }
-    
+    session.close()
+    return ret
+
+
 def getBookLanding( bookID ):
     bookID = int(bookID)
     session = Session()
     book = session.query(Book).filter_by(bookID = bookID).one()
 
     if book == None:
+        session.close()
         return { "bookID" : bookID, "status": 0 }
     else:
         ret = { "bookID" : bookID }
@@ -142,6 +152,7 @@ def getBookLanding( bookID ):
         ret["coverUrl"] = book.coverUrl
         ret["backgroundUrl"] = book.backgroundUrl
         ret["status"] = 1
+        session.close()
         return ret
 
 
@@ -177,6 +188,7 @@ def getPageData( bookID, chNum, userID ):
         ret["imageData"] = images.getImageDataPage(chapterID, start, end)
         ret["status"] = 1
 
+    session.close()
     return ret
 
 
@@ -198,6 +210,7 @@ def getPageAJAX(bID, chN, curCC, curPg):
         ret["imageData"] = images.getImageDataPage(chapterID, start, end)
         ret["status"] = 1
         ret["bookLength"] = getBookLength(bookID)
+    session.close()
     return ret
 
 def getEndOfChCC(bID, chN):
@@ -205,9 +218,8 @@ def getEndOfChCC(bID, chN):
     session = Session()
     chapter = session.query(Chapter).filter(Chapter.chapterID == getChapterID(bID, chN)).one()
     pageCCStrArr = chapter.pageCC.split(":")
-    print "endof ch cc retrieved"
     lastPair = pageCCStrArr[-1].split(",")
-    print lastPair[1]
+    session.close()
     return int(lastPair[1]) - 1
 #return getPageInfo(  , getChapterID(bID, chN))["endCC"] - 1
 
@@ -223,12 +235,15 @@ def getBook( bookID ):
     bookID = int(bookID)
     session = Session()
     book = session.query(Book).filter_by(bookID = bookID).one()
+    session.close()
     return book
 
 def getBookLength( bookID ):
     session = Session()
-    return session.query(Chapter).filter_by(bookID = bookID).count()
-                                                             
+    ret = session.query(Chapter).filter_by(bookID = bookID).count()
+    session.close()
+    return ret
+    
 #Returns {"pgNum", "text", "chLength", "curCC", "startCC", "endCC"}
 def getPageInfo( cc, chID ):
 
@@ -259,6 +274,7 @@ def getPageInfo( cc, chID ):
     ret["startCC"] = ret["curCC"]
     ret["endCC"] = pageCCArr[thePairIndex][1]
     #note: you're gonna hate urself
+    session.close()
     return ret
 
 def getPageInfoAJAX( pgN, chID ):
@@ -287,6 +303,7 @@ def getPageInfoAJAX( pgN, chID ):
     #print ret["curCC"]
     #print "end"
     #note: you're gonna hate urself
+    session.close()
     return ret
 
 
@@ -294,7 +311,9 @@ def getChapterID( bookID, chNum ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.bookID == bookID, Chapter.chapterNum == chNum) #should only give one
     if res.count() != 1:
+        session.close()
         return None #something's wrong
+    session.close()
     return res.one().chapterID
 
 
@@ -302,7 +321,9 @@ def getChapterTitle( chapterID ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.chapterID == chapterID)
     if res.count() != 1:
+        session.close()
         return None #something's wrong
+    session.close()
     return res.one().title
     
 

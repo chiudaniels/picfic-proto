@@ -5,7 +5,7 @@ var imgGallery = document.getElementById('imageGallery');
 //interactive
 var prevPgBtn = document.getElementById('prevPgBtn'); 
 var nextPgBtn = document.getElementById('nextPgBtn'); 
-
+var likes = document.getElementById('likes');
 
 //var storyText = "";
 
@@ -31,14 +31,18 @@ var loadPage = function(data){
 
     artArray = data["imageData"]
     for (i = 0; i < artArray.length; i++){
-	//console.log(data);
+	console.log(artArray[i]);
+	console.log("debugging");
 	artArray[i]["urlName"] = '/static/data/images/' + artArray[i]["urlName"];
     }
     
-    if (sourceArray.length != 0)
+    loadArt();
+    
+    if (artArray.length != 0)
 	setGallery();
+    
     //gotta reset the gallery...
-    if (sourceArray.length == 0){
+    if (artArray.length == 0){
 	imgGallery.setAttribute("style", "display:none");
     }
     else {

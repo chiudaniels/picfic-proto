@@ -114,6 +114,20 @@ or click to upload</span>
                                 <br> <img src="../static/svg/uploadPicture.svg"> </center>
                         </div>
                     </form>
+                    <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
+                        <div class="dz-message" data-dz-message>
+                            <center> <span class="dropdesc">Drag & drop file <br>
+                    or click to upload</span>
+                                <br> <img src="/static/svg/uploadPicture.svg"> </center>
+                        </div>
+                        <input type="hidden" name="bookID" id="artUploadBookID"></input>
+                        <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+                        <input type="hidden" name="caption" id="artUploadCaption"></input>
+                        <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+                        <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+                        <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+                        <!-- jokes it's not an html form -->
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <p id="upload-desc"></p>

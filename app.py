@@ -293,15 +293,15 @@ def uploaded_file(filename):
 def adminPage():
     if isLoggedIn():
         uID = getUserID()
-        if isAdmin(uID):
-            return render_template("admin.html", data = admin.getAdminPageDate())
+        if users.isAdmin(uID):
+            return render_template("admin.html", data = admin.getAdminPageData(), isLoggedIn = isLoggedIn())
     return redirect(url_for('page_not_found', e = None))
 
 @app.route('/adminAction/', methods = ['POST'])
 def adminAction():
     if isLoggedIn():
         uID = getUserID()
-        if isAdmin(uID):
+        if users.isAdmin(uID):
             #action here
             return True
     return redirect(url_for('page_not_found', e = None))
@@ -379,7 +379,10 @@ def get_activation_link(uID): #user
 
 # Login Helpers
 def isLoggedIn():
-    return "uID" in session
+    if "uID" in session:
+        return users.getUsergroup(session["uID"])
+    else:
+        return 0
 
 def getUserID():
     if isLoggedIn():
