@@ -12,6 +12,10 @@ var likes = document.getElementById('likes');
 var loadPage = function(data){
     //console.log(data);
     data = JSON.parse(data);
+    if ("pgNum" in data){
+	//gallery
+    }
+    else {
     //update body
     while (storyBody.hasChildNodes()){
 	storyBody.removeChild(storyBody.lastChild);
@@ -69,6 +73,7 @@ var loadPage = function(data){
     
     progressBar.setAttribute("aria-valuenow", Math.ceil(100.0 * curPg / chLength));
     progressBar.setAttribute("style", "width:" + String(Math.ceil(100.0 * curPg/ chLength)) + "%");
+    }
 }
 /*
 var initializeButtons = function(){
@@ -96,12 +101,30 @@ var changePg = function(){
 var nextPage = function(){
     //do a chapter check
     //do next page logic
-    if (curPg == chLength){
+    if (curPg == -1){ //ur in the gallery bois
 	curChapter += 1;
 	curCC = 0;
-	console.log(curChapter);
-	window.location.href = "/books/" + bookID + "/read/" + curChapter; 
+	window.location.href = "/books/" + bookID + "/read/" + curChapter;
 	bookmark();
+    }
+    if (curPg == chLength){ //get to the gallery
+	curPg = -1;
+	$.ajax({
+	    url: "/chapterGallery/",
+	    type: "POST",
+	    data: {
+		"bookID": bookID,
+		"chNum": curChapter
+	    },
+	    success: function(response){
+		loadPage(response);
+		curCC = -1;
+		bookmark();
+	    },
+	    error: function(data){
+		console.log("nextpage error");
+	    }
+	});
     }
     else {
 	curPg += 1;
@@ -133,8 +156,12 @@ var nextPage = function(){
 
 var prevPage = function(){
     if (curPg == 1){
+	curPg = -1;
 	curChapter -= 1;
-	//get end of last chapter
+	bookmark();
+	window.location.href = "/books/" + bookID + "/read/" + curChapter;    }
+    if (curPg == -1){//gallery
+	//get end of chapter
 	$.ajax({
 	    url: "/getEndOfChPage/",
 	    type: "POST",
@@ -143,9 +170,10 @@ var prevPage = function(){
 		"chNum": curChapter,
 	    },
 	    success: function(response){
+		curPg = JSON.parse(response)["chLength"];
 		curCC = JSON.parse(response)["endOfChCC"];
+		loadPage(response);
 		bookmark();
-		window.location.href = "/books/" + bookID + "/read/" + curChapter; 		
 	    }
 	});	
 	
@@ -160,8 +188,7 @@ var prevPage = function(){
 	    data: {
 		"bookID": bookID,
 		"chNum": curChapter,
-		"curCC": curCC,
-		"curPg": curPg
+		"curCC": curCC
 	    },
 	    success: function(response){
 		console.log("next paged");

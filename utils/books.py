@@ -223,12 +223,21 @@ def getEndOfChCC(bID, chN):
     return int(lastPair[1]) - 1
 #return getPageInfo(  , getChapterID(bID, chN))["endCC"] - 1
 
+def getChLength(bID, chN):
+    session = Session()
+    chapter = session.query(Chapter).filter(Chapter.chapterID == getChapterID(bID, chN)).one()
+    chLength = chapter.pageCC.count(":")
+    session.close()
+    return chLength
+    
 #Returns: images. that's it. and chN 
 def getChapterSummary(bID, chN):
     ret = {}
-    ret["imageData"] = images.getImageDataChapter(getChapter(bID, chN))
+    ret["imageData"] = images.getImageDataChapter(getChapterID(bID, chN))
     ret["bookID"] = bID
     ret["chapterNum"] = chN
+    ret["pgNum"] = -1
+    return ret
     
 #Helpers ======================================
 def getBook( bookID ):

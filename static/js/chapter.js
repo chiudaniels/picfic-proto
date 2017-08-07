@@ -107,28 +107,26 @@ function setGallery() {
 	//this better come in soon...
 	//$('#gallery-thumbnail').innerHTML;
     }
+    $(document).ready(function(){
+	$('.slideshow-images').not('.slick-initialized').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '.gallery-thumbnail'
+	});
+
+	$('.gallery-thumbnail').not('.slick-initialized').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            asNavFor: '.slideshow-images',
+            focusOnSelect: true
+	});
+    });
 }
 
-$(document).ready(function() {
-    $('.slideshow-images').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: '.gallery-thumbnail'
-    });
-
-    $('.gallery-thumbnail').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        asNavFor: '.slideshow-images',
-        focusOnSelect: true
-    });
-
-    setGallery();
-    
-});
+//setGallery();
 
 //
 

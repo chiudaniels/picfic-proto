@@ -99,13 +99,6 @@ def bookLanding(bookID):
     metadata = books.getBookLanding(bookID)
     return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata)
 
-# == Chapter End page ===============================
-@app.route("/books/<int:bookID>/read/<int:chNum>/gallery")
-def chapterGallery(bookID, chNum):
-    chapterGalData = books.getChapterSummary(bookID, chNum)
-    return render_template("endOfChapterMockup.html", isLoggedIn = isLoggedIn(), data = chapterGalData)
-
-
 # == reading =====
 
 
@@ -121,7 +114,6 @@ def bookRedir(bookID):
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
-    
     data = books.getPageData( bookID, chNum, getUserID() )
     #print data["pgData"]
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
@@ -143,7 +135,6 @@ def bookmark():
     bID = request.form.get("bookID")
     chN = request.form.get("chNum")
     ccStart = request.form.get("ccStart")
-    pgNum = request.form.get("pgNum")
     if isLoggedIn():
         data =  users.bookmark(getUserID(), bID, chN, ccStart)
         return json.dumps({"status":1})
@@ -153,8 +144,18 @@ def bookmark():
 def endOfCh():
     bID = request.form.get("bookID")
     chN = request.form.get("chNum")
-    data = {"endOfChCC" : books.getEndOfChCC(bID, chN)}
+    data = {"endOfChCC" : books.getEndOfChCC(bID, chN),
+            "chLength" : books.getChLength(bID, chN)
+    }
     return json.dumps(data)
+
+@app.route("/chapterGallery/", methods = ["POST"])
+def chapterGallery():
+    bID = request.form.get("bookID")
+    chN = request.form.get("chNum")
+    print books.getChapterSummary(bID, chN)
+    return json.dumps(books.getChapterSummary(bID, chN))
+
 
 #=================== END SITE NAVIGATION =======================
 

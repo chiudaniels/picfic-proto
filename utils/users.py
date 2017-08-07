@@ -74,7 +74,7 @@ def getCC( uID, bookID ):
         return entry.curCC
     return 0
 
-def bookmark( uID, bID, chN, ccStart ):
+def bookmark( uID, bID, chN, ccStart):
     session = Session()
     usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bID)
     if usr.count() == 0:
@@ -86,8 +86,12 @@ def bookmark( uID, bID, chN, ccStart ):
         return False
     else:
         entry = usr.one()
+        #if int(pgN) != -1:
         entry.curChapter = chN
         entry.curCC = ccStart
+        #else:
+         #   entry.curChapter = chN
+          #  entry.curCC = -1
         session.commit()
         session.close()
     return True
