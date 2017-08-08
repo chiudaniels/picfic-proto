@@ -247,8 +247,13 @@ def uploadStoryFile():
 
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
-    
+    metaText = request.form["meta"]
+    text = request.form["text"]
     return True
+
+@app.route('/uploadStoryCoverPic/', methods = ['POST'])
+def uploadStoryCover():
+    return True #see cover art
 
 # Photo Upload ==================================================================
 
