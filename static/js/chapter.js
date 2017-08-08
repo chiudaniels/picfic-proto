@@ -84,7 +84,7 @@ for (var i = 0; i < imageArray.length; i++) {
 */
 function makeSlides(img) {
     newSlide = document.createElement("div");
-    img.setAttribute("class", "mySlides")
+    img.setAttribute("class", "slideImages")
     newSlide.appendChild(img);
     $("#slideMaster").append(newSlide);
 }
