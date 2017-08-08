@@ -74,7 +74,7 @@ function makeThumbnail(img) {
     newThumb = document.createElement("div");
     img.setAttribute("class", "thumbnails")
     newThumb.appendChild(img);
-    $("#gallery-thumbnail").append(newThumb);
+    $(".gallery-thumbnail").append(newThumb);
 }
 
 /*
