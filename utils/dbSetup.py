@@ -388,6 +388,7 @@ class UserChapter(Base):
         self.chapterID = chID
         self.readerID = uID
         self.config = ""
+        self.permissions = 1 #allow reading by default haha
 
     
 # END CLASS DEFINITIONS ======================================

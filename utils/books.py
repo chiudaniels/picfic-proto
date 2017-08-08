@@ -176,15 +176,45 @@ def getBookLanding( bookID ):
         session.close()
         return ret
 
+def getTableOfContents( bookID, userID ):
+    bookID = int(bookID)
+    session = Session()
+    chapters = session.query(Chapter).filter(Chapter.bookID == bookID).order_by(Chapter.chapterNum).all()
+    ret = []
+    for chapter in chapters:
+        chData = {"chapterNum" : chapter.chapterNum,
+                  "title" : chapter.title,
+                  "permit" : getPermit(chapter.chapterID, userID)
+        }
+        ret.append(chData)
+    session.close()
+    return ret
+
+def getPermit( chapterID, userID ):
+    session = Session()
+    if userID == None:
+        ret = 1 #free permits for everyone! #Todo, replace with chapterID default perm
+    q = session.query(UserChapter).filter(UserChapter.readerID == userID, UserChapter.chapterID == chapterID)
+    if q.count() == 1:
+        ret = q.one().permissions    
+    session.close()
+    return ret
 
 def getPageData( bookID, chNum, userID ):
     session = Session()
     bookID = int(bookID)
     chNum = int(chNum)
     bookmark = users.getCC(userID, bookID) #gets character count
-    print "GET PAGE DATA DEBUG"
-    print bookmark
-    
+    chapterID = getChapterID(bookID, chNum)
+    #register in UserChapter when first page of book is retrieved
+
+    if userID != None:
+        usrChQ = session.query(UserChapter).filter(UserChapter.readerID == userID, UserChapter.chapterID == chapterID)
+    if usrChQ.count() == 0:
+        newUserChapter = UserChapter(userID, chapterID)
+        session.add(newUserChapter)
+        session.commit()
+        
     properChQ = session.query(UserBook).filter(UserBook.readerID == userID, UserBook.bookID == bookID)
     if properChQ.count() == 0:
         properCh = 0

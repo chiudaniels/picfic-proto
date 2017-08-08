@@ -116,7 +116,11 @@ def bookRedir(bookID):
 def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
     #print data["pgData"]
+    data.update(books.getTableOfContents(bookID, getUserID()))
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
+
+#todo : refuse permission if access not given
+#todo: grant free access on chapters 
 
 #How do i pass data about the page to the router if not in the url?
 @app.route("/getPage/", methods = ["POST"])

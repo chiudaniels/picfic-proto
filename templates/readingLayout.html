@@ -4,9 +4,15 @@
   <head>
     <title>{% block title %}{% endblock%}</title>
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>-->
     <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
     {% block css %}{% endblock %}
@@ -17,7 +23,9 @@
 
   <body>
     <nav class="navbar">
+    {% if showMenu == 1 %}
       <a href="#" data-toggle="modal" data-target="#tocModal"><img src="/static/png/Menu.png" class="navMenu"></a>
+    {% endif %}
       <a href="/"><img src="/static/svg/PicFic.svg" class="navpicficLogo"></a>
 
       <div class="dropdown-container">
@@ -33,16 +41,30 @@
     </nav>
 
     <!-- CLASS: toc --------- ID: tocModal ------------------------------------>
-
+    
+    {% if showMenu == 1 %}
     <div class="modal fade" id="tocModal" role="dialog">
       <div class="modal-dialog toc">
-	<div class="modal-content">
+	     <div class="modal-content">
 	  <div class="blurrify"></div>
 	  <div class="modal-header" style="text-align: center" hidden="true"></div>
 	  <div class="modal-body">
 	    <br><p class="taboc">TABLE OF CONTENTS</p><br><br><br>
-	    <br>
+	    <br><a href="/books/{{data['bookID']}}">Back To Landing</a>
+      <br>
 	    <p class="bookParts">
+        
+        {% for ch in data["chData"]}
+        {% if ch["permit"] == 1 %}
+        <a class = "btn" href="/books/{{data['bookID']}}/read/{{ch['chapterNum']}}">
+          {{ch["title"]}}</a>
+        {% else %}
+        <a class = "btn disabled" href="/books/{{data['bookID']}}/read/{{ch['chapterNum']}}">
+          {{ch["title"]}}</a>
+        {% endif %}
+        <br>            
+        {% endfor %}
+        <!--
 	      PART I<br><br>
 	      Chapter I. Sherlock Holmes<br>
 	      Chapter II. The Science of Deduction<br>
@@ -54,15 +76,16 @@
 	      Chapter I. On the Great Alkali Plain<br>
 	      Chapter II. The Flower of Utah<br>
 	      Chapter III. John Ferrier Talks with the Prophet<br>
-	      b<br> b<br> b<br> b<br> b<br> b<br> b<br> b<br>
+	      b<br> b<br> b<br> b<br> b<br> b<br> b<br> b<br>-->
 	    </p>
+      
 	  </div>
 	</div>
 	<div class="modal-footer">
 	</div>
       </div>
     </div>
-
+    {% endif %}
     {% block content %}{% endblock %}
     
     
