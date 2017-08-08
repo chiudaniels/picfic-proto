@@ -50,16 +50,16 @@
 	  <div class="modal-header" style="text-align: center" hidden="true"></div>
 	  <div class="modal-body">
 	    <br><p class="taboc">TABLE OF CONTENTS</p><br><br><br>
-	    <br><a href="/books/{{data['bookID']}}">Back To Landing</a>
+	    <br><a href="/books/{{pageData['bookID']}}">Back To Landing</a>
       <br>
 	    <p class="bookParts">
         
-        {% for ch in data["chData"]}
+        {% for ch in pageData["chData"] %}
         {% if ch["permit"] == 1 %}
-        <a class = "btn" href="/books/{{data['bookID']}}/read/{{ch['chapterNum']}}">
+        <a class = "btn" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
           {{ch["title"]}}</a>
         {% else %}
-        <a class = "btn disabled" href="/books/{{data['bookID']}}/read/{{ch['chapterNum']}}">
+        <a class = "btn disabled" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
           {{ch["title"]}}</a>
         {% endif %}
         <br>            

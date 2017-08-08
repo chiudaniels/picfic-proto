@@ -188,15 +188,15 @@ def getTableOfContents( bookID, userID ):
         }
         ret.append(chData)
     session.close()
-    return ret
+    return {"chData" : ret}
 
 def getPermit( chapterID, userID ):
     session = Session()
-    if userID == None:
-        ret = 1 #free permits for everyone! #Todo, replace with chapterID default perm
-    q = session.query(UserChapter).filter(UserChapter.readerID == userID, UserChapter.chapterID == chapterID)
-    if q.count() == 1:
-        ret = q.one().permissions    
+    ret = 1 #change this to get default
+    if userID != None:
+        q = session.query(UserChapter).filter(UserChapter.readerID == userID, UserChapter.chapterID == chapterID)
+        if q.count() == 1:
+            ret = q.one().permissions    
     session.close()
     return ret
 

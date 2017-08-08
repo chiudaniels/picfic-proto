@@ -97,7 +97,7 @@ def galleryPage(pageNum):
 @app.route("/books/<int:bookID>")
 def bookLanding(bookID):
     metadata = books.getBookLanding(bookID)
-    return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata)
+    return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, showMenu = 0)
 
 # == reading =====
 
@@ -117,7 +117,7 @@ def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
     #print data["pgData"]
     data.update(books.getTableOfContents(bookID, getUserID()))
-    return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data)
+    return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data, showMenu = 1)
 
 #todo : refuse permission if access not given
 #todo: grant free access on chapters 
