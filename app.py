@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 from threading import Thread
 from itsdangerous import URLSafeSerializer, BadSignature
 import flask
-from utils import users, books, gallery, images, admin
+from utils import users, books, gallery, images, admin, uploadStory
 from werkzeug.utils import secure_filename
 import json, os
 from bson import BSON

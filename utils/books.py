@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
-import string, re
+import string, re, datetime
 import users, images
 
 Session = sessionmaker()
@@ -9,6 +9,13 @@ engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 Session.configure(bind=engine)
 
+def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
+    metaList = [title, author, datetime.date.today(), blurb, "", userID]
+    storyArr = storyText.split("\n")
+    bID = parseBook(storyArr, metaList)
+    setCover(bID, coverUrl)
+    return bID
+    
 def parseBookRaw(textStr, metaStr):
     textArrRaw = textStr.split("\n")
     metaArrRaw = metaStr.split("\n")
@@ -88,7 +95,7 @@ def parseBook(textArr, metaArr):
 
     session.close()
     
-    return True
+    return bookID
 
 def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session = Session()
