@@ -237,8 +237,9 @@ def changeTag():
 # Story Upload ==================================================================
 @app.route('/uploadStory/')
 def uploadStoryPage():
-    if isLoggedIn() and isActive(getUserID()):
-        return render_template('uploadStory.html', isLoggedIn = isLoggedIn())
+    if isLoggedIn() and users.isActive(getUserID()):
+        data = uploadStory.getUploadStoryData(getUserID())
+        return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
     return redirect('/')
 
 @app.route('/uploadStoryFile/', methods = ['POST'])
