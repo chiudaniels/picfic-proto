@@ -1,57 +1,80 @@
-var slideIndex = 0;
-var thumbIndex = 0;
-var uploadArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
-var likedArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
-var thumbs = document.getElementsByClassName("thumbnails");
+var editPersonalBtn = document.getElementById("editPersonal");
+var editAbout = document.getElementById("editAbout");
+var editGenre = document.getElementById("editGenre");
+var editBS = document.getElementById("editBS");
+var editAuthors = document.getElementById("editAuthors");
+var editAccountBtn = document.getElementById("editAccount");
+var editEmail = document.getElementById("editEmail");
+var editGender = document.getElementById("editGender");
 
-var editMeBtn = document.getElementById('editMe');
-var eAM = document.getElementById('editAboutMe');
-var eAM2 = document.getElementById('editAboutMe2');
-var eAM3 = document.getElementById('editAboutMe3');
-var editAccountBtn = document.getElementById('editAccount');
-var eMA = document.getElementById('editMyAccount');
-var eMA2 = document.getElementById('editMyAccount2');
-var eMA3 = document.getElementById('editMyAccount3');
-
-
+editPersonalBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (editGenre.isContentEditable) {
+        // Disable Editing
+	editPersonalBtn.innerHTML = 'Edit';
+        // You could save any changes here.
+        // Disable Editing
+	editAbout.contentEditable = "false";
+	editBS.contentEditable = "false";
+	editAuthors.contentEditable = "false";
+	editGenre.contentEditable = "false";
+	
+	$.ajax({
+	    url: "/saveProfile/",
+	    type: "POST",
+	    data: {
+		"about": editAbout.innerHTML,
+		"genre": editGenre.innerHTML,
+		"bs": editBS.innerHTML,
+		"authors": editAuthors.innerHTML
+	    },
+	    datatype: "json",
+	    success: function(response){
+		console.log("profile saved");
+	    },
+	    error: function(data){
+		console.log(data);
+		console.log("profile error");
+	    }
+	});
+	
+    } else {
+        editAbout.contentEditable = 'true';
+        editGenre.contentEditable = 'true';
+        editAuthors.contentEditable = 'true';
+	editBS.contentEditable = 'true';
+	editAbout.focus();
+        editPersonalBtn.innerHTML = 'Save';
+    }
+});
+/*
 editAccountBtn.addEventListener('click', function(e) {
     e.preventDefault();
 
-    if (eMA.isContentEditable) {
+    if (editEmail.isContentEditable) {
         // Disable Editing
-        eMA.contentEditable = 'false';
+        editEmail.contentEditable = 'false';
+        // You could save any changes here.
+        // Disable Editing
+        //editEmail.contentEditable = 'false';
+        editGender.contentEditable = 'false';
         editAccountBtn.innerHTML = 'Edit';
-        // You could save any changes here.
-        // Disable Editing
-        eMA.contentEditable = 'false';
-        eMA2.contentEditable = 'false';
-        eMA3.contentEditable = 'false';
-        editAccountBtn.innerHTML = 'Edit';
-        // You could save any changes here.
-    } else {
-        eMA3.contentEditable = 'true';
-        eMA3.focus();
-        eMA2.contentEditable = 'true';
-        eMA2.focus();
-        eMA.contentEditable = 'true';
-        eMA.focus();
-        editAccountBtn.innerHTML = 'Save';
-    }
-});
 
-editMeBtn.addEventListener('click', function(e) {
-    e.preventDefault();
+	$.ajax({
+	    url : "/saveAccount/",
+	    type: "POST",
+	    data: {
+		"gender": editGender.innerHTML,
+	    },
+	    dataType: "json",
+	    success: function(response) {
+		console.log("user reading bookmarked");
+	    },
+	    error: function(data) {
+		console.log(data);
+	    }
+	});
 
-    if (eAM.isContentEditable) {
-        // Disable Editing
-        eAM.contentEditable = 'false';
-        editMeBtn.innerHTML = 'Edit';
-        // You could save any changes here.
-        // Disable Editing
-        eAM.contentEditable = 'false';
-        eAM2.contentEditable = 'false';
-        eAM3.contentEditable = 'false';
-        editMeBtn.innerHTML = 'Edit';
         // You could save any changes here.
     } else {
         eAM3.contentEditable = 'true';
@@ -64,59 +87,7 @@ editMeBtn.addEventListener('click', function(e) {
     }
 });
 
-
-
-function source2img(path) {
-    var newImage = new Image();
-    newImage.src = path;
-    return newImage;
-}
-
-function makeUploads(img) {
-    newSlide = document.createElement("div");
-    img.setAttribute("class", "slides")
-    newSlide.appendChild(img);
-    $(".uploaded").append(newSlide);
-}
-
-function makeLiked(img) {
-    newSlide = document.createElement("div");
-    img.setAttribute("class", "slides")
-    newSlide.appendChild(img);
-    $(".liked").append(newSlide);
-}
-
-function setGalleries() {
-    for (var i = 0; i < uploadArray.length; i++) {
-        makeUploads(source2img(uploadArray[i]));
-    }
-    for (var i = 0; i < likedArray.length; i++) {
-        makeLiked(source2img(likedArray[i]));
-    }
-
-    $(document).ready(function() {
-        $('.uploaded').slick({
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            focusOnSelect: true
-        });
-    });
-
-
-    $(document).ready(function() {
-        $('.liked').slick({
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            focusOnSelect: true
-        });
-    });
-
-}
-
-
-if (!document.all) document.captureEvents(Event.MOUSEUP);
+*/
 
 //LOAD GALLERIES
 
@@ -128,10 +99,10 @@ var loadProfile = function() {
             "username": username //I'll figure this out somehow...
         },
         success: function(response) {
-            likedArray = response["liked"];
-            uploadArray = respsonse["uploaded"];
-            setGalleries();
-            console.log("Galleries set");
+            //likedArray = response["liked"];
+            //uploadArray = respsonse["uploaded"];
+            //setGalleries();
+            //console.log("Galleries set");
         },
         error: function(data) {
             console.log("book landing error");
@@ -142,5 +113,5 @@ var loadProfile = function() {
 }
 
 $(document).ready(function() {
-    loadProfile();
+    //loadProfile();
 });

@@ -2,6 +2,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
 import books, images
+import string, re
 
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
@@ -251,7 +252,7 @@ def getUploadedArt( uID ):
     myUploads = []
     q = session.query(Art).filter(Art.uploaderID == uID).all()
     for art in q:
-        myUploads.append(images.getArtPreview(art.uploaderID, uID))
+        myUploads.append(images.getArtPreview(art.artID, uID))
     session.close()
     return {"uploadedArt": myUploads}
 
@@ -263,3 +264,15 @@ def getLikedArt( uID ):
         myLiked.append(images.getArtPreview(like.uploaderID, uID))
     session.close()
     return {"uploadedArt": myLiked}
+
+
+def saveProfile(data, uID):
+    session = Session()
+
+    usrP = session.query(UserProfile).filter(User.userID == uID).one()
+    usrP.favoriteBooks = data["bs"].strip()
+    usrP.favoriteAuthors = data["authors"].strip()
+    usrP.favoriteGenres = data["genre"].strip()
+    usrP.about = data["about"].strip()
+    session.commit()
+    session.close()

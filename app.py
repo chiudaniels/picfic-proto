@@ -74,6 +74,20 @@ def userProfilePage(username):
     return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
 
+@app.route("/saveProfile/", methods = ['POST'])
+def saveProfile():
+    print request.form
+    #d = {
+     #   "about": request.form["about"],
+      #  "bs": request.form["bs"],
+       # "genres": request.form.get("genres"),
+       # "authors": request.form.get("authors")
+    #}
+    #try to eventually sanitize this
+    users.saveProfile(request.form.to_dict(), getUserID())
+    print "well we got here, what's wrong"
+    return json.dumps({"status":1})
+    
 # == Book Gallery Browsing ==========================
 
 @app.route("/gallery/")

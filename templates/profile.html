@@ -1,5 +1,5 @@
 {% extends 'baseLayout.html' %} {% block css %}
-<link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css" )>
+<link rel="stylesheet" type="text/css" href="/static/css/launchpad_stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}" /> {% endblock %} {% block content %}
 <div class="profileBackground">
@@ -11,38 +11,43 @@
         </div>
         <div class="about">
             <h5 class="f"> About Me</h5>
-            <button class="edit" id="editMe">Edit</button>
+            <button class="edit" id="editPersonal">Edit</button>
             <br>
             <br>
-            <p>{{data["about"]}}
+            <p>
+	      <div id="editAbout">
+		{{data["about"]}}
+	      </div>
+	    </p>
+	    <p>
                 <br>
                 <br> Genres:
-                <div id="editAboutMe"> {{data["favGenres"]}}</div>
+                <div id="editGenre"> {{data["favGenres"]}}</div>
             </p>
             <br>
             <p>Books/Series:
-                <div id="editAboutMe2">{{data["favBooks"]}}</div>
+                <div id="editBS">{{data["favBooks"]}}</div>
             </p>
             <br>
             <p>Authors:
-                <div id="editAboutMe3"> {{data["favAuthors"]}}</div>
+                <div id="editAuthors"> {{data["favAuthors"]}}</div>
             </p>
             <br> {% if perm == 1 %}
             <h5 class="e">My Account</h5>
-            <button class="edit" id="editAccount">Edit</button>
+            <!--<button class="edit" id="editAccount">Edit</button>-->
             <br>
             <br>
             <p>
                 Email:
-                <div id="editMyAccount">{{data["email"]}}</div>
+                <div id="editEmail">{{data["email"]}}</div>
             </p>
             <br>
             <p>Birthday:
-                <div id="editMyAccount2">{{data["birthday"]}}</div>
+                <div id="editBirthday">{{data["birthday"]}}</div>
             </p>
             <br>
             <p>Gender:
-                <div id="editMyAccount3">{{data["gender"]}}</div>
+                <div id="editGender">{{data["gender"]}}</div>
             </p>
             {% endif %}
         </div>
@@ -73,7 +78,8 @@
         </div>
         <br <h5> Uploaded by me</h5>
         <div class="row uploaded">
-        </div>
+	  <!-- more galleries lmao -->
+	</div>
         <br>
         <h5> Liked by me</h5>
         <div class="row liked">
@@ -127,7 +133,7 @@
             <div class="modal-header" style="text-align: center" hidden="true"></div>
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                <img src="/static/svg/PicFic.svg" class="modalpicfic">
                 <br>
                 <br>
                 <br>
