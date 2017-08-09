@@ -16,7 +16,7 @@ bcrypt = Bcrypt(app)
 mail=Mail(app)
 app.secret_key = "secrets"
 
-UPLOAD_FOLDER = "static/data/images/"
+UPLOAD_FOLDER = "static/data/"
 ALLOWED_EXTENSIONS = set(["jpg", "jpeg", "png"])
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -76,18 +76,27 @@ def userProfilePage(username):
 
 @app.route("/saveProfile/", methods = ['POST'])
 def saveProfile():
-    print request.form
-    #d = {
-     #   "about": request.form["about"],
-      #  "bs": request.form["bs"],
-       # "genres": request.form.get("genres"),
-       # "authors": request.form.get("authors")
-    #}
     #try to eventually sanitize this
     users.saveProfile(request.form.to_dict(), getUserID())
-    print "well we got here, what's wrong"
     return json.dumps({"status":1})
-    
+
+@app.route("/saveProfilePic/", methods = ['POST'])
+def saveProfilePic():
+    print "saving profile pic"
+    if 'file' not in request.files:
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        print "shocking"
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'] + "profilePics/", filename))
+        users.saveProfilePic(getUserID(), filename)
+        return json.dumps({"status": 1})
+    return None
+
+
 # == Book Gallery Browsing ==========================
 
 @app.route("/gallery/")
@@ -262,9 +271,45 @@ def uploadStoryFile():
 
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
-    metaText = request.form["meta"]
-    text = request.form["text"]
-    return True
+    if request.method == 'POST':
+        print "WOW! A story is being made!"
+        #    files = request.files.getlist('file[]')
+        print request.files
+        file1 = request.files['file[0]']
+        file2 = request.files['file[1]']
+        textFile = None
+        coverFile = None
+        if file1.filename.endswith('.txt'):
+            textFile = file1
+            coverFile = file2
+        else:
+            textFile = file2
+            coverFile = file1
+        coverFile = request.files['file[0]']
+        textFile = request.files['file[1]']
+        if coverFile.filename == '' or textFile.filename == '':
+            print "sucky file"
+            return redirect(request.url)
+        if coverFile and allowed_file(coverFile.filename):
+            print "what's up"
+            filename = secure_filename(coverFile.filename)
+            print "g"
+            coverFile.save(os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", filename))
+            
+            print "oh"
+            #make the book first
+            print request.form
+            title = request.form["title"]
+            author = request.form["author"]
+            #text = request.form["storyText"]
+            blurb = request.form["blurb"]
+            #print "boi"
+            #print text
+            #books.parseBookForm(title, author, blurb, text, getUserID(), filename)
+            books.parseBookCustom(textFile, title, author, blurb, getUserID(), filename)
+            print "and it was mada mada!"
+            return redirect(request.url) 
+        return False
 
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])
 def uploadStoryCover():
@@ -301,7 +346,7 @@ def upload_file():
         cStart = request.form["startCC"]
         cEnd = request.form["endCC"]
         print "RECEIVING DATA FROM FORM"
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'] + "images/", filename))
         images.uploadArt(filename, getUserID(), caption, cStart, cEnd, bID, chN)
         url = request.url.replace("/uploadArt/", "")
         return redirect(url)
@@ -402,7 +447,7 @@ def get_activation_link(uID): #user
 
 
 # General Helpers =====================================
-
+ 
 # Login Helpers
 def isLoggedIn():
     if "uID" in session:

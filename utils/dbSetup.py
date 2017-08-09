@@ -173,6 +173,7 @@ class UserProfile(Base):
 class Art(Base):
     __tablename__ = "Art"
 
+    # Table Fields
     artID = Column(Integer, primary_key = True)
     uploaderID = Column(Integer, ForeignKey("Users.userID"))
     caption = Column(String)
@@ -191,8 +192,8 @@ class Art(Base):
     likers = relationship("User", secondary = "Likes", back_populates="liked") #many to many
     
     #Constraints
-    CheckConstraint('ccStart > 0', name='posCC')
-    CheckConstraint('ccEnd > 0', name='limCC')
+    CheckConstraint('ccStart > 0', name='posCC') # Update Later
+    CheckConstraint('ccEnd > 0', name='limCC') # Update Later
 
     def __repr__(self):
         return "<Art(id='%d',uploader='%d'),>" % (
@@ -237,7 +238,7 @@ class Book(Base):
     #Author is just string rn, extend to author profiles
     author = Column(String(50), nullable = False)
     authorID = Column(Integer, ForeignKey("Users.userID"), default = 0)
-    release = Column(Date) #lol fix this
+    release = Column(Date) 
     title = Column(String(200))
     misc = Column(String)
     blurb = Column(String(2000))
@@ -387,7 +388,7 @@ class UserChapter(Base):
     def __init__(self, uID, chID):
         self.chapterID = chID
         self.readerID = uID
-        self.config = ""
+        self.config = "default"
         self.permissions = 1 #allow reading by default haha
 
     
@@ -395,6 +396,6 @@ class UserChapter(Base):
 
 
 def makeTables():
-    Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine) # Creates tables
 
 makeTables()

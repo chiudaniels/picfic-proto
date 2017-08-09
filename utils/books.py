@@ -12,6 +12,7 @@ Session.configure(bind=engine)
 def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
     storyArr = storyText.split("\n")
+    print storyArr
     bID = parseBook(storyArr, metaList)
     setCover(bID, coverUrl)
     return bID
@@ -29,6 +30,14 @@ def parseBookFile(textFilename, metaFilename):
     textText = textFile.readlines()
     textFile.close()
     return parseBook(textText, metaList)
+
+def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
+    metaList = [title, author, datetime.date.today(), blurb, "", userID]
+    textText = textFile.readlines()
+    textFile.close()
+    bID = parseBook(textText, metaList)
+    setCover(bID, coverUrl)
+    return bID
     
 def parseBook(textArr, metaArr):
     session = Session()
@@ -46,8 +55,11 @@ def parseBook(textArr, metaArr):
         else:
             textText.append(line)
     for ln in metaArr:
-        line = filter(lambda x: x in printable, ln)
-        if line.isspace():
+        line = ln
+        if isinstance(line, basestring):
+            line = filter(lambda x: x in printable, ln)
+            
+        if isinstance(line, basestring) and line.isspace():
             continue
         else:
             metaList.append(line)
@@ -66,6 +78,7 @@ def parseBook(textArr, metaArr):
     session.flush()
     #retrieve that bookID!
     bookID = newBook.bookID
+    print "MAKING NEW BOOK\n\n\n"
     #Distinguish chapters for parsing, modularized for future
     chapterMasterArr = []
     curChDict = {}
@@ -213,6 +226,9 @@ def getPageData( bookID, chNum, userID ):
     chNum = int(chNum)
     bookmark = users.getCC(userID, bookID) #gets character count
     chapterID = getChapterID(bookID, chNum)
+    print bookID
+    print chNum
+    print chapterID
     #register in UserChapter when first page of book is retrieved
 
     if userID != None:

@@ -209,10 +209,11 @@ def follow(uID, toFollowID):
         return False
 
 #Implement a cleaning mechanism for old profile pictures...    
-def setImage( uID, url ):
+def saveProfilePic( uID, url ):
     session = Session()
-    p = session.query(User).filter(User.userID == userID).one()
+    p = session.query(UserProfile).filter(UserProfile.userID == uID).one()
     p.picUrl = url
+    print "what's gone wrong"
     session.commit()
     session.close()
 

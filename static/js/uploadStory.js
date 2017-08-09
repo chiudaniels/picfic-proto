@@ -1,4 +1,5 @@
-Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
+var formSubmit = document.getElementById("submitStoryBtn");
+Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of the form element
 
   // The configuration we've talked about above
   autoProcessQueue: false,
@@ -8,16 +9,28 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
 
   // The setting up of the dropzone
   init: function() {
-    var myDropzone = this;
+      var myDropzone = this;
+      formSubmit.setAttribute("display", "none");
+      formSubmit.addEventListener("click", function() {
+          myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+      });
+
+      // You might want to show the submit button only when 
+      // files are dropped here:
+      this.on("addedfile", function() {
+          formSubmit.setAttribute("display", "inline");
+          // Show submit button here and/or inform user to click it.
+      });
 
     // First change the button to actually tell Dropzone to process the queue.
-    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+      /*
+      this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
       // Make sure that the form isn't actually being sent.
       e.preventDefault();
       e.stopPropagation();
       myDropzone.processQueue();
     });
-
+*/
     // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
     // of the sending event because uploadMultiple is set to true.
     this.on("sendingmultiple", function() {
