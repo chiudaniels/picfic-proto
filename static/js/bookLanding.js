@@ -7,14 +7,13 @@ var loadBookLanding = function(){
 	},
 	success: function(response){
 	    artArray = response;
+	    console.log(artArray);
 	    setGallery();
 	},
 	error: function(data){
 	    console.log("book landing error");
 	}
     });
-    
-   
 }
 
 $(document).ready(function() {

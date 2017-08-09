@@ -122,6 +122,13 @@ def bookLanding(bookID):
     metadata = books.getBookLanding(bookID)
     return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, showMenu = 0)
 
+@app.route("/getBookLandingImages/", methods=['POST'])
+def bookLandingImages(): #lazy jump
+    metadata = books.getBookLanding(int(request.form["bookID"]))
+    print "no screw you"
+    return json.dumps(metadata["imageData"])
+
+
 # == reading =====
 
 

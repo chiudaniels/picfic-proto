@@ -217,7 +217,7 @@ def getBookPreview( bookID ):
     }
     session.close()
     return ret
-} 
+ 
 
 # getBookLanding (..) - get data for book landing page 
 # pre  : int    bookID - id of book to update
@@ -227,7 +227,7 @@ def getBookPreview( bookID ):
 #          String coverUrl  : filename of book cover
 #          String backgroundUrl : filename of book background
 #          String author    : author name
-#          dict imageData : dictionary of art pieces associated with book
+#          dict imageData : list of dictionaries of art pieces associated with book
 #          dict meta      : metadata about book [see code] } 
 def getBookLanding( bookID ):
     bookID = int(bookID)
