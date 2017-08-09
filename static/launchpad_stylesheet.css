@@ -334,7 +334,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1000px) {
     #laptop1 {
         padding-left: 5px;
         margin: auto;
@@ -387,7 +387,7 @@ body {
         margin: auto;
         text-align: center;
         left: 31.5vw;
-        top: 275vh;
+        top: 270vh;
         position: relative;
     }
     .pagefourcontainer {
@@ -454,7 +454,7 @@ body {
     }
 
     #picficdesc {
-        font-size: 2.4vh;
+        font-size: 2.4vmax;
         max-width: 60vw;
     }
 
@@ -464,7 +464,7 @@ body {
         margin: auto;
         text-align: center;
         left: 2vw;
-        top: 275vh;
+        top: 278.5vh;
         position: relative;
     }
     .pagefourcontainer {
@@ -474,5 +474,29 @@ body {
         align-content: center;
         top: 285vh;
         left: 0;
+    }
+
+    .pagefourcontent {
+        padding-top: 5vh;
+        font-size: 2vmax;    
+    }
+
+    .picficLogo {
+        left: 0;
+        padding-left: 15vw;
+        height: 12vh;
+        width: auto;
+        fill: black;
+        stroke: black;
+        opacity: 1;
+        text-align: center;
+    }
+
+    #watpic {
+        font-weight: bold;
+    }
+
+    .fullpagefive{
+        display:none;
     }
 }

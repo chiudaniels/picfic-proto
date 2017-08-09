@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <title>{% block title %}{% endblock%}</title>
-  <!-- bootstrap -->
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <meta charset="utf-8">
@@ -13,529 +13,554 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
-    {% block css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css"> {% block css %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css" />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
-    
-    {% block head %}{% endblock %}
-
+    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com"> {% block head %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <script src="https://apis.google.com/js/api:client.js"></script>
-  <script>
-  var googleUser = {};
-  var startApp = function() {
-    gapi.load('auth2', function(){
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      auth2 = gapi.auth2.init({
-        client_id: '887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
-      });
-      attachSignin(document.getElementById('customBtn'));
-    });
-  };
-  function attachSignin(element) {
-    console.log(element.id);
-    auth2.attachClickHandler(element, {},
-        function(googleUser) {
-          document.getElementById('name').innerText = "Signed in: " +
-              googleUser.getBasicProfile().getName();
-        }, function(error) {
-          /*alert(JSON.stringify(error, undefined, 2));*/
-        });
-  }
-  </script>
-
-  <style type="text/css">
-    #customBtn:hover {
-    cursor: pointer;
-    }
-  </style>
-  
-  </head>
-
-  <body>
+    <script src="https://apis.google.com/js/api:client.js"></script>
     <script>
-      function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      }
-      function onFailure(error) {
-      console.log(error);
-      }
-      function renderButton() {
-      gapi.signin2.render('my-signin2', {
-      'scope': 'profile email',
-      'width': 500,
-      'height': 50,
-      'longtitle': true,
-      'theme': 'light',
-      'onsuccess': onSuccess,
-      'onfailure': onFailure
-      });
-      }
-    </script>
+    var googleUser = {};
+    var startApp = function() {
+        gapi.load('auth2', function() {
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+                client_id: '887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+            attachSignin(document.getElementById('customBtn'));
+        });
+    };
 
+    function attachSignin(element) {
+        console.log(element.id);
+        auth2.attachClickHandler(element, {},
+            function(googleUser) {
+                document.getElementById('name').innerText = "Signed in: " +
+                    googleUser.getBasicProfile().getName();
+            },
+            function(error) {
+                /*alert(JSON.stringify(error, undefined, 2));*/
+            });
+    }
+    </script>
+    <style type="text/css">
+    #customBtn:hover {
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+    <script>
+    function onSuccess(googleUser) {
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+
+    function onFailure(error) {
+        console.log(error);
+    }
+
+    function renderButton() {
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 500,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'light',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+    </script>
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-    
     <div id="fb-root"></div>
     <script>
-      window.fbAsyncInit = function() {
-      FB.init({
-      appId      :  '1855877571394404', // Set YOUR APP ID
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-      });
-      
-      FB.Event.subscribe('auth.authResponseChange', function(response) 
-      {
-      if (response.status === 'connected') 
-      {
-      document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
-      //SUCCESS
-      
-      }    
-      else if (response.status === 'not_authorized') 
-      {
-      document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
-      
-      //FAILED
-      } else 
-      {
-      document.getElementById("message").innerHTML +=  "<br>Logged Out";
-      
-      //UNKNOWN ERROR
-      }
-      }); 
-      
-      };
-      
-      function Login()
-      {
-      
-      FB.login(function(response) {
-      if (response.authResponse) 
-      {
-      getUserInfo();
-      } else 
-      {
-      console.log('User cancelled login or did not fully authorize.');
-      }
-      },{scope: 'email,user_photos,user_videos'});
-      
-      }
-      
-      function getUserInfo() {
-      FB.api('/me', function(response) {
-      
-      var str="<b>Name</b> : "+response.name+"<br>";
-      str +="<b>Link: </b>"+response.link+"<br>";
-      str +="<b>Username:</b> "+response.username+"<br>";
-      str +="<b>id: </b>"+response.id+"<br>";
-      str +="<b>Email:</b> "+response.email+"<br>";
-      str +="<input type='button' value='Get Photo' onclick='getPhoto();'/>";
-      str +="<input type='button' value='Logout' onclick='Logout();'/>";
-      document.getElementById("status").innerHTML=str;
-      
-      });
-      }
-      function getPhoto()
-      {
-      FB.api('/me/picture?type=normal', function(response) {
-      
-      var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
-      document.getElementById("status").innerHTML+=str;
-      
-      });
-      
-      }
-      function Logout()
-      {
-      FB.logout(function(){document.location.reload();});
-      }
-      
-      // Load the SDK asynchronously
-      (function(d){
-      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement('script'); js.id = id; js.async = true;
-      js.src = "//connect.facebook.net/en_US/all.js";
-      ref.parentNode.insertBefore(js, ref);
-      }(document));
-      function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-      }
-      function fb_login(){
-      FB.login(function(response) {
-      if (response.authResponse) {
-      console.log('Welcome!  Fetching your information.... ');
-      //console.log(response); // dump complete info
-      access_token = response.authResponse.accessToken; //get access token
-      user_id = response.authResponse.userID; //get FB UID
-      FB.api('/me', function(response) {
-      user_email = response.email; //get user email
-      // you can store this data into your database             
-      });
-      } else {
-      //user hit cancel button
-      console.log('User cancelled login or did not fully authorize.');
-      }
-      }, {
-      scope: 'publish_stream,email'
-      });
-      }
-      (function() {
-      var e = document.createElement('script');
-      e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-      e.async = true;
-      document.getElementById('fb-root').appendChild(e);
-      }());
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '1855877571394404', // Set YOUR APP ID
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true // parse XFBML
+        });
+
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if (response.status === 'connected') {
+                document.getElementById("message").innerHTML += "<br>Connected to Facebook";
+                //SUCCESS
+
+            } else if (response.status === 'not_authorized') {
+                document.getElementById("message").innerHTML += "<br>Failed to Connect";
+
+                //FAILED
+            } else {
+                document.getElementById("message").innerHTML += "<br>Logged Out";
+
+                //UNKNOWN ERROR
+            }
+        });
+
+    };
+
+    function Login() {
+
+        FB.login(function(response) {
+            if (response.authResponse) {
+                getUserInfo();
+            } else {
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        }, { scope: 'email,user_photos,user_videos' });
+
+    }
+
+    function getUserInfo() {
+        FB.api('/me', function(response) {
+
+            var str = "<b>Name</b> : " + response.name + "<br>";
+            str += "<b>Link: </b>" + response.link + "<br>";
+            str += "<b>Username:</b> " + response.username + "<br>";
+            str += "<b>id: </b>" + response.id + "<br>";
+            str += "<b>Email:</b> " + response.email + "<br>";
+            str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+            str += "<input type='button' value='Logout' onclick='Logout();'/>";
+            document.getElementById("status").innerHTML = str;
+
+        });
+    }
+
+    function getPhoto() {
+        FB.api('/me/picture?type=normal', function(response) {
+
+            var str = "<br/><b>Pic</b> : <img src='" + response.data.url + "'/>";
+            document.getElementById("status").innerHTML += str;
+
+        });
+
+    }
+
+    function Logout() {
+        FB.logout(function() { document.location.reload(); });
+    }
+
+    // Load the SDK asynchronously
+    (function(d) {
+        var js, id = 'facebook-jssdk',
+            ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
+    function fb_login() {
+        FB.login(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                //console.log(response); // dump complete info
+                access_token = response.authResponse.accessToken; //get access token
+                user_id = response.authResponse.userID; //get FB UID
+                FB.api('/me', function(response) {
+                    user_email = response.email; //get user email
+                    // you can store this data into your database             
+                });
+            } else {
+                //user hit cancel button
+                console.log('User cancelled login or did not fully authorize.');
+            }
+        }, {
+            scope: 'publish_stream,email'
+        });
+    }
+    (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    }());
     </script>
-    
     {% if isLoggedIn != 0 %}
-     <nav class="navbar">
-      <img src="/static/svg/PicFic.svg" class="navpicficLogo">
-      <div class="dropdown-container">
-	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
-	</button>
-	<ul class="dropdown-menu-right dropdown-menu" role="menu">
-	  {% if isLoggedIn == 3 %}
-	  <li>
-	    <a href="/admin/">Admin Panel</a>
-	  </li>
-	 {% endif %}
-	  <li>
-	    <a href="/user/myProfile/">My Profile</a>
-	  </li>
-	  <li>
-	    <a href="/uploadStory/">Upload Story</a>
-	  </li>
-	  <li>
-            <a href="/logout/">Log Out</a>
-          </li>
-	</ul>
-	<div class="showName">{{data["username"]}}</div>
-      </div> <!-- make variable so that other images can be put in -->
+    <nav class="navbar">
+        <img src="/static/svg/PicFic.svg" class="navpicficLogo">
+        <div class="dropdown-container">
+            <button type="button" class="dropdown-toggle user" data-toggle="dropdown">
+            </button>
+            <ul class="dropdown-menu-right dropdown-menu" role="menu">
+                {% if isLoggedIn == 3 %}
+                <li>
+                    <a href="/admin/">Admin Panel</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="/user/myProfile/">My Profile</a>
+                </li>
+                <li>
+                    <a href="/uploadStory/">Upload Story</a>
+                </li>
+                <li>
+                    <a href="/logout/">Log Out</a>
+                </li>
+            </ul>
+            <div class="showName">{{data["username"]}}</div>
+        </div>
+        <!-- make variable so that other images can be put in -->
     </nav>
-
-     {% else %}
-    <nav class="navbar"> <!-- THERE SHOULD BE A DIFFERENT NAVBAR ENTIRELY FOR IF SOMEONE IS LOGGED IN -->
-      <a href="/">
-	<img src="../static/svg/PicFic.svg" class="navpicficLogo">
+    {% else %}
+    <nav class="navbar">
+        <!-- THERE SHOULD BE A DIFFERENT NAVBAR ENTIRELY FOR IF SOMEONE IS LOGGED IN -->
+        <a href="/">
+  <img src="../static/svg/PicFic.svg" class="navpicficLogo">
       </a>
-      <!--<span id="aboutus">
-	  <a href="/about/">ABOUT US</a>
-      </span>-->
-      
-
-      <div class="container-fluid">
-	<!-- Brand and toggle get grouped for better mobile display -->
-
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	  <ul class="nav navbar-nav navbar-right">
-
-            <li><p class="navbar-text"><a href="/about/">ABOUT US</a></p></li>
-	    <li><p class="navbar-text"><a href="/gallery/">COMMUNITY</a></p></li>
-	    <li><p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p></li>
-		<!--
-		    <a href="external-content.htm" rel="#overlay" style="text-decoration:none">
-		      <!-- remember that you can use any element inside the trigger -->
-		      <!--<button type="button">SIGN UP or LOG IN</button>
-			  </a>
-		    
-		    <!-- overlayed element -->
-		    <!--<div class="apple_overlay" id="overlay">
-			<!-- the external content is loaded inside this tag -->
-			<!--<div class="contentWrap"></div>
-			    </div>-->
-
-			
-			{% endif %}
-		    </div><!-- /.navbar-collapse -->
-		    
-	      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <p class="navbar-text"><a href="/about/">ABOUT US</a></p>
+                    </li>
+                    <li>
+                        <p class="navbar-text"><a href="/gallery/">COMMUNITY</a></p>
+                    </li>
+                    <li>
+                        <p class="navbar-text"><a href="#" data-toggle="modal" data-target="#firstModal">SIGN UP or LOG IN</a></p>
+                    </li>
+                    {% endif %}
+            </div>
+        </div>
     </nav>
     {% block content %}{% endblock %}
     <div class="socialMedia">
-      <div class="row logos">
-        <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
-        <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
-        <a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
-      </div>
+        <div class="row logos">
+            <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
+            <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
+            <a href="https://twitter.com/ThePicFic"><img class="logo" src="../static/launchpad/png/twitter.png"></a>
+        </div>
     </div>
     <div class="footer">
-      <img src="../static/svg/PicFic.svg" class="navpicficLogo">
-      <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact Us</a>
-      <p class="cpyright">Copyright ©2017 PicFic</p>
+        <img src="../static/svg/PicFic.svg" class="navpicficLogo">
+        <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact Us</a>
+        <p class="cpyright">Copyright ©2017 PicFic</p>
     </div>
-
-
-
     <!-- CLASS: firstM --------- ID: firstModal ------------------------------------>
-
-    
     <div class="modal fade" id="firstModal" role="dialog">
-      <div class="modal-dialog firstM">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br>
-	    <p>
-	      <br><div class="modaldesc">Sign in to PicFic to read and participate in your favorite stories, serialized.</div><br>
-	      <!--<div class="row">-->
-	      <!--<div class="col-md-12">-->
-	      <img src="../static/png/continueWithGoogle.png" id="customBtn"><br><br>
-	      <div id="name"></div>
-	      <script>startApp();</script>
-	      <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a><br><br>
-	      <img src="../static/png/continueWithTwitter.png"><br><br>
-
-	      
-	      <div class="emailSignButton">
-		<a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Sign in </a>or
-		<a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal"> sign up with email.</a></div>
-	    </p>
-	  </div>
-	</div>
-	<div class="modal-footer">
-	  
-	</div>
-      </div>
+        <div class="modal-dialog firstM">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <p>
+                        <br>
+                        <div class="modaldesc">Sign in to PicFic to read and participate in your favorite stories, serialized.</div>
+                        <br>
+                        <!--<div class="row">-->
+                        <!--<div class="col-md-12">-->
+                        <img src="../static/png/continueWithGoogle.png" id="customBtn">
+                        <br>
+                        <br>
+                        <div id="name"></div>
+                        <script>
+                        startApp();
+                        </script>
+                        <a href="#" onclick="fb_login();"><img src="../static/png/continueWithFacebook.png" border="0" alt=""></a>
+                        <br>
+                        <br>
+                        <img src="../static/png/continueWithTwitter.png">
+                        <br>
+                        <br>
+                        <div class="emailSignButton">
+                            <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Sign in </a>or
+                            <a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal"> sign up with email.</a></div>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-
-
-    <!----------------CLASS: signUpM ------- ID: signUpModal --------------------->
-    
+    <!-- class signup -->
     <div class="modal fade" id="signUpModal" role="dialog">
-      <div class="modal-dialog signUpM">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br>
-
-	    <form action="/register/" class="formStyle" method="POST">
-	      <div class="form-group">
-		<input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
-	      </div>
-	      <div class="form-group">
-		<input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name">
-	      </div>	      
-	      <div class="form-group">
-		<input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
-	      </div>
-	      <div class="form-group">
-		<input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email">
-	      </div>
-	      <div class="form-group">
-		<input type="text" name="username" class="form-control" id="username" placeholder="Username">
-	      </div>
-	      <div class="form-group">
-		<input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
-	      </div>
-	      <div class="form-group">
-		<input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
-	      </div>
-	      <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
-		<select class="form-control" id="sel1" name="bMonth" placeholder="Month">
-		  <option value="1">January</option>
-		  <option value="2">February</option>
-		  <option value="3">March</option>
-		  <option value="4">April</option>
-		  <option value="5">May</option>
-		  <option value="6">June</option>
-		  <option value="7">July</option>
-		  <option value="8">August</option>
-		  <option value="9">September</option>
-		  <option value="10">October</option>
-		  <option value="11">November</option>
-		  <option value="12">December</option>
-		</select>
-	      </div>
-	      <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
-		<input type="number" name="day" class="form-control" id="day" placeholder="Day">
-	      </div>
-	      <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
-		<input type="number" name="year" class="form-control" id="year" placeholder="Year">
-	      </div><br>
-	      <div class="form-group" style="display:inline-block;" id="gender">
-		<div class="checkbox" style="display:inline-block;">
-		  <label><input type="checkbox" name="gender" value="f">Female</label>
-		</div>
-		<div class="checkbox" style="display:inline-block;margin-left:30px;">
-		  <label><input type="checkbox" name="gender" value="m">Male</label>
-		</div>
-		<div class="checkbox" style="display:inline-block;margin-left:30px">
-		  <label><input type="checkbox" name="gender" value="n">Non-binary</label>
-		</div>
-	      </div>
-	      <p>
-		<stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
-	      </p>
-	      <button type="submit" class="btn submitButton">Test btn</button>
-	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
-	    </form> <br>
-	    <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a><br>
-	    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
-	</div>
-      </div>
+        <div class="modal-dialog signUpM">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <form action="/register/" class="formStyle" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
+                            <select class="form-control" id="sel1" name="bMonth" placeholder="Month">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
+                            <input type="number" name="day" class="form-control" id="day" placeholder="Day">
+                        </div>
+                        <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
+                            <input type="number" name="year" class="form-control" id="year" placeholder="Year">
+                        </div>
+                        <br>
+                        <div class="form-group" style="display:inline-block;" id="gender">
+                            <div class="checkbox" style="display:inline-block;">
+                                <label>
+                                    <input type="checkbox" name="gender" value="f">Female</label>
+                            </div>
+                            <div class="checkbox" style="display:inline-block;margin-left:30px;">
+                                <label>
+                                    <input type="checkbox" name="gender" value="m">Male</label>
+                            </div>
+                            <div class="checkbox" style="display:inline-block;margin-left:30px">
+                                <label>
+                                    <input type="checkbox" name="gender" value="n">Non-binary</label>
+                            </div>
+                        </div>
+                        <p>
+                            <stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
+                        </p>
+                        <button type="submit" class="btn submitButton">Test btn</button>
+                        <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
+                    </form>
+                    <br>
+                    <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a>
+                    <br>
+                    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
+            </div>
+        </div>
     </div>
-
-
-
-    <!-- CLASS: signInM ----------------- IDL signInModal -------------------------->
+    <!-- class signinm -->
     <div class="modal fade" id="signInModal" role="dialog">
-      <div class="modal-dialog signInM">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <form action="/login/" class="formStyle" method="POST">
-	      <div class="form-group">
-		<input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
-	      </div>
-	      <div class="form-group">
-		<input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password">
-	      </div>
-	      <button type="submit" class="btn submitButton" id="signInButton">Sign In</button><br><br><br>
-	    </form>
-	    <a href="#" data-toggle="modal" data-target="#forgot" data-dismiss="modal">Forgot your password?</a><br>
-	    <a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Create new account</a><br>
-	    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div><br>
-	</div>
-      </div>
-      <div class="modal-footer">
-	
-      </div>
+        <div class="modal-dialog signInM">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <form action="/login/" class="formStyle" method="POST">
+                        <div class="form-group">
+                            <input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn submitButton" id="signInButton">Sign In</button>
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+                    <a href="#" data-toggle="modal" data-target="#forgot" data-dismiss="modal">Forgot your password?</a>
+                    <br>
+                    <a href="#" data-toggle="modal" data-target="#signUpModal" data-dismiss="modal">Create new account</a>
+                    <br>
+                    <a href="#" data-toggle="modal" data-target="#firstModal" data-dismiss="modal">Continue with Facebook, Twitter, or Google</a></div>
+                <br>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
     </div>
-
-    <!-- CLASS: forgotPass --------- ID: forgot ------------------------------------>
-
-    
+    <!-- class forgotpass -->
     <div class="modal fade" id="forgot" role="dialog">
-      <div class="modal-dialog forgotPass">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <p style="left:15px;right:15px;"> Enter the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p><br><br>
-	    <form class="formStyle">
-	      <div class="form-group">
-		<input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
-	      </div>
-	      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#forgotEmail" data-dismiss="modal">Send</button><br><br><br><br>
-	    </form>
-	      <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a><br>
-	  </div>
-	</div>
-	<div class="modal-footer">
-	  
-	</div>
-      </div>
+        <div class="modal-dialog forgotPass">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="left:15px;right:15px;"> Enter the email address that you used to register. We'll send you an email with your username and a link to reset your password.</p>
+                    <br>
+                    <br>
+                    <form class="formStyle">
+                        <div class="form-group">
+                            <input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
+                        </div>
+                        <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#forgotEmail" data-dismiss="modal">Send</button>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+                    <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-
-
-    <!-- CLASS: accMadeModal --------- ID: accMade ---------------------------------->
-
-
+    <!-- class accMadeModal -->
     <div class="modal fade" id="accMade" role="dialog">
-      <div class="modal-dialog accMadeModal">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <p>Thanks for creating an account with us. <br><br>Please check your inbox for a link to confirm your email.</p><br><br><br>
-	     <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a><br>	    
-	  </div>
-	</div>
-	<div class="modal-footer">
-	  
-	</div>
-      </div>
+        <div class="modal-dialog accMadeModal">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <p>Thanks for creating an account with us.
+                        <br>
+                        <br>Please check your inbox for a link to confirm your email.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-
-
-     <!-- CLASS: forgotEmailModal --------- ID: forgotEmail ------------------------>
-
+    <!-- class forgot email -->
     <div class="modal fade" id="forgotEmail" role="dialog">
-      <div class="modal-dialog forgotEmailModal">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <p>Email sent!<br><br>Please check your inbox for a link to reset your password.</p><br><br><br>
-	     <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a><br>	    
-	  </div>
-	</div>
-	<div class="modal-footer">
-	</div>
-      </div>
+        <div class="modal-dialog forgotEmailModal">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <p>Email sent!
+                        <br>
+                        <br>Please check your inbox for a link to reset your password.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-
-
-<!-- CLASS: contactModal --------- ID: contact ------------------------>
-
+    <!-- contact modal -->
     <div class="modal fade" id="contact" role="dialog">
-      <div class="modal-dialog contactModal">
-	
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
-	  <div class="modal-body">
-	    <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <img src="../static/svg/PicFic.svg" class="modalpicfic"><br><br><br><br><br><br>
-	    <p>Shoot us an email!<br><br></p>
-	    <form action="mailto:someone@example.com" method="post" enctype="text/plain">
-	      Name:<br>
-	      <input type="text" name="name"><br>
-	      Subject:<br>
-	      <input type="text" name="subject"><br>
-	      E-mail:<br>
-	      <input type="text" name="mail"><br>
-	      Comment:<br>
-	      <textarea name="comment" style="height:100px;width:300px;"></textarea><br><br>
-	      <input type="submit" value="Send">
-	    </form><br><br><br>  
-	  </div>
-	</div>
-	<div class="modal-footer">
-	</div>
-      </div>
+        <div class="modal-dialog contactModal">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="text-align: center" hidden="true"></div>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <img src="../static/svg/PicFic.svg" class="modalpicfic">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <p>Shoot us an email!
+                        <br>
+                        <br>
+                    </p>
+                    <form action="mailto:someone@example.com" method="post" enctype="text/plain">
+                        Name:
+                        <br>
+                        <input type="text" name="name">
+                        <br> Subject:
+                        <br>
+                        <input type="text" name="subject">
+                        <br> E-mail:
+                        <br>
+                        <input type="text" name="mail">
+                        <br> Comment:
+                        <br>
+                        <textarea name="comment" style="height:100px;width:300px;"></textarea>
+                        <br>
+                        <br>
+                        <input type="submit" value="Send">
+                    </form>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
+</body>
+<script src="/static/js/login.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 
-    
-
-
-  </body>
-  <script src="/static/js/login.js"></script>
-  <script src="/static/js/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
 </html>

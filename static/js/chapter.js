@@ -112,7 +112,7 @@ function setGallery() {
         $('.slideshow-images').not('.slick-initialized').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
-            arrows: false,
+            arrows: true,
             fade: true,
             asNavFor: '.gallery-thumbnail'
         });
