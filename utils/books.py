@@ -4,11 +4,22 @@ from dbSetup import *
 import string, re, datetime
 import users, images
 
+# books.py - Book Parsing, Data Mutators and Chapters
+
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 Session.configure(bind=engine)
 
+# parseBookForm (..) - parses book uploaded by form
+# pre  : String title - title of the book
+#        String author - author of the book
+#        String blurb - blurb of the book
+#        String storyText - story text, unparsed
+#        int    userID - user's ID
+#        String coverUrl - filename of the book cover image
+# post : int bID - book ID of created book
+#        database is updated with details of the new book
 def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
     storyArr = storyText.split("\n")
@@ -16,12 +27,18 @@ def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
     bID = parseBook(storyArr, metaList)
     setCover(bID, coverUrl)
     return bID
-    
+
+# parseBookRaw (..) - formats raw data and parses book
+# pre  : String textStr - string with book text
+#        String metaStr - string with author, title, blurb
+# post : int RET - book ID of created book
+#        database is updated with details of the new book, default book cover
 def parseBookRaw(textStr, metaStr):
     textArrRaw = textStr.split("\n")
     metaArrRaw = metaStr.split("\n")
     return parseBook(textArrRaw, metaArrRaw)
 
+# May Not Be Used
 def parseBookFile(textFilename, metaFilename):
     metaFile = open(metaFilename, "r")
     metaList = metaFile.readlines()
@@ -31,6 +48,7 @@ def parseBookFile(textFilename, metaFilename):
     textFile.close()
     return parseBook(textText, metaList)
 
+# Add Docs Later
 def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
     textText = textFile.readlines()
@@ -39,6 +57,11 @@ def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
     setCover(bID, coverUrl)
     return bID
     
+# parseBook (..) - parses data and updates database with book
+# pre  : String[] textArr - array of each line in a story
+#        Object[] metaArr - array of metadata
+# post : int bookID - book ID of created book
+#        book is created in database
 def parseBook(textArr, metaArr):
     session = Session()
 
@@ -64,6 +87,7 @@ def parseBook(textArr, metaArr):
         else:
             metaList.append(line)
     #ur gonna need a better regex filter
+    # double check carriage returns for windows - \r\n vs \n 
     
     #Make book
     bT = metaList[0]
@@ -110,6 +134,12 @@ def parseBook(textArr, metaArr):
     
     return bookID
 
+# addNewChapter (..) - adds a new chapter to existing book
+# pre  : String chTitle - title of chapter
+#        String chText - text for new chapter
+#        int    bookID - ID of book
+#        int    chNum - chapter number
+# post : adds a new chapter to the given book
 def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session = Session()
     #chText is an array
@@ -143,6 +173,10 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session.commit()
     session.close()
 
+# setCover (..) - changes book cover
+# pre  : int    bookID - id of book to update
+#        String url - filename of image 
+# post : book cover is updated
 def setCover( bookID, url ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
@@ -150,13 +184,26 @@ def setCover( bookID, url ):
     session.commit()
     session.close()
 
+# Unused 
+# setBackground (..) - changes book background
+# pre  : int    bookID - id of book to update
+#        String url - filename of background image
+# post : book cover is updated
 def setBackground( bookID, url ):
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     book.backgroundUrl = url
     session.commit()
     session.close()
-    
+
+# getBookPreview (..) - gets preview of book data for use on launchpad
+# pre  : int    bookID - id of book to update
+#        String url - filename of background image
+# post : dict ret - dictionary with preview data
+#        { int    bookID   : ID of book
+#          String title    : title of book
+#          String coverUrl : filename of book cover
+#          String author   : author name } 
 def getBookPreview( bookID ):
     print "getting book preview"
     print bookID
@@ -170,8 +217,18 @@ def getBookPreview( bookID ):
     }
     session.close()
     return ret
+} 
 
-
+# getBookLanding (..) - get data for book landing page 
+# pre  : int    bookID - id of book to update
+# post : dict ret - dictionary with preview data
+#        { int    status    : status of function (0 - fail, 1 - success)
+#          int    bookID    : ID of book
+#          String coverUrl  : filename of book cover
+#          String backgroundUrl : filename of book background
+#          String author    : author name
+#          dict imageData : dictionary of art pieces associated with book
+#          dict meta      : metadata about book [see code] } 
 def getBookLanding( bookID ):
     bookID = int(bookID)
     session = Session()
@@ -196,6 +253,14 @@ def getBookLanding( bookID ):
         session.close()
         return ret
 
+# getTableOfContents (..) - get data for table of contents
+# pre  : int bookID - id of book to update
+#        int userID - id of user  
+# post : dict RET - dictionary of an array of dictionaries with ToC data
+#        chData { 
+#        [ { int    chapterNum : chapter number
+#            String title      : title of chapter
+#            int    permit     : whether user can read the book } ] } 
 def getTableOfContents( bookID, userID ):
     bookID = int(bookID)
     session = Session()
@@ -210,6 +275,10 @@ def getTableOfContents( bookID, userID ):
     session.close()
     return {"chData" : ret}
 
+# getPermit (..) - get permission status 
+# pre  : int chapterID - id of chapter
+#        int userID    - id of user  
+# post : int ret - permission status (1 - allowed to read, 0 - can't read) 
 def getPermit( chapterID, userID ):
     session = Session()
     ret = 1 #change this to get default
@@ -220,6 +289,17 @@ def getPermit( chapterID, userID ):
     session.close()
     return ret
 
+# getPageData (..) - returns data about a page
+# pre  : int bookID - id of book to update
+#        int chNum  - chapter number of book
+#        int userID - id of user 
+# post : dict RET - dictionary of page metadata
+#        { int status     : 0 - fail, 1 - success
+#          int bookID     : book ID
+#          int bookLength : chapter count of book
+#          int chNum      : chapter of page
+#          String chTitle : title of chapter
+#          dict pgData : metadata of page [see getPageInfo] }
 def getPageData( bookID, chNum, userID ):
     session = Session()
     bookID = int(bookID)
@@ -271,7 +351,18 @@ def getPageData( bookID, chNum, userID ):
     session.close()
     return ret
 
-
+# getPageAJAX (..) - returns page data using AJAX 
+# pre  : int bID   - book ID 
+#        int chN   - chapter number
+#        int curCC - current character count, where user has read up to 
+#        int curPg - current page user is up to 
+# post : dict RET - dictionary of page metadata
+#        { int status     : 0 - fail, 1 - success
+#          int bookID     : book ID
+#          int bookLength : chapter count of book
+#          int chNum      : chapter of page
+#          dict imageData : image metadata
+#          dict pgData    : metadata of page [see getPageInfoAJAX] }
 def getPageAJAX(bID, chN, curCC, curPg):
     session = Session()
     bookID = int(bID)
@@ -296,6 +387,10 @@ def getPageAJAX(bID, chN, curCC, curPg):
     session.close()
     return ret
 
+# getEndOfChCC (..) - returns last character count of given chapter
+# pre  : int bID   - book ID 
+#        int chN   - chapter number
+# post : int RET - char count of chapter - 1 
 def getEndOfChCC(bID, chN):
     print "end of ch cc debug"
     print chN
@@ -306,8 +401,11 @@ def getEndOfChCC(bID, chN):
     lastPair = pageCCStrArr[-1].split(",")
     session.close()
     return int(lastPair[1]) - 1
-#return getPageInfo(  , getChapterID(bID, chN))["endCC"] - 1
 
+# getChLength (..) - returns page count of chapter 
+# pre  : int bID   - book ID 
+#        int chN   - chapter number
+# post : int chLength - page count 
 def getChLength(bID, chN):
     session = Session()
     chapter = session.query(Chapter).filter(Chapter.chapterID == getChapterID(bID, chN)).one()
@@ -315,7 +413,15 @@ def getChLength(bID, chN):
     session.close()
     return chLength
     
-#Returns: images. that's it. and chN 
+# getChapterSummary (..) - get images for end of chapter 
+# pre  : int bID   - book ID 
+#        int chN   - chapter number
+# post : dict ret - dictionary with image data
+#        { dict imageData : dict of image data
+#          int bookID     : book ID
+#          int bookLength : length of book
+#          int chapterNum : chapter number
+#          int pgNum      : -1 } 
 def getChapterSummary(bID, chN):
     ret = {}
     bID = int(bID)
@@ -327,7 +433,10 @@ def getChapterSummary(bID, chN):
     ret["pgNum"] = -1
     return ret
     
-#Helpers ======================================
+# Helpers ======================================
+# getBook (..) - gets book object
+# pre  : int bookID - book ID
+# post : Book book - book object
 def getBook( bookID ):
     bookID = int(bookID)
     session = Session()
@@ -335,12 +444,16 @@ def getBook( bookID ):
     session.close()
     return book
 
+# getBookLength (..) - gets number of chapters in a book
+# pre  : int bookID - book ID
+# post : int ret - number of chapters in given book
 def getBookLength( bookID ):
     session = Session()
     ret = session.query(Chapter).filter_by(bookID = bookID).count()
     session.close()
     return ret
-    
+
+# Doc This Later
 #Returns {"pgNum", "text", "chLength", "curCC", "startCC", "endCC"}
 def getPageInfo( cc, chID ):
     
@@ -383,6 +496,7 @@ def getPageInfo( cc, chID ):
     session.close()
     return ret
 
+# Doc This Later
 def getPageInfoAJAX( pgN, chID ):
     ret = {}
     session = Session()
@@ -419,7 +533,10 @@ def getPageInfoAJAX( pgN, chID ):
     session.close()
     return ret
 
-
+# getChapterID (..) - get ID of chapter
+# pre  : int bookID - book ID
+#        int chNum  - chapter number 
+# post : int ret - ID of chapter in given book 
 def getChapterID( bookID, chNum ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.bookID == bookID, Chapter.chapterNum == chNum) #should only give one
@@ -430,7 +547,9 @@ def getChapterID( bookID, chNum ):
     session.close()
     return ret
 
-
+# getChapterTitle (..) - get chapter's title
+# pre  : int chapterID - ID of chapter 
+# post : String ret - chapter title
 def getChapterTitle( chapterID ):
     session = Session()
     res = session.query(Chapter).filter(Chapter.chapterID == chapterID)
@@ -440,18 +559,21 @@ def getChapterTitle( chapterID ):
     ret = res.one().title
     session.close()
     return ret
-    
+
+# getBookTitle (..) - get book's title
+# pre  : int bookID - book ID
+# post : String ret - book title
 def getBookTitle( bookID ):
     session = Session()
     res = session.query(Book).filter(Book.bookID == bookID)
     ret = res.one().title
     session.close()
     return ret
-    
+
+# Debugging Function, Prints __repr__ or __str__ of Object
 def debug(s):
     print "DEBUG"
     print s
     print "END DEBUG"
-
 
 #parseBookManual("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")

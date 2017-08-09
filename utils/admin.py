@@ -3,13 +3,19 @@ from sqlalchemy import create_engine
 from dbSetup import *
 import users, books, images
 
+# admin.py - Administrative Functions for the Admin Page
+
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 Session.configure(bind=engine)
 
-#Admin page code, etc
-
+# getAdminPageData () - returns data used to populate admin page
+# pre  : 
+# post : dict - all the data for all users, stories and art
+#        { dict stories : dictionary form of the story object
+#          dict users   : user data
+#          dict art     : art data } 
 def getAdminPageData():
     session = Session()
     userDataL = session.query(User).all()
@@ -48,7 +54,12 @@ def getAdminPageData():
     session.close()
     return ret
 
-#gets type, id, and action id
+# adminAction (..) - executes actions on admin page
+# pre  : dict dat - data with keys describing what action to perform
+#        { String type  : string form of table accessed [see in line comments]
+#          String act   : string form of action performed [see in line comments]
+#          String rowID : string form of entry }
+# post : action is executed, database is changed appropriately 
 def adminAction(dat):
     session = Session()
     data = {}

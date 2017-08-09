@@ -265,10 +265,12 @@ def uploadStoryPage():
         return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
     return redirect('/')
 
+# Create Later
 @app.route('/uploadStoryFile/', methods = ['POST'])
 def uploadStoryFile():
     return True
 
+# Work on This 
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
     if request.method == 'POST':
@@ -310,7 +312,8 @@ def uploadStoryText():
             print "and it was mada mada!"
             return redirect(request.url) 
         return False
-
+    return False # Not POST 
+    
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])
 def uploadStoryCover():
     return True #see cover art
