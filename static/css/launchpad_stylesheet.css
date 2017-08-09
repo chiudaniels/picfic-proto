@@ -310,6 +310,10 @@ span {
     left: 6vw;
 }
 
+.modal-body{
+    height: 100%;
+}
+
 .modalpicfic {
     position: absolute;
     height: 25px;
@@ -640,9 +644,6 @@ button:focus {
     height: 600px;
     max-height: 100%;
     left: 50%;
-    top: 50%;
-    margin-left: -200px;
-    margin-top: -330px;
     text-align: center;
     font-family: .AppleSystemUIFont;
     font-size: 12px;
@@ -659,7 +660,6 @@ button:focus {
     left: 50%;
     top: 50%;
     margin-left: -200px;
-    margin-top: -200px;
     text-align: center;
     font-family: .AppleSystemUIFont;
     font-size: 12px;
@@ -719,12 +719,10 @@ button:focus {
 }
 
 .formStyle {
-    position: relative;
     left: 50%;
-    margin-left: -150px;
     width: 300px;
+    margin: auto;
     border-radius: 2px;
-    margin-top: -400px;
 }
 
 .bookshelf {
