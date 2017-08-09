@@ -22,6 +22,24 @@ var loadArt = function() {
     }
 }
 
+var setLikes = function(x) {
+    $('#likes').text(x);
+}
+
+var setDesc = function(x) {
+    $('#galDesc').text(x);
+}
+
+var setUploader = function(x) {
+    $('#uploader').text(x);
+}
+
+var setDate = function(x) {
+    $('#dateUploaded').text(x);
+}
+
+
+
 // slideshow //
 // function plusSlides(n) {
 //     showSlides(slideIndex += n);
