@@ -10,6 +10,7 @@ from bson import BSON
 from bson import json_util
 #from utils import decorators import async
 from flask_bcrypt import Bcrypt
+import cStringIO
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -266,6 +267,7 @@ def changeTag():
 
 # Story Upload ==================================================================
 @app.route('/uploadStory/')
+# uploadStoryPage - renders landing page for uploading stories
 def uploadStoryPage():
     if isLoggedIn() and users.isActive(getUserID()):
         data = uploadStory.getUploadStoryData(getUserID())
@@ -280,14 +282,50 @@ def uploadStoryFile():
 # Work on This 
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
-    print "Story being uploaded..."
-    print "Debugging Fields:"
-    print request.form
+    print "Story being uploaded..." # Debugging
+    print "Debugging Fields:", request.form # Debugging
+    print "Debugging Files:", request.files # Debugging
+    print "Number of Keys:", len(request.form) # Debugging
+    print "Number of Files:", len(request.files) # Debugging
     if request.method == 'POST':
+        # NEW FRAMEWORK - STORY UPLOADED AS TEXT IN TEXTAREA
+        # Retrieving Fields - Add Defaults Later
+        title = request.form["title"]
+        author = request.form["author"]
+        blurb = request.form["blurb"]
+        print title, author, "\n", blurb # Debugging
+
+        # Verifying Data
+        try:
+            cover = request.files['file[0]'] # FileStorage object
+            covertype = cover.mimetype # file type 
+            if (covertype != "image/jpeg" and covertype != "image/png"):
+                return "Invalid image file." # Redirect - TODO
+            covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
+        except:
+            return "No image selected." # Redirect - TODO
+        print "Cover Filename:", covername # Debugging
+        print "Cover Filetype:", covertype # Debugging
+
+        # Saving Cover as File
+        cover.save(os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/",
+                                covername))
+        print "File Saved In:", os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", covername) # Debugging        
+
+        # Creating Book
+        bID = books.parseBookCustom2(title, author, blurb, getUserID(), covername)
+        print "Book Created - Book ID:", bID # Debugging
+
+        # Redirect - Change Later
+        return redirect(url_for('root'))
+
+        '''
+        # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
         print "WOW! A story is being made!" # Debugging
         # files = request.files.getlist('file[]')
         print request.files
         file1 = request.files['file[0]']
+        print "hello"
         file2 = request.files['file[1]']
         textFile = None
         coverFile = None
@@ -299,6 +337,7 @@ def uploadStoryText():
             coverFile = file1
         coverFile = request.files['file[0]']
         textFile = request.files['file[1]']
+        print "hello"
         if coverFile.filename == '' or textFile.filename == '':
             print "sucky file"
             return redirect(request.url)
@@ -322,6 +361,7 @@ def uploadStoryText():
             print "and it was mada mada!"
             return redirect(request.url) 
         return False # Failure - Missing Fields
+        '''
     return False # Not POST 
     
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])

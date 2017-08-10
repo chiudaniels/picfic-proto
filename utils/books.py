@@ -48,7 +48,15 @@ def parseBookFile(textFilename, metaFilename):
     textFile.close()
     return parseBook(textText, metaList)
 
-# Add Docs Later
+# parseBookCustom (..)   - parses data and updates database with book
+# pre  : File textFile   - file with text
+#        String title    - title of the book
+#        String author   - author name
+#        String blurb    - blurb of the book
+#        String coverUrl - filename of the cover
+#        int userID - user's ID
+# post : int bID - ID of created book
+#        book is created in database
 def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
     textText = textFile.readlines()
@@ -56,7 +64,14 @@ def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
     bID = parseBook(textText, metaList)
     setCover(bID, coverUrl)
     return bID
-    
+# Temporary Function - For New Framework
+def parseBookCustom2(title, author, blurb, userID, coverUrl):
+    metaList = [title, author, datetime.date.today(), blurb, "", userID]
+    textText = []
+    bID = parseBook(textText, metaList)
+    setCover(bID, coverUrl)
+    return bID
+
 # parseBook (..) - parses data and updates database with book
 # pre  : String[] textArr - array of each line in a story
 #        Object[] metaArr - array of metadata
