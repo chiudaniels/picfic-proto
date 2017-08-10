@@ -272,7 +272,7 @@ def uploadStoryPage():
         return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
     return redirect('/')
 
-# Create Later
+# Create Later - Not Needed for MVP
 @app.route('/uploadStoryFile/', methods = ['POST'])
 def uploadStoryFile():
     return True
@@ -280,9 +280,12 @@ def uploadStoryFile():
 # Work on This 
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
+    print "Story being uploaded..."
+    print "Debugging Fields:"
+    print request.form
     if request.method == 'POST':
-        print "WOW! A story is being made!"
-        #    files = request.files.getlist('file[]')
+        print "WOW! A story is being made!" # Debugging
+        # files = request.files.getlist('file[]')
         print request.files
         file1 = request.files['file[0]']
         file2 = request.files['file[1]']
@@ -318,7 +321,7 @@ def uploadStoryText():
             books.parseBookCustom(textFile, title, author, blurb, getUserID(), filename)
             print "and it was mada mada!"
             return redirect(request.url) 
-        return False
+        return False # Failure - Missing Fields
     return False # Not POST 
     
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])

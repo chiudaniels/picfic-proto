@@ -8,6 +8,23 @@
     <div class="back">
       <div class="main">
 	<div class="h">Upload New Picfic</div><br>
+	<!-- form begins -> 
+	<form id="test" action="/uploadStoryText/" method="post" enctype="multipart/form-data">
+	  <!-- input fields -> 
+	  <div class="descriptiveText">Title</div>
+	  <div class="descriptiveText" style="margin-left: 400px">Author</div><br><br>
+	  <input type="text" class="descriptiveText" placeholder="Title" style="width:370px;" id="bookTitle" name="title">
+	  <input type="text" class="descriptiveText" placeholder="Author" style="margin-left:50px; width:230px;" id="bookAuthor" name="author">
+	  
+	  <!-- dropzone ->
+	  <div class="dropzone" id="myDropzone"></div>	  
+	</form>
+	<textarea rows="4" cols="50" form="test" class="descriptiveText" id="storyText" name="blurbText" placeholder="Max 150 words"></textarea>
+	<br>
+	<textarea rows="4" cols="50" form="test" class="descriptiveText" id="storyText" name="storyText" placeholder="First chapter text here"></textarea>
+	<button type="submit" class="btn btn-default prev" id="submitStoryBtn" form="test" >Submit Story</button>
+	-->
+
 	<form id="storyUploadDropzone" class="dropzone" action="/uploadStoryText/" method="post" enctype="multipart/form-data">
 	  <div class="dropzone-previews"></div> <!-- this is were the previews should be shown. -->
 	  <!-- Now setup your input fields -->
@@ -25,6 +42,7 @@
 	<textarea rows="4" cols="50" form="storyUploadDropzone" class="sText" id="storyText" name="storyText">
 	  Story text here
 	</textarea>
+
 	<!-- <form action="" id="uploadStoryForm" method="post" enctype="multipart/form-data"> -->
 	<!--
 	      <div class="descriptiveText">Genres<br><br>
