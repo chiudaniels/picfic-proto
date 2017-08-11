@@ -658,7 +658,7 @@ button:focus {
     height: 370px;
     max-height: 100%;
     left: 50%;
-    top: 50%;
+    top: 25%;
     margin-left: -200px;
     text-align: center;
     font-family: .AppleSystemUIFont;

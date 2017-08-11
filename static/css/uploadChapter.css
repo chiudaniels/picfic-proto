@@ -1,0 +1,18 @@
+body{
+	max-width: 75vw;
+	margin:auto;
+}
+
+.forms{
+	width: 55vw;
+	margin:auto;
+}
+
+#submit{
+	margin-left: 50%;
+	text-align: center;
+}
+
+#storyArea{
+	height:75vh;
+}

@@ -2,32 +2,29 @@
 <link rel="stylesheet" type="text/css" href="/static/css/launchpad_stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}" />
-<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css"/>
-{% endblock %} {% block content %}
-
+<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" /> {% endblock %} {% block content %}
 <div class="profileBackground">
-  <div class="aboutMe">
-    
-    <a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
-      <div class="bigProf" id="profilePic">
-	<img src="/static/data/profilePics/{{data['picUrl']}}" />
-    </div>
-      </a>
-    <div class="userNames">
+    <div class="aboutMe">
+        <a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
+            <div class="bigProf" id="profilePic">
+                <img src="/static/data/profilePics/{{data['picUrl']}}" />
+            </div>
+        </a>
+        <div class="userNames">
             <h4><b>{{data["firstName"]}} {{data["lastName"]}}</b></h4>
             <h6>{{data["username"]}}</h6>
         </div>
         <div class="about">
-          <h5 class="f"> About Me</h5>
+            <h5 class="f"> About Me</h5>
             <button class="edit" id="editPersonal">Edit</button>
             <br>
             <br>
             <p>
-	      <div id="editAbout">
-		{{data["about"]}}
-	      </div>
-	    </p>
-	    <p>
+                <div id="editAbout">
+                    {{data["about"]}}
+                </div>
+            </p>
+            <p>
                 <br>
                 <br> Genres:
                 <div id="editGenre"> {{data["favGenres"]}}</div>
@@ -66,28 +63,32 @@
         <h4 class="g"><b>My Stories</b></h4> <a href="#" class="newEdit" id="editStories">Edit</a>
         <br>
         <h5>My Stories</h5>
-        <div class="bookshelf">
-            {% for bookData in data["myStories"] %}
-            <a href="/books/{{bookData['bookID']}}/read" }>
-	  <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
-	  <div class="title"> {{bookData['title']}}</div>
-	  </a> {% endfor %}
+        <div class="mystories bookshelf">
+            <div>
+                {% for bookData in data["myStories"] %}
+                <a href="/books/{{bookData['bookID']}}/read" }>
+                <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
+                <div class="title"> {{bookData['title']}}</div>
+                </a> {% endfor %}
+            </div>
         </div>
         <h4><b>Shelf</b></h4> <a href="#" class="edit" id="editShelf">Edit</a>
         <br>
         <h5> Continue Reading</h5>
-        <div class="bookshelf">
-            <!-- put a for loop in here -->
-            {% for bookData in data["myShelf"] %}
-            <a href="/books/{{ bookData['bookID'] }}/read">
-	  <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
-	  <div class="title">{{bookData['title']}}</div>
-	  </a> {% endfor %}
+        <div class="bookshelf continereading">
+            <div>
+                <!-- put a for loop in here -->
+                {% for bookData in data["myShelf"] %}
+                <a href="/books/{{ bookData['bookID'] }}/read">
+                <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
+                <div class="title">{{bookData['title']}}</div>
+                </a> {% endfor %}
+            </div>
         </div>
         <br <h5> Uploaded by me</h5>
         <div class="row uploaded">
-	  <!-- more galleries lmao -->
-	</div>
+            <!-- more galleries lmao -->
+        </div>
         <br>
         <h5> Liked by me</h5>
         <div class="row liked">
@@ -164,29 +165,29 @@
     </div>
 </div>
 <div class="modal" id="profilePicModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Upload Profile Pic</h4>
-      </div>
-      <div class="modal-body">
-        <form action="/saveProfilePic/" class="dropzone" id="profileDrop" method="post" enctype="multipart/form-data">
-          <div class="dz-message" data-dz-message>
-            <center> <span class="dropdesc">Drag & drop file <br>
-		or click to upload</span>
-              <br> <img src="/static/svg/uploadPicture.svg"/>
-	    </center>
-          </div>	  
-        </form>
-      </div>
-      <div class="modal-footer">
-        <p id="upload-desc"></p>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Upload Profile Pic</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/saveProfilePic/" class="dropzone" id="profileDrop" method="post" enctype="multipart/form-data">
+                    <div class="dz-message" data-dz-message>
+                        <center> <span class="dropdesc">Drag & drop file <br>
+        or click to upload</span>
+                            <br> <img src="/static/svg/uploadPicture.svg" />
+                        </center>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p id="upload-desc"></p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <script src="/static/js/profile.js"></script>
-<script src="/static/js/dropzone.js "></script>       
+<script src="/static/js/dropzone.js "></script>
 <script type="text/javascript" src="/static/slick/slick.min.js"></script>
 {% endblock %}

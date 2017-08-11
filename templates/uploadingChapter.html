@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="assets/js/bootstrap-dropdown.js" type="text/javascript"></script>
+    <!-- -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/uploadChapter.css">
+    <!-- Theme included stylesheets -->
+    <!-- <link rel="stylesheet" type="text/css" href="../static/quill/themes/snow.css">
+    <link rel="stylesheet" type="text/css" href="../static/quill/themes/bubble.css"> 
+    -->
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="mystories bookSelection">
+        <div>
+            {% for bookData in data["myStories"] %}
+            <a href="/books/{{bookData['bookID']}}/read" }>
+                <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
+                <div class="title"> {{bookData['title']}}</div>
+                </a> {% endfor %}
+        </div>
+    </div>
+    </div>
+    <form class="forms">
+        <div class="form-group">
+            Chapter Title
+            <br>
+            <input type="text" class="form-control" id="title">
+        </div>
+        <br>
+        <div class="form-group">
+        	<input name="storyText" type="hidden">
+            <div id="storyArea">
+            </div>
+        </div>
+        <button class="btn" id="submit"> Submit </button>
+    </form>
+    <!-- Main Quill library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.0.0/quill.min.js"></script>
+    <script src="../static/js/uploadChapter.js"></script>
+</body>
+
+</html>

@@ -37,7 +37,7 @@
     </div>
     <div class="row" id="bookgallery">
         {% for book in data["books"] %}
-        <div class="col-md-3">
+        <div>
             <a href="/books/{{book['bookID']}}"><img class="img-fluid" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
             <br>
             <span>{{book['title']}}</span>
