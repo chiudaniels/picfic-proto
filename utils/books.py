@@ -67,7 +67,7 @@ def parseBookCustom(textFile, title, author, blurb, userID, coverUrl):
 # Temporary Function - For New Framework
 def parseBookCustom2(title, author, blurb, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
-    textText = []
+    textText = ["CHAPTER 1", "Default Text"]
     bID = parseBook(textText, metaList)
     setCover(bID, coverUrl)
     return bID

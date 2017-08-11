@@ -66,18 +66,29 @@ def adminAction(dat):
     for key in dat.keys():
         data[key] = int(dat[key])
     print data
+    rowID = data["rowID"] # Robustify Later With Error Checking
     if data["type"] == 0: #story
-        story = session.query(Book).filter(Book.bookID == data["rowID"])
+        story = session.query(Book).filter(Book.bookID == rowID)
         if data["act"] == 1: #approve
             story.one().approve()
         elif data["act"] == 2: #delete
+            chapter = session.query(Chapter).filter(Chapter.bookID == rowID)
+            # print "Wow!:", chapter.all() # Debugging
+            for ch in chapter:
+                userchapter = session.query(UserChapter).filter(UserChapter.chapterID == ch.chapterID)
+                userchapter.delete()
+            chapter.delete()
+            art = session.query(Art).filter(Art.bookID == rowID)
+            art.delete()
+            userbook = session.query(UserBook).filter(UserBook.bookID == rowID)
+            userbook.delete()
             story.delete()
     elif data["type"] == 1: #art
-        art = session.query(Art).filter(Art.artID == data["rowID"])
+        art = session.query(Art).filter(Art.artID == rowID)
         if data["act"] == 1: #delete
             art.delete()
     elif data["type"] == 2: #user
-        user = session.query(User).filter(User.userID == data["rowID"])
+        user = session.query(User).filter(User.userID == rowID)
         if data["act"] == 1: #promote
             user.one().promote()
         elif data["act"] == 2: #delete

@@ -204,7 +204,7 @@ def login():
     pwd = request.form["loginPass"]
     #auth
     msg = ""
-    if bcrypt.check_password_hash(users.getHashed(email), pwd) :
+    if users.getHashed(email) and bcrypt.check_password_hash(users.getHashed(email), pwd) :
         session['uID'] = users.getUserID( email )
         return redirect( url_for('root'))
     else:
@@ -239,8 +239,6 @@ def register():
         msg = "User already exists"
     return redirect( url_for('root') )
 
-
-
 # Setting Routes ======================================
 
 @app.route('/changePass/', methods = ['POST'])
@@ -269,6 +267,8 @@ def changeTag():
 @app.route('/uploadStory/')
 # uploadStoryPage - renders landing page for uploading stories
 def uploadStoryPage():
+    print "Logged In Status:", isLoggedIn() # Debugging
+    print "Active Status:", users.isActive(getUserID()) # Debugging
     if isLoggedIn() and users.isActive(getUserID()):
         data = uploadStory.getUploadStoryData(getUserID())
         return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
@@ -494,10 +494,6 @@ def get_activation_link(uID): #user
     payload = s.dumps(uID) # payload = s.dumps(user.id)
     return url_for('confirm_account', payload=payload, _external=True)
 #why is this a url_for
-
-
-
-
 
 # General Helpers =====================================
  

@@ -119,8 +119,11 @@ def getChapter( uID, bookID ):
 def getHashed( email ):
     session = Session()
     usr = session.query(User).filter(User.email == email)
+    if usr.count() < 1:
+        return False # No User With Matching Credentials
     ret =  usr.one().passData
     session.close()
+    print "Successful Retrieval!"
     return ret
 
 def getHashedFromID( uID ):
@@ -161,7 +164,7 @@ def getUsername( uID ):
 def isActive(uID):
     session = Session()
     usr = session.query(User).filter(User.userID == uID).one()
-    ret = usr.usergroup > 1
+    ret = usr.usergroup > 0 # Change to 1 once activation becomes possible
     session.close()
     return ret
 
