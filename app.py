@@ -279,7 +279,7 @@ def uploadStoryPage():
 def uploadStoryFile():
     return True
 
-# Work on This 
+# uploadStoryText - backend for story upload
 @app.route('/uploadStoryText/', methods = ['POST'])
 def uploadStoryText():
     print "Story being uploaded..." # Debugging
@@ -317,9 +317,12 @@ def uploadStoryText():
         print "Book Created - Book ID:", bID # Debugging
 
         # Redirect - Change Later
-        return redirect(url_for('root'))
+        username = users.getUsername(getUserID())
+        profileData = users.getProfile(username)
+        profileData.update( users.getActivity(username) )
+        return flask.Response(render_template('uploadingChapter.html', isLoggedIn = isLoggedIn(), data = profileData))
 
-        '''
+    '''
         # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
         print "WOW! A story is being made!" # Debugging
         # files = request.files.getlist('file[]')
