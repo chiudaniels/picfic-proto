@@ -294,16 +294,19 @@ def uploadStoryText():
         author = request.form["author"]
         blurb = request.form["blurb"]
         print title, author, "\n", blurb # Debugging
-
+        
         # Verifying Data
-        try:
-            cover = request.files['file[0]'] # FileStorage object
-            covertype = cover.mimetype # file type 
-            if (covertype != "image/jpeg" and covertype != "image/png"):
-                return "Invalid image file." # Redirect - TODO
-            covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
-        except:
-            return "No image selected." # Redirect - TODO
+        #try:
+        print request.files # Debugging
+        cover = request.files['file'] # FileStorage object
+        print "Hello?" # Debugging
+        covertype = cover.mimetype # file type 
+        if (covertype != "image/jpeg" and covertype != "image/png"):
+            print "Why?"
+            #return "Invalid image file." # Redirect - TODO
+        covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
+        #except:
+        #return "No image selected." # Redirect - TODO
         print "Cover Filename:", covername # Debugging
         print "Cover Filetype:", covertype # Debugging
 
@@ -370,6 +373,13 @@ def uploadStoryText():
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])
 def uploadStoryCover():
     return True #see cover art
+
+@app.route('/uploadChapter/', methods = ['GET'])
+def uploadChapter():
+    username = users.getUsername(getUserID())
+    profileData = users.getProfile(username)
+    profileData.update( users.getActivity(username) )
+    return render_template('uploadingChapter.html', isLoggedIn = isLoggedIn(), data = profileData)
 
 # Photo Upload ==================================================================
 
@@ -518,6 +528,14 @@ def getUserID():
 def page_not_found(e):
     return render_template('404.html')
 
+@app.route('/debug/', methods=['POST'])
+def debug():
+    ret = "Request Data:<br>"
+    formdata = request.values
+    print formdata
+    for kv in formdata:
+        ret += str(kv) + ", " + str(formdata[kv]) + "<br>"
+    return ret
 
 # RUN APP - NO FUNCTIONS AFTER THIS POINT ============================================    
 if __name__ == "__main__":
