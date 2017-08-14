@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
-import users, books, images
+import users, books, images, os
 
 # admin.py - Administrative Functions for the Admin Page
 
@@ -82,6 +82,12 @@ def adminAction(dat):
             art.delete()
             userbook = session.query(UserBook).filter(UserBook.bookID == rowID)
             userbook.delete()
+            img = os.path.join("static/data/bookCovers/", story.one().coverUrl)
+            print img
+            try:
+                os.remove(img)
+            except:
+                print "Image does not exist."
             story.delete()
     elif data["type"] == 1: #art
         art = session.query(Art).filter(Art.artID == rowID)
