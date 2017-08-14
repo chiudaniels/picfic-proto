@@ -38,5 +38,7 @@ body {
     border: none;
 }
 
-
+.coverArt{
+    z-index: 10000000000000;
+}
 button:focus {outline:0;}
