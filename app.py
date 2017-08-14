@@ -296,17 +296,15 @@ def uploadStoryText():
         print title, author, "\n", blurb # Debugging
         
         # Verifying Data
-        #try:
-        print request.files # Debugging
-        cover = request.files['file'] # FileStorage object
-        print "Hello?" # Debugging
-        covertype = cover.mimetype # file type 
-        if (covertype != "image/jpeg" and covertype != "image/png"):
-            print "Why?"
-            #return "Invalid image file." # Redirect - TODO
-        covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
-        #except:
-        #return "No image selected." # Redirect - TODO
+        try:
+            print request.files # Debugging
+            cover = request.files['file'] # FileStorage object
+            covertype = cover.mimetype # file type 
+            if (covertype != "image/jpeg" and covertype != "image/png"):
+                return "Invalid image file." # Redirect - TODO
+            covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
+        except:
+            return "No image selected." # Redirect - TODO
         print "Cover Filename:", covername # Debugging
         print "Cover Filetype:", covertype # Debugging
 
