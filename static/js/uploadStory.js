@@ -1,13 +1,6 @@
 var formSubmit = document.getElementById("submitStoryBtn");
-Dropzone.options.test = {
-    autoProcessQueue : false,
-    uploadMultiple : false,
-    parallelUploads : 1,
-    maxFiles : 1,
-}
 
 Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of the form element
-
     // The configuration we've talked about above
     autoProcessQueue: false,
     uploadMultiple: false,
@@ -27,8 +20,8 @@ Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of t
 	// You might want to show the submit button only when 
 	// files are dropped here:
 	this.on("addedfile", function() {
-            formSubmit.setAttribute("display", "inline");
             // Show submit button here and/or inform user to click it.
+            formSubmit.setAttribute("display", "inline");
 	});
 
 	// First change the button to actually tell Dropzone to process the queue.
@@ -42,6 +35,7 @@ Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of t
 	*/
 	
 	this.on("queuecomplete", function() {
+	    alert('Upload successful!');
 	    window.location = '/uploadChapter/';
 	});
 	
@@ -58,6 +52,7 @@ Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of t
 	this.on("errormultiple", function(files, response) {
 	    // Gets triggered when there was an error sending the files.
 	    // Maybe show form again, and notify user of error
+	    alert('Upload not successful!');
 	});
     }
 

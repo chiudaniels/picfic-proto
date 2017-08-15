@@ -19,6 +19,7 @@
     <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com"> {% block head %}{% endblock %}
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
+    <script src="../static/js/validator.min.js"></script>
     <script>
     var googleUser = {};
     var startApp = function() {
@@ -310,30 +311,30 @@
                     <br>
                     <br>
                     <br>
-                    <form action="/register/" class="formStyle" method="POST">
+                    <form action="/register/" class="formStyle" data-toggle="validator" method="POST">
                         <div class="form-group">
-                            <input type="text" name="fName" class="form-control" id="firstName" placeholder="First name">
+                            <input type="text" name="fName" class="form-control" id="firstName" placeholder="First name" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name">
+                            <input type="text" name="lName" class="form-control" id="lastName" placeholder="Last name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email">
+                            <input type="email" name="makeEmail" class="form-control" id="makeEmail" placeholder="Email" data-error="Please enter a valid email." required>
                         </div>
                         <div class="form-group">
-                            <input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email">
+                            <input type="email" name="confirmEmail" class="form-control" id="confirmEmail" placeholder="Confirm Email" data-match="#makeEmail" data-match-error="These emails do not match!" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password">
+                            <input type="password" name="makePass" class="form-control" id="makePass" placeholder="Password" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password">
+                            <input type="password" name="confirmPass" class="form-control" id="confirmPass" placeholder="Confirm Password" data-match="#makePass" data-match-error="These passwords do not match!" required>
                         </div>
                         <div class="form-group" style="display:inline-block;width:100px;" name="month" id="month">
-                            <select class="form-control" id="sel1" name="bMonth" placeholder="Month">
+                            <select class="form-control" id="sel1" name="bMonth" placeholder="Month" required>
                                 <option value="1">January</option>
                                 <option value="2">February</option>
                                 <option value="3">March</option>
@@ -349,31 +350,30 @@
                             </select>
                         </div>
                         <div class="form-group" style="display:inline-block; width:75px;margin-left:21px;">
-                            <input type="number" name="day" class="form-control" id="day" placeholder="Day">
+                            <input type="number" name="day" class="form-control" id="day" placeholder="Day" min="1" max="31" required>
                         </div>
                         <div class="form-group" style="display:inline-block; width: 75px;margin-left:21px;">
-                            <input type="number" name="year" class="form-control" id="year" placeholder="Year">
+                            <input type="number" name="year" class="form-control" id="year" placeholder="Year" min="1901" max="2017" required>
                         </div>
                         <br>
                         <div class="form-group" style="display:inline-block;" id="gender">
-                            <div class="checkbox" style="display:inline-block;">
+                            <div class="radio" style="display:inline-block;">
                                 <label>
-                                    <input type="checkbox" name="gender" value="f">Female</label>
+                                    <input type="radio" name="gender" value="f" required>Female</label>
                             </div>
-                            <div class="checkbox" style="display:inline-block;margin-left:30px;">
+                            <div class="radio" style="display:inline-block;margin-left:30px;">
                                 <label>
-                                    <input type="checkbox" name="gender" value="m">Male</label>
+                                    <input type="radio" name="gender" value="m" required>Male</label>
                             </div>
-                            <div class="checkbox" style="display:inline-block;margin-left:30px">
+                            <div class="radio" style="display:inline-block;margin-left:30px">
                                 <label>
-                                    <input type="checkbox" name="gender" value="n">Non-binary</label>
+                                    <input type="radio" name="gender" value="n" required>Other</label>
                             </div>
                         </div>
                         <p>
                             <stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
                         </p>
-                        <button type="submit" class="btn submitButton">Test btn</button>
-                        <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#accMade" data-dismiss="modal">Sign Up</button>
+                        <button type="submit" class="btn submitButton">Sign Up</button>
                     </form>
                     <br>
                     <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a>
@@ -397,12 +397,12 @@
                     <br>
                     <br>
                     <br>
-                    <form action="/login/" class="formStyle" method="POST">
+                    <form action="/login/" class="formStyle" method="POST" data-toggle="validator">
                         <div class="form-group">
-                            <input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email">
+                            <input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password">
+                            <input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn submitButton" id="signInButton">Sign In</button>
                         <br>
