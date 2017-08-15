@@ -77,6 +77,8 @@ def adminAction(dat):
             for ch in chapter:
                 userchapter = session.query(UserChapter).filter(UserChapter.chapterID == ch.chapterID)
                 userchapter.delete()
+                chapterart = session.query(Art).filter(Art.chapterID == ch.chapterID)
+                chapterart.delete()
             chapter.delete()
             art = session.query(Art).filter(Art.bookID == rowID)
             art.delete()
