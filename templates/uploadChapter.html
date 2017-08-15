@@ -1,0 +1,41 @@
+{% extends 'baseLayout.html' %}
+{% block css %}
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/css/uploadChapter.css">
+<link rel="stylesheet" type="text/css" href="/static/css/upload_ss.css">
+{% endblock %}
+{% block content %}
+
+<!--
+<div class="mystories bookSelection">
+  <div>
+    {% for bookData in data["myStories"] %}
+    <a href="/books/{{bookData['bookID']}}/read" }>
+      <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
+      <div class="title"> {{bookData['title']}} </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+-->
+
+<form class="forms">
+  <div class="form-group">
+    <h4>Chapter Title</h4>
+    <input type="text" class="form-control" id="title">
+  </div>
+  <br>
+  <div class="form-group">
+    <h4>Chapter Text</h4>
+    <input name="storyText" type="hidden">
+    <div id="storyArea">
+    </div>
+  </div>
+  <button class="btn" id="submit"> Submit </button>
+</form>
+
+<!-- Main Quill library -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script src="https://cdn.quilljs.com/1.0.0/quill.min.js"></script>
+<script src="../static/js/uploadChapter.js"></script>
+{% endblock %}
