@@ -55,6 +55,10 @@ span {
     position: absolute;
 }
 
+.launchpadCara {
+    top: 38.5vh;
+    left: 16.2vw;
+}
 
 .text1 {
     font-size: 2.7vw;
