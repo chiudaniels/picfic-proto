@@ -33,7 +33,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # == Launchpad ======================================
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def root():
     print gallery.getGallery()
     print isLoggedIn()
