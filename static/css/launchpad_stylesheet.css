@@ -53,8 +53,14 @@ span {
     top: 38.3vh;
     left: 60vw;
     position: absolute;
+
 }
 
+.launchCara {
+    position: absolute;
+    top: 50.5vh;
+    left: 16.2vw;
+}
 
 .text1 {
     font-size: 2.7vw;
@@ -191,6 +197,7 @@ span {
 
 
 
+
 /*.pagefivecontent {
 /*position: absolute;*/
 
@@ -310,7 +317,7 @@ span {
     left: 6vw;
 }
 
-.modal-body{
+.modal-body {
     height: 100%;
 }
 
@@ -366,6 +373,7 @@ span {
 #login-dp .social-buttons a {
     width: 49%;
 }
+
 
 
 
@@ -503,6 +511,7 @@ button:focus {
 
 
 
+
 /*.about h5:after {
     content:" "; 
     display:inline-block; 
@@ -590,6 +599,7 @@ button:focus {
     display: inline-block;
     width: 570px;
 }
+
 
 
 
@@ -827,6 +837,7 @@ button:focus {
 
 
 
+
 /*.about p {
     font-family: .AppleSystemUIFont;
     font-size: 10px;
@@ -876,6 +887,7 @@ button:focus {
 
 
 
+
 /*.accMadeModal {
     position: fixed;
     width:400px;
@@ -894,7 +906,6 @@ button:focus {
 }*/
 
 // RESPOSNIVE FEATURES ///////////
-
 @media only screen and (max-width: 1000px) {
     #laptop1 {
         padding-left: 5px;
