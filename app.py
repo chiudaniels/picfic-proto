@@ -321,7 +321,7 @@ def uploadStoryText():
         username = users.getUsername(getUserID())
         profileData = users.getProfile(username)
         profileData.update( users.getActivity(username) )
-        return flask.Response(render_template('uploadingChapter.html', isLoggedIn = isLoggedIn(), data = profileData))
+        return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData))
 
     '''
         # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
@@ -377,7 +377,7 @@ def uploadChapter():
     username = users.getUsername(getUserID())
     profileData = users.getProfile(username)
     profileData.update( users.getActivity(username) )
-    return render_template('uploadingChapter.html', isLoggedIn = isLoggedIn(), data = profileData)
+    return render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)
 
 # Photo Upload ==================================================================
 
