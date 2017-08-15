@@ -372,15 +372,40 @@ def uploadStoryText():
 def uploadStoryCover():
     return True #see cover art
 
-@app.route('/uploadChapter/', methods = ['GET'])
-def uploadChapter():
-    username = users.getUsername(getUserID())
-    profileData = users.getProfile(username)
+@app.route('/uploadChapter/<int:bookID>', methods = ['GET', 'POST'])
+def uploadChapter(bookID):
+    # GET Requests - From Landing Page or uploadStory - TODO
+    if request.method == 'GET':
+        username = users.getUsername(getUserID())
+        profileData = users.getProfile(username)
+        profileData.update(users.getActivity(username))
+        return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
+
+    # POST Requests - From uploadChapter - TODO
+    if request.method == 'POST':
+        username = users.getUsername(getUserID())
+        profileData = users.getProfile(username)
+        profileData.update( users.getActivity(username) )
+        return "POST request received...!"
+
+    # Error Catching
+    return "Something went wrong..."
+
+'''
+@app.route("/user/<username>")
+def userProfilePage(username):
+    profileData = users.getProfile( username )
+    #"myShelf", "myStories", "likedArt", "uploadedArt"
     profileData.update( users.getActivity(username) )
-    return render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)
+    #get visibility options - add in later
+    userVis = 0
+    if isLoggedIn() and username == users.getUsername( getUserID() ):
+        userVis = 1
+        profileData.update( users.getProfileSensitive( username ) )
+    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
+'''
 
 # Photo Upload ==================================================================
-
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
