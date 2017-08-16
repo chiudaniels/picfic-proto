@@ -36,7 +36,7 @@ Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of t
 	
 	this.on("queuecomplete", function() {
 	    alert('Upload successful!');
-	    window.location = '/uploadChapter/0';
+	    window.location = '/bookSelect/';
 	});
 	
 	// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead

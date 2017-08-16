@@ -3,9 +3,13 @@ body{
     margin:auto;
 }
 
-.forms{
+.forms {
     width: 55vw;
     margin:auto;
+}
+
+#bookSelect {
+    width : 100%;
 }
 
 #submit{

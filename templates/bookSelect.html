@@ -18,16 +18,14 @@
 </div>
 <!-- -->
 
-<form class="forms">
+<form class="forms" method="POST" action="/uploadChapter/">
   <h2>Select A Book To Edit</h2>
   <br>
-  {% for book in data['myStories'] %}
-  <input name="bookSelect" type="radio" value="{{ book['bookID'] }}">
-  {{ book['title'] }} by {{ book['author'] }}
-  <br>
-  {% endfor %}
-  <br>
   <div class="text-center"> 
+    <select id="bookSelect" name="bookSelect" class="form-control selcls" required>
+      {% for book in data['myStories'] %}<option value="{{ book['bookID'] }}">{{ book['title'] }} by {{ book['author'] }}</option>{% endfor %}    
+    </select>
+    <br><br>
     <button class="btn btn-lg btn-default" id="submit">Submit</button>
   </div>
 </form>

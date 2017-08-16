@@ -23,13 +23,22 @@
   <h2>Edit Chapter</h2>
   <br>
   <div class="form-group">
-    <h4>Chapter Title</h4>
-    <input type="text" class="form-control" id="title">
+    <h4>Select A Chapter</h4>
+    <select id="chapterSelect" name="chapter" class="form-control selcls" required>
+      <option value="-1">NEW CHAPTER</option>
+      {% for ch in chapterData %}<option value="{{ch['chapterid']}}">CHAPTER {{ch['chnum']}} - {{ch['title']}}</option>{% endfor %}
+      <!-- options here - populate with jinja later -->
+    </select>
   </div>
   <br>
   <div class="form-group">
-    <h4>Chapter Text</h4>
-    <input name="storyText" type="hidden">
+    <h4>Edit Chapter Title</h4>
+    <input type="text" id="chapterTitle" name="title" class="form-control" required>
+  </div>
+  <br>
+  <div class="form-group">
+    <h4>Edit Chapter Text</h4>
+    <input name="storyText" id="chapterText" name="text" class="form-control" type="hidden" required>
     <div id="storyArea">
     </div>
   </div>

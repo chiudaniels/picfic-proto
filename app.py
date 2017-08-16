@@ -372,24 +372,53 @@ def uploadStoryText():
 def uploadStoryCover():
     return True #see cover art
 
-@app.route('/uploadChapter/<int:bookID>', methods = ['GET', 'POST'])
+@app.route('/bookSelect/', methods = ['GET'])
+def bookSelect():
+    username = users.getUsername(getUserID())
+    profileData = users.getProfile(username)
+    profileData.update(users.getActivity(username))
+    return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
+
+@app.route('/uploadChapter/', defaults={'bookID': None}, methods = ['POST'])
+@app.route('/uploadChapter/<int:bookID>', methods = ['POST'])
 def uploadChapter(bookID):
-    # GET Requests - From Landing Page or uploadStory - TODO
-    if request.method == 'GET':
+    if request.method == 'POST':
+        # Self Routing Loop
+        if bookID is None:
+            bookID = request.form['bookSelect']
+            return uploadChapter(bookID)
+
+        # Retrieving Book / Chapter Data
+        bookTitle = books.getBookTitle(bookID)
+        bookLength = books.getBookLength(bookID)
+        chapters = []
+        for chNum in range(1, bookLength + 1):
+            # Add chapter data into dictionary
+            chData = {} 
+            chID = books.getChapterID(bookID, chNum)
+            chTitle = books.getChapterTitle(chID)
+            chData['chnum'] = chNum
+            chData['chapterid'] = chID
+            chData['title'] = chTitle
+            chapters += [chData]
+        
         username = users.getUsername(getUserID())
         profileData = users.getProfile(username)
         profileData.update(users.getActivity(username))
-        return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
+    
+        ret = "Request: " + str(request.form) + "<br>"
+        ret += "Title: " + bookTitle + "<br>"
+        ret += "Number of Chapters: " + str(bookLength) + "<br>"
+        ret += "Chapters: " + str(chapters) + "<br>"
+        # return ret # Debugging
 
-    # POST Requests - From uploadChapter - TODO
-    if request.method == 'POST':
-        username = users.getUsername(getUserID())
-        profileData = users.getProfile(username)
-        profileData.update( users.getActivity(username) )
-        return "POST request received...!"
+        return render_template("uploadChapter.html",
+                               isLoggedIn = isLoggedIn(),
+                               chapterData = chapters[::-1], # Reverse, newest chapters on top
+                               data = profileData)
 
     # Error Catching
-    return "Something went wrong..."
+    return abort(404)
 
 '''
 @app.route("/user/<username>")
@@ -487,7 +516,6 @@ def index():
    get_activation_link()
    return "Sent"
 
-
 #@async - important but im confused
 def send_async_email(app, msg):
     with app.app_context():
@@ -551,7 +579,7 @@ def getUserID():
 def page_not_found(e):
     return render_template('404.html')
 
-@app.route('/debug/', methods=['POST'])
+@app.route('/debug/', methods=['GET', 'POST'])
 def debug():
     ret = "Request Data:<br>"
     formdata = request.values
