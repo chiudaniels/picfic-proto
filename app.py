@@ -381,9 +381,12 @@ def bookSelect():
     profileData.update(users.getActivity(username))
     return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
 
-@app.route('/uploadChapter/', defaults={'bookID': None}, methods = ['POST'])
-@app.route('/uploadChapter/<int:bookID>', methods = ['POST'])
+@app.route('/uploadChapter/', defaults={'bookID': None}, methods = ['POST', 'GET'])
+@app.route('/uploadChapter/<int:bookID>', methods = ['POST', 'GET'])
 def uploadChapter(bookID):
+    if request.method == 'GET':
+        return redirect(url_for('bookSelect'))
+        
     if request.method == 'POST':
         # Self Routing Loop
         if bookID is None:

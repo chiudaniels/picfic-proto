@@ -18,13 +18,23 @@
   </div>
 </div>
 <!-- -->
+
+<!-- Upload Success / Fail Notification --> 
 {% if uploadedChapter > 0 %}
-<div>Chapter uploaded!</div>
+<div class="alert alert-success alert-disassemble fade in">
+  <strong>Chapter Updated!</strong> You will be able to view your update if your book has been approved.
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
 {% elif uploadedChapter < 0 %}
-<div>Chapter upload failed!</div>
+<div class="alert alert-danger alert-disassemble fade in">
+  <strong>Update failed!</strong> Please retry. If this problem persists, please contact an administrator.
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
 {% else %}
 {% endif %}
-<form class="forms" action="/uploadChapter/{{ bID }}" method="POST">
+
+<!-- Update Story -->
+<form class="forms" action="/uploadChapter/{{ bID }}" data-toggle="validator" method="POST">
   <h2>Edit Chapter</h2>
   <br>
   <div class="form-group">
