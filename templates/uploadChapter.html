@@ -18,27 +18,31 @@
   </div>
 </div>
 <!-- -->
-
-<form class="forms">
+{% if uploadedChapter > 0 %}
+<div>Chapter uploaded!</div>
+{% elif uploadedChapter < 0 %}
+<div>Chapter upload failed!</div>
+{% else %}
+{% endif %}
+<form class="forms" action="/uploadChapter/{{ bID }}" method="POST">
   <h2>Edit Chapter</h2>
   <br>
   <div class="form-group">
     <h4>Select A Chapter</h4>
-    <select id="chapterSelect" name="chapter" class="form-control selcls" required>
+    <select id="chapterSelect" name="chapterid" class="form-control selcls" required>
       <option value="-1">NEW CHAPTER</option>
       {% for ch in chapterData %}<option value="{{ch['chapterid']}}">CHAPTER {{ch['chnum']}} - {{ch['title']}}</option>{% endfor %}
-      <!-- options here - populate with jinja later -->
     </select>
   </div>
   <br>
   <div class="form-group">
     <h4>Edit Chapter Title</h4>
-    <input type="text" id="chapterTitle" name="title" class="form-control" required>
+    <input type="text" id="chapterTitle" name="storyTitle" class="form-control" required>
   </div>
   <br>
   <div class="form-group">
     <h4>Edit Chapter Text</h4>
-    <input name="storyText" id="chapterText" name="text" class="form-control" type="hidden" required>
+    <input type="hidden" id="chapterText" name="storyText" class="form-control" required>
     <div id="storyArea">
     </div>
   </div>

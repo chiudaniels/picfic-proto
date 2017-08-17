@@ -275,7 +275,7 @@ class Book(Base):
                 "author": self.author,
                 "authorID": self.authorID, #take note...
                 "timestamp": self.timestamp.isoformat(),
-                "approval": self.approval
+                "approval": self.approval,
         }
         
 class Chapter(Base):

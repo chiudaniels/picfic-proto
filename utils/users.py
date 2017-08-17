@@ -235,8 +235,7 @@ def getStories( uID ):
     myStories = []
     q = session.query(Book.bookID).filter(Book.authorID == uID).all()
     for bID in q:
-        print "story"
-        print bID
+        # print "BookID:", bID # Debugging
         myStories.append(books.getBookPreview(bID[0]))
     session.close()
     return {"myStories": myStories}

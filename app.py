@@ -126,7 +126,6 @@ def bookLanding(bookID):
 @app.route("/getBookLandingImages/", methods=['POST'])
 def bookLandingImages(): #lazy jump
     metadata = books.getBookLanding(int(request.form["bookID"]))
-    print "no screw you"
     return json.dumps(metadata["imageData"])
 
 
@@ -314,60 +313,63 @@ def uploadStoryText():
         print "File Saved In:", os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", covername) # Debugging        
 
         # Creating Book
-        bID = books.parseBookCustom2(title, author, blurb, getUserID(), covername)
-        print "Book Created - Book ID:", bID # Debugging
-
-        # Redirect - Change Later
-        username = users.getUsername(getUserID())
-        profileData = users.getProfile(username)
-        profileData.update( users.getActivity(username) )
-        return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData))
-
-    '''
-        # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
-        print "WOW! A story is being made!" # Debugging
-        # files = request.files.getlist('file[]')
-        print request.files
-        file1 = request.files['file[0]']
-        print "hello"
-        file2 = request.files['file[1]']
-        textFile = None
-        coverFile = None
-        if file1.filename.endswith('.txt'):
-            textFile = file1
-            coverFile = file2
-        else:
-            textFile = file2
-            coverFile = file1
-        coverFile = request.files['file[0]']
-        textFile = request.files['file[1]']
-        print "hello"
-        if coverFile.filename == '' or textFile.filename == '':
-            print "sucky file"
-            return redirect(request.url)
-        if coverFile and allowed_file(coverFile.filename):
-            print "what's up"
-            filename = secure_filename(coverFile.filename)
-            print "g"
-            coverFile.save(os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", filename))
-            
-            print "oh"
-            #make the book first
-            print request.form
-            title = request.form["title"]
-            author = request.form["author"]
-            #text = request.form["storyText"]
-            blurb = request.form["blurb"]
-            #print "boi"
-            #print text
-            #books.parseBookForm(title, author, blurb, text, getUserID(), filename)
-            books.parseBookCustom(textFile, title, author, blurb, getUserID(), filename)
-            print "and it was mada mada!"
-            return redirect(request.url) 
-        return False # Failure - Missing Fields
-        '''
-    return False # Not POST 
+        bID = books.createBook(title, author, blurb, getUserID(), covername)
+        # bID = books.parseBookCustom2(title, author, blurb, getUserID(), covername) # Old
+        # print "Book Created - Book ID:", bID # Debugging - Now in createBook in books.py
+        return "Success!"
     
+        # Redirect - Not Used
+        # username = users.getUsername(getUserID())
+        # profileData = users.getProfile(username)
+        # profileData.update( users.getActivity(username) )
+        # return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)) # Not Actually Run - Check Javascript
+
+    return "Failure!" # Not POST
+    
+'''
+    # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
+    print "WOW! A story is being made!" # Debugging
+    # files = request.files.getlist('file[]')
+    print request.files
+    file1 = request.files['file[0]']
+    print "hello"
+    file2 = request.files['file[1]']
+    textFile = None
+    coverFile = None
+    if file1.filename.endswith('.txt'):
+        textFile = file1
+        coverFile = file2
+    else:
+        textFile = file2
+        coverFile = file1
+    coverFile = request.files['file[0]']
+    textFile = request.files['file[1]']
+    print "hello"
+    if coverFile.filename == '' or textFile.filename == '':
+        print "sucky file"
+        return redirect(request.url)
+    if coverFile and allowed_file(coverFile.filename):
+        print "what's up"
+        filename = secure_filename(coverFile.filename)
+        print "g"
+        coverFile.save(os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", filename))
+        
+        print "oh"
+        #make the book first
+        print request.form
+        title = request.form["title"]
+        author = request.form["author"]
+        #text = request.form["storyText"]
+        blurb = request.form["blurb"]
+        #print "boi"
+        #print text
+        #books.parseBookForm(title, author, blurb, text, getUserID(), filename)
+        books.parseBookCustom(textFile, title, author, blurb, getUserID(), filename)
+        print "and it was mada mada!"
+        return redirect(request.url) 
+    return False # Failure - Missing Fields
+'''
+        
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])
 def uploadStoryCover():
     return True #see cover art
@@ -388,6 +390,19 @@ def uploadChapter(bookID):
             bookID = request.form['bookSelect']
             return uploadChapter(bookID)
 
+        # Adding Chapter
+        added = 0 # 0 - no request, 1 - success, -1 - failure
+        print request.form
+        if "storyTitle" in request.form and "chapterid" in request.form and "storyText" in request.form:
+            chNum = int(request.form["chapterid"])
+            if chNum == -1: # NEW CHAPTER Option
+                chNum = books.getBookLength(bookID) + 1 # Should be integrated into books.py - TODO
+            print "Add chapter here."
+            added = books.addNewChapter(request.form['storyTitle'],
+                                        "Testing", # request.form['storyText'], # Debug Later
+                                        bookID,
+                                        chNum) # Edit addNewChapter to allow editing of books - TODO
+        
         # Retrieving Book / Chapter Data
         bookTitle = books.getBookTitle(bookID)
         bookLength = books.getBookLength(bookID)
@@ -415,7 +430,9 @@ def uploadChapter(bookID):
         return render_template("uploadChapter.html",
                                isLoggedIn = isLoggedIn(),
                                chapterData = chapters[::-1], # Reverse, newest chapters on top
-                               data = profileData)
+                               uploadedChapter = added, # Used For Alerts
+                               data = profileData,
+                               bID = bookID)
 
     # Error Catching
     return abort(404)
@@ -592,6 +609,7 @@ def debug():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+    #app.run(host="0.0.0.0")
+    #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080))) # DEPRECATED
     
 print __name__

@@ -23,7 +23,7 @@ Session.configure(bind=engine)
 def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
     metaList = [title, author, datetime.date.today(), blurb, "", userID]
     storyArr = storyText.split("\n")
-    print storyArr
+    # print storyArr # Debugging
     bID = parseBook(storyArr, metaList)
     setCover(bID, coverUrl)
     return bID
@@ -72,6 +72,30 @@ def parseBookCustom2(title, author, blurb, userID, coverUrl):
     setCover(bID, coverUrl)
     return bID
 
+# createBook (..) - parses data and creates book in database - replaces ParseBookCustom Functions
+def createBook(title, author, blurb, userID, coverUrl):
+    # Initialize database connection
+    session = Session()
+    printable = set(string.printable)
+
+    # Book Variables
+    newBook = Book(author,
+                   title,
+                   datetime.date.today(),
+                   blurb,
+                   "",
+                   userID) 
+    session.add(newBook)
+    session.flush()
+    bookID = newBook.bookID
+    session.commit()
+    session.close()
+    setCover(bookID, coverUrl)
+    
+    print "New Book Created:", bookID # Debugging
+    return bookID
+    
+# DEPRECATED
 # parseBook (..) - parses data and updates database with book
 # pre  : String[] textArr - array of each line in a story
 #        Object[] metaArr - array of metadata
@@ -103,14 +127,19 @@ def parseBook(textArr, metaArr):
             metaList.append(line)
     #ur gonna need a better regex filter
     # double check carriage returns for windows - \r\n vs \n 
+
+    print "MetaArr:\t", metaArr # Debugging
+    print "MetaList:\t", metaList # Debugging
+    for c in range(len(metaList)):
+        print c, metaList[c]
     
     #Make book
-    bT = metaList[0]
-    bA = metaList[1]
-    bR = metaList[2]
-    bB = metaList[3]
-    bM = metaList[4]
-    aID = 1
+    bT = metaList[0] # Book Title
+    bA = metaList[1] # Book Author
+    bR = metaList[2] # Date/Time Published
+    bB = metaList[3] # Book Blurb
+    bM = metaList[4] # Book Miscellany
+    aID = metaList[5] # Author ID
     newBook = Book(bA, bT, bR, bB, bM, aID)
     
     session.add(newBook)
@@ -131,8 +160,7 @@ def parseBook(textArr, metaArr):
                 #print curChDict
                 chapterMasterArr.append(curChDict)
             curChDict = {"title": line, "text": []}
-            #print "Title"
-            print curChDict["title"]
+            # print "Title:", curChDict["title"] # Debugging
         else: #regular or page break, whatever
             curChDict["text"].append(line)
     #flush last chapter
@@ -144,9 +172,7 @@ def parseBook(textArr, metaArr):
         ch = chapterMasterArr[i]
         #print ch["text"]
         addNewChapter(ch["title"], ch["text"], bookID, i + 1)
-
     session.close()
-    
     return bookID
 
 # addNewChapter (..) - adds a new chapter to existing book
@@ -154,7 +180,8 @@ def parseBook(textArr, metaArr):
 #        String chText - text for new chapter
 #        int    bookID - ID of book
 #        int    chNum - chapter number
-# post : adds a new chapter to the given book
+# post : int added - 1 if success, -1 if failure
+#        adds a new chapter to the given book
 def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     session = Session()
     #chText is an array
@@ -163,10 +190,9 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     pageCC = ""
     curPageStartCC = 0
     
-    """Current formatting for pageCC
-    <int>,<int>:<int>,<int>:...
-    
-    """
+    # Current formatting for pageCC
+    # <int>,<int>:<int>,<int>:...
+
     #off by one hell
     for line in chText:
         if "--------" in line:#page break
@@ -183,11 +209,17 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     newCCStr = str(curPageStartCC) + "," + str(curCC)
     pageCC += newCCStr
     processedText = processedText[:-1]
-    newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
-    session.add(newChapter)
-    session.commit()
+    added = -1
+    try:
+        newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
+        session.add(newChapter)
+        session.commit()
+        added = 1
+    except:
+        pass # Do Nothing
     session.close()
-
+    return added
+    
 # setCover (..) - changes book cover
 # pre  : int    bookID - id of book to update
 #        String url - filename of image 
@@ -220,8 +252,8 @@ def setBackground( bookID, url ):
 #          String coverUrl : filename of book cover
 #          String author   : author name } 
 def getBookPreview( bookID ):
-    print "getting book preview"
-    print bookID
+    # print "getting book preview" # Debugging
+    # print bookID # Debugging
     session = Session()
     book = session.query(Book).filter(Book.bookID == bookID).one()
     ret =  {
@@ -321,9 +353,9 @@ def getPageData( bookID, chNum, userID ):
     chNum = int(chNum)
     bookmark = users.getCC(userID, bookID) #gets character count
     chapterID = getChapterID(bookID, chNum)
-    print bookID
-    print chNum
-    print chapterID
+    print bookID # Debugging
+    print chNum # Debugging
+    print chapterID # Debugging
     #register in UserChapter when first page of book is retrieved
 
     if userID != None:
@@ -407,9 +439,8 @@ def getPageAJAX(bID, chN, curCC, curPg):
 #        int chN   - chapter number
 # post : int RET - char count of chapter - 1 
 def getEndOfChCC(bID, chN):
-    print "end of ch cc debug"
-    print chN
-    #i'm lazy
+    # print "end of ch cc debug" # Debugging
+    # print chN # Debugging
     session = Session()
     chapter = session.query(Chapter).filter(Chapter.chapterID == getChapterID(bID, chN)).one()
     pageCCStrArr = chapter.pageCC.split(":")
@@ -499,7 +530,7 @@ def getPageInfo( cc, chID ):
                 ret["pgNum"] = i + 1 #user index friendly af
                 thePairIndex = i
                 break
-            print pageCCArr[thePairIndex]
+            # print pageCCArr[thePairIndex] # Debugging
         textStr = chapter.text[pageCCArr[thePairIndex][0]:pageCCArr[thePairIndex][1]]
         #ugh...
         ret["text"] = textStr.split("|")
