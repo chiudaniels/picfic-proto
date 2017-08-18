@@ -197,17 +197,18 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     if len(chText) == 0:
         return -1 # Fail
     for line in chText:
-        if "--------" in line: #page break
+        line = line.strip()
+        if line == "": # Multiple blank lines in a row
+            continue
+        elif "***" in line: #page break
             #print "page break reee"
             newCCStr = str(curPageStartCC) + "," + str(curCC) + ":"
             #print newCCStr
             curPageStartCC = curCC #like list, non-last inclusive
             pageCC += newCCStr
         else:
-            line = line.strip()
             curCC += len(line) + 1 #put in the extra character count for the bar. Image cc is gonna get screwweeedddd :((
             processedText += line + "|"
-
 
     #PUSH LAST CHAPTER BOOKMARKS!
     newCCStr = str(curPageStartCC) + "," + str(curCC)

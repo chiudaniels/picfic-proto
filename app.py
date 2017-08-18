@@ -403,7 +403,7 @@ def uploadChapter(bookID):
                 chNum = books.getBookLength(bookID) + 1 # Should be integrated into books.py - TODO
             # Add chapter here.
             added = books.addNewChapter(request.form['storyTitle'].strip(),
-                                        request.form['storyText'].strip(), # request.form['storyText'], # Debug Later
+                                        request.form['storyText'].strip().splitlines(), # request.form['storyText'], # Debug Later
                                         bookID,
                                         chNum) # Edit addNewChapter to allow editing of books - TODO
         

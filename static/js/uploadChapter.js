@@ -47,8 +47,10 @@ var quill = new Quill('#storyArea', {
     modules : {
 	toolbar : false
     }, // Add Later Once Style Parsing Is Done
-    theme : 'snow'
+    theme : 'snow',
+    placeholder : "Use *** to denote a page break."
 });
+document.getElementById('storyArea').setAttribute("style", "font-size:14px");
 
 // Editing ChapterForm
 var chapterForm = document.getElementById("uploadChapterForm");

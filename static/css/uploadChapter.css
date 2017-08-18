@@ -1,11 +1,11 @@
 body{
-    max-width: 75vw;
-    margin:auto;
+    max-width : 75vw;
+    margin : auto;
 }
 
 .forms {
     width: 55vw;
-    margin:auto;
+    margin : auto;
 }
 
 #bookSelect {
@@ -13,9 +13,9 @@ body{
 }
 
 #submit{
-    text-align: center;
+    text-align : center;
 }
 
 #storyArea{
-    height:75vh;
+    height : 75vh;
 }
