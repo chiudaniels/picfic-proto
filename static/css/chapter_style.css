@@ -1,11 +1,16 @@
-/* {
+.* {
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-*/
+
+body {
+    margin: 0px;
+    padding: 0px;
+    padding-top: 2.5%;
+}
 
 .paragraph {
     -moz-user-select: text;
@@ -13,12 +18,9 @@
     -webkit-user-select: text;
     -ms-user-select: text;
     user-select: text;
-}
-
-body {
-    margin: 0px;
-    padding: 0px;
-    padding-top: 2.5%;
+    position: relative;
+    margin-bottom: 3.5%;
+    font-size: 14px;
 }
 
 ::selection {
@@ -75,13 +77,8 @@ body {
 
 .title {
     text-align: center;
-    font-size: 16px;
-    padding-bottom: 170px;
-}
-
-.paragraph {
-    position: relative;
-    margin-bottom: 7%;
+    font-size: 24px;
+    padding-bottom: 50px;
 }
 
 .fanartIcon {

@@ -127,7 +127,6 @@ def parseBook(textArr, metaArr):
             metaList.append(line)
     #ur gonna need a better regex filter
     # double check carriage returns for windows - \r\n vs \n 
-
     print "MetaArr:\t", metaArr # Debugging
     print "MetaList:\t", metaList # Debugging
     for c in range(len(metaList)):
@@ -224,7 +223,7 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
         pass # Do Nothing
     session.close()
     return added
-    
+
 # setCover (..) - changes book cover
 # pre  : int    bookID - id of book to update
 #        String url - filename of image 
@@ -269,7 +268,6 @@ def getBookPreview( bookID ):
     }
     session.close()
     return ret
- 
 
 # getBookLanding (..) - get data for book landing page 
 # pre  : int    bookID - id of book to update
