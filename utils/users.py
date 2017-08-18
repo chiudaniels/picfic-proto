@@ -50,7 +50,6 @@ def getProfileSensitive( username ):
     session.close()
     return ret
 
-
 def isNameTaken( username ):
     session = Session()
     usr = session.query(User).filter_by(username = username)   
@@ -75,7 +74,7 @@ def getCC( uID, bookID ):
         return entry.curCC
     return 0
 
-def bookmark( uID, bID, chN, ccStart):
+def bookmark( uID, bID, chN, ccStart ):
     session = Session()
     usr = session.query(UserBook).filter(UserBook.readerID == uID, UserBook.bookID == bID)
     if usr.count() == 0:
@@ -236,8 +235,7 @@ def getStories( uID ):
     myStories = []
     q = session.query(Book.bookID).filter(Book.authorID == uID).all()
     for bID in q:
-        print "story"
-        print bID
+        # print "BookID:", bID # Debugging
         myStories.append(books.getBookPreview(bID[0]))
     session.close()
     return {"myStories": myStories}

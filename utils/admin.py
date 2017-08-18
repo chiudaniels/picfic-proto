@@ -18,6 +18,8 @@ Session.configure(bind=engine)
 #          dict art     : art data } 
 def getAdminPageData():
     session = Session()
+
+    # Users
     userDataL = session.query(User).all()
     userData = []
     for user in userDataL:
@@ -33,12 +35,18 @@ def getAdminPageData():
             d["usergroup"] = "active"
         elif d["usergroup"] == 3:
             d["usergroup"] = "admin"
+
+    # Stories
     storyDataL = session.query(Book).all()
     storyData = []
     for story in storyDataL:
         d = story.adminDict()
-        d["username"] = users.getUsername(d["authorID"])
-        storyData.append(d)
+        chapterCount = session.query(Chapter).filter(Chapter.bookID == d['storyID']).count()
+        if (chapterCount > 0): # Only Show Books w/ Chapters
+            d["username"] = users.getUsername(d["authorID"])
+            storyData.append(d)
+
+    # Art
     artDataL = session.query(Art).all()
     artData = []
     for art in artDataL:
@@ -86,10 +94,11 @@ def adminAction(dat):
             userbook.delete()
             img = os.path.join("static/data/bookCovers/", story.one().coverUrl)
             print img
-            try:
-                os.remove(img)
-            except:
-                print "Image does not exist."
+            if (img != "static/data/bookCovers/defaultBookPic.jpg"):
+                try:
+                    os.remove(img)
+                except:
+                    print "Image does not exist."
             story.delete()
     elif data["type"] == 1: #art
         art = session.query(Art).filter(Art.artID == rowID)

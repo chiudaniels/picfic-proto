@@ -1,5 +1,4 @@
 var artArray = [];
-
 var imageArray = [];
 
 function source2img(path) {
