@@ -933,7 +933,7 @@ button:focus {
     .pagethreetext {
         text-align: center;
         position: absolute;
-        top: 267vh;
+        top: 277vh;
         left: 19vw;
         z-index: 1;
     }
@@ -944,8 +944,6 @@ button:focus {
     }
 
     #laptop2 {
-        height: 42.8vmax;
-        width: 27vmax;
         margin: auto;
         text-align: center;
         left: 31.5vw;
@@ -964,27 +962,36 @@ button:focus {
 
 
 @media only screen and (max-width: 990px) {
+    body{
+	margin:auto;
+    }
     .navbar {
         display: none;
     }
 
+    .launchpadCara{
+	top:21vh;
+	margin:auto;
+	right:0;
+	left:0;
+    }
+    
     #laptop1 {
         padding-left: 5px;
         margin: auto;
         text-align: center;
         left: 3vw;
-        top: 59.3vh;
+        top: 29.3vh;
         position: relative;
     }
 
     .text1 {
         font-size: 5vmax;
         text-align: center;
-        top: 25.5vh;
+        top: 22.5vh;
         /*        left: 15vw;
-*/
-        right: 7vw;
-        z-index: 1;
+	 */
+	z-index: 1;
         position: absolute;
     }
 
@@ -1010,7 +1017,7 @@ button:focus {
     .pagethreetext {
         text-align: center;
         position: absolute;
-        top: 267vh;
+        top: 275vh;
         left: 19vw;
         z-index: 1;
     }
@@ -1026,7 +1033,7 @@ button:focus {
         margin: auto;
         text-align: center;
         left: 2vw;
-        top: 278.5vh;
+        top: 262.5vh;
         position: relative;
     }
     .pagefourcontainer {
@@ -1034,7 +1041,7 @@ button:focus {
         max-width: 52vw;
         text-align: center;
         align-content: center;
-        top: 285vh;
+        top: 268vh;
         left: 0;
     }
 
@@ -1045,7 +1052,7 @@ button:focus {
 
     .picficLogo {
         left: 0;
-        padding-left: 15vw;
+        padding-left: 3vw;
         height: 12vh;
         width: auto;
         fill: black;
