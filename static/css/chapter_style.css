@@ -314,6 +314,7 @@ body {
 }
 
 .slideImages {
+    text-align:center;
     display: block;
     margin: auto;
     max-width: 60vw;
@@ -321,7 +322,7 @@ body {
 
     width: auto;
     height: auto;
-    object-fit: fill;
+    object-fit: scale-down;
 }
 
 .nothumbnails {

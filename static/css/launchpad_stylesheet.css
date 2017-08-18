@@ -95,7 +95,7 @@ span {
 }
 
 .bookcover{
-    width: 10vw;
+    width: 20vw;
     height: 31vh;
     object-fit:contain;
 }
