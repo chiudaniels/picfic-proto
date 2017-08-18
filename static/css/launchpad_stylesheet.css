@@ -94,6 +94,12 @@ span {
     font-family: 'Nunito', sans-serif;
 }
 
+.bookcover{
+    width: 10vw;
+    height: 31vh;
+    object-fit:contain;
+}
+
 #startreading {
     text-align: center;
     font-size: 5vh;

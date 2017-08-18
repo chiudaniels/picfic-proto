@@ -40,7 +40,7 @@
     <div class="row" id="bookgallery">
         {% for book in data["books"] %}
         <div>
-            <a href="/books/{{book['bookID']}}"><img class="img-fluid" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
+            <a href="/books/{{book['bookID']}}"><img class="img-fluid bookcover" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
             <br>
             <span>{{book['title']}}</span>
             <br>

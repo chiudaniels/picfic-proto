@@ -10,7 +10,7 @@ $(document).ready(function() {
     });
 })
 
-$('#bookgallerys').not('.slick-initialized').slick({
+$('#bookgallery').not('.slick-initialized').slick({
     dots: true,
     infinite: false,
     speed: 300,
