@@ -8,6 +8,7 @@ function source2img(path) {
     return newImage;
 }
 
+/* // Gallery - Deprecated
 $(document).ready(function() {
     //loadProfile();
     $('.mystories').not('.slick-initialized').slick({
@@ -38,21 +39,66 @@ $(document).ready(function() {
             }
         }]
     });
+}) 
+// */
 
-    var quill = new Quill('#storyArea', {
-        modules: { toolbar: true },
-        theme: 'snow'
-    });
-})
+// Styling Quill Editor
+var quill = new Quill('#storyArea', {
+    modules : {
+	toolbar : false
+    }, // Add Later Once Style Parsing Is Done
+    theme : 'snow'
+});
 
-var form = document.querySelector('form');
-form.onsubmit = function() {
-  // Populate hidden form on submit
-  var about = document.querySelector('input[name=about]');
-  about.value = JSON.stringify(quill.getContents());
-  console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-  
-  // No back end to actually submit to!
-  alert('Open the console to see the submit data!')
-  return false;
+// Editing ChapterForm
+var chapterForm = document.getElementById("uploadChapterForm");
+
+// Alerts - For Upload Failure
+var alerts = document.getElementById("alerts");
+console.log("alerts: ", alerts);
+
+chapterForm.onsubmit = function() {
+    // Populate hidden form on submit
+    var about = quill.getContents();
+    console.log("about: ", about);
+
+    var chapterText = document.getElementById("chapterText");
+    chapterText.value = (about.ops[0]['insert']).trim();
+    console.log("chapterText: ", chapterText);
+
+    // console.log("Submitted", $(chapterForm).serialize(), $(chapterForm).serializeArray()); // Debugging
+    // alert('Open the console to see the submit data!') // Debugging
+
+    console.log(chapterText.value.length);
+    if (chapterText.value.length < 10) { // Check Text
+	var warning = document.createElement("div");
+	warning.innerHTML = "<strong>What a short chapter!</strong> Try uploading something a little longer...";
+	warning.setAttribute("class", "alert alert-warning alert-disassemble fade in");
+	warning.setAttribute("style", "margin-bottom:0px");
+	
+	var close = document.createElement("a");
+	close.innerHTML = "&times;";
+	close.setAttribute("class", "close");
+	close.setAttribute("data-dismiss", "alert");
+	close.setAttribute("aria-label", "close");
+
+	warning.appendChild(close);
+	alerts.prepend(warning);
+	alerts.scrollIntoView({
+	    behavior : "smooth",
+	});
+	console.log(warning);
+	return false; // Stop Submission
+    }
 };
+
+/*
+var oldEditor = document.getElementById('editor');
+var editor = new Quill('#editor', {
+    modules : { toolbar : true },
+    theme : 'snow'
+});
+oldEditor.parentNode.replaceChild(editor, oldEditor);
+*/
+
+console.log("Uploading Chapter JS Loaded...");

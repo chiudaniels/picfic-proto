@@ -316,14 +316,13 @@ def uploadStoryText():
         bID = books.createBook(title, author, blurb, getUserID(), covername)
         # bID = books.parseBookCustom2(title, author, blurb, getUserID(), covername) # Old
         # print "Book Created - Book ID:", bID # Debugging - Now in createBook in books.py
-        return "Success!"
     
         # Redirect - Not Used
         # username = users.getUsername(getUserID())
         # profileData = users.getProfile(username)
         # profileData.update( users.getActivity(username) )
         # return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)) # Not Actually Run - Check Javascript
-
+        return "Success!" # Not Actually Run - Check Redirect
     return "Failure!" # Not POST
     
 '''
@@ -384,6 +383,8 @@ def bookSelect():
 @app.route('/uploadChapter/', defaults={'bookID': None}, methods = ['POST', 'GET'])
 @app.route('/uploadChapter/<int:bookID>', methods = ['POST', 'GET'])
 def uploadChapter(bookID):
+    print "Request Fields:", request.form
+
     if request.method == 'GET':
         return redirect(url_for('bookSelect'))
         
@@ -400,9 +401,9 @@ def uploadChapter(bookID):
             chNum = int(request.form["chapterid"])
             if chNum == -1: # NEW CHAPTER Option
                 chNum = books.getBookLength(bookID) + 1 # Should be integrated into books.py - TODO
-            print "Add chapter here."
-            added = books.addNewChapter(request.form['storyTitle'],
-                                        "Testing", # request.form['storyText'], # Debug Later
+            # Add chapter here.
+            added = books.addNewChapter(request.form['storyTitle'].strip(),
+                                        request.form['storyText'].strip(), # request.form['storyText'], # Debug Later
                                         bookID,
                                         chNum) # Edit addNewChapter to allow editing of books - TODO
         

@@ -34,7 +34,6 @@ primary_key must be last
 NO ASSOCIATION PROXY IS USED
 
 using ch ID (for PK) and ch Num 
-
 """
 
 

@@ -176,8 +176,8 @@ def parseBook(textArr, metaArr):
     return bookID
 
 # addNewChapter (..) - adds a new chapter to existing book
-# pre  : String chTitle - title of chapter
-#        String chText - text for new chapter
+# pre  : String   chTitle - title of chapter
+#        String[] chText - text for new chapter
 #        int    bookID - ID of book
 #        int    chNum - chapter number
 # post : int added - 1 if success, -1 if failure
@@ -194,8 +194,10 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     # <int>,<int>:<int>,<int>:...
 
     #off by one hell
+    if len(chText) == 0:
+        return -1 # Fail
     for line in chText:
-        if "--------" in line:#page break
+        if "--------" in line: #page break
             #print "page break reee"
             newCCStr = str(curPageStartCC) + "," + str(curCC) + ":"
             #print newCCStr
@@ -205,16 +207,18 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
             line = line.strip()
             curCC += len(line) + 1 #put in the extra character count for the bar. Image cc is gonna get screwweeedddd :((
             processedText += line + "|"
+
+
     #PUSH LAST CHAPTER BOOKMARKS!
     newCCStr = str(curPageStartCC) + "," + str(curCC)
     pageCC += newCCStr
     processedText = processedText[:-1]
-    added = -1
+    added = -1 # Fail
     try:
         newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
         session.add(newChapter)
         session.commit()
-        added = 1
+        added = 1 # Success
     except:
         pass # Do Nothing
     session.close()
