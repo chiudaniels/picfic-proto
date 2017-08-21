@@ -178,10 +178,10 @@ def parseBook(textArr, metaArr):
 # pre  : String   chTitle - title of chapter
 #        String[] chText - text for new chapter
 #        int    bookID - ID of book
-#        int    chNum - chapter number
+#        int    chID - chapter ID
 # post : int added - 1 if success, -1 if failure
 #        adds a new chapter to the given book
-def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
+def addNewChapter(chTitle, chText, bookID, chID): #chText is array
     session = Session()
     #chText is an array
     curCC = 0
@@ -192,6 +192,7 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
     # Current formatting for pageCC
     # <int>,<int>:<int>,<int>:...
 
+    # ====================================
     #off by one hell
     if len(chText) == 0:
         return -1 # Fail
@@ -208,15 +209,25 @@ def addNewChapter(chTitle, chText, bookID, chNum): #chText is array
         else:
             curCC += len(line) + 1 #put in the extra character count for the bar. Image cc is gonna get screwweeedddd :((
             processedText += line + "|"
-
+    # ====================================
+            
     #PUSH LAST CHAPTER BOOKMARKS!
     newCCStr = str(curPageStartCC) + "," + str(curCC)
     pageCC += newCCStr
     processedText = processedText[:-1]
     added = -1 # Fail
     try:
-        newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
-        session.add(newChapter)
+        if chID == -1: # New Chapter
+            chNum = getBookLength(bookID) + 1
+            newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
+            session.add(newChapter)
+            # added = ??? # Create separate success message for updates?
+        else: # Editing Past Chapter
+            chapter = session.query(Chapter).filter(Chapter.chapterID == chID).one()
+            chapter.title = chTitle
+            chapter.text = processedText
+            chapter.pageCC = pageCC
+            chapter.charCount = len(chapter.text)
         session.commit()
         added = 1 # Success
     except:
@@ -504,8 +515,7 @@ def getBookLength( bookID ):
 
 # Doc This Later
 #Returns {"pgNum", "text", "chLength", "curCC", "startCC", "endCC"}
-def getPageInfo( cc, chID ):
-    
+def getPageInfo( cc, chID ):    
     ret = {}
     session = Session()
     chapter = session.query(Chapter).filter_by(chapterID = chID).one()
@@ -596,6 +606,19 @@ def getChapterID( bookID, chNum ):
     session.close()
     return ret
 
+# getChapterNum (..) - get num of chapter given ID
+# pre  : int chID - chapter id 
+# post : int ret - chapter number
+def getChapterNum( chID ):
+    session = Session()
+    res = session.query(Chapter).filter(Chapter.chapterID == chID)
+    if res.count() != 1:
+        session.close()
+        return None #something's wrong
+    ret = res.one().chapterNum
+    session.close()
+    return ret
+
 # getChapterTitle (..) - get chapter's title
 # pre  : int chapterID - ID of chapter 
 # post : String ret - chapter title
@@ -606,6 +629,19 @@ def getChapterTitle( chapterID ):
         session.close()
         return None #something's wrong
     ret = res.one().title
+    session.close()
+    return ret
+
+# getChapterText (..) - get chapter's text
+# pre  : int chapterID - ID of chapter 
+# post : String ret - text of chapter, without whitespace
+def getChapterText( chapterID ):
+    session = Session()
+    res = session.query(Chapter).filter(Chapter.chapterID == chapterID)
+    if res.count() != 1:
+        session.close()
+        return None #something's wrong
+    ret = res.one().text
     session.close()
     return ret
 

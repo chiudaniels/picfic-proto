@@ -334,51 +334,7 @@ def uploadStoryText():
         # profileData.update( users.getActivity(username) )
         # return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)) # Not Actually Run - Check Javascript
         return "Success!" # Not Actually Run - Check Redirect
-    return "Failure!" # Not POST
-    
-'''
-    # OLD FRAMEWORK - STORY UPLOADED AS .TXT FILE
-    print "WOW! A story is being made!" # Debugging
-    # files = request.files.getlist('file[]')
-    print request.files
-    file1 = request.files['file[0]']
-    print "hello"
-    file2 = request.files['file[1]']
-    textFile = None
-    coverFile = None
-    if file1.filename.endswith('.txt'):
-        textFile = file1
-        coverFile = file2
-    else:
-        textFile = file2
-        coverFile = file1
-    coverFile = request.files['file[0]']
-    textFile = request.files['file[1]']
-    print "hello"
-    if coverFile.filename == '' or textFile.filename == '':
-        print "sucky file"
-        return redirect(request.url)
-    if coverFile and allowed_file(coverFile.filename):
-        print "what's up"
-        filename = secure_filename(coverFile.filename)
-        print "g"
-        coverFile.save(os.path.join(app.config['UPLOAD_FOLDER'] + "bookCovers/", filename))
-        
-        print "oh"
-        #make the book first
-        print request.form
-        title = request.form["title"]
-        author = request.form["author"]
-        #text = request.form["storyText"]
-        blurb = request.form["blurb"]
-        #print "boi"
-        #print text
-        #books.parseBookForm(title, author, blurb, text, getUserID(), filename)
-        books.parseBookCustom(textFile, title, author, blurb, getUserID(), filename)
-        print "and it was mada mada!"
-        return redirect(request.url) 
-    return False # Failure - Missing Fields
-'''
+    return "Failure!" # Not POST    
         
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])
 def uploadStoryCover():
@@ -390,6 +346,22 @@ def bookSelect():
     profileData = users.getProfile(username)
     profileData.update(users.getActivity(username))
     return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
+
+@app.route("/ajaxUploadChapter/", methods=['POST'])
+def ajaxUploadChapter():
+    response = {}
+    chID = int(request.json['chapterid'])
+    print chID
+    if chID != -1:
+        cTitle = books.getChapterTitle(chID)
+        cText = books.getChapterText(chID).replace("|", "\r\n\r\n***\r\n\r\n")
+    else:
+        cTitle = ""
+        cText = ""
+    response['cTitle'] = cTitle
+    response['cText'] = cText
+    response['status'] = "OK"
+    return json.dumps(response)
 
 @app.route('/uploadChapter/', defaults={'bookID': None}, methods = ['POST', 'GET'])
 @app.route('/uploadChapter/<int:bookID>', methods = ['POST', 'GET'])
@@ -409,14 +381,12 @@ def uploadChapter(bookID):
         added = 0 # 0 - no request, 1 - success, -1 - failure
         print request.form
         if "storyTitle" in request.form and "chapterid" in request.form and "storyText" in request.form:
-            chNum = int(request.form["chapterid"])
-            if chNum == -1: # NEW CHAPTER Option
-                chNum = books.getBookLength(bookID) + 1 # Should be integrated into books.py - TODO
             # Add chapter here.
+            chID = int(request.form["chapterid"])
             added = books.addNewChapter(request.form['storyTitle'].strip(),
                                         request.form['storyText'].strip().splitlines(), # request.form['storyText'], # Debug Later
                                         bookID,
-                                        chNum) # Edit addNewChapter to allow editing of books - TODO
+                                        chID) # Edit addNewChapter to allow editing of books - TODO
         
         # Retrieving Book / Chapter Data
         bookTitle = books.getBookTitle(bookID)
@@ -451,7 +421,7 @@ def uploadChapter(bookID):
 
     # Error Catching
     return abort(404)
-
+    
 '''
 @app.route("/user/<username>")
 def userProfilePage(username):
