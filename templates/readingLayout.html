@@ -70,10 +70,10 @@
         {% for ch in pageData["chData"] %}
         {% if ch["permit"] == 1 %}
         <a class = "btn" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-          {{ch["title"]}}</a>
+          {{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
         {% else %}
         <a class = "btn disabled" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-          {{ch["title"]}}</a>
+          {{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
         {% endif %}
         <br>            
         {% endfor %}

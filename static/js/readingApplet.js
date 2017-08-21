@@ -2,21 +2,22 @@
 var storyBody = document.getElementById('storyBody'); 
 var progressBar = document.getElementById('progressBar'); 
 var imgGallery = document.getElementById('imageGallery'); 
+
 //interactive
 var prevPgBtn = document.getElementById('prevPgBtn'); 
 var nextPgBtn = document.getElementById('nextPgBtn'); 
 var likes = document.getElementById('likes');
 
-//var storyText = "";
+var pageMetaData = null;
 
 var loadPage = function(data){
     //dump stuff
     while (storyBody.hasChildNodes()){
 	storyBody.removeChild(storyBody.lastChild);
     }
-
     
     data = JSON.parse(data);
+    pageMetaData = data;
     console.log(data);
     artArray = data["imageData"]
     for (i = 0; i < artArray.length; i++){
@@ -111,6 +112,11 @@ var changePg = function(){
 var nextPage = function(){
     //do a chapter check
     //do next page logic
+    // Check to make sure there's a page to go forward to
+    data = pageMetaData;
+    if (data["chapterNum"] == data["bookLength"]) {
+	return; // Terminate
+    }
     if (curPg == -1){ //ur in the gallery bois
 	curChapter += 1;
 	curCC = 0;
@@ -167,6 +173,11 @@ var nextPage = function(){
 }
 
 var prevPage = function(){
+    // Check to make sure there's a page to go back to
+    data = pageMetaData;
+    if (data["chNum"] == 1 && data["pgData"]["pgNum"] == 1) {
+	return; // Terminate
+    }
     if (curPg == 1){
 	curPg = -1;
 	curChapter -= 1;
