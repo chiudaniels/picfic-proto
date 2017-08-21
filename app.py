@@ -209,6 +209,17 @@ def login():
     else:
         return flask.Response("fail")
 
+# Route for AJAX
+@app.route("/ajaxLogin/", methods=["POST"])
+def ajaxLogin():
+    response = {}
+    email = request.json['email']
+    pwd = request.json['pass']
+    if users.getHashed(email) and bcrypt.check_password_hash(users.getHashed(email), pwd): # Verification
+        response['status'] = "OK"
+    else:
+        response['status'] = "FAIL"
+    return json.dumps(response)
 
 @app.route("/logout/")
 def logout():

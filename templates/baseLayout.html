@@ -401,14 +401,17 @@
                     <br>
                     <br>
                     <br>
-                    <form action="/login/" class="formStyle" method="POST" data-toggle="validator">
+                    <form action="/login/" id="signInForm" class="formStyle" method="POST" data-toggle="validator">
                         <div class="form-group">
                             <input type="email" name="loginEmail" class="form-control" id="loginEmail" placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password" required>
                         </div>
-                        <button type="submit" class="btn submitButton" id="signInButton">Sign In</button>
+			<div class="alert alert-danger" id="loginFail">
+			  Authentication failed.
+			</div>
+                        <button type="button" class="btn submitButton" id="signInButton">Sign In</button>
                         <br>
                         <br>
                         <br>
