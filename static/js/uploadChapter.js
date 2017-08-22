@@ -59,7 +59,6 @@ chapterForm.onsubmit = function() {
     }
 };
 
-
 // AJAX for Editing
 var $chapterSelect = $('#chapterSelect');
 var $chapterTitle = $('#chapterTitle');

@@ -74,7 +74,6 @@ def userProfilePage(username):
         profileData.update( users.getProfileSensitive( username ) )
     return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
 
-
 @app.route("/saveProfile/", methods = ['POST'])
 def saveProfile():
     #try to eventually sanitize this
@@ -97,9 +96,7 @@ def saveProfilePic():
         return json.dumps({"status": 1})
     return None
 
-
 # == Book Gallery Browsing ==========================
-
 @app.route("/gallery/")
 def galleryRoute():
     return redirect("/gallery/browse/page/1", isLoggedIn = isLoggedIn() )
@@ -107,6 +104,7 @@ def galleryRoute():
 @app.route("/gallery/browse/page/<pageNum>")
 def galleryPage(pageNum):
     return render_template("gallery.html", isLoggedIn = isLoggedIn() )
+
 """
     data = gallery.getPage(getUserID(), pageNum) #<-- get back later
     
@@ -117,7 +115,6 @@ def galleryPage(pageNum):
 """
 
 # == Book landing page ==============================
-
 @app.route("/books/<int:bookID>")
 def bookLanding(bookID):
     metadata = books.getBookLanding(bookID)
@@ -128,10 +125,7 @@ def bookLandingImages(): #lazy jump
     metadata = books.getBookLanding(int(request.form["bookID"]))
     return json.dumps(metadata["imageData"])
 
-
 # == reading =====
-
-
 @app.route("/books/<int:bookID>/read")
 def bookRedir(bookID):
     #get user progress - get appropriate chapter
@@ -140,7 +134,7 @@ def bookRedir(bookID):
         return redirect("/books/" + str(bookID) + "/read/1")
     return redirect("/books/" + str(bookID) + "/read/" + str(users.getChapter(getUserID(), bookID)))
 
-                    #Kill chNum?
+#Kill chNum?
 #How do i pass data about the page to the router if not in the url?
 @app.route("/books/<int:bookID>/read/<int:chNum>")
 def bookPage(bookID, chNum):
@@ -149,7 +143,7 @@ def bookPage(bookID, chNum):
     data.update(books.getTableOfContents(bookID, getUserID()))
     return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data, showMenu = 1)
 
-#todo : refuse permission if access not given
+#todo: refuse permission if access not given
 #todo: grant free access on chapters 
 
 #How do i pass data about the page to the router if not in the url?
@@ -190,11 +184,9 @@ def chapterGallery():
     print books.getChapterSummary(bID, chN)
     return json.dumps(books.getChapterSummary(bID, chN))
 
-
 #=================== END SITE NAVIGATION =======================
 
 # Login Routes ======================================
-
 @app.route("/login/", methods=["POST"])
 def login():
 
@@ -250,7 +242,6 @@ def register():
     return redirect( url_for('root') )
 
 # Setting Routes ======================================
-
 @app.route('/changePass/', methods = ['POST'])
 def changePass():
     if isLoggedIn():
@@ -354,7 +345,15 @@ def ajaxUploadChapter():
     print chID
     if chID != -1:
         cTitle = books.getChapterTitle(chID)
-        cText = books.getChapterText(chID).replace("|", "\r\n\r\n***\r\n\r\n")
+        pageCCs = books.getChapterPageCC(chID) # [[start, end], [start, end], ...]
+        rawText = books.getChapterText(chID)
+        cText = ""
+        print pageCCs
+        for ccindex in pageCCs[:-1]:
+            print ccindex
+            cText += rawText[ccindex[0]:ccindex[1]] + "\r\n***\r\n\r\n"
+        cText += rawText[pageCCs[-1][0]:pageCCs[-1][1]]
+        cText = cText.replace("|", "\r\n")
     else:
         cTitle = ""
         cText = ""

@@ -200,10 +200,8 @@ def addNewChapter(chTitle, chText, bookID, chID): #chText is array
         line = line.strip()
         if line == "": # Multiple blank lines in a row
             continue
-        elif "***" in line: #page break
-            #print "page break reee"
+        elif "***" in line: # page break
             newCCStr = str(curPageStartCC) + "," + str(curCC) + ":"
-            #print newCCStr
             curPageStartCC = curCC #like list, non-last inclusive
             pageCC += newCCStr
         else:
@@ -646,6 +644,23 @@ def getChapterText( chapterID ):
         return None #something's wrong
     ret = res.one().text
     session.close()
+    return ret
+
+# getChapterPageCC (..) - get chapter's page cc bounds
+# pre  : int chapterID - ID of chapter
+# post : [[int, int], [int, int], ...]
+#        each [int, int] pair is a page's starting and ending char
+def getChapterPageCC( chapterID ):
+    session = Session()
+    res = session.query(Chapter).filter(Chapter.chapterID == chapterID)
+    if res.count() != 1:
+        session.close()
+        return None #something's wrong
+    raw = res.one().pageCC.split(":")
+    ret = []
+    for entry in raw:
+        cc = entry.split(",")
+        ret += [[int(cc[0]), int(cc[1])]] # Convert To Integers
     return ret
 
 # getBookTitle (..) - get book's title
