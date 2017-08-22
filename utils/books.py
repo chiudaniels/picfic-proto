@@ -374,10 +374,10 @@ def getPageData( bookID, chNum, userID ):
 
     if userID != None:
         usrChQ = session.query(UserChapter).filter(UserChapter.readerID == userID, UserChapter.chapterID == chapterID)
-    if usrChQ.count() == 0:
-        newUserChapter = UserChapter(userID, chapterID)
-        session.add(newUserChapter)
-        session.commit()
+        if usrChQ.count() == 0:
+            newUserChapter = UserChapter(userID, chapterID)
+            session.add(newUserChapter)
+            session.commit()
         
     properChQ = session.query(UserBook).filter(UserBook.readerID == userID, UserBook.bookID == bookID)
     if properChQ.count() == 0:
@@ -385,10 +385,13 @@ def getPageData( bookID, chNum, userID ):
     else:
         properCh = properChQ.one().curChapter
     if chNum != properCh:
-        bookmark = 0
-        properChQ.one().curChapter = chNum
-        properChQ.one().curCC = 0
-        session.commit()
+        try:
+            bookmark = 0
+            properChQ.one().curChapter = chNum
+            properChQ.one().curCC = 0
+            session.commit()
+        except:
+            pass
     
     ret = {"status": 0}
     
