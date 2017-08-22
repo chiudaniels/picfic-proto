@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/chapter_style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+	
+	<div class="col-md-10">
+	  <div class="slideshow-container">
+	    <span class="slideshow-images">
+	      <div class="mySlides">
+		<div class="numbertext">1 / 2</div>
+		<img src="../static/img1.jpg" style="width:100%">
+		<div class="text">Caption Text</div>
+	      </div>
+
+	      <div class="mySlides">
+		<div class="numbertext">2 / 2</div>
+		<img src="../static/img2.jpg" style="width:100%">
+		<div class="text">Caption Two</div>
+	      </div>
+	      
+	    </span>
+
+	    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+	  </div>
+	</div>
+	
+	<div class="col-md-2">
+	  <form id="image_upload" name="/image/upload/" method="post">
+	    <input type='file' id="fileUpload"/>
+	  </form>
+	</div>
+      </div>
+    </div>
+    <script src="../static/picture.js"> </script>
+  </body>
+</html>

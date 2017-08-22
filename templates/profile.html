@@ -1,8 +1,12 @@
-{% extends 'baseLayout.html' %} {% block css %}
+<!-- Profile -->
+{% extends 'baseLayout.html' %}
+{% block title %}PicFic - {{data["firstName"]}} {{data["lastName"]}}'s Profile{% endblock %}
+{% block css %}
 <link rel="stylesheet" type="text/css" href="/static/css/launchpad_stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}" />
-<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" /> {% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" />
+{% endblock %} {% block content %}
 <div class="profileBackground">
   <div class="aboutMe">
     <a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
@@ -16,7 +20,7 @@
       <h6>{{data["username"]}}</h6>
     </div>
     <div class="about">
-      <h5 class="f"> About Me</h5>
+      <h5 class="f">About Me</h5>
       <button class="edit" id="editPersonal">Edit</button>
       <br>
       <br>

@@ -1,9 +1,13 @@
-{% extends 'readingLayout.html' %} {% block css %}
+<!-- Chapter Template -->
+{% extends 'readingLayout.html' %}
+{% block title %}PicFic - {{ pageData["chTitle"] }}{% endblock %}
+{% block css %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/chapter_style.css') }}">
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" /> {% endblock %} {% block content %} {% if pageData["status"] == 1 %}
+<link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" />
+{% endblock %} {% block content %} {% if pageData["status"] == 1 %}
 <div class="container">
   <div class="row">
     <div class="col-md-1 logos">

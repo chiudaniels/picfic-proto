@@ -1,7 +1,11 @@
-{% extends 'baseLayout.html' %} {% block css %}
+<!-- Launchpad -->
+{% extends 'baseLayout.html' %}
+{% block title %}PicFic{% endblock %}
+{% block css %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}">
-<link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">{% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
+{% endblock %} {% block content %}
 <!-- FIRST PAGE-->
 <div class="pageone">
 </div>

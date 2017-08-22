@@ -99,11 +99,11 @@ def saveProfilePic():
 # == Book Gallery Browsing ==========================
 @app.route("/gallery/")
 def galleryRoute():
-    return redirect("/gallery/browse/page/1", isLoggedIn = isLoggedIn() )
+    return galleryPage(1)
 
 @app.route("/gallery/browse/page/<pageNum>")
 def galleryPage(pageNum):
-    return render_template("gallery.html", isLoggedIn = isLoggedIn() )
+    return render_template("gallery.html", isLoggedIn = isLoggedIn())
 
 """
     data = gallery.getPage(getUserID(), pageNum) #<-- get back later

@@ -1,6 +1,10 @@
-{% extends 'readingLayout.html' %} {% block css %}
+<!-- Book Landing -->
+{% extends 'readingLayout.html' %}
+{% block title %}PicFic - {{ data["meta"]["title"] }}{% endblock %}
+{% block css %}
 <link rel="stylesheet" type="text/css" href="/static/css/reading_stylesheet.css">
-<link rel="stylesheet" type="text/css" href="/static/endofchapter_stylesheet.css"> {% endblock %} {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/endofchapter_stylesheet.css">
+{% endblock %} {% block content %}
 <div class="share">
     <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="/static/launchpad/png/facebook.png"></a>
     <br>
