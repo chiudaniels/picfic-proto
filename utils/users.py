@@ -9,6 +9,19 @@ engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
 Session.configure(bind=engine)
 
+# addUser (..) - creates and adds user 
+# pre  : String fN     - first name
+#        String lN     - last name
+#        String uN     - username
+#        String email  - email
+#        String pwd    - password
+#        String gender - gender
+#        int bM - birth month
+#        int bD - birth day
+#        int bY - birth year
+#        String authTokens - authToken - unused
+# post : int uID - user ID of created user
+#        User and UserProfile are created in database 
 def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
     session = Session()
     newUser = User(uN, pwd, "", email)
@@ -21,19 +34,28 @@ def addUser( fN, lN, uN, email, pwd, bM, bD, bY, gender, authTokens ):
     session.close()
     return uID
 
+# addUser (..) - creates and adds user 
+# pre  : int uID - user ID
+# post : user is deleted from the database
 def deleteUser( uID ):
     session = Session()
     usr = session.query(User).filter_by(userID = uID).one()
     session.delete(usr)
     session.commit()
     session.close()
-    
+
+# getUser (..) - retrieves User object
+# pre  : int uID - user ID
+# post : User usr - User object from database
 def getUser( uID ):
     session = Session()
     usr = session.query(User).filter_by(userID = uID).one()
     session.close()
     return usr
 
+# getUser (..) - retrieves UserProfile object
+# pre  : int uID - user ID
+# post : UserProfile profileInfo - UserProfile object from database
 def getProfile( username ):
     session = Session()
     userID = session.query(User.userID).filter(User.username == username).one()[0]
@@ -52,12 +74,21 @@ def getProfileSensitive( username ):
 
 def isNameTaken( username ):
     session = Session()
-    usr = session.query(User).filter_by(username = username)   
+    usr = session.query(User).filter(User.username == username)
     if usr.count() == 0:
         session.close()
-        return False
+        return False # Not Taken
     session.close()
-    return True
+    return True # Taken
+
+def isEmailTaken( email ):
+    session = Session()
+    usr = session.query(User).filter(User.email == email)   
+    if usr.count() == 0:
+        session.close()
+        return False # Not Taken
+    session.close()
+    return True # Taken
 
 def getCC( uID, bookID ):
     session = Session()

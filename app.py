@@ -241,6 +241,17 @@ def register():
         msg = "User already exists"
     return redirect( url_for('root') )
 
+@app.route("/ajaxRegister/", methods=["POST"])
+def ajaxRegister():
+    response = {}
+    email = request.json['email']
+    uname = request.json['username']
+    if not users.isNameTaken(uname) and not users.isEmailTaken(email):
+        response['status'] = "OK"
+    else:
+        response['status'] = "FAIL"
+    return json.dumps(response)
+
 # Setting Routes ======================================
 @app.route('/changePass/', methods = ['POST'])
 def changePass():
@@ -484,22 +495,22 @@ def adminPage():
     if isLoggedIn():
         uID = getUserID()
         if users.isAdmin(uID):
-            print admin.getAdminPageData()
+            # print admin.getAdminPageData() # Debugging
             return render_template("admin.html", data = admin.getAdminPageData(), isLoggedIn = isLoggedIn())
     return redirect(url_for('page_not_found', e = None))
 
+# Called from AJAX
 @app.route('/adminAction/', methods = ['POST'])
 def adminAction():
     if isLoggedIn():
         uID = getUserID()
         if users.isAdmin(uID):
-            return json.dumps(admin.adminAction(request.form))
-    return redirect(url_for('page_not_found', e = None))
+            print request.json
+            return json.dumps(admin.adminAction(request.json))
+    return json.dumps({ 'status' : 'FAIL' });
 
 
 #Emailing and business below
-
-
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'jealocker@gmail.com'
@@ -508,7 +519,6 @@ app.config['MAIL_PASSWORD'] = 'lockeryolo1'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-
 
 ####################################################### SENDING EMAIL BASICS
 @app.route("/nogoof")

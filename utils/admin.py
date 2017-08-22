@@ -1,14 +1,10 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from dbSetup import *
-import users, books, images, os
+import users, books, images
+import json, os
 
 # admin.py - Administrative Functions for the Admin Page
-
-# admin.py - Administrative Functions for the Admin Page
-
-# admin.py - Administrative Functions for the Admin Page
-
 Session = sessionmaker()
 engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 
@@ -67,23 +63,30 @@ def getAdminPageData():
     return ret
 
 # adminAction (..) - executes actions on admin page
-# pre  : dict dat - data with keys describing what action to perform
+# pre  : dict data - data with keys describing what action to perform
 #        { String type  : string form of table accessed [see in line comments]
 #          String act   : string form of action performed [see in line comments]
 #          String rowID : string form of entry }
-# post : action is executed, database is changed appropriately 
-def adminAction(dat):
+# post : dict ret - return dictionary
+#        { String status : "OK" or "FAIL"
+#          String type   : "story", "art" or "user"
+#          String act    : "promote", "approve" or "delete"
+#          String rowid  : rowID of initlal call } 
+#        action is executed, database is changed appropriately 
+def adminAction(data):
     session = Session()
-    data = {}
-    for key in dat.keys():
-        data[key] = int(dat[key])
-    print data
+    response = {}
+    print data # Debugging
+    response['rowid'] = data['rowID']
     rowID = data["rowID"] # Robustify Later With Error Checking
-    if data["type"] == 0: #story
+    if data["type"] == "0": #story
+        response['type'] = 'story'
         story = session.query(Book).filter(Book.bookID == rowID)
-        if data["act"] == 1: #approve
+        if data["act"] == "1": # story approve
+            response['act'] = "approve"
             story.one().approve()
-        elif data["act"] == 2: #delete
+        elif data["act"] == "2": # story delete
+            response['act'] = "delete"
             chapter = session.query(Chapter).filter(Chapter.bookID == rowID)
             # print "Wow!:", chapter.all() # Debugging
             for ch in chapter:
@@ -104,17 +107,28 @@ def adminAction(dat):
                 except:
                     print "Image does not exist."
             story.delete()
-    elif data["type"] == 1: #art
+            
+    elif data["type"] == "1": # art
+        response['type'] = 'art'
         art = session.query(Art).filter(Art.artID == rowID)
-        if data["act"] == 1: #delete
+        if data["act"] == "1": # art delete
+            response['act'] = "delete"
             art.delete()
-    elif data["type"] == 2: #user
+            
+    elif data["type"] == "2": #user
+        response['type'] = 'user'
         user = session.query(User).filter(User.userID == rowID)
-        if data["act"] == 1: #promote
+        if data["act"] == "1": # user promote
+            response['act'] = "promote"
             user.one().promote()
-        elif data["act"] == 2: #delete
+        elif data["act"] == "2": # user delete - Not Currently Implemented in Front
+            response['act'] = "delete"
             user.delete()
     session.commit()
     session.close()
-    return {"status" : "True"}
+    response['status'] = 'OK'
+    print response # Debugging
+    return response
+    # return json.dumps(response)
+    # return {"status" : "FAIL"} - For Error Checking
 

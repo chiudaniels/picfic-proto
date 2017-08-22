@@ -315,7 +315,7 @@
                     <br>
                     <br>
                     <br>
-                    <form action="/register/" class="formStyle" data-toggle="validator" method="POST">
+                    <form action="/register/" id="registerForm" class="formStyle" data-toggle="validator" method="POST">
                         <div class="form-group">
                             <input type="text" name="fName" class="form-control" id="firstName" placeholder="First Name" required>
                         </div>
@@ -375,9 +375,12 @@
                             </div>
                         </div>
                         <p>
-                            <stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
+                          <stronger>By clicking on Sign Up, you agree to PicFic's terms & conditions and privacy policy.</stronger>
                         </p>
-                        <button type="submit" class="btn submitButton">Sign Up</button>
+			<div class="alert alert-danger" id="registerFail">
+			  That email or username already exists. Please choose a different one! 
+			</div>
+                        <button type="button" id="registerButton" class="btn submitButton">Sign Up</button>
                     </form>
                     <br>
                     <a href="#" data-toggle="modal" data-target="#signInModal" data-dismiss="modal">Login to existing account</a>
@@ -409,7 +412,7 @@
                             <input type="password" name="loginPass" class="form-control" id="loginPass" placeholder="Password" required>
                         </div>
 			<div class="alert alert-danger" id="loginFail">
-			  Authentication failed.
+			  Invalid email or password.
 			</div>
                         <button type="button" class="btn submitButton" id="signInButton">Sign In</button>
                         <br>

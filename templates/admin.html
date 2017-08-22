@@ -44,7 +44,7 @@
     </nav>
 
     <div class="padder">
-      <h1> ADMIN DASHBOARD</h1>
+      <h1>ADMIN DASHBOARD</h1>
       
       <ul class="nav nav-pills">
 	<li id="storyTable" class="active"><a data-toggle="pill" href="#stors" class="customTab">STORIES</a></li>
@@ -64,19 +64,18 @@
 	    <th>TAGS</th>
 	  </tr>
 	  {% for story in data["stories"] %}
-	  <tr>
+	  <tr id="story{{story['storyID']}}">
 	    <td>{{story["storyID"]}}</td>
 	    <td>{{story["title"]}}</td>
 	    <td>{{story["username"]}}</td>
 	    <td>{{story["timestamp"]}}</td> <!-- hol'up -->
 	    <td>{{story["approval"]}}</td>
-	  
+	    
 	    <td>
 	      {% if story["approval"] == 0 %}
-	      <button class="btn adminForm" type="0" act="1" rowID="{{story['storyID']}}">Approve</button>
-	      <br>
+	      <button class="btn adminForm" type="0" act="1" rowID="{{story['storyID']}}" id="storyapprove{{story['storyID']}}" style="display:block">Approve</button>
 	      {% endif %}
-	      <button class="btn adminForm" type="0" act="2" rowID="{{story['storyID']}}">Delete</button>
+	      <button class="btn adminForm" type="0" act="2" rowID="{{story['storyID']}}" id="storydelete{{story['storyID']}}">Delete</button>
 	    </td>
 	    <td>Unimplemented</td>
 	  </tr>
@@ -95,13 +94,13 @@
 	    <th>OPTIONS</th>
 	  </tr>
 	  {% for art in data["art"] %}
-	  <tr>
+	  <tr id="art{{art['artID']}}">
 	    <td>{{art["artID"]}}</td>
 	    <td>{{art["title"]}}</td>
 	    <td>{{art["username"]}}</td>
 	    <td>{{art["timestamp"]}}</td>
 	    <td>
-	      <button class="btn adminForm" type="1" act="1" rowID="{{art['artID']}}">Delete</button>
+	      <button class="btn adminForm" type="1" act="1" rowID="{{art['artID']}}" id="artdelete{{art['artID']}}">Delete</button>
 	    </td>
 	  </tr>
 	  {% endfor %}
@@ -124,7 +123,7 @@
 	    <th>OPTIONS</th>
 	  </tr>
 	  {% for user in data["users"] %}
-	  <tr>
+	  <tr id="user{{user['userID']}}">
 	    <td>{{user["userID"]}}</td>
 	    <td>{{user["firstName"]}}</td>
 	    <td>{{user["lastName"]}}</td>
@@ -135,13 +134,12 @@
 	    <td>{{user["gender"]}}</td>
 	    <td>{{user["usergroup"]}}</td>
 	    <td>
-	     
+	      
 	      {% if user["usergroup"] == 2 %}
-	      <button class="btn adminForm" type="2" act="1" rowID="{{user['userID']}}">Promote</button>
-	      <br>
+	      <button class="btn adminForm" type="2" act="1" rowID="{{user['userID']}}" id="userpromote{{user['userID']}}" style="display:block">Promote</button>
 	      {% endif %}
 	      {% if user["usergroup"] != "admin" %}
-	      <button class="btn adminForm" type="2" act="2" rowID="{{user['userID']}}">Delete</button>
+	      <button class="btn adminForm" type="2" act="2" rowID="{{user['userID']}}" id="userdelete{{user['userID']}}">Delete</button>
 	      {% endif %}
 	    </td>
 	  </tr>

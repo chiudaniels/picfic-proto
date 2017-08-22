@@ -12,12 +12,12 @@ engine = create_engine('postgresql+psycopg2://postgres:picfic@localhost/picfic')
 Session.configure(bind=engine)
 
 # parseBookForm (..) - parses book uploaded by form
-# pre  : String title - title of the book
-#        String author - author of the book
-#        String blurb - blurb of the book
+# pre  : String title     - title of the book
+#        String author    - author of the book
+#        String blurb     - blurb of the book
 #        String storyText - story text, unparsed
-#        int    userID - user's ID
-#        String coverUrl - filename of the book cover image
+#        int    userID    - user's ID
+#        String coverUrl  - filename of the book cover image
 # post : int bID - book ID of created book
 #        database is updated with details of the new book
 def parseBookForm(title, author, blurb, storyText, userID, coverUrl):
