@@ -39,18 +39,20 @@
 <!-- SECOND PAGE -->
 <div class="container content" id="page2">
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <h1 id="startreading">Start reading</h1>
         </div>
     </div>
     <div class="row" id="bookgallery">
         {% for book in data["books"] %}
         <div>
+	  <div class="text-center">
             <a href="/books/{{book['bookID']}}"><img class="img-fluid bookcover" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
-            <br>
-            <span>{{book['title']}}</span>
-            <br>
-            <span>{{book['author']}}</span>
+	  </div>
+          <br>
+          <div class="text-center"><strong>{{book['title']}}</strong></div>
+          <br>
+          <div class="text-center"><em>{{book['author']}}</em></div>
         </div>
         {% endfor %}
     </div>
