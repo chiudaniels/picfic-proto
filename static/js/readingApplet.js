@@ -252,7 +252,9 @@ var bookmark = function(){
 	},
 	dataType: "json",
 	success: function(response) {
-	    console.log("user reading bookmarked");
+	    if (response['status'] == 1) {
+		console.log("user reading bookmarked");
+	    };
 	},
 	error: function(data) {
 	    console.log(data);

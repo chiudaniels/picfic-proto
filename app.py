@@ -166,7 +166,7 @@ def bookmark():
     if isLoggedIn():
         data =  users.bookmark(getUserID(), bID, chN, ccStart)
         return json.dumps({"status":1})
-    return None
+    return json.dumps({"status":0})
 
 @app.route("/getEndOfChPage/", methods = ["POST"])
 def endOfCh():

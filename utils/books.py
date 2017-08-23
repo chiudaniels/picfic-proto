@@ -94,85 +94,6 @@ def createBook(title, author, blurb, userID, coverUrl):
     
     print "New Book Created:", bookID # Debugging
     return bookID
-    
-# DEPRECATED
-# parseBook (..) - parses data and updates database with book
-# pre  : String[] textArr - array of each line in a story
-#        Object[] metaArr - array of metadata
-# post : int bookID - book ID of created book
-#        book is created in database
-def parseBook(textArr, metaArr):
-    session = Session()
-
-    #cleanse both arrs, prelim, (quotes don't matter the future is now)
-    printable = set(string.printable)
-
-    textText = []
-    metaList = []
-
-    for ln in textArr:
-        line = filter(lambda x: x in printable, ln)
-        if line.isspace():
-            continue
-        else:
-            textText.append(line)
-    for ln in metaArr:
-        line = ln
-        if isinstance(line, basestring):
-            line = filter(lambda x: x in printable, ln)
-            
-        if isinstance(line, basestring) and line.isspace():
-            continue
-        else:
-            metaList.append(line)
-    #ur gonna need a better regex filter
-    # double check carriage returns for windows - \r\n vs \n 
-    print "MetaArr:\t", metaArr # Debugging
-    print "MetaList:\t", metaList # Debugging
-    for c in range(len(metaList)):
-        print c, metaList[c]
-    
-    #Make book
-    bT = metaList[0] # Book Title
-    bA = metaList[1] # Book Author
-    bR = metaList[2] # Date/Time Published
-    bB = metaList[3] # Book Blurb
-    bM = metaList[4] # Book Miscellany
-    aID = metaList[5] # Author ID
-    newBook = Book(bA, bT, bR, bB, bM, aID)
-    
-    session.add(newBook)
-    session.flush()
-    #retrieve that bookID!
-    bookID = newBook.bookID
-    print "MAKING NEW BOOK\n\n\n"
-    #Distinguish chapters for parsing, modularized for future
-    chapterMasterArr = []
-    curChDict = {}
-    curChDict["text"] = []
-    for line in textText:
-        if "CHAPTER" in line.upper():
-            print "Chapter detected"
-            #flush last chapter's text to array, reset
-            if "title" in curChDict.keys():
-                print "last chapter appended"
-                #print curChDict
-                chapterMasterArr.append(curChDict)
-            curChDict = {"title": line, "text": []}
-            # print "Title:", curChDict["title"] # Debugging
-        else: #regular or page break, whatever
-            curChDict["text"].append(line)
-    #flush last chapter
-    if "title" in curChDict.keys():
-        chapterMasterArr.append(curChDict)
-    session.commit()
-    #done splitting, parse them all
-    for i in range(len(chapterMasterArr)):
-        ch = chapterMasterArr[i]
-        #print ch["text"]
-        addNewChapter(ch["title"], ch["text"], bookID, i + 1)
-    session.close()
-    return bookID
 
 # addNewChapter (..) - adds a new chapter to existing book
 # pre  : String   chTitle - title of chapter
@@ -218,6 +139,7 @@ def addNewChapter(chTitle, chText, bookID, chID): #chText is array
         if chID == -1: # New Chapter
             chNum = getBookLength(bookID) + 1
             newChapter = Chapter(bookID, chTitle, chNum, processedText, pageCC)
+            print("New chapter created!")
             session.add(newChapter)
             # added = ??? # Create separate success message for updates?
         else: # Editing Past Chapter
@@ -680,3 +602,85 @@ def debug(s):
     print "END DEBUG"
 
 #parseBookManual("../data/texts/aStudyInScarlet.txt", "../data/texts/sampleMeta.txt")
+
+# DEPRECATED CODE
+'''    
+# DEPRECATED
+# parseBook (..) - parses data and updates database with book
+# pre  : String[] textArr - array of each line in a story
+#        Object[] metaArr - array of metadata
+# post : int bookID - book ID of created book
+#        book is created in database
+def parseBook(textArr, metaArr):
+    session = Session()
+
+    #cleanse both arrs, prelim, (quotes don't matter the future is now)
+    printable = set(string.printable)
+
+    textText = []
+    metaList = []
+
+    for ln in textArr:
+        line = filter(lambda x: x in printable, ln)
+        if line.isspace():
+            continue
+        else:
+            textText.append(line)
+    for ln in metaArr:
+        line = ln
+        if isinstance(line, basestring):
+            line = filter(lambda x: x in printable, ln)
+            
+        if isinstance(line, basestring) and line.isspace():
+            continue
+        else:
+            metaList.append(line)
+    #ur gonna need a better regex filter
+    # double check carriage returns for windows - \r\n vs \n 
+    print "MetaArr:\t", metaArr # Debugging
+    print "MetaList:\t", metaList # Debugging
+    for c in range(len(metaList)):
+        print c, metaList[c]
+    
+    #Make book
+    bT = metaList[0] # Book Title
+    bA = metaList[1] # Book Author
+    bR = metaList[2] # Date/Time Published
+    bB = metaList[3] # Book Blurb
+    bM = metaList[4] # Book Miscellany
+    aID = metaList[5] # Author ID
+    newBook = Book(bA, bT, bR, bB, bM, aID)
+    
+    session.add(newBook)
+    session.flush()
+    #retrieve that bookID!
+    bookID = newBook.bookID
+    print "MAKING NEW BOOK\n\n\n"
+    #Distinguish chapters for parsing, modularized for future
+    chapterMasterArr = []
+    curChDict = {}
+    curChDict["text"] = []
+    for line in textText:
+        if "CHAPTER" in line.upper():
+            print "Chapter detected"
+            #flush last chapter's text to array, reset
+            if "title" in curChDict.keys():
+                print "last chapter appended"
+                #print curChDict
+                chapterMasterArr.append(curChDict)
+            curChDict = {"title": line, "text": []}
+            # print "Title:", curChDict["title"] # Debugging
+        else: #regular or page break, whatever
+            curChDict["text"].append(line)
+    #flush last chapter
+    if "title" in curChDict.keys():
+        chapterMasterArr.append(curChDict)
+    session.commit()
+    #done splitting, parse them all
+    for i in range(len(chapterMasterArr)):
+        ch = chapterMasterArr[i]
+        #print ch["text"]
+        addNewChapter(ch["title"], ch["text"], bookID, i + 1)
+    session.close()
+    return bookID
+'''
