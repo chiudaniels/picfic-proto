@@ -30,8 +30,11 @@ var submitAdminForm = function(){
 		}
 		else if (act == "approve" || act == "promote") {
 		    var id = '#' + type + act + rowid; // e.g. storyapprove1
-		    console.log(id); // Debugging
+		    var id2 = '#storyapproval' + rowid; // e.g. storyapproval1
+		    // console.log(id); // Debugging
+		    // console.log(id2); // Debugging
 		    $(id).remove();
+		    $(id2).html("1");
 		}
 	    } else {
 		console.log("Something went wrong...");

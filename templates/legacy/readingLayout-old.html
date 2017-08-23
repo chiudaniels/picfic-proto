@@ -3,29 +3,29 @@
 <html>  
   <head>
     <title>{% block title %}{% endblock %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
-
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reading_stylesheet.css">
-    {% block css %}{% endblock %}
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="/static/css/reading_stylesheet.css");
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
   </head>
-  {% block js %}{% endblock %}
-  
+
   <body>
     <nav class="navbar">
-      {% if showMenu == 1 %}
+    {% if showMenu == 1 %}
       <a href="#" data-toggle="modal" data-target="#tocModal"><img src="/static/png/Menu.png" class="navMenu"></a>
-      {% endif %}
+    {% endif %}
       <a href="/"><img src="/static/svg/PicFic.svg" class="navpicficLogo"></a>
 
       <div class="dropdown-container">
@@ -52,39 +52,56 @@
       </div>
       <!--<div class="user">make variable so that other images can be put in -->
     </nav>
-    
+
     <!-- CLASS: toc --------- ID: tocModal ------------------------------------>
+    
     {% if showMenu == 1 %}
     <div class="modal fade" id="tocModal" role="dialog">
       <div class="modal-dialog toc">
-	<div class="modal-content">
+	     <div class="modal-content">
 	  <div class="blurrify"></div>
 	  <div class="modal-header" style="text-align: center" hidden="true"></div>
 	  <div class="modal-body">
 	    <br><p class="taboc">TABLE OF CONTENTS</p><br><br><br>
 	    <br><a href="/books/{{pageData['bookID']}}">Back To Landing</a>
-	    <br>
+      <br>
 	    <p class="bookParts">
-              
-              {% for ch in pageData["chData"] %}
-              {% if ch["permit"] == 1 %}
-              <a class = "btn" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-		{{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
-              {% else %}
-              <a class = "btn disabled" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-		{{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
-              {% endif %}
-              <br>            
-              {% endfor %}
-	    </p>	    
+        
+        {% for ch in pageData["chData"] %}
+        {% if ch["permit"] == 1 %}
+        <a class = "btn" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
+          {{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
+        {% else %}
+        <a class = "btn disabled" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
+          {{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
+        {% endif %}
+        <br>            
+        {% endfor %}
+        <!--
+	      PART I<br><br>
+	      Chapter I. Sherlock Holmes<br>
+	      Chapter II. The Science of Deduction<br>
+	      Chapter III. The Lauriston Garden Mystery<br>
+	      Chapter IV. What John Rance Had to Tell<br>
+	      Chapter V. Our Advertisement Brings a Visitor<br>
+	      Chapter VI. Tobias Gregson Shows What He Can Do<br><br><br>
+	      PART II<br><br>
+	      Chapter I. On the Great Alkali Plain<br>
+	      Chapter II. The Flower of Utah<br>
+	      Chapter III. John Ferrier Talks with the Prophet<br>
+	      b<br> b<br> b<br> b<br> b<br> b<br> b<br> b<br>-->
+	    </p>
+      
 	  </div>
 	</div>
-	<div class="modal-footer"></div>
+	<div class="modal-footer">
+	</div>
       </div>
     </div>
     {% endif %}
-    
     {% block content %}{% endblock %}
-    {% block endjs %}{% endblock %}
+    
+    
+    
   </body>
 </html>

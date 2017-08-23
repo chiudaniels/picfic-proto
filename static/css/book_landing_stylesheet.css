@@ -1,0 +1,348 @@
+@font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
+
+html {
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    margin: 0 auto;
+    background-color: #F8F8F8;
+}
+
+button:focus {outline:0;}
+
+.bookInfo {
+    height: 64vh;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0px;
+}
+
+.bookInfo::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: #000;
+    opacity: 0.6;
+    width: 100%;
+    height: 100%;
+}
+
+.coverArt {
+    position:absolute;
+    top: 10vh;
+    left:25vw;
+    height: 249px;
+    width: 162px;
+}
+
+.summary {
+    position:absolute;
+    left: 40vw;
+    top: 7vh;
+    color:white;
+    width: 40vw;
+    font-family: 'Nunito', sans-serif;
+}
+
+.toRead {
+    position:relative;
+    width:250px;
+    background-color:white;
+    border-radius: 15px;
+    top: 50vh;
+    border: none;
+    height: 35px;
+    left:40vw;
+    font-size: 17px;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* To Be Changed */
+.viewArt{
+    position:absolute;
+    font-family: 'Nunito', sans-serif;
+    left: 25vw;
+    top: 86xvh;
+}
+
+h3, h2, h4 {
+    font-family: 'Nunito', sans-serif;
+}
+
+.share { 
+  width: 190px; 
+  position: fixed;
+  top: 30vh;
+  left: 5vw;
+  z-index: 50000;
+}
+
+.logo {
+    padding-right: 5vh;
+}
+
+.toc  {
+    background: rgba(255, 255, 255, 0.50);
+    position: fixed;
+    width:50vw;
+    max-width:100%;
+    height:100%;
+    max-height:100%
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color:white;
+    letter-spacing: 0.17px;
+    margin-top: 0px;
+    border-radius: 0px;
+    border:0px;
+    font-weight: lighter;
+    overflow-y: auto;
+    -webkit-backdrop-filter: blur(3px); /* Safari 9+ */
+    backdrop-filter: blur(3px);
+}
+  
+.blurrify {
+    left: 0;
+    right: 0;
+    /*-webkit-backdrop-filter: blur(10px); /* Safari 9+ */
+    /*backdrop-filter: blur(10px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);*/
+    position: absolute;
+    width:50vw;
+    max-width:100%;
+    height:100%;
+    max-height:100%
+}
+
+.taboc {
+    z-index:1000;
+    font-family: .AppleSystemUIFont;
+    font-size: 18px;
+    color: #333333;
+    letter-spacing: 0.36px;
+    text-align: center;
+}
+
+.bookParts {
+    font-family: .AppleSystemUIFont;
+    font-size: 16px;
+    color: #9B9B9B;
+    letter-spacing: 0.32px;
+    line-height:33px;
+    text-align: left;
+    left: 10px;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.prev {
+    left: 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.thumbnails {
+    border-radius: 3px;
+    width: 9vw;
+    height: 13.7vh;
+}
+
+.gallery {
+    max-width: 59vw;
+    box-shadow: 0 0 .5px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    padding: 3vh 5vw 6vh 5vw;
+    background: white;
+    margin-bottom: 10vh;
+}
+
+.gallery-image {
+    padding-top: 3vh;
+}
+
+.gallery-interact {
+    padding-top: 3vh;
+}
+
+.gallery-desc {
+    padding-top: 3vh;
+}
+
+.gallery-thumbnail {
+    padding-top: 3vh;
+    text-align: center;
+}
+
+.gallery-arrow {
+    top: 5vh;
+}
+
+.blueicons {
+    padding-right: .5vw;
+}
+
+.fbicon {
+    padding-left: 5vw;
+}
+
+.slideshow-container {
+    text-align: center;
+    max-width: 60vw;
+    max-height: 60vh;
+    background-color: #f4f4f4;
+}
+
+.slideImages {
+    display: block;
+    margin: auto;
+    max-width: 30vw;
+    max-height: 25vh;
+
+    width: auto;
+    height: auto;
+    object-fit: fill;
+}
+
+.displayImage {
+    max-width: 45vw;
+    max-height: 55vh;
+
+    width: auto;
+    height: auto;
+}
+
+.nothumbnails {
+    margin: auto;
+    text-align: initial;
+    box-shadow: 0 0 .5px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    padding: 0 0 1vh 0;
+    max-width: 41.6vw;
+    margin-top: 2.3vh;
+}
+
+.gallery-interact {
+    padding: 2vh 0 1vh 2vw;
+}
+
+.gallery-desc {
+    padding: 0 3vw 0 3vw;
+}
+
+.title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+
+    color: #181818;
+    padding-top: 5vh;
+    max-width: 1000px;
+    padding-bottom: 5vh;
+    position: relative;
+    margin: auto;
+    left: 8.5vw;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}

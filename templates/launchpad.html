@@ -5,7 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}">
 <link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <!-- FIRST PAGE-->
 <div class="pageone">
 </div>
@@ -97,6 +99,19 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <!-- <script type="text/javascript" src="/static/slick/slick.min.js"></script> -->
 <script type="text/javascript" src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
-
 <script src="../static/js/launchpad.js"></script>
+{% endblock %}
+
+{% block contactbar %}
+  <!-- Bottom Contact Bar -->
+  <div class="socialMedia">
+    <div id="socialMediaText" class="text-center">
+      Like what we're doing? Follow us on social media!
+    </div>
+    <div class="logos text-center">
+      <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
+      <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
+      <a href="https://twitter.com/ThePicFic"><img class="lastlogo" src="../static/launchpad/png/twitter.png"></a>
+    </div>
+  </div>
 {% endblock %}

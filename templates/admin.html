@@ -1,154 +1,116 @@
-<!DOCTYPE html>
 <!-- Admin Panel -->
-<html>  
-  <head>
-    <title>PicFic - Admin Panel</title>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--<script src="/assets/js/bootstrap-dropdown.js" type="text/javascript"></script>-->
-    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reading_stylesheet.css') }}">-->
-    <link rel="stylesheet" type="text/css" href="../static/css/reading_stylesheet.css");
-	  <script src="https://apis.google.com/js/platform.js" async defer></script>
-	  <meta name="google-signin-client_id" content="887660322034-rt5g95hhlnd2v2qtngrcrp4tg4s7i0ph.apps.googleusercontent.com">
-  </head>
+{% extends 'baseLayout.html' %}
+{% block title %}PicFic - Admin Panel{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="../static/css/admin_stylesheet.css"/>
+{% endblock %}
 
-  <body>
-    <nav class="navbar">
-      <a href="#" data-toggle="modal" data-target="#tocModal"><img src="/static/png/Menu.png" class="navMenu"></a>
-      <a href="/"><img src="/static/svg/PicFic.svg" class="navpicficLogo"></a>
+{% block content %} 
+<div class="padder">
+  <h1>ADMIN DASHBOARD</h1>
+  <ul class="nav nav-pills">
+    <li id="storyTable" class="active"><a data-toggle="pill" href="#stors" class="customTab">STORIES</a></li>
+    <li id="artTable"><a data-toggle="pill" href="#fanas" class="customTab">FANART</a></li>
+    <li id="userTable"><a data-toggle="pill" href="#uses" class="customTab">USERS</a></li>
+  </ul>
+  <div id="stors" class="tab-pane fade in active customTabDOM">
+    <h2>STORIES</h2>
+    <table>
+      <tr>
+	<th>StoryID</th>
+	<th>TITLE</th>
+	<th>USER</th>
+	<th>DATE SUBMITTED</th>
+	<th>STATUS</th>
+	<th>OPTIONS</th>
+	<th>TAGS</th>
+      </tr>
+      {% for story in data["stories"] %}
+      <tr id="story{{story['storyID']}}">
+	<td>{{story["storyID"]}}</td>
+	<td>{{story["title"]}}</td>
+	<td>{{story["username"]}}</td>
+	<td>{{story["timestamp"]}}</td> <!-- hol'up -->
+	<td id="storyapproval{{story['storyID']}}">{{story["approval"]}}</td>
+	<td>
+	  {% if story["approval"] == 0 %}
+	  <button class="btn adminForm" type="0" act="1" rowID="{{story['storyID']}}" id="storyapprove{{story['storyID']}}" style="display:block">Approve</button>
+	  {% endif %}
+	  <button class="btn adminForm" type="0" act="2" rowID="{{story['storyID']}}" id="storydelete{{story['storyID']}}">Delete</button>
+	</td>
+	<td>Unimplemented</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  
+  <div id="fanas" class="tab-pane fade customTabDOM">
+    <h2>FANART</h2>
+    <table>
+      <tr>
+	<th>ArtID</th>	
+	<th>TITLE</th>
+	<th>USER</th>
+	<th>DATE SUBMITTED</th>
+	<th>OPTIONS</th>
+      </tr>
+      {% for art in data["art"] %}
+      <tr id="art{{art['artID']}}">
+	<td>{{art["artID"]}}</td>
+	<td>{{art["title"]}}</td>
+	<td>{{art["username"]}}</td>
+	<td>{{art["timestamp"]}}</td>
+	<td>
+	  <button class="btn adminForm" type="1" act="1" rowID="{{art['artID']}}" id="artdelete{{art['artID']}}">Delete</button>
+	</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  
+  <div id="uses" class="tab-pane fade customTabDOM">
+    <h2>USERS</h2>
+    <table>
+      <tr>
+	<th>UserID</th>
+	<th>FIRST NAME</th>
+	<th>LAST NAME</th>
+	<th>USERNAME</th>
+	<th>DOB</th>
+	<th>EMAIL</th>
+	<th>COUNTRY</th>
+	<th>GENDER</th>
+	<th>STATUS</th>
+	<th>OPTIONS</th>
+      </tr>
+      {% for user in data["users"] %}
+      <tr id="user{{user['userID']}}">
+	<td>{{user["userID"]}}</td>
+	<td>{{user["firstName"]}}</td>
+	<td>{{user["lastName"]}}</td>
+	<td>{{user["username"]}}</td>
+	<td>{{user["birthday"]}}</td>
+	<td>{{user["email"]}}</td>
+	<td>{{user["country"]}}</td>
+	<td>{{user["gender"]}}</td>
+	<td>{{user["usergroup"]}}</td>
+	<td>
+	  
+	  {% if user["usergroup"] == 2 %}
+	  <button class="btn adminForm" type="2" act="1" rowID="{{user['userID']}}" id="userpromote{{user['userID']}}" style="display:block">Promote</button>
+	  {% endif %}
+	  {% if user["usergroup"] != "admin" %}
+	  <button class="btn adminForm" type="2" act="2" rowID="{{user['userID']}}" id="userdelete{{user['userID']}}">Delete</button>
+	  {% endif %}
+	</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
 
-      <div class="dropdown-container">
-	<button type="button" class="dropdown-toggle user" data-toggle="dropdown">
-	</button>
-	<ul class="dropdown-menu-right dropdown-menu" role="menu">
-          <li>
-            <a href="/admin/">Admin Panel</a>
-          </li>
-          <li>
-            <a href="/user/myProfile/">My Profile</a>
-          </li>
-	  <li>
-            <a href="/uploadStory/">Upload Story</a>
-          </li>
-          <li>
-	    <a href="/bookSelect/">Edit Books</a>
-	  </li>
-          <li>
-            <a href="/logout/">Log Out</a>
-          </li>
-	</ul>
-      </div>
-      <!--<div class="user">make variable so that other images can be put in -->
-    </nav>
-
-    <div class="padder">
-      <h1>ADMIN DASHBOARD</h1>
-      
-      <ul class="nav nav-pills">
-	<li id="storyTable" class="active"><a data-toggle="pill" href="#stors" class="customTab">STORIES</a></li>
-	<li id="artTable"><a data-toggle="pill" href="#fanas" class="customTab">FANART</a></li>
-	<li id="userTable"><a data-toggle="pill" href="#uses" class="customTab">USERS</a></li>
-      </ul>
-      <div id="stors" class="tab-pane fade in active customTabDOM">
-	<h2>STORIES</h2>
-	<table>
-	  <tr>
-	    <th>StoryID</th>
-	    <th>TITLE</th>
-	    <th>USER</th>
-	    <th>DATE SUBMITTED</th>
-	    <th>STATUS</th>
-	    <th>OPTIONS</th>
-	    <th>TAGS</th>
-	  </tr>
-	  {% for story in data["stories"] %}
-	  <tr id="story{{story['storyID']}}">
-	    <td>{{story["storyID"]}}</td>
-	    <td>{{story["title"]}}</td>
-	    <td>{{story["username"]}}</td>
-	    <td>{{story["timestamp"]}}</td> <!-- hol'up -->
-	    <td>{{story["approval"]}}</td>
-	    
-	    <td>
-	      {% if story["approval"] == 0 %}
-	      <button class="btn adminForm" type="0" act="1" rowID="{{story['storyID']}}" id="storyapprove{{story['storyID']}}" style="display:block">Approve</button>
-	      {% endif %}
-	      <button class="btn adminForm" type="0" act="2" rowID="{{story['storyID']}}" id="storydelete{{story['storyID']}}">Delete</button>
-	    </td>
-	    <td>Unimplemented</td>
-	  </tr>
-	  {% endfor %}
-	</table>
-      </div>
-      
-      <div id="fanas" class="tab-pane fade customTabDOM">
-	<h2>FANART</h2>
-	<table>
-	  <tr>
-	    <th>ArtID</th>	
-	    <th>TITLE</th>
-	    <th>USER</th>
-	    <th>DATE SUBMITTED</th>
-	    <th>OPTIONS</th>
-	  </tr>
-	  {% for art in data["art"] %}
-	  <tr id="art{{art['artID']}}">
-	    <td>{{art["artID"]}}</td>
-	    <td>{{art["title"]}}</td>
-	    <td>{{art["username"]}}</td>
-	    <td>{{art["timestamp"]}}</td>
-	    <td>
-	      <button class="btn adminForm" type="1" act="1" rowID="{{art['artID']}}" id="artdelete{{art['artID']}}">Delete</button>
-	    </td>
-	  </tr>
-	  {% endfor %}
-	</table>
-      </div>
-      
-      <div id="uses" class="tab-pane fade customTabDOM">
-	<h2>USERS</h2>
-	<table>
-	  <tr>
-	    <th>UserID</th>
-	    <th>FIRST NAME</th>
-	    <th>LAST NAME</th>
-	    <th>USERNAME</th>
-	    <th>DOB</th>
-	    <th>EMAIL</th>
-	    <th>COUNTRY</th>
-	    <th>GENDER</th>
-	    <th>STATUS</th>
-	    <th>OPTIONS</th>
-	  </tr>
-	  {% for user in data["users"] %}
-	  <tr id="user{{user['userID']}}">
-	    <td>{{user["userID"]}}</td>
-	    <td>{{user["firstName"]}}</td>
-	    <td>{{user["lastName"]}}</td>
-	    <td>{{user["username"]}}</td>
-	    <td>{{user["birthday"]}}</td>
-	    <td>{{user["email"]}}</td>
-	    <td>{{user["country"]}}</td>
-	    <td>{{user["gender"]}}</td>
-	    <td>{{user["usergroup"]}}</td>
-	    <td>
-	      
-	      {% if user["usergroup"] == 2 %}
-	      <button class="btn adminForm" type="2" act="1" rowID="{{user['userID']}}" id="userpromote{{user['userID']}}" style="display:block">Promote</button>
-	      {% endif %}
-	      {% if user["usergroup"] != "admin" %}
-	      <button class="btn adminForm" type="2" act="2" rowID="{{user['userID']}}" id="userdelete{{user['userID']}}">Delete</button>
-	      {% endif %}
-	    </td>
-	  </tr>
-	  {% endfor %}
-	</table>
-      </div>
-    </div>
-    <script src="/static/js/admin.js"></script>
-  </body>
-</html>
-
+{% block endjs %}
+<script src="/static/js/admin.js"></script>
+{% endblock %}
 

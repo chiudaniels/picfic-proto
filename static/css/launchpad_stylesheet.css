@@ -215,10 +215,15 @@ span {
 }*/
 
 .socialMedia {
-    top: 480vh;
-    left: 41.5vw;
+    top: 471vh;
     position: absolute;
     font-family: 'Nunito', sans-serif;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+#socialMediaText {
+    font-size: 18px;
 }
 
 .footer {

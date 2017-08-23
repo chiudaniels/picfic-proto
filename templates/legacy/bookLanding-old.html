@@ -1,15 +1,10 @@
 <!-- Book Landing -->
-{% extends 'baseLayout.html' %}
+{% extends 'readingLayout.html' %}
 {% block title %}PicFic - {{ data["meta"]["title"] }}{% endblock %}
-
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}">
-<link rel="stylesheet" type="text/css" href="/static/css/launchpad_stylesheet.css">
-<link rel="stylesheet" type="text/css" href="/static/css/book_landing_stylesheet.css">
-{% endblock %}
-
-{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/reading_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="/static/endofchapter_stylesheet.css">
+{% endblock %} {% block content %}
 <div class="share">
     <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="/static/launchpad/png/facebook.png"></a>
     <br>
@@ -39,6 +34,26 @@
   </div>
   <a href="{{data['bookID']}}/read"><button class="toRead"><b>START READING</b></button></a>
 </div>
+
+<!--
+<div class="bookInfo" style="background-image: url('/static/data/bookCovers/{{data['coverUrl']}}')" >
+  <img src="/static/data/bookCovers/{{data['coverUrl']}}" class="coverArt">
+  <div class="summary">
+        <h2>{{data["meta"]["title"]}}</h2>
+        <h4><i>{{data["meta"]["author"]}}</i></h4>
+        <p>
+	  {% for p in data["meta"]["blurb"]%}
+	  {{p}}
+	  <br>
+	  {% endfor %}
+        </p>
+	<p>
+	  {{data["meta"]["misc"]}}
+	</p>
+  </div>
+  <a href="{{data['bookID']}}/read"><button class="toRead"><b>START READING</b></button></a>
+</div>
+-->
 
 <div class="viewArt">
     <h3>VIEW FANART FOR {{data["meta"]["title"]}}</h3>
