@@ -595,6 +595,15 @@ def getBookTitle( bookID ):
     session.close()
     return ret
 
+# bookExists(..) - check whether book exists
+# pre  : int bookID - book ID
+# post : True if book exists
+#        False otherwise
+def bookExists( bookID ):
+    session = Session()
+    res = session.query(Book).filter(Book.bookID == bookID).count()
+    return res > 0
+
 # Debugging Function, Prints __repr__ or __str__ of Object
 def debug(s):
     print "DEBUG"

@@ -607,9 +607,6 @@ button:focus {
     width: 570px;
 }
 
-
-
-
 /*.aedit:before{
     content:" "; 
     display:inline-block; 
@@ -653,14 +650,15 @@ button:focus {
     text-align: center;
 }
 
-
 .signUpM {
     position: fixed;
     width: 400px;
     max-width: 100%;
     height: 600px;
     max-height: 100%;
-    left: 35%;
+    left: 50%;
+    top: 10%;
+    margin-left: -200px;
     text-align: center;
     font-family: .AppleSystemUIFont;
     font-size: 12px;

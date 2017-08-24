@@ -117,8 +117,10 @@ def galleryPage(pageNum):
 # == Book landing page ==============================
 @app.route("/books/<int:bookID>")
 def bookLanding(bookID):
-    metadata = books.getBookLanding(bookID)
-    return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, showMenu = 0)
+    if books.bookExists(bookID):
+        metadata = books.getBookLanding(bookID)
+        return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, showMenu = 0) # showMenu no longer needed - using baseLayout
+    return redirect(url_for('root'))
 
 @app.route("/getBookLandingImages/", methods=['POST'])
 def bookLandingImages(): #lazy jump
@@ -276,12 +278,12 @@ def changeTag():
     return redirect(url_for('settings'))
 
 # Story Upload ==================================================================
-@app.route('/uploadStory/')
+@app.route('/uploadStory/', methods = ['POST', 'GET'])
 # uploadStoryPage - renders landing page for uploading stories
 def uploadStoryPage():
-    print "Logged In Status:", isLoggedIn() # Debugging
-    print "Active Status:", users.isActive(getUserID()) # Debugging
-    if isLoggedIn() and users.isActive(getUserID()):
+    if isLoggedIn() > 0 and users.isActive(getUserID()):
+        print "Logged In Status:", isLoggedIn() # Debugging
+        print "Active Status:", users.isActive(getUserID()) # Debugging
         data = uploadStory.getUploadStoryData(getUserID())
         return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
     return redirect('/')
@@ -292,8 +294,10 @@ def uploadStoryFile():
     return True
 
 # uploadStoryText - backend for story upload
-@app.route('/uploadStoryText/', methods = ['POST'])
+@app.route('/uploadStoryText/', methods = ['POST', 'GET'])
 def uploadStoryText():
+    if request.method == 'GET':
+        return redirect(url_for('root'))
     print "Story being uploaded..." # Debugging
     print "Debugging Fields:", request.form # Debugging
     print "Debugging Files:", request.files # Debugging
@@ -344,6 +348,8 @@ def uploadStoryCover():
 
 @app.route('/bookSelect/', methods = ['GET'])
 def bookSelect():
+    if isLoggedIn() == 0:
+        return redirect(url_for('root'))
     username = users.getUsername(getUserID())
     profileData = users.getProfile(username)
     profileData.update(users.getActivity(username))
@@ -448,7 +454,6 @@ def userProfilePage(username):
 
 # Photo Upload ==================================================================
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
 
 def allowed_file(filename):
     return '.' in filename and \
