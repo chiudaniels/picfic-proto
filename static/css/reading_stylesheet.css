@@ -168,10 +168,9 @@ h3, h2, h4 {
     border:0px;
     font-weight: lighter;
     overflow-y: auto;
-    -webkit-backdrop-filter: blur(3px); /* Safari 9+ 
+    -webkit-backdrop-filter: blur(3px); /* Safari 9+ */
     backdrop-filter: blur(3px);
 }
- 
  
 .blurrify {
     left: 0;
@@ -190,9 +189,11 @@ h3, h2, h4 {
     max-height:100%
 }
 
+/*
 .modal-backdrop.fade {
     opacity: 0;
 }
+*/
 
 .taboc {
     z-index:1000;

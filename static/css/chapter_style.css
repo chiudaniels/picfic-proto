@@ -194,6 +194,7 @@ body {
 }
 
 /* Fading animation */
+/* Breaks Modal 
 .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
@@ -218,6 +219,7 @@ body {
         opacity: 1
     }
 }
+*/
 
 .thumbnails {
     border-radius: 3px;
@@ -291,15 +293,12 @@ body {
     padding: 0 3vw 0 3vw;
 }
 
-
-
-
 /*.gallery-thumbnails{
   padding-top:3vh;
 }
 */
 
-//SEARCH STUFF
+/* SEARCH STUFF */
 .search-form .form-group input.form-control::-webkit-input-placeholder {
     display: none;
 }
@@ -389,37 +388,96 @@ input[type="text"].form-control {
     z-index: 90;
 }
 
-//UPLOAD MODAL
+/* UPLOAD MODAL */
 .modal {
-    display: inline;
-    /* Hidden by default */
-    position: fixed;
+    /*position: fixed;*/
+    /*height: 100%;*/
     /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
+    /*overflow: auto;*/
     /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
+    /*background-color: rgb(0, 0, 0);*/
     /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
+    /*background-color: rgba(0, 0, 0, 0.4);*/
     /* Black w/ opacity */
 }
 
-.modal-body {
-    background-color: #E8E8E8;
-    height: 50vh;
-    width: 99.8%;
+/* Sidebar Modals */
+/* Code adapted from https://codepen.io/bootpen/pen/jbbaRa */
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 40%;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
 }
 
+.modal.left .modal-content,
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/* Left Modal Sidebar */
+.modal.left.fade .modal-dialog{
+    left: -40%;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog{
+    left: 0;
+}
+
+/* Right Modal Sidebar */
+.modal.right.fade .modal-dialog {
+    right: -40%px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+/* Modal Styling */
+.modal-footer,
+.modal-body {
+    text-align: left;
+    border: none;
+}
+
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-header {
+    text-align: center;
+    background-color: #F0F0F0;
+    border-bottom-color: #D0D0D0;
+}
+
+#tocHead {
+    margin: 0px;
+}
+
+/* Dropzone */
 .dropzone {
     height: 100%;
-    width: 99.8%;
+    width: 100%;
 }
 
 .dz-message {
@@ -427,23 +485,45 @@ input[type="text"].form-control {
 }
 
 .dropdesc {
-    padding: 5vh 3vw 5vh 3vw;
-    font-size: 2em;
-    max-width: 15vw;
+    font-size: 1.5em;
+    color: #D0D0D0;
 }
 
-.modal-footer {
-    text-align: left;
+.dropzone .dz-preview,
+.dropzone .dz-preview.dz-image-preview {
+    margin: 0px;
 }
 
-//PROGRESS BAR
-.progress{
-    width: 25vw;
+.dropzone .dz-preview.dz-image-preview {
+    background: white;
+    width: 100%;
+}
+
+.dropzone .dz-preview .dz-image {
+    margin: auto;
+}
+
+/* PROGRESS BAR */
+.progress {
+    width: 30vw;
     background-color: lightgrey;
+    height: 10px;
+    border-radius: 0px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+/* progress bar color */
+.progress-bar {
+    background-image: -webkit-linear-gradient(top,#ffb6da 0,#ff1d8e 100%);
+    background-image: -o-linear-gradient(top,#ffb6da 0,#ff1d8e 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#ffb6da),to(#ff1d8e)); 
+    background-image: linear-gradient(to bottom,#ffb6da 0,#ff1d8e 100%);
+    background-repeat: repeat-x;
 }
 
 #progressBar{
-    border-radius: 10px;
-    height:7px;
-    background-color: #969696FF;
+    margin: auto;
+    height: 5px;
+    background-color: #FF69B4;
 }

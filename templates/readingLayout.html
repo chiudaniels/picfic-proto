@@ -16,7 +16,6 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
   {% block js %}{% endblock %}
@@ -25,7 +24,7 @@
     <nav class="navbar">
       {% if showMenu == 1 %}
       <div class="navbar-div">
-	<a href="#" data-toggle="modal" data-target="#tocModal"><img src="/static/png/Menu.png" class="navMenu"></a>
+	<a href="#" data-toggle="modal" data-target="#testModal"><img src="/static/png/Menu.png" class="navMenu"></a>
       </div>
 
       {% endif %}
@@ -59,38 +58,40 @@
       </div>
       <!--<div class="user">make variable so that other images can be put in -->
     </nav>
-    
-    <!-- CLASS: toc --------- ID: tocModal ------------------------------------>
-    {% if showMenu == 1 %}
-    <div class="modal fade" id="tocModal" role="dialog">
-      <div class="modal-dialog toc">
+
+    <!-- MODAL: Table of Contents #tocModal -->
+    <div class="modal left fade" id="testModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+	<!-- modal content -->
 	<div class="modal-content">
-	  <div class="blurrify"></div>
-	  <div class="modal-header" style="text-align: center" hidden="true"></div>
+	  <!-- modal header -->
+	  <div class="modal-header">
+	    <h3 id="tocHead">Table of Contents</h3>
+	  </div><!-- end modal header -->
+
+	  <!-- modal body -->
 	  <div class="modal-body">
-	    <br><p class="taboc">TABLE OF CONTENTS</p><br><br><br>
-	    <br><a href="/books/{{pageData['bookID']}}">Back To Landing</a>
-	    <br>
-	    <p class="bookParts">
-              
-              {% for ch in pageData["chData"] %}
-              {% if ch["permit"] == 1 %}
-              <a class = "btn" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-		{{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
-              {% else %}
-              <a class = "btn disabled" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
-		{{ch['chapterNum']}}&#9;{{ch["title"]}}</a>
-              {% endif %}
-              <br>            
-              {% endfor %}
-	    </p>	    
-	  </div>
+	    {% for ch in pageData["chData"] %}
+	    <div style="display:block">
+	      <div style="display:inline;min-width:3%">
+		<a class = "btn {% if ch['permit'] != 1 %}disabled{% endif %}" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
+		  {{ch['chapterNum']}}
+		</a>
+	      </div>
+	      <div style="display:inline">
+		<a class = "btn {% if ch['permit'] != 1 %}disabled{% endif %}" href="/books/{{pageData['bookID']}}/read/{{ch['chapterNum']}}">
+		  {{ch["title"]}}
+		</a>
+	      </div>
+	    </div>
+            {% endfor %}
+	  </div> <!-- end modal body -->
+	</div> <!-- end modal content -->
+	<div class="modal-footer">
 	</div>
-	<div class="modal-footer"></div>
       </div>
     </div>
-    {% endif %}
-    
+
     {% block content %}{% endblock %}
     {% block endjs %}{% endblock %}
   </body>

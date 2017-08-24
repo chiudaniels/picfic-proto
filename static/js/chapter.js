@@ -114,7 +114,6 @@ function resetImages() {
     console.log("images emptied...");
 }
 
-
 function setGallery() {
     resetImages();
     for (var i = 0; i < imageArray.length; i++) {
@@ -144,12 +143,6 @@ function setGallery() {
         });
     });
 }
-
-
-
-
-
-
 
 //upload functions //
 var fanart = document.getElementsByClassName("fanartIcon");
@@ -217,11 +210,9 @@ function clearHighlight() {
     //console.log(upload.style.display);
 }
 
-
 function wait(e) {
     setTimeout(highlight(e), 100);
 }
-
 
 document.onmousedown = clickedSomewhere;
 document.onmouseup = highlight;
@@ -230,7 +221,6 @@ if (!document.all) document.captureEvents(Event.MOUSEUP);
 //////////////////
 
 // Joel's code -- hi joel //
-
 var formBookID = document.getElementById("artUploadBookID");
 var formCaption = document.getElementById("artUploadCaption");
 var formStartCC = document.getElementById("artUploadStartCC");
