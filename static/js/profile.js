@@ -1,11 +1,14 @@
-var editPersonalBtn = document.getElementById("editPersonal");
-var editAbout = document.getElementById("editAbout");
-var editGenre = document.getElementById("editGenre");
-var editBS = document.getElementById("editBS");
-var editAuthors = document.getElementById("editAuthors");
-var editAccountBtn = document.getElementById("editAccount");
-var editEmail = document.getElementById("editEmail");
-var editGender = document.getElementById("editGender");
+/*
+var $editPersonalBtn = $('editPersonal');
+var $editAbout = $('editAbout');
+var $editGenre = $('editGenre');
+var $editBS = $('editBS');
+var $editAuthors = $('editAuthors');
+var $editAccountBtn = $('editAccount');
+var $editEmail = $('editEmail');
+var $editGender = $('editGender');
+
+
 
 editPersonalBtn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -47,6 +50,7 @@ editPersonalBtn.addEventListener('click', function(e) {
         editPersonalBtn.innerHTML = 'Save';
     }
 });
+
 /*
 editAccountBtn.addEventListener('click', function(e) {
     e.preventDefault();
@@ -87,7 +91,7 @@ editAccountBtn.addEventListener('click', function(e) {
     }
 });
 
-*/
+
 
 //LOAD GALLERIES
 
@@ -229,3 +233,5 @@ $(document).ready(function() {
         }]
     });
 });
+
+*/

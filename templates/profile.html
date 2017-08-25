@@ -1,18 +1,113 @@
 <!-- Profile -->
 {% extends 'baseLayout.html' %}
 {% block title %}PicFic - {{data["firstName"]}} {{data["lastName"]}}'s Profile{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" type="text/css" href="/static/css/launchpad_stylesheet.css" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}" />
+<link rel="stylesheet" type="text/css" href="/static/css/profile.css" />
 <link rel="stylesheet" type="text/css" href="/static/css/dropzone.css" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
+<div class="profileBackground">
+  <div class="col col-md-4 col-xs-12 padded-container">
+    <!-- Account Details - Left Side --> 
+    <div class="inner-container" id="accountDetails">
+      <div class="text-center">
+	<div class="bigProf" id="profilePic">
+	  <!-- To implement once profile pictures are available. --> 
+          <!-- <img src="/static/data/profilePics/{{data['picUrl']}}" /> -->
+	</div>
+	<div class="userNames">
+	  <h4><strong>{{data["firstName"]}} {{data["lastName"]}}</strong></h4>
+	  <h5 style="margin-top:-7px">{{data["username"]}}</h5>
+	</div>
+      </div>
+      <br>
+      <h3 class="text-center subtitle">About Me</h3>
+      <div id="about">
+	<h4 class="subtitle">Bio</h4>
+	<!-- Needs Conditional Edit Button -->
+	<div>
+          {{data["about"]}}
+	</div>
+      </div>
+      <br>
+      <div id="genres">
+	<h4 class="subtitle">Genres</h4>
+	<div>
+          {{data["favGenres"]}}
+	</div>
+      </div>
+      <br>
+      <div id="books">
+	<h4 class="subtitle">Books/Series</h4>
+	<div>
+          {{data["favBooks"]}}
+	</div>
+      </div>
+      <br>
+      <div id="authors">
+	<h4 class="subtitle">Authors</h4>
+	<div>
+          {{data["favAuthors"]}}
+	</div>
+      </div>
+      <br>
+      {% if perm == 1 %}
+      <h3 class="text-center subtitle">Account Details</h3>
+      <div id="email">
+	<h4 class="subtitle">Email</h4>
+	<div>
+          {{data["email"]}}
+	</div>
+      </div>
+      <br>
+      <div id="birthday">
+	<h4 class="subtitle">Authors</h4>
+	<div>
+          {{data["birthday"]}}
+	</div>
+      </div>
+      <br>
+      <div id="gender">
+	<h4 class="subtitle">Gender</h4>
+	<div>
+          {{data["gender"]}}
+	</div>
+      </div>
+      <br>
+      {% endif %}
+    </div><!-- end inner container -->
+  </div>
+
+  <!-- Book Details - Right Side --> 
+  <div class="col col-md-8 col-xs-12 padded-container">
+    <div class="inner-container" id="bookDetails">
+      <h3 class="subtitle">My Stories</h3>
+      <div>Placeholder</div>
+      <br>
+      <h3 class="subtitle">Currently Reading</h3>
+      <div>Placeholder</div>
+      <br>
+      <h3 class="subtitle">My Art</h3>
+      <div>Placeholder</div>
+      <br>
+      <h3 class="subtitle">My Likes</h3>
+      <div>Placeholder</div>
+      <br>
+    </div><!-- end inner container -->
+  </div>
+</div>
+
+
+<!--
 <div class="profileBackground">
   <div class="aboutMe">
     <a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
       <div class="bigProf" id="profilePic">
-	<!-- To implement once profile pictures are available. --> 
-        <!-- <img src="/static/data/profilePics/{{data['picUrl']}}" /> -->
+	<!-- To implement once profile pictures are available. -> 
+        <!-- <img src="/static/data/profilePics/{{data['picUrl']}}" /> ->
       </div>
     </a>
     <div class="userNames">
@@ -44,7 +139,7 @@
       </p>
       <br> {% if perm == 1 %}
       <h5 class="e">My Account</h5>
-      <!--<button class="edit" id="editAccount">Edit</button>-->
+      <!--<button class="edit" id="editAccount">Edit</button>->
       <br>
       <br>
       <p>
@@ -82,7 +177,7 @@
     <h5> Continue Reading</h5>
     <div class="bookshelf continereading">
       <div>
-        <!-- put a for loop in here -->
+        <!-- put a for loop in here ->
         {% for bookData in data["myShelf"] %}
         <a href="/books/{{ bookData['bookID'] }}/read">
           <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
@@ -92,7 +187,7 @@
     </div>
     <br <h5> Uploaded by me</h5>
         <div class="row uploaded">
-          <!-- more galleries lmao -->
+          <!-- more galleries lmao ->
         </div>
         <br>
         <h5> Liked by me</h5>
@@ -100,10 +195,10 @@
         </div>
   </div>
 </div>
-<!-- CLASS: cPas --------- ID: changePas ---------------------------------->
+<!-- CLASS: cPas --------- ID: changePas ->
 <div class="modal fade" id="changePas" role="dialog">
   <div class="modal-dialog cPas">
-    <!-- Modal content-->
+    <!-- Modal content ->
     <div class="modal-content">
       <div class="modal-header" style="text-align: center" hidden="true"></div>
       <div class="modal-body">
@@ -139,10 +234,10 @@
     </div>
   </div>
 </div>
-<!-- CLASS: cPas --------- ID: cpc ---------------------------------->
+<!-- CLASS: cPas --------- ID: cpc ->
 <div class="modal fade" id="cpc" role="dialog">
   <div class="modal-dialog cPas">
-    <!-- Modal content-->
+    <!-- Modal content ->
     <div class="modal-content">
       <div class="modal-header" style="text-align: center" hidden="true"></div>
       <div class="modal-body">
@@ -192,6 +287,10 @@
     </div>
   </div>
 </div>
+-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script src="/static/js/profile.js"></script>
 <script src="/static/js/dropzone.js "></script>
 <script type="text/javascript" src="/static/slick/slick.min.js"></script>

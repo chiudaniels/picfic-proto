@@ -238,14 +238,6 @@ span {
     width: 100%;
 }
 
-.contactUs {
-    position: absolute;
-    left: 50%;
-    margin-left: -46px;
-    color: black;
-    top: 40%;
-}
-
 .contactUs:focus {
     outline: 0;
 }
@@ -381,9 +373,6 @@ span {
     width: 49%;
 }
 
-
-
-
 /* Rectangle 2: */
 
 background: #FFFFFF;
@@ -445,196 +434,6 @@ border-radius: 10px;
 
 button:focus {
     outline: 0;
-}
-
-.profileBackground {
-    position: relative;
-    background: #f8f8f8;
-    height: 115vh;
-}
-
-.aboutMe {
-    position: absolute;
-    background: #FFFFFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-    height: 550px;
-    width: 240px;
-    top: 5vh;
-    left: 8vw;
-    border-radius: 10px;
-}
-
-.aboutMe p {
-    font-family: 'Nunito', sans-serif;
-}
-
-.activity {
-    background: #FFFFFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
-    position: absolute;
-    background: white;
-    height: 750px;
-    width: 750px;
-    top: 5vh;
-    left: 31vw;
-    border-radius: 10px;
-    font-family: 'Nunito', sans-serif;
-}
-
-.bigProf {
-    position: absolute;
-    top: 2vh;
-    left: 50%;
-    margin-left: -60px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
-    border-style: solid;
-    border-color: #D1EBFF;
-}
-
-.userNames {
-    position: relative;
-    text-align: center;
-    font-family: 'Nunito', sans-serif;
-    top: 18.2vh;
-}
-
-.about {
-    position: relative;
-    top: 20vh;
-}
-
-.about h5 {
-    display: inline;
-    font-weight: bolder;
-    letter-spacing: 0.28px;
-    line-height: 16px;
-}
-
-
-
-
-/*.about h5:after {
-    content:" "; 
-    display:inline-block; 
-    width:120px;
-}*/
-
-.about .f:after {
-    content: " ";
-    display: inline-block;
-    width: 130px;
-}
-
-.edit {
-    font-size: 11px;
-    color: #0092FF;
-    letter-spacing: 0.22px;
-    line-height: 16px;
-    font-family: 'Nunito', sans-serif;
-    display: inline;
-    text-align: right;
-    left: 50vw;
-    background: none!important;
-    border: none;
-    padding: 0!important;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.eedit {
-    font-size: 11px;
-    color: #0092FF;
-    letter-spacing: 0.22px;
-    line-height: 16px;
-    font-family: 'Nunito', sans-serif;
-    display: inline;
-    text-align: right;
-    left: 50vw;
-}
-
-.newEdit {
-    font-size: 11px;
-    color: #0092FF;
-    letter-spacing: 0.22px;
-    line-height: 16px;
-    font-family: 'Nunito', sans-serif;
-    display: inline;
-    text-align: right;
-    left: 50vw;
-}
-
-.activity .g:after {
-    content: " ";
-    display: inline-block;
-    width: 575px;
-}
-
-.e:after {
-    content: " ";
-    display: inline-block;
-    width: 120px;
-}
-
-.about h5:before {
-    content: " ";
-    display: inline-block;
-    width: 9px;
-}
-
-.activity h4:before {
-    content: " ";
-    display: inline-block;
-    width: 30px;
-}
-
-.activity h4 {
-    padding-top: .5cm;
-    display: inline-block;
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
-    letter-spacing: 0.4px;
-}
-
-.activity h4:after {
-    content: " ";
-    display: inline-block;
-    width: 570px;
-}
-
-/*.aedit:before{
-    content:" "; 
-    display:inline-block; 
-    width:570px;
-}*/
-
-.aedit {
-    font-size: 11px;
-    color: #0092FF;
-    letter-spacing: 0.22px;
-    line-height: 16px;
-    font-family: 'Nunito', sans-serif;
-    display: inline;
-    text-align: right;
-    left: 50vw;
-}
-
-.activity h5:before {
-    content: " ";
-    display: inline-block;
-    width: 28px;
-}
-
-.activity h5 {
-    font-family: .AppleSystemUIFont;
-    font-size: 14px;
-    color: #181818;
-    letter-spacing: 0.28px;
 }
 
 .firstM {
@@ -817,100 +616,17 @@ button:focus {
     font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;
 }
 
-#editAboutMe,
-#editAboutMe2,
-#editAboutMe3,
-#editMyAccount,
-#editMyAccount2,
-#editMyAccount3 {
-    line-height: 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 12px;
-    margin-left: 11px;
-    margin-right: 5px;
-    margin-top: 0px;
-}
-
 .showName {
-    position: relative;
-    left: 97vw;
-    display: inline-block;
+    position: absolute;
+    display: inline;
     font-family: 'Nunito', sans-serif;
-    font-size: 12px;
-    top: 46%;
+    font-size: 16px;
+    line-height: 50px; /* same as navbar height */
+    float: right;
+    right: 11vw;
 }
 
-
-
-
-/*.about p {
-    font-family: .AppleSystemUIFont;
-    font-size: 10px;
-    letter-spacing: 0.2px;
-    line-height:16px;
-}
-*/
-
-.about p {
-    font-family: 'Nunito', sans-serif;
-    font-size: 12px;
-    margin-left: 11px;
-    margin-right: 5px;
-    margin-top: 0px;
-}
-
-
-.cPass {
-    line-height: 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 12px;
-    margin-left: 11px;
-    margin-right: 5px;
-    margin-top: 0px;
-    position: relative;
-    color: red;
-}
-
-.cPas {
-    position: fixed;
-    width: 400px;
-    max-width: 100%;
-    height: 370px;
-    max-height: 100%;
-    left: 50%;
-    top: 50%;
-    margin-left: -200px;
-    margin-top: -200px;
-    text-align: center;
-    font-family: .AppleSystemUIFont;
-    font-size: 12px;
-    color: #414141;
-    letter-spacing: 0.17px;
-}
-
-
-
-
-
-
-/*.accMadeModal {
-    position: fixed;
-    width:400px;
-    max-width:100%;
-    height:370px;
-    max-height:100%;
-    left: 50%;
-    top: 50%;
-    margin-left: -200px;
-    margin-top: -200px;
-    text-align: center;
-    font-family: .AppleSystemUIFont;
-    font-size: 12px;
-    color:#414141;
-    letter-spacing: 0.17px;
-}*/
-
-// RESPOSNIVE FEATURES ///////////
+/* RESPOSNIVE FEATURES */
 @media only screen and (max-width: 1000px) {
     #laptop1 {
         padding-left: 5px;
@@ -1004,8 +720,6 @@ button:focus {
         font-size: 5vmax;
         text-align: center;
         top: 22.5vh;
-        /*        left: 15vw;
-	 */
 	z-index: 1;
         position: absolute;
     }

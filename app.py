@@ -37,7 +37,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def root():
     print gallery.getGallery()
     print isLoggedIn()
-    return render_template("launchpad.html", isLoggedIn = isLoggedIn(), data ={"books": gallery.getGallery()} )
+    return render_template("launchpad.html", isLoggedIn = isLoggedIn(), myUsername = getUsername(), data ={"books": gallery.getGallery()})
 
 # == Settings =======================================
 
@@ -45,13 +45,13 @@ def root():
 def settings():
     if isLoggedIn():
         return render_template( "settings.html" )
-    return redirect( url_for('root'), isLoggedIn = isLoggedIn() )
+    return redirect( url_for('root'), isLoggedIn = isLoggedIn(), myUsername = getUsername() )
 
 # == About ==========================================
 
 @app.route("/about/")
 def about():
-    return render_template( "about.html", isLoggedIn = isLoggedIn() )
+    return render_template( "about.html", isLoggedIn = isLoggedIn(), myUsername = getUsername() )
 
 
 # == User Profile ===================================
@@ -67,13 +67,13 @@ def userProfilePage(username):
     profileData = users.getProfile( username )
     #"myShelf", "myStories", "likedArt", "uploadedArt"
     profileData.update( users.getActivity(username) )
-    #get visibility options - add in later
     userVis = 0
     if isLoggedIn() and username == users.getUsername( getUserID() ):
         userVis = 1
         profileData.update( users.getProfileSensitive( username ) )
-    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, perm = userVis )
+    return render_template( "profile.html", isLoggedIn = isLoggedIn(), data = profileData, myUsername = getUsername(), perm = userVis )
 
+# AJAX ROUTING
 @app.route("/saveProfile/", methods = ['POST'])
 def saveProfile():
     #try to eventually sanitize this
@@ -103,7 +103,7 @@ def galleryRoute():
 
 @app.route("/gallery/browse/page/<pageNum>")
 def galleryPage(pageNum):
-    return render_template("gallery.html", isLoggedIn = isLoggedIn())
+    return render_template("gallery.html", isLoggedIn = isLoggedIn(), myUsername = getUsername() )
 
 """
     data = gallery.getPage(getUserID(), pageNum) #<-- get back later
@@ -119,7 +119,7 @@ def galleryPage(pageNum):
 def bookLanding(bookID):
     if books.bookExists(bookID):
         metadata = books.getBookLanding(bookID)
-        return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, showMenu = 0) # showMenu no longer needed - using baseLayout
+        return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, myUsername = getUsername(), showMenu = 0) # showMenu no longer needed - using baseLayout
     return redirect(url_for('root'))
 
 @app.route("/getBookLandingImages/", methods=['POST'])
@@ -143,7 +143,7 @@ def bookPage(bookID, chNum):
     data = books.getPageData( bookID, chNum, getUserID() )
     #print data["pgData"]
     data.update(books.getTableOfContents(bookID, getUserID()))
-    return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data, showMenu = 1)
+    return render_template("chapter_template.html", isLoggedIn = isLoggedIn(), pageData = data, showMenu = 1, myUsername = getUsername())
 
 #todo: refuse permission if access not given
 #todo: grant free access on chapters 
@@ -285,7 +285,7 @@ def uploadStoryPage():
         print "Logged In Status:", isLoggedIn() # Debugging
         print "Active Status:", users.isActive(getUserID()) # Debugging
         data = uploadStory.getUploadStoryData(getUserID())
-        return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data)
+        return render_template('uploadStory.html', isLoggedIn = isLoggedIn(), data = data, myUsername = getUsername() )
     return redirect('/')
 
 # Create Later - Not Needed for MVP
@@ -349,7 +349,7 @@ def bookSelect():
     username = users.getUsername(getUserID())
     profileData = users.getProfile(username)
     profileData.update(users.getActivity(username))
-    return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData)
+    return render_template('bookSelect.html', isLoggedIn = isLoggedIn(), data = profileData, myUsername = getUsername())
 
 @app.route("/ajaxUploadChapter/", methods=['POST'])
 def ajaxUploadChapter():
@@ -429,7 +429,8 @@ def uploadChapter(bookID):
                                chapterData = chapters[::-1], # Reverse, newest chapters on top
                                uploadedChapter = added, # Used For Alerts
                                data = profileData,
-                               bID = bookID)
+                               bID = bookID,
+                               myUsername = getUsername())
 
     # Error Catching
     return abort(404)
@@ -497,7 +498,7 @@ def adminPage():
         uID = getUserID()
         if users.isAdmin(uID):
             # print admin.getAdminPageData() # Debugging
-            return render_template("admin.html", data = admin.getAdminPageData(), isLoggedIn = isLoggedIn())
+            return render_template("admin.html", data = admin.getAdminPageData(), isLoggedIn = isLoggedIn(), myUsername = getUsername())
     return redirect(url_for('page_not_found', e = None))
 
 # Called from AJAX
@@ -545,8 +546,8 @@ def confirm_account(payload):
     send_email("Confirm your account with PicFic",
                "jealocker@gmail.com",
                ["altermuse3@gmail.com"],
-               render_template("testText.txt", payload=payload),
-               render_template("testHtml.html", payload = payload))
+               render_template("testText.txt", payload=payload, myUsername = getUsername()),
+               render_template("testHtml.html", payload = payload, myUsername = getUsername()))
 
 def get_serializer(secret_key=None):
     if secret_key is None:
@@ -586,6 +587,12 @@ def getUserID():
     else:
         return None
 
+def getUsername():
+    if isLoggedIn():
+        return users.getUsername(int(session['uID']))
+    else:
+        return ""
+    
 # Error Handling =======================================
 @app.errorhandler(404)
 def page_not_found(e):

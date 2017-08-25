@@ -61,6 +61,7 @@ def getProfile( username ):
     userID = session.query(User.userID).filter(User.username == username).one()[0]
     profileInfo = session.query(UserProfile).filter(UserProfile.userID == userID).one().asDict()
     session.close()
+    profileInfo['username'] = username
     return profileInfo
 
 def getProfileSensitive( username ):
@@ -249,7 +250,6 @@ def saveProfilePic( uID, url ):
     print "what's gone wrong"
     session.commit()
     session.close()
-
 
 #for profile page
 def getActivity( username ):

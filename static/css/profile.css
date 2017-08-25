@@ -1,44 +1,239 @@
 @font-face { font-family: Avenir; src: url('../AvenirLTStd-Light.otf'); } 
 
-html {
-    width: auto;
-    margin: 0;
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #f8f8f8; /* off white */
+    overflow-x: hidden; /* no side scrolling */
 }
 
-body {
-    margin: 0 auto;
-    width:auto;
+.profileBackground {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5%;
 }
 
-.navbar {
-    background: #D1EBFF;
+/* Titles and Subtitles */
+.subtitle {
+    font-weight: bold;
+    margin-bottom: 2px;
 }
 
-.navpicficLogo {
-    position: absolute;
-    height: 5vh;
-    width: auto;
-    top:.6vh;
-    left:6vw;
+/* Containers */
+.padded-container {
+    padding: 5%;
 }
 
-.user {
-    position:absolute;
-    right: 7vw;
-    top:50%;
-    margin-top:-20px;
-    width: 40px;
-    height: 40px;
+.inner-container {
+    min-height: 50%;
+    border: 1px solid #F0F0F0;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
+    padding: 20px;
+}
+
+#accountDetails {
+    background-color: #FFF0F0;
+}
+
+#bookDetails {
+    background-color: #F0F0FF;
+}
+
+/* Account Details (Left Side) */
+.bigProf {
+    position: relative;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI');
-    padding: 0;
-    border: none;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpwmXdev0fStEIIknORzeZdnFs7OVVluYxsK4pnDOcAsz46nclDRkMPwI'); /* To Change */
+    background-image: url('https://simplyfordogs.com/public_html/wp-content/uploads/2017/04/7.-Samoyed.jpg'); /* Slightly More HD */
+    border-style: solid;
+    border-color: #D1EBFF;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
-.coverArt{
-    z-index: 10000000000000;
+.userNames {
+    position: relative;
+    font-family: 'Nunito', sans-serif;
 }
-button:focus {outline:0;}
+
+/*
+.activity {
+    background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    position: absolute;
+    background: white;
+    height: 750px;
+    width: 750px;
+    top: 5vh;
+    left: 31vw;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.about .f:after {
+    content: " ";
+    display: inline-block;
+    width: 130px;
+}
+
+.edit {
+    font-size: 11px;
+    color: #0092FF;
+    letter-spacing: 0.22px;
+    line-height: 16px;
+    font-family: 'Nunito', sans-serif;
+    display: inline;
+    text-align: right;
+    left: 50vw;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.eedit {
+    font-size: 11px;
+    color: #0092FF;
+    letter-spacing: 0.22px;
+    line-height: 16px;
+    font-family: 'Nunito', sans-serif;
+    display: inline;
+    text-align: right;
+    left: 50vw;
+}
+
+.newEdit {
+    font-size: 11px;
+    color: #0092FF;
+    letter-spacing: 0.22px;
+    line-height: 16px;
+    font-family: 'Nunito', sans-serif;
+    display: inline;
+    text-align: right;
+    left: 50vw;
+}
+
+.activity .g:after {
+    content: " ";
+    display: inline-block;
+    width: 575px;
+}
+
+.e:after {
+    content: " ";
+    display: inline-block;
+    width: 120px;
+}
+
+.about h5:before {
+    content: " ";
+    display: inline-block;
+    width: 9px;
+}
+
+.activity h4:before {
+    content: " ";
+    display: inline-block;
+    width: 30px;
+}
+
+.activity h4 {
+    padding-top: .5cm;
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+}
+
+.activity h4:after {
+    content: " ";
+    display: inline-block;
+    width: 570px;
+}
+
+.aedit {
+    font-size: 11px;
+    color: #0092FF;
+    letter-spacing: 0.22px;
+    line-height: 16px;
+    font-family: 'Nunito', sans-serif;
+    display: inline;
+    text-align: right;
+    left: 50vw;
+}
+
+.activity h5:before {
+    content: " ";
+    display: inline-block;
+    width: 28px;
+}
+
+.activity h5 {
+    font-family: .AppleSystemUIFont;
+    font-size: 14px;
+    color: #181818;
+    letter-spacing: 0.28px;
+}
+
+#editAboutMe,
+#editAboutMe2,
+#editAboutMe3,
+#editMyAccount,
+#editMyAccount2,
+#editMyAccount3 {
+    line-height: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+
+.about p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+}
+/* */
+
+/* password changing *
+.cPass {
+    line-height: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    margin-left: 11px;
+    margin-right: 5px;
+    margin-top: 0px;
+    position: relative;
+    color: red;
+}
+
+.cPas {
+    position: fixed;
+    width: 400px;
+    max-width: 100%;
+    height: 370px;
+    max-height: 100%;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    text-align: center;
+    font-family: .AppleSystemUIFont;
+    font-size: 12px;
+    color: #414141;
+    letter-spacing: 0.17px;
+}
+/* */
