@@ -1,59 +1,57 @@
-var formSubmit = document.getElementById("submitStoryBtn");
+var $formSubmit = $('#submitStoryBtn');
+var $dz = $('#coverImage');
+// console.log($formSubmit, $dz); // Debugging
 
-Dropzone.options.storyUploadDropzone = { // The camelized version of the ID of the form element
-    // The configuration we've talked about above
+// Initialization of Dropzone
+Dropzone.autoDiscover = false;
+$(function () {
+    $dz.dropzone({
+	url: "/uploadStoryText/",
+	addRemoveLinks: true,
+	success: function (file, response) {
+	    var imgName = response;
+	    file.previewElement.classList.add("dz-success");
+	    console.log("Successfully uploaded :" + imgName);
+	},
+	error: function (file, response) {
+	    file.previewElement.classList.add("dz-error");
+	}
+    });
+});
+
+// Dropzone Config
+Dropzone.options.coverImage = { 
     autoProcessQueue: false,
     uploadMultiple: false,
     parallelUploads: 1,
     maxFiles: 1,
-
+    thumbnailWidth: 162,
+    thumbnailHeight: 250,
+    acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif",
+    
     // The setting up of the dropzone
     init: function() {
 	var myDropzone = this;
-	formSubmit.setAttribute("display", "none");
-	formSubmit.addEventListener("click", function() {
-	    event.preventDefault();
-	    event.stopPropagation();
+	$formSubmit.click(function(e) {
+	    e.preventDefault();
+	    console.log(myDropzone.files);
 	    myDropzone.processQueue(); // Tell Dropzone to process all queued files.
 	});
 
-	// You might want to show the submit button only when 
-	// files are dropped here:
-	this.on("addedfile", function() {
-            // Show submit button here and/or inform user to click it.
-            formSubmit.setAttribute("display", "inline");
+	this.on("sending", function(file, xhr, formData) {
+	    formData.append('title', $('#bookTitle').val());
+	    formData.append('author', $('#bookAuthor').val());
+	    formData.append('blurb', $('#blurbText').val());
 	});
-
-	// First change the button to actually tell Dropzone to process the queue.
-	/*
-	  this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
-	  // Make sure that the form isn't actually being sent.
-	  e.preventDefault();
-	  e.stopPropagation();
-	  myDropzone.processQueue();
-	  });
-	*/
 	
-	this.on("queuecomplete", function() {
-	    alert('Upload successful!');
+	this.on("success", function(files, response) {
+	    alert("Successful upload!") // Debugging - Change on Final Deploy, Modal?
 	    window.location = '/bookSelect/';
 	});
-	
-	// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-	// of the sending event because uploadMultiple is set to true.
-	this.on("sendingmultiple", function() {
-	    // Gets triggered when the form is actually being sent.
-	    // Hide the success button or the complete form.
-	});
-	this.on("successmultiple", function(files, response) {
-	    // Gets triggered when the files have successfully been sent.
-	    // Redirect user or notify of success.
-	});
-	this.on("errormultiple", function(files, response) {
-	    // Gets triggered when there was an error sending the files.
-	    // Maybe show form again, and notify user of error
-	    alert('Upload not successful!');
+	this.on("error", function(files, response) {
+	    alert('Upload not successful!'); // Debugging - Change on Final Deploy, Modal?
+	    window.location = '/uploadStory/';
 	});
     }
-
 }
+// console.log("UploadStory javascript loaded."); // Debugging

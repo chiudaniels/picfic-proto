@@ -14,7 +14,7 @@ body {
     max-width: 1920px;
     margin: 0 auto;
     font-family: 'Nunito', sans-serif;
-    padding-right: 0px !important;
+    padding-right: 0px !important; /* To get rid of modal-signin adding padding */
 }
 
 span {

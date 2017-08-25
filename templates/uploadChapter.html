@@ -8,19 +8,6 @@
 {% endblock %}
 {% block content %}
 
-<!-- Gallery - Deprecated ->
-<div class="mystories bookSelection">
-  <div>
-    {% for bookData in data["myStories"] %}
-    <a href="/books/{{bookData['bookID']}}/read" }>
-      <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
-      <div class="title"> {{bookData['title']}} </div>
-    </a>
-    {% endfor %}
-  </div>
-</div>
-<!-- -->
-
 <!-- Upload Success / Fail Notification --> 
 <div id="alerts">
   {% if uploadedChapter > 0 %}
@@ -61,7 +48,6 @@
   <br>
   <div class="form-group">
     <h4>Edit Chapter Text</h4>
-    <!--<textarea id="editor"></textarea>-->
     <input type="hidden" id="chapterText" name="storyText" class="form-control" required>
     <div id="storyArea">
     </div>

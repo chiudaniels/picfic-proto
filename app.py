@@ -303,23 +303,26 @@ def uploadStoryText():
     print "Debugging Files:", request.files # Debugging
     print "Number of Keys:", len(request.form) # Debugging
     print "Number of Files:", len(request.files) # Debugging
+    print request.method
     if request.method == 'POST':
         # NEW FRAMEWORK - STORY UPLOADED AS TEXT IN TEXTAREA
         # Retrieving Fields - Add Defaults Later
         title = request.form["title"]
         author = request.form["author"]
         blurb = request.form["blurb"]
-        print title, author, "\n", blurb # Debugging
-        
+        print "Title:", title # Debugging
+        print "Author: ", author # Debugging
+        print blurb # Debugging
+
         # Verifying Data
-        try:
-            print request.files # Debugging
+        print request.files # Debugging
+        if len(request.files) > 0: # Uploaded Cover
             cover = request.files['file'] # FileStorage object
             covertype = cover.mimetype # file type 
             if (covertype != "image/jpeg" and covertype != "image/png"):
                 return "Invalid image file." # Redirect - TODO
             covername = secure_filename(str(getUserID()) + "_" + title + "_" + cover.filename) # filename
-        except:
+        else:
             return "No image selected." # Redirect - TODO
         print "Cover Filename:", covername # Debugging
         print "Cover Filetype:", covertype # Debugging
@@ -331,15 +334,8 @@ def uploadStoryText():
 
         # Creating Book
         bID = books.createBook(title, author, blurb, getUserID(), covername)
-        # bID = books.parseBookCustom2(title, author, blurb, getUserID(), covername) # Old
         # print "Book Created - Book ID:", bID # Debugging - Now in createBook in books.py
-    
-        # Redirect - Not Used
-        # username = users.getUsername(getUserID())
-        # profileData = users.getProfile(username)
-        # profileData.update( users.getActivity(username) )
-        # return flask.Response(render_template('uploadChapter.html', isLoggedIn = isLoggedIn(), data = profileData)) # Not Actually Run - Check Javascript
-        return "Success!" # Not Actually Run - Check Redirect
+        return "Success!"
     return "Failure!" # Not POST    
         
 @app.route('/uploadStoryCoverPic/', methods = ['POST'])

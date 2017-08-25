@@ -10,7 +10,7 @@ var $registerForm = $('#registerForm');
 var $failMsgReg = $('#registerFail');
 $failMsgReg.hide();
 
-console.log($failMsgReg);
+// console.log($failMsgReg); // Debugging
 
 // On Ready
 $(function() {

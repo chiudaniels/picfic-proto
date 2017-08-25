@@ -1,10 +1,5 @@
-body{
-    max-width : 75vw;
-    margin : auto;
-}
-
 .forms {
-    width: 55vw;
+    width: 60vw;
     margin : auto;
 }
 
@@ -12,7 +7,7 @@ body{
     width : 100%;
 }
 
-#submit{
+#submit {
     text-align : center;
 }
 

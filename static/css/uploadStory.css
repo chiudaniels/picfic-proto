@@ -1,0 +1,46 @@
+.forms {
+    width: 60vw;
+    margin: auto;
+}
+
+textarea {
+    resize: vertical;
+}
+
+#coverImage {
+    width: 186px;
+    height: 274px;
+    margin: auto;
+}
+
+.dropzone {
+    padding: 10px;
+    width: 162px;
+    height: 250px;
+}
+
+.dropzone .dz-preview {
+    margin: 0px;
+    display: block;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.dropzone .dz-preview .dz-image {
+    overflow: visible;
+}
+.dropzone .dz-preview .dz-remove {
+    padding-top: 90%;
+}
+
+.dz-image img {
+    height: 250px;
+    width: 162px;
+}
+
+.dropzone .dz-message {
+    height: 100%;
+    vertical-align: middle;
+    margin: auto;
+    margin-top: 60%;
+}
