@@ -1,13 +1,14 @@
 <!-- Upload Story -->
 {% extends 'baseLayout.html' %}
 {% block title %}PicFic - Upload Story{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" type="text/css" href="/static/css/dropzone.css"/>
 <link rel="stylesheet" type="text/css" href="/static/css/upload_ss.css"/>
 <link rel="stylesheet" type="text/css" href="/static/css/uploadStory.css"/>
 {% endblock %}
-{% block content %}
 
+{% block content %}
 <!-- Upload A Picfic -->
 <form class="forms" id="uploadStoryForm" action="/uploadStoryText/" enctype="multipart/form-data" data-toggle="validator" method="POST" >
   <h2>Upload A Picfic</h2>

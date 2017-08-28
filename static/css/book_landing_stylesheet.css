@@ -33,10 +33,14 @@ button:focus {outline:0;}
 
 .coverArt {
     position:absolute;
+    border-radius: 0px;
+    display: default;
     top: 10vh;
-    left:25vw;
+    left: 25vw;
     height: 249px;
     width: 162px;
+    max-width: none;
+    max-height: none;
 }
 
 .summary {

@@ -4,7 +4,6 @@
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css') }}">
-<link rel="stylesheet" type="text/css" href="../static/css/launchpad_stylesheet.css">
 {% endblock %}
 
 {% block content %}
@@ -12,90 +11,90 @@
 <div class="pageone">
 </div>
 <div class="container-fluid">
-        <div class="row launchpadCara">
-            <div class="text1">
-                <span id="text1"> Read different</span>
-                <br>
-                <span id="text2"> Interact with your favorite stories</span>
-            </div>
-	    <!--
-            <div class="text1">
-                <span id="text1"> Read beautiful</span>
-                <br>
-                <span id="text2"> Illustrate for everyone to see</span>
-            </div>
-            <div class="text1">
-                <span id="text1"> Read together</span>
-                <br>
-                <span id="text2"> Connect with other readers</span>
-            </div>
-	    -->
+  <div class="row launchpadCara">
+    <div class="text1">
+      <span id="text1"> Read different</span>
+      <br>
+      <span id="text2"> Interact with your favorite stories</span>
+    </div>
+    <!--
+        <div class="text1">
+          <span id="text1"> Read beautiful</span>
+          <br>
+          <span id="text2"> Illustrate for everyone to see</span>
         </div>
-        <div class="col-md-4" id="laptop1">
-            <img class="img-fluid laptop1" src="../static/launchpad/png/laptop.png">
+        <div class="text1">
+          <span id="text1"> Read together</span>
+          <br>
+          <span id="text2"> Connect with other readers</span>
         </div>
+	-->
+  </div>
+  <div class="col-md-4" id="laptop1">
+    <img class="img-fluid laptop1" src="../static/launchpad/png/laptop.png">
+  </div>
 </div>
 <!-- -->
 <!-- SECOND PAGE -->
 <div class="container content" id="page2">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 id="startreading">Start reading</h1>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 id="startreading">Start reading</h1>
     </div>
-    <div class="row" id="bookgallery">
-        {% for book in data["books"] %}
-        <div>
-	  <div class="text-center">
-            <a href="/books/{{book['bookID']}}"><img class="img-fluid bookcover" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
-	  </div>
-          <br>
-          <div class="text-center"><strong>{{book['title']}}</strong></div>
-          <br>
-          <div class="text-center"><em>{{book['author']}}</em></div>
-        </div>
-        {% endfor %}
+  </div>
+  <div class="row" id="bookgallery">
+    {% for book in data["books"] %}
+    <div>
+      <div class="text-center">
+        <a href="/books/{{book['bookID']}}"><img class="img-fluid bookcover" src="/static/data/bookCovers/{{book['coverUrl']}}"></a>
+      </div>
+      <br>
+      <div class="text-center"><strong>{{book['title']}}</strong></div>
+      <br>
+      <div class="text-center"><em>{{book['author']}}</em></div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 <!-- -->
 <!-- Page 3 -->
 <div class="pagethree">
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6 pagethreetext">
-            <h1>What's a picfic?</h1>
-            <br>
-            <p id="picficdesc">Picfics are serialized, illustrated novels with chapters released weekly. Every picfic encourages a community where readers can interact within the stories by uploading their own art.</p>
-        </div>
-        <div class="col-md-5" id="laptop2">
-            <img class="img-responsive laptop2" src="../static/launchpad/png/laptop2.png">
-        </div>
+  <div class="row">
+    <div class="col-md-6 pagethreetext">
+      <h1>What's a picfic?</h1>
+      <br>
+      <p id="picficdesc">Picfics are serialized, illustrated novels with chapters released weekly. Every picfic encourages a community where readers can interact within the stories by uploading their own art.</p>
     </div>
+    <div class="col-md-5" id="laptop2">
+      <img class="img-responsive laptop2" src="../static/launchpad/png/laptop2.png">
+    </div>
+  </div>
 </div>
 <!-- -->
 <!-- Page 4 -->
 <div class="pagefour">
 </div>
 <div class="container-fluid pagefourcontainer pagefourcontent">
-    <div class="row">
-        <img src="../static/svg/PicFic.svg" class="picficLogo img-responsive pagefourcontent">
+  <div class="row">
+    <img src="../static/svg/PicFic.svg" class="picficLogo img-responsive pagefourcontent">
+  </div>
+  <div class="row">
+    <div class="col-md-11 pagefourtext">
+      <p class="pagefourcontent">
+        PicFic is an online publishing platform that serializes stories for readers to illustrate and interact with. We're rediscovering classics, but we'll be releasing science fiction and fantasy stories in the near-future.
+      </p>
+      <p class="pagefourcontent">
+        We're a team of writers, artists, and developers from MIT. Our mission is to redefine reading as a truly social activity befitting the digital age.
+      </p>
     </div>
-    <div class="row">
-        <div class="col-md-11 pagefourtext">
-            <p class="pagefourcontent">
-                PicFic is an online publishing platform that serializes stories for readers to illustrate and interact with. We're rediscovering classics, but we'll be releasing science fiction and fantasy stories in the near-future.
-            </p>
-            <p class="pagefourcontent">
-                We're a team of writers, artists, and developers from MIT. Our mission is to redefine reading as a truly social activity befitting the digital age.
-            </p>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-11 pagefourcontent">
+      <img src="/static/launchpad/png/mitlogo.png" class="img-responsive picficLogo" id="mitLogo">
     </div>
-    <div class="row">
-        <div class="col-md-11 pagefourcontent">
-            <img src="/static/launchpad/png/mitlogo.png" class="img-responsive picficLogo" id="mitLogo">
-        </div>
-    </div>
+  </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -105,15 +104,15 @@
 {% endblock %}
 
 {% block contactbar %}
-  <!-- Bottom Contact Bar -->
-  <div class="socialMedia">
-    <div id="socialMediaText" class="text-center">
-      Like what we're doing? Follow us on social media!
-    </div>
-    <div class="logos text-center">
-      <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
-      <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
-      <a href="https://twitter.com/ThePicFic"><img class="lastlogo" src="../static/launchpad/png/twitter.png"></a>
-    </div>
+<!-- Bottom Contact Bar -->
+<div class="socialMedia">
+  <div id="socialMediaText" class="text-center">
+    Like what we're doing? Follow us on social media!
   </div>
+  <div class="logos text-center">
+    <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
+    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
+    <a href="https://twitter.com/ThePicFic"><img class="lastlogo" src="../static/launchpad/png/twitter.png"></a>
+  </div>
+</div>
 {% endblock %}
