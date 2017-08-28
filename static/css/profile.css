@@ -34,12 +34,53 @@ html, body {
     padding: 20px;
 }
 
+.bookshelf {
+    position: relative;
+    background-image: linear-gradient(-180deg, white 0%, #F5EED9 100%);
+    box-shadow: 0 1px 3px 0 rgba(107, 89, 34, 0.10);
+    height: 300px;
+    width: 100%;
+    overflow-y: auto;
+    left: 0px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+.title {
+    color: #404040;
+    margin-top: 0px;
+}
+
+.bookIcon {
+    position: relative;
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    margin: 0px;
+}
+
+.bookTitle {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+.bookTitle:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 #accountDetails {
-    background-color: #FFF0F0;
+    background-color: #FFFFFF;
+    /* background-color: #FFF0F0; */
 }
 
 #bookDetails {
-    background-color: #F0F0FF;
+    background-color: #FFFFFF;
+    /* background-color: #F0F0FF; */ 
 }
 
 /* Account Details (Left Side) */

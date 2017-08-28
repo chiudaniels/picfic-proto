@@ -58,7 +58,6 @@ span {
 
 }
 
-
 .launchpadCara {
     top: 38.5vh;
     left: 16.2vw;
@@ -573,24 +572,25 @@ button:focus {
 }
 
 .title {
-    position: absolute;
+    position: relative;
     display: inline-block;
     font-family: 'Nunito', sans-serif;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
     color: #181818;
     letter-spacing: 0.24px;
-    left: 130px;
     top: 50%;
     margin-top: -6px;
 }
 
 .coverArt {
-    left: 50px;
-    position: absolute;
+    position: relative;
     border-radius: 3px;
     display: inline-block;
-    height: 100px;
+    height: auto;
     width: auto;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .thumbnails {
@@ -602,7 +602,6 @@ button:focus {
     position: absolute;
     padding-top: 35px;
 }
-
 
 .mainLoginInput::-webkit-input-placeholder {
     font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;

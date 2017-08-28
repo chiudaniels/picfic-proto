@@ -85,209 +85,43 @@
   <div class="col col-md-8 col-xs-12 padded-container">
     <div class="inner-container" id="bookDetails">
       <h3 class="subtitle">My Stories</h3>
-      <div>Placeholder</div>
+      <div class="bookshelf">
+        {% for bookData in data["myStories"] %}
+	<div>
+          <a href="/books/{{ bookData['bookID'] }}/">
+	    <div class="bookIcon text-center">
+              <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
+	    </div>
+            <div class="title bookTitle">{{bookData['title']}}</div>
+          </a>
+	</div>
+	{% endfor %}
+      </div>
       <br>
       <h3 class="subtitle">Currently Reading</h3>
-      <div>Placeholder</div>
+      <div class="bookshelf">
+	<!-- to change! -->
+	{% for bookData in data["myShelf"] %}
+	<div>
+          <a href="/books/{{ bookData['bookID'] }}/">
+	    <div class="bookIcon text-center">
+	      <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
+	    </div>
+            <div class="title bookTitle">{{bookData['title']}}</div>
+          </a> 
+	</div>
+	{% endfor %}
+      </div>
       <br>
       <h3 class="subtitle">My Art</h3>
-      <div>Placeholder</div>
+      <div><em>Coming soon!</em></div>
       <br>
       <h3 class="subtitle">My Likes</h3>
-      <div>Placeholder</div>
+      <div><em>Coming soon!</em></div>
       <br>
     </div><!-- end inner container -->
   </div>
 </div>
-
-
-<!--
-<div class="profileBackground">
-  <div class="aboutMe">
-    <a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
-      <div class="bigProf" id="profilePic">
-	<!-- To implement once profile pictures are available. -> 
-        <!-- <img src="/static/data/profilePics/{{data['picUrl']}}" /> ->
-      </div>
-    </a>
-    <div class="userNames">
-      <h4><b>{{data["firstName"]}} {{data["lastName"]}}</b></h4>
-      <h6>{{data["username"]}}</h6>
-    </div>
-    <div class="about">
-      <h5 class="f">About Me</h5>
-      <button class="edit" id="editPersonal">Edit</button>
-      <br>
-      <br>
-      <p>
-        <div id="editAbout">
-          {{data["about"]}}
-        </div>
-      </p>
-      <p>
-        <br>
-        <br> Genres:
-        <div id="editGenre"> {{data["favGenres"]}}</div>
-      </p>
-      <br>
-      <p>Books/Series:
-        <div id="editBS">{{data["favBooks"]}}</div>
-      </p>
-      <br>
-      <p>Authors:
-        <div id="editAuthors"> {{data["favAuthors"]}}</div>
-      </p>
-      <br> {% if perm == 1 %}
-      <h5 class="e">My Account</h5>
-      <!--<button class="edit" id="editAccount">Edit</button>->
-      <br>
-      <br>
-      <p>
-        Email:
-        <div id="editEmail">{{data["email"]}}</div>
-      </p>
-      <br>
-      <p>Birthday:
-        <div id="editBirthday">{{data["birthday"]}}</div>
-      </p>
-      <br>
-      <p>Gender:
-        <div id="editGender">{{data["gender"]}}</div>
-      </p>
-      {% endif %}
-    </div>
-    <a href="#" class="cPas cPass" data-toggle="modal" data-target="#changePas" data-dismiss="modal">Change your password</a>
-    <br>
-  </div>
-  <div class="activity">
-    <h4 class="g"><b>My Stories</b></h4> <a href="#" class="newEdit" id="editStories">Edit</a>
-    <br>
-    <h5>My Stories</h5>
-    <div class="mystories bookshelf">
-      <div>
-        {% for bookData in data["myStories"] %}
-        <a href="/books/{{bookData['bookID']}}/read" }>
-          <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
-          <div class="title"> {{bookData['title']}}</div>
-        </a> {% endfor %}
-      </div>
-    </div>
-    <h4><b>Shelf</b></h4> <a href="#" class="edit" id="editShelf">Edit</a>
-    <br>
-    <h5> Continue Reading</h5>
-    <div class="bookshelf continereading">
-      <div>
-        <!-- put a for loop in here ->
-        {% for bookData in data["myShelf"] %}
-        <a href="/books/{{ bookData['bookID'] }}/read">
-          <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
-          <div class="title">{{bookData['title']}}</div>
-        </a> {% endfor %}
-      </div>
-    </div>
-    <br <h5> Uploaded by me</h5>
-        <div class="row uploaded">
-          <!-- more galleries lmao ->
-        </div>
-        <br>
-        <h5> Liked by me</h5>
-        <div class="row liked">
-        </div>
-  </div>
-</div>
-<!-- CLASS: cPas --------- ID: changePas ->
-<div class="modal fade" id="changePas" role="dialog">
-  <div class="modal-dialog cPas">
-    <!-- Modal content ->
-    <div class="modal-content">
-      <div class="modal-header" style="text-align: center" hidden="true"></div>
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="../static/svg/PicFic.svg" class="modalpicfic">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <p style="color:red;">Make sure you're ready to change your password before proceeding.
-          <br>
-          <br>
-          <form>
-            Enter your old password:
-            <input type="password" name="oldPass">
-            <br> Enter your new password:
-            <input type="password" name="newPass">
-            <br> Re-enter your new password:
-            <input type="password" name="confirmnewPass">
-            <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#cpc" data-dismiss="modal">Reset my password</button>
-            <br>
-            <br>
-            <br>
-            <br>
-          </form>
-          <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
-          <br>
-      </div>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-</div>
-<!-- CLASS: cPas --------- ID: cpc ->
-<div class="modal fade" id="cpc" role="dialog">
-  <div class="modal-dialog cPas">
-    <!-- Modal content ->
-    <div class="modal-content">
-      <div class="modal-header" style="text-align: center" hidden="true"></div>
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <img src="/static/svg/PicFic.svg" class="modalpicfic">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <p>You've successfully changed your password.
-          <br>
-          <br>
-        </p>
-        <br>
-        <br>
-        <br>
-        <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
-        <br>
-      </div>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-</div>
-<div class="modal" id="profilePicModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Upload Profile Pic</h4>
-      </div>
-      <div class="modal-body">
-        <form action="/saveProfilePic/" class="dropzone" id="profileDrop" method="post" enctype="multipart/form-data">
-          <div class="dz-message" data-dz-message>
-            <center> <span class="dropdesc">Drag & drop file <br>
-		or click to upload</span>
-              <br> <img src="/static/svg/uploadPicture.svg" />
-            </center>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <p id="upload-desc"></p>
-      </div>
-    </div>
-  </div>
-</div>
--->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
@@ -295,3 +129,195 @@
 <script src="/static/js/dropzone.js "></script>
 <script type="text/javascript" src="/static/slick/slick.min.js"></script>
 {% endblock %}
+
+<!--
+    <div class="profileBackground">
+      <div class="aboutMe">
+	<a href="#" class="" data-toggle="modal" data-target="#profilePicModal" data-dismiss="modal">
+	  <div class="bigProf" id="profilePic">
+	    <!-- To implement once profile pictures are available. -> 
+		 <!-- <img src="/static/data/profilePics/{{data['picUrl']}}" /> ->
+		      </div>
+	</a>
+	<div class="userNames">
+	  <h4><b>{{data["firstName"]}} {{data["lastName"]}}</b></h4>
+	  <h6>{{data["username"]}}</h6>
+	</div>
+	<div class="about">
+	  <h5 class="f">About Me</h5>
+	  <button class="edit" id="editPersonal">Edit</button>
+	  <br>
+	  <br>
+	  <p>
+            <div id="editAbout">
+              {{data["about"]}}
+            </div>
+	  </p>
+	  <p>
+            <br>
+            <br> Genres:
+            <div id="editGenre"> {{data["favGenres"]}}</div>
+	  </p>
+	  <br>
+	  <p>Books/Series:
+            <div id="editBS">{{data["favBooks"]}}</div>
+	  </p>
+	  <br>
+	  <p>Authors:
+            <div id="editAuthors"> {{data["favAuthors"]}}</div>
+	  </p>
+	  <br> {% if perm == 1 %}
+	  <h5 class="e">My Account</h5>
+	  <!--<button class="edit" id="editAccount">Edit</button>->
+	      <br>
+	      <br>
+	  <p>
+            Email:
+            <div id="editEmail">{{data["email"]}}</div>
+	  </p>
+	  <br>
+	  <p>Birthday:
+            <div id="editBirthday">{{data["birthday"]}}</div>
+	  </p>
+	  <br>
+	  <p>Gender:
+            <div id="editGender">{{data["gender"]}}</div>
+	  </p>
+	  {% endif %}
+	</div>
+	<a href="#" class="cPas cPass" data-toggle="modal" data-target="#changePas" data-dismiss="modal">Change your password</a>
+	<br>
+      </div>
+      <div class="activity">
+	<h4 class="g"><b>My Stories</b></h4> <a href="#" class="newEdit" id="editStories">Edit</a>
+	<br>
+	<h5>My Stories</h5>
+	<div class="mystories bookshelf">
+	  <div>
+            {% for bookData in data["myStories"] %}
+            <a href="/books/{{bookData['bookID']}}/read" }>
+              <img src="/static/data/bookCovers/{{bookData['coverUrl']}}" class="coverArt img-fluid">
+              <div class="title"> {{bookData['title']}}</div>
+            </a> {% endfor %}
+	  </div>
+	</div>
+	<h4><b>Shelf</b></h4> <a href="#" class="edit" id="editShelf">Edit</a>
+	<br>
+	<h5> Continue Reading</h5>
+	<div class="bookshelf continereading">
+	  <div>
+            <!-- put a for loop in here ->
+		 {% for bookData in data["myShelf"] %}
+		 <a href="/books/{{ bookData['bookID'] }}/read">
+		   <img src="/static/data/bookCovers/{{ bookData['coverUrl'] }}" class="coverArt img-fluid">
+		   <div class="title">{{bookData['title']}}</div>
+		 </a> {% endfor %}
+	  </div>
+	</div>
+	<br <h5> Uploaded by me</h5>
+            <div class="row uploaded">
+              <!-- more galleries lmao ->
+		   </div>
+      <br>
+      <h5> Liked by me</h5>
+      <div class="row liked">
+      </div>
+    </div>
+</div>
+
+<!-- CLASS: cPas --------- ID: changePas ->
+     <div class="modal fade" id="changePas" role="dialog">
+       <div class="modal-dialog cPas">
+	 <!-- Modal content ->
+	      <div class="modal-content">
+		<div class="modal-header" style="text-align: center" hidden="true"></div>
+		<div class="modal-body">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <img src="../static/svg/PicFic.svg" class="modalpicfic">
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+		  <p style="color:red;">Make sure you're ready to change your password before proceeding.
+		    <br>
+		    <br>
+		    <form>
+		      Enter your old password:
+		      <input type="password" name="oldPass">
+		      <br> Enter your new password:
+		      <input type="password" name="newPass">
+		      <br> Re-enter your new password:
+		      <input type="password" name="confirmnewPass">
+		      <button type="submit" class="btn submitButton" data-toggle="modal" data-target="#cpc" data-dismiss="modal">Reset my password</button>
+		      <br>
+		      <br>
+		      <br>
+		      <br>
+		    </form>
+		    <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
+		    <br>
+		</div>
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+       </div>
+     </div>
+
+     <!-- CLASS: cPas --------- ID: cpc ->
+	  <div class="modal fade" id="cpc" role="dialog">
+	    <div class="modal-dialog cPas">
+	      <!-- Modal content ->
+		   <div class="modal-content">
+		     <div class="modal-header" style="text-align: center" hidden="true"></div>
+		     <div class="modal-body">
+		       <button type="button" class="close" data-dismiss="modal">&times;</button>
+		       <img src="/static/svg/PicFic.svg" class="modalpicfic">
+		       <br>
+		       <br>
+		       <br>
+		       <br>
+		       <br>
+		       <br>
+		       <p>You've successfully changed your password.
+			 <br>
+			 <br>
+		       </p>
+		       <br>
+		       <br>
+		       <br>
+		       <a href="#" class="contactUs" data-toggle="modal" data-target="#contact" data-dismiss="modal">Contact PicFic for further support</a>
+		       <br>
+		     </div>
+		   </div>
+		   <div class="modal-footer">
+		   </div>
+	    </div>
+	  </div>
+
+	  <div class="modal" id="profilePicModal" role="dialog">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Upload Profile Pic</h4>
+		</div>
+		<div class="modal-body">
+		  <form action="/saveProfilePic/" class="dropzone" id="profileDrop" method="post" enctype="multipart/form-data">
+		    <div class="dz-message" data-dz-message>
+		      <center> <span class="dropdesc">Drag & drop file <br>
+			  or click to upload</span>
+			<br> <img src="/static/svg/uploadPicture.svg" />
+		      </center>
+		    </div>
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <p id="upload-desc"></p>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	  -->
+
