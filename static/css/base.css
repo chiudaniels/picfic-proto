@@ -112,17 +112,6 @@ border-radius: 10px;
     background-color: #59b5fa;
 }
 
-@media(max-width:768px) {
-    #login-dp {
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom {
-        background-color: inherit;
-        border-top: 0 none;
-    }
-}
-
 /* Navbar */
 .navbar {
     background: #D1EBFF;
@@ -372,6 +361,17 @@ button:focus {
 }
 
 /* RESPOSNIVE FEATURES /
+@media(max-width:768px) {
+    #login-dp {
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom {
+        background-color: inherit;
+        border-top: 0 none;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     #laptop1 {
         padding-left: 5px;
