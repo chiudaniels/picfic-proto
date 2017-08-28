@@ -115,7 +115,7 @@ def galleryPage(pageNum):
 """
 
 # == Book landing page ==============================
-@app.route("/books/<int:bookID>")
+@app.route("/books/<int:bookID>", methods=['POST', 'GET'])
 def bookLanding(bookID):
     if books.bookExists(bookID):
         metadata = books.getBookLanding(bookID)
