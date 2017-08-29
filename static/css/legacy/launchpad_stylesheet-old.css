@@ -1,0 +1,258 @@
+
+.pageone {
+    opacity: .35;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../launchpad/png/background1.png);
+    background-position: center;
+    height: 98vh;
+    width: 100%;
+    display: flex;
+    color: red;
+
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    font-family: 'Nunito', sans-serif;
+}
+
+#laptop1 {
+    padding-left: 5px;
+    top: 38.3vh;
+    left: 60vw;
+    position: absolute;
+
+}
+
+.launchpadCara {
+    top: 38.5vh;
+    left: 16.2vw;
+    position:relative;
+    height:100%;
+    max-width:50vw;
+}
+
+.text1 {
+    font-size: 2.7vw;
+    top: 50.5vh;
+    left: 16.2vw;
+    z-index: 1;
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+}
+
+.content {
+    width: 70%;
+    max-width: 1920px;
+    font-family: 'Nunito', sans-serif;
+}
+
+#page2 {
+    position: absolute;
+    top: 140vh;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+}
+
+#bookgallery {
+    padding-right: 5%;
+    padding-left: 10%;
+    font-family: 'Nunito', sans-serif;
+}
+
+.bookcover{
+    width: 20vw;
+    height: 31vh;
+    object-fit: contain;
+    margin: auto;
+}
+
+#startreading {
+    text-align: center;
+    font-size: 5vh;
+    padding-bottom: 5vh;
+    padding-top: 7vh;
+    font-family: 'Nunito', sans-serif;
+}
+
+.pagethree {
+    position: absolute;
+    top: 260vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../launchpad/png/background2.png);
+    height: 110vh;
+    width: 100%;
+    z-index: -1;
+    font-family: 'Nunito', sans-serif;
+}
+
+#laptop2 {
+    position: absolute;
+    top: 285vh;
+    left: 55vw;
+    z-index: 1;
+}
+
+
+.pagethreetext {
+    position: absolute;
+    top: 287vh;
+    left: 15vw;
+    z-index: 1;
+    font-family: 'Nunito', sans-serif;
+}
+
+#picficdesc {
+    font-size: 2.4vh;
+    max-width: 30vw;
+    font-family: 'Nunito', sans-serif;
+}
+
+.pagefour {
+    opacity: .17;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    font-family: 'Nunito', sans-serif;
+    top: 369.88vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../launchpad/png/background3.png);
+    height: 100vh;
+    width: 100%;
+}
+
+.pagefourtext {
+    font-size: 1.2em;
+    font-family: 'Nunito', sans-serif;
+}
+
+.pagefourcontainer {
+    position: absolute;
+    max-width: 52vw;
+    text-align: center;
+    align-content: center;
+    margin:auto;
+    top: 375vh;
+    left: 24.3vw;
+    font-family: 'Nunito', sans-serif;
+}
+
+.picficLogo {
+    margin:auto;
+    height: 6vw;
+    width: auto;
+    fill: black;
+    stroke: black;
+    opacity: 1;
+}
+
+#mitLogo{
+    margin:auto;
+}
+
+.pagefourcontent {
+    padding-top: 5vh;
+    font-family: 'Nunito', sans-serif;
+}
+
+
+
+
+/*.pagefivecontent {
+/*position: absolute;*/
+
+
+/*
+    text-align: center;
+    top: 50vh;
+    left: 26vw;
+    max-width: 47vw;
+    vertical-align: text-top;
+    height: 100%;               
+    width: 100%;    
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    margin:-10px;
+    background-color:red;
+}*/
+
+.socialMedia {
+    top: 471vh;
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+#socialMediaText {
+    font-size: 18px;
+}
+
+.footer {
+    top: 490vh;
+    position: absolute;
+    font-family: 'Nunita', sans-serif;
+    font-size: 12px;
+    background: #F3F3F3;
+    height: 50px;
+    width: 100%;
+}
+
+.contactUs:focus {
+    outline: 0;
+}
+
+.cpyright {
+    left: 87%;
+    top: 40%;
+    position: absolute;
+    color: black;
+}
+
+.logo {
+    padding-right: 5vh;
+}
+
+.contactfooter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    width: 100%;
+    background: #EAEAEA;
+    max-width: 1920px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.contactfootercontent {
+    z-index: -1;
+    left: 12vw;
+    position: absolute;
+    top: 575vh;
+    width: 100%;
+    max-width: 1920px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.footertext {
+    padding-left: 27vw;
+    font-family: 'Nunito', sans-serif;
+}
+
+#footerimg {
+    padding-left: 2vw;
+    height: 7vh;
+    width: auto;
+}

@@ -14,8 +14,9 @@ $car.not('.slick-initialized').slick({
 
 $('#bookgallery').not('.slick-initialized').slick({
     dots: true,
-    infinite: false,
     arrows: false,
+    autoplay: true,
+    autoplaySpeed: 5000,
     infinite: true,
     pauseOnDotsHover: true,
     speed: 300,

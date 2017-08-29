@@ -66,7 +66,7 @@
   <div class="col-md-7 col-xs-12">
     <div class="vertical-center middle" id="pagethreetext">
       <div>
-	<div class="header-xl">What's a picfic?</div>
+	<div class="header-xl" id="title-pagethree">What's a picfic?</div>
 	<h3>Picfics are serialized, illustrated novels with chapters released weekly.</h3>
 	<h3>Every picfic encourages a community where readers can interact within the stories by uploading their own art.</h3> 
       </div>
@@ -84,23 +84,17 @@
   <div class="blur" id="background-pagefour"></div>
   
   <div class="container-fluid pagefourcontainer pagefourcontent">
-    <div class="row">
-      <img src="../static/svg/PicFic.svg" class="picficLogo img-responsive pagefourcontent">
+    <img src="../static/svg/PicFic.svg" class="picficLogo pagefourcontent">
+    <div class="col-md-12" id="pagefourtext">
+      <p class="pagefourcontent">
+        PicFic is an online publishing platform that serializes stories for readers to illustrate and interact with. We're rediscovering classics, but we'll be releasing science fiction and fantasy stories in the near-future.
+      </p>
+      <p class="pagefourcontent">
+        We're a team of writers, artists, and developers from MIT. Our mission is to redefine reading as a truly social activity befitting the digital age.
+      </p>
     </div>
-    <div class="row">
-      <div class="col-md-12 pagefourtext">
-	<p class="pagefourcontent">
-          PicFic is an online publishing platform that serializes stories for readers to illustrate and interact with. We're rediscovering classics, but we'll be releasing science fiction and fantasy stories in the near-future.
-	</p>
-	<p class="pagefourcontent">
-          We're a team of writers, artists, and developers from MIT. Our mission is to redefine reading as a truly social activity befitting the digital age.
-	</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 pagefourcontent">
-	<img src="/static/launchpad/png/mitlogo.png" class="img-responsive picficLogo" id="mitLogo">
-      </div>
+    <div class="col-md-12 pagefourcontent">
+      <img src="/static/launchpad/png/mitlogo.png" class="img-responsive picficLogo" id="mitLogo">
     </div>
   </div>
 </div>
@@ -114,13 +108,10 @@
 {% block contactbar %}
 <!-- Bottom Contact Bar -->
 <div class="socialMedia">
-  <div id="socialMediaText" class="text-center">
-    Like what we're doing? Follow us on social media!
-  </div>
   <div class="logos text-center">
     <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="../static/launchpad/png/facebook.png"></a>
-    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="../static/launchpad/png/instagram.png"></a>
-    <a href="https://twitter.com/ThePicFic"><img class="lastlogo" src="../static/launchpad/png/twitter.png"></a>
+    <a href="https://www.instagram.com/the.picfic/"><img class="logo" id="logo2" src="../static/launchpad/png/instagram.png"></a>
+    <a href="https://twitter.com/ThePicFic"><img class="lastlogo" id="logo3" src="../static/launchpad/png/twitter.png"></a>
   </div>
 </div>
 {% endblock %}
