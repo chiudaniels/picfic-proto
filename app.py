@@ -119,7 +119,7 @@ def galleryPage(pageNum):
 def bookLanding(bookID):
     if books.bookExists(bookID):
         metadata = books.getBookLanding(bookID)
-        return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, myUsername = getUsername(), showMenu = 0) # showMenu no longer needed - using baseLayout
+        return render_template("bookLanding.html", isLoggedIn = isLoggedIn(), data = metadata, artData = books.getArtData(bookID), myUsername = getUsername(), showMenu = 0) # showMenu no longer needed - using baseLayout
     return redirect(url_for('root'))
 
 @app.route("/getBookLandingImages/", methods=['POST'])

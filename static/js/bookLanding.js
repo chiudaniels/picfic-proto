@@ -1,3 +1,5 @@
+var artArray = null;
+
 var loadBookLanding = function(){
     $.ajax({
 	url: "/getBookLandingImages/",
@@ -8,7 +10,6 @@ var loadBookLanding = function(){
 	success: function(response){
 	    artArray = response;
 	    console.log(artArray);
-	    setGallery();
 	},
 	error: function(data){
 	    console.log("book landing error");
@@ -16,6 +17,17 @@ var loadBookLanding = function(){
     });
 }
 
-$(document).ready(function() {
-    loadBookLanding();
+$(function () {
+    loadBookLanding();    
+    $('#art-slideshow').slick({
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	autoplay: true,
+	autoplaySpeed: 4000,
+	dots: true,
+	infinite: true,
+	arrows: true,
+    });
+    console.log("Book Landing JS loaded.");
 });
+

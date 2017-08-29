@@ -234,6 +234,24 @@ def getBookLanding( bookID ):
         session.close()
         return ret
 
+# getArtData (..) - get art data about a book
+# pre  : int bookID - id of book 
+# post : dict RET - array of dictionaries
+#        [ { String author  : creator of art piece,
+#            String caption : caption of art piece,
+#            String url     : url of art piece } ... ]
+def getArtData( bookID ):
+    raw = images.getImageDataBook(bookID)
+    artdata = []
+    for piece in raw:
+        print piece
+        art = {}
+        art['author'] = users.getUsername(int(piece['uploaderID']))
+        art['caption'] = piece['caption']
+        art['url'] = "/static/data/images/" + piece['urlName']
+        artdata += [art]
+    return artdata
+
 # getTableOfContents (..) - get data for table of contents
 # pre  : int bookID - id of book to update
 #        int userID - id of user  

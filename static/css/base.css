@@ -129,6 +129,8 @@ border-radius: 10px;
 }
 
 .navbar-brand {
+    position: relative;
+    z-index: 10;
     padding: 0px;
 }
 
@@ -375,12 +377,12 @@ button:focus {
 }
 
 /* Hiding Navbar Button */
-@media (min-width: 992px) {
+@media (min-width: 768px) {
     .navbar-toggleable-md .navbar-toggler {
 	display: none;
     }
 }
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     #notloggedin-navbar {
 	display: none;
     }

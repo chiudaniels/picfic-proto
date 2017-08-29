@@ -9,82 +9,113 @@
 {% endblock %}
 
 {% block content %}
-<div class="share">
-    <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="/static/launchpad/png/facebook.png"></a>
-    <br>
-    <br>
-    <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="/static/launchpad/png/instagram.png"></a>
-    <br>
-    <br>
-    <a href="https://twitter.com/ThePicFic"><img class="logo" src="/static/launchpad/png/twitter.png"></a>
-</div>
-
+<!-- Book Preview --> 
 <div class="bookInfo" style="background-image: url('/static/data/bookCovers/{{data['coverUrl']}}');background-position:center">
   <div id="coverContent">
     <img src="/static/data/bookCovers/{{data['coverUrl']}}" class="coverArt">
   </div>
-  <div class="summary">
-        <h2>{{data["meta"]["title"]}}</h2>
-        <h4><i>{{data["meta"]["author"]}}</i></h4>
-        <p>
-	  {% for p in data["meta"]["blurb"]%}
-	  {{p}}
-	  <br>
-	  {% endfor %}
-        </p>
-	<p>
-	  {{data["meta"]["misc"]}}
-	</p>
+  <div id="bookData">
+    <h2>{{data["meta"]["title"]}}</h2>
+    <h4><i>{{data["meta"]["author"]}}</i></h4>
+    <p>
+      {% for p in data["meta"]["blurb"]%}
+      {{p}}
+      <br>
+      {% endfor %}
+    </p>
+    <p>
+      {{data["meta"]["misc"]}}
+    </p>
   </div>
-  <a href="{{data['bookID']}}/read"><button class="toRead"><b>START READING</b></button></a>
+  <div id="startReading">
+    <a href="{{data['bookID']}}/read">
+      <button class="toRead"><strong>START READING</strong></button>
+    </a>
+  </div>
 </div>
 
-<div class="viewArt">
-    <h3>VIEW FANART FOR {{data["meta"]["title"]}}</h3>
-    <div class="container gallery">
-        <div class="nothumbnails">
-            <div class="row gallery-image">
-                <div class="col-md-12">
-                    <div class="slideshow-container">
-                        <span class="slideshow-images" id="slideMaster">
-                    
-                     </span>
-                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row gallery-interact">
-                <div class="col-md-6">
-                    <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
-                </div>
-                <div class="col-md-6">
-                    <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
-                    <img class="blueicons" src="/static/svg/blue_insta.svg">
-                    <img class="blueicons" src="/static/svg/blue_twitter.svg">
-                    <img class="blueicons" src="/static/svg/blue_tumblr.svg">
-                    <img class="blueicons" src="/static/svg/blue_pin.svg">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 gallery-desc">
-                </div>
-            </div>
-        </div>
-        <div class="gallery-thumbnail">
-        </div>
+<div class="viewArt text-center">
+  <div style="margin-top:20px;margin-bottom:20px">
+    <h3>VIEW FANART FOR <strong>{{data["meta"]["title"]}}</strong></h3>
+  </div>
+  <div class="container gallery">
+    <div id="art-slideshow">
+      {% for piece in artData %}
+      <div class="artPiece">
+	<div>
+	  <img class="art" src="{{ piece['url'] }}" style="margin:auto">
+	</div>
+	<br>
+	<div>
+	  <strong>By: {{ piece['author'] }}</strong>
+	</div>
+	<br>
+	<div>
+	  {{ piece['caption'] }}
+	</div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </div>
+
+<!-- OLD CODE -> 
+<div style="display:block;position:relative;background-color:gray;width:100%;height:100px"></div>
+
+<div class="viewArt2">
+  <h3>VIEW FANART FOR {{data["meta"]["title"]}}</h3>
+  <div class="container gallery">
+    <div class="nothumbnails2">
+      <div class="row gallery-image">
+        <div class="col-md-12">
+          <div class="slideshow-container">
+            <span class="slideshow-images" id="slideMaster">
+              
+	    </span>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+        </div>
+      </div>
+      <div class="row gallery-interact">
+        <div class="col-md-6">
+          <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
+        </div>
+        <div class="col-md-6">
+          <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
+          <img class="blueicons" src="/static/svg/blue_insta.svg">
+          <img class="blueicons" src="/static/svg/blue_twitter.svg">
+          <img class="blueicons" src="/static/svg/blue_tumblr.svg">
+          <img class="blueicons" src="/static/svg/blue_pin.svg">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 gallery-desc">
+        </div>
+      </div>
+    </div>
+    <div class="gallery-thumbnail">
+    </div>
+  </div>
+</div>
+<!-- -->
+
+<!-- Social Media -->
+<div class="share">
+  <a href="https://www.facebook.com/thepicfic"><img class="logo" id="logo1" src="/static/launchpad/png/facebook.png"></a>
+  <br>
+  <a href="https://www.instagram.com/the.picfic/"><img class="logo" src="/static/launchpad/png/instagram.png"></a>
+  <br>
+  <a href="https://twitter.com/ThePicFic"><img class="logo" src="/static/launchpad/png/twitter.png"></a>
+</div>
+
 <script>
   bookID = {{data['bookID']}};
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="/static/js/dropzone.js "></script>
-<script src="/static/js/chapter.js"></script>
-<script src="/static/js/bookLanding.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <script type="text/javascript" src="/static/slick/slick.min.js"></script>
-
+<script src="/static/js/bookLanding.js"></script>
 {% endblock %}
