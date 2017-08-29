@@ -119,6 +119,19 @@ border-radius: 10px;
     border-radius: 0;
 }
 
+.navbar-container {
+    height: 50px;
+}
+
+.navbar-collapse {
+    padding: 0px;
+    padding-right: 5vw;
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+
 #aboutus {
     position: absolute;
     right: 15vw;
@@ -140,8 +153,9 @@ border-radius: 10px;
     margin-top: 5px;
 }
 
-.navbar-container {
-    height: 50px;
+#notloggedin-navbar {
+    display: inline-block;
+    position: relative;
 }
 
 .navbar-inner ul.nav li {
@@ -358,4 +372,40 @@ button:focus {
 
 .mainLoginInput:-moz-placeholder {
     font-family: .AppleSystemUIFont, Arial, Helvetica, sans-serif;
+}
+
+/* Hiding Navbar Button */
+@media (min-width: 992px) {
+    .navbar-toggleable-md .navbar-toggler {
+	display: none;
+    }
+}
+@media (max-width: 992px) {
+    #notloggedin-navbar {
+	display: none;
+    }
+    .navbar-text {
+	text-align: right;
+    }
+    .navbar-nav {
+	margin-top: 50px;
+	float: right;
+    }
+}
+.navbar-toggler.navbar-toggleable-md.navbar-toggler-right {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5vw;
+    padding: 0px;
+    border: none;
+    float: right;
+    background-color: #D1EBFF;
+}
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
