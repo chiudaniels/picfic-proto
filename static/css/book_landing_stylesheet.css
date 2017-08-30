@@ -115,13 +115,15 @@ html, body {
 /* Social Media */
 .share { 
   position: fixed;
-  top: 35vh;
+  top: 37.5vh;
   left: 5vw;
   z-index: 50000; /* Unnecessarily High */
 }
 
 .logo {
-    padding-bottom: 5vh;
+    height: 5vh;
+    width: auto;
+    margin-bottom: 5vh;
 }
 
 /* Slick */
@@ -130,21 +132,46 @@ html, body {
 }
 
 /* Responsiveness */
-@media (min-width: 768px) {
-    .col-sm-5ths {
-        width: 20%;
-        float: left;
+@media only screen and (max-width: 768px) {
+    /* Book Preview */
+    .bookInfo {
+	height: 120vh;
     }
-}
-@media (min-width: 992px) {
-    .col-md-5ths {
-        width: 20%;
-        float: left;
+
+    #coverContent {
+	float: none;
+	width: 100%;
+	height: 40vh;
+	margin-top: 5vh;
     }
-}
-@media (min-width: 1200px) {
-    .col-lg-5ths {
-        width: 20%;
-        float: left;
+    .coverArt {
+	width: 100%;
+	height: 100%;
+	margin-top: 0;
+	margin-right: 0px;
+	padding-left: 15vh;
+	padding-right: 15vh
+    }
+
+    #bookData {
+	height: 65vh;
+	width: 100%;
+	padding: 2vh;
+	text-align: center;
+	float: none;
+    }
+
+    .toRead {
+	width: 200px;
+	height: 28px;
+	font-size: 14px;
+    }
+    
+    p {
+	font-size: 0.9em;
+    }
+    
+    .share {
+	display: none;
     }
 }
