@@ -522,6 +522,15 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
+# ==================================================
+# AJAX Helpers
+# ==================================================
+# Not Used
+@app.route('/getUsername/', methods = ['POST'])
+def getUsernameAJAX():
+    uname = users.getUsername(int(request.json['uID']))
+    return json.dumps({ 'status':'OK', 'username':uname })
+
 ####################################################### SENDING EMAIL BASICS
 @app.route("/nogoof")
 def index():

@@ -127,17 +127,9 @@ p {
     font-family: 'Nunito', sans-serif;
 }
 
-.viewArt{
-    position:absolute;
-    font-family: 'Nunito', sans-serif;
-    left: 25vw;
-    top: 86xvh;
-}
-
 h3, h2, h4 {
     font-family: 'Nunito', sans-serif;
 }
-
 
 .share { 
   width: 190px; 

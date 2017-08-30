@@ -26,15 +26,15 @@
 	   <img src="/static/svg/twitter.svg " class="logo3 ">
 	 </div>
 	 -->
+
+    <!-- story stuff -->
     <div class="col-md-1 col-md-offset-1 arrow">
-      <a href="#nextPgBtn">
+      <a href="#">
 	<div class="prev" id="prevPgBtn">
 	  <img src="/static/svg/leftarrow.svg">
 	</div>
       </a>
     </div>
-
-    <!-- story stuff -->
     <div class="col-md-8 ">
       <div class="title" id="chapterTitle">
 	<h2>CHAPTER {{pageData["chNum"]}}<br> {{pageData["chTitle"]}}</h2>
@@ -47,102 +47,14 @@
     </div>
     <div class="col-md-1 arrow">
       <a href="#myModal" role="button" data-toggle="modal"> <img id="upload" class="upload" src="/static/svg/upload.svg"></a>
-      <a href="#prevPgBtn">
-	 <div class="next" id="nextPgBtn">
-	   <img src="/static/svg/rightarrow.svg">
-	 </div>
+      <a href="#">
+	<div class="next" id="nextPgBtn">
+	  <img src="/static/svg/rightarrow.svg">
+	</div>
       </a>
     </div>
   </div>
-  
-  <!-- image gallery -->
-  <div class="container gallery" id="imageGallery">
-    <div class="nothumbnails">
-      <div class="row imgHeader">
-	<div class="col-md-4" id="dateUploaded">
-	</div>
-	<div class="col-md-4">
-	</div>
-	<div class="col-md-4" id="uploader">
-	</div>
-      </div>
-      <div class="row gallery-image">
-	<div class="col-md-12">
-	  <div class="slideshow-container">
-	    <span class="slideshow-images" id="slideMaster">
-
-	    </span>
-	  </div>
-	</div>
-      </div>
-      <div class="row gallery-interact">
-	<div class="col-md-6">
-	  <img src="/static/svg/heart.svg"> <span id="likes"> 0 </span><span> likes </span>
-	</div>
-	<div class="col-md-6">
-	  <img class="blueicons fbicon" src="/static/svg/blue_fb.svg">
-	  <img class="blueicons" src="/static/svg/blue_insta.svg">
-	  <img class="blueicons" src="/static/svg/blue_twitter.svg">
-	  <img class="blueicons" src="/static/svg/blue_tumblr.svg">
-	  <img class="blueicons" src="/static/svg/blue_pin.svg">
-	</div>
-      </div>
-      <div class="row">
-	<div class="col-md-12 gallery-desc" id="galDesc">
-	</div>
-      </div>
-    </div>
-    <div class="row gallery-thumbnail">
-    </div>
-  </div>
-
-  <!-- modal - dropzone -->
-  <!-- -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-	<div class="modal-header">
-	  <button type="button" class="close" data-dismiss="modal">&times;</button>
-	  <h4 class="modal-title">Upload Art</h4>
-	</div>
-	<div class="modal-body">
-	  {% if isLoggedIn %}
-	  <form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
-	    <div class="dz-message" data-dz-message>
-	      <div class="text-center dropdesc">
-		Drag &amp; Drop A File
-	      </div>
-	      <div class="text-center dropdesc">
-		(Or click to upload!)
-	      </div>
-	      <div class="text-center">
-		<img src="/static/svg/uploadPicture.svg">
-	      </div>
-	    </div>
-	    <input type="hidden" name="bookID" id="artUploadBookID"></input>
-	    <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
-	    <input type="hidden" name="caption" id="artUploadCaption"></input>
-	    <input type="hidden" name="startCC" id="artUploadStartCC"></input>
-	    <input type="hidden" name="endCC" id="artUploadEndCC"></input>
-	    <div class="text-center">
-	      <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
-	    </div>
-	    <br>
-	  </form>
-	  <div class="modal-footer">
-	    <p id="upload-desc"></p>
-	  </div>
-	  {% else %}
-	  <div class="text-center">
-	    Please create an account to add art!
-	  </div>
-	  {% endif %}
-	</div>
-      </div>
-    </div>
-  </div>
 </div>
-<!-- -->
 
 <!-- progress bar -->
 <div class="progress">
@@ -156,6 +68,65 @@
 <p> {{pageData["errMsg"]}} </p>
 <a href="/">Back home</a>
 {% endif %}
+
+<!-- Gallery -->
+<div class="viewArt text-center" id="artGallery" style="margin-top: 3vh">
+  <div style="margin-top:20px;margin-bottom:20px">
+    <h3>VIEW FANART FOR <strong>{{pageData["chTitle"]}}</strong></h3>
+  </div>
+  <div class="container gallery">
+    <div id="art-slideshow">
+    </div>
+  </div>
+</div>
+
+<!-- modal - dropzone -->
+<!-- -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<h4 class="modal-title">Upload Art</h4>
+      </div>
+      <div class="modal-body">
+	{% if isLoggedIn %}
+	<form action="/uploadArt/" class="dropzone" id="artDrop" method="post" enctype="multipart/form-data">
+	  <div class="dz-message" data-dz-message>
+	    <div class="text-center dropdesc">
+	      Drag &amp; Drop A File
+	    </div>
+	    <div class="text-center dropdesc">
+	      (Or click to upload!)
+	    </div>
+	    <div class="text-center">
+	      <img src="/static/svg/uploadPicture.svg">
+	    </div>
+	  </div>
+	  <input type="hidden" name="bookID" id="artUploadBookID"></input>
+	  <input type="hidden" name="chapterNum" id="artUploadChapterNum"></input>
+	  <input type="hidden" name="caption" id="artUploadCaption"></input>
+	  <input type="hidden" name="startCC" id="artUploadStartCC"></input>
+	  <input type="hidden" name="endCC" id="artUploadEndCC"></input>
+	  <div class="text-center">
+	    <button type="button" class="btn btn-default" id="artUploadSubmit">Submit</button>
+	  </div>
+	  <br>
+	</form>
+	<div class="modal-footer">
+	  <p id="upload-desc"></p>
+	</div>
+	{% else %}
+	<div class="text-center">
+	  Please create an account to add art!
+	</div>
+	{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- -->
 
 <script>
   var bookID = {{ pageData["bookID"] }};

@@ -1,81 +1,37 @@
-var slideIndex = 0;
-var thumbIndex = 0;
-//var sourceArray = ["../static/img1.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg", "../static/img2.jpg"];
-//var captionArray = ["", "", "", "", "", ""];
+// Variable Declaration
 var artArray = [];
+var imageArray = []; // Art
 
-var imageArray = [];
-var imageArray2 = [];
+// var imageArray2 = []; // Thumbnails
+var fileUpload = document.getElementById('fileUpload');
 var thumbs = document.getElementsByClassName("thumbnails");
 
-function source2img(path) {
-    var newImage = new Image();
-    newImage.src = path;
-    newImage.setAttribute("class", "slideImages");
-    return newImage;
-}
-
 var loadArt = function() {
+    imageArray = [] // Clear Array
     for (var i = 0; i < artArray.length; i++) {
-        imageArray.push(source2img(artArray[i]["urlName"]));
-        imageArray2.push(source2img(artArray[i]["urlName"]));
+	console.log("ArtArray Index: ", artArray[i]); // Debugging
+	artPiece = {}
+	artPiece['url'] = '/static/data/images/' + artArray[i]["urlName"];
+	artPiece['author'] = artArray[i]['username'];
+	artPiece['caption'] = artArray[i]['caption'];
+	imageArray.push(artPiece);
     }
+    console.log("ImageArray: ", imageArray); // Debugging
 }
 
+// Not Implemented
 var setLikes = function(x) {
     $('#likes').text(x);
 }
-
 var setDesc = function(x) {
     $('#galDesc').text(x);
 }
-
 var setUploader = function(x) {
     $('#uploader').text(x);
 }
-
 var setDate = function(x) {
     $('#dateUploaded').text(x);
 }
-
-
-
-// slideshow //
-// function plusSlides(n) {
-//     showSlides(slideIndex += n);
-// }
-
-// function currentSlide(n) {
-//     showSlides(slideIndex = n);
-// }
-
-// function showSlides(n) {
-//     var i;
-//     var slides = document.getElementsByClassName("mySlides");
-//     if (n > slides.length - 1) { slideIndex = 0 }
-//     if (n < 0) { slideIndex = slides.length - 1 }
-//     for (i = 0; i < slides.length; i++) {
-//         slides[i].style.display = "none";
-//     }
-//     slides[slideIndex].style.display = "block";
-//     //document.getElementById("galDesc").innerHTML = captionArray[n];
-//     //console.log(captionArray[n]);
-// }
-
-// var makeNewSlide = function(img) {
-//     newSlide = document.createElement("div");
-//     newSlide.setAttribute("class", "mySlides");
-//     newSlide.appendChild(img);
-//     document.getElementById("slideMaster").appendChild(newSlide);
-//     showSlides(slideIndex);
-// }
-
-
-// for (var i = 0; i < sourceArray.length; i++) {
-//     makeNewSlide(source2img(sourceArray[i]));
-// }
-
-////////////////
 
 function setProgressBar(percent) {
     $(function() {
@@ -83,79 +39,85 @@ function setProgressBar(percent) {
     });
 }
 
-var fileUpload = document.getElementById('fileUpload');
+// Gallery
+var $artSlides = $('#art-slideshow');
 
-
-//thumbnail///
-
-function makeThumbnail(img) {
-    newThumb = document.createElement("div");
-    img.setAttribute("class", "thumbnails")
-    newThumb.appendChild(img);
-    $(".gallery-thumbnail").append(newThumb);
-}
-
-/*
-for (var i = 0; i < imageArray.length; i++) {
-    makeThumbnail(imageArray[i]);
-}
-*/
-function makeSlides(img) {
-    newSlide = document.createElement("div");
-    img.setAttribute("class", "slideImages")
-    newSlide.appendChild(img);
-    $("#slideMaster").append(newSlide);
-}
-
-function resetImages() {
-    //remove all children
-    $('#gallery-thumbnail').empty();
-    $('#slideMaster').empty();
+var resetImages = function() {
+    // Remove All
+    $artSlides.empty();
     console.log("images emptied...");
 }
+var addImage = function(i) {
+    var $newImage = $('<div/>')
+	.addClass("artPiece text-center")
+	.append(
+	    $('<div/>').append(
+		$("<img>")
+		    .addClass("art")
+		    .attr("src", imageArray[i]['url'])
+		    .css("margin", "auto")
+	    )
+	)
+	.append($('<br/>'))
+	.append(
+	    $('<div/>')
+		.text("By: " + imageArray[i]['author'])
+		.css("font-weight", "bold")
+	)
+	.append($('<br/>'))
+	.append(
+	    $('<div/>').text(imageArray[i]['caption'])
+	)
+    $artSlides.append($newImage);
+    console.log("New image added!", $newImage);
+}
 
+var galleryLoaded = false;
 function setGallery() {
-    resetImages();
-    for (var i = 0; i < imageArray.length; i++) {
-        makeThumbnail(imageArray2[i]);
-        makeSlides(imageArray[i]);
-        console.log("gallery debug");
-        //  console.log($();
-        //this better come in soon...
-        //$('#gallery-thumbnail').innerHTML;
-    }
-
     $(document).ready(function() {
-        $('.slideshow-images').not('.slick-initialized').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: true,
-            fade: true,
-            asNavFor: '.gallery-thumbnail'
-        });
-
-        $('.gallery-thumbnail').not('.slick-initialized').slick({
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            asNavFor: '.slideshow-images',
-            focusOnSelect: true
-        });
+	loadArt();
+	if (!galleryLoaded) {
+	    for (var i = 0; i < imageArray.length; i++) {
+		console.log(imageArray[i]); // Debugging
+		addImage(i); // Actual Art
+	    }
+	    slickGallery();
+	    galleryLoaded = true;
+	    console.log("Gallery has been loaded.");
+	} else {
+	    console.log("Gallery is already loaded!");
+	    $artSlides.slick('unslick');
+	    resetImages();
+	    for (var i = 0; i < imageArray.length; i++) {
+		console.log(imageArray[i]); // Debugging
+		addImage(i); // Actual Art
+	    }
+	    slickGallery();
+	}
+    });
+}
+function slickGallery() {    
+    $artSlides.slick({
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	autoplay: true,
+	autoplaySpeed: 4000,
+	dots: true,
+	infinite: true,
+	arrows: true
     });
 }
 
-//upload functions //
+
+// Uploading Art // 
 var fanart = document.getElementsByClassName("fanartIcon");
 var paragraph = document.getElementsByClassName("paragraph");
 var picture = document.getElementsByClassName("picture");
-
 var upload = document.getElementById("upload");
-
+var highlightedText = "";
 var iconClick = function(pos) {
     console.log(pos);
 }
-
-var highlightedText = "";
 
 function clickedSomewhere() {
     $("body").mousedown(function(e) {
@@ -204,23 +166,21 @@ function highlight(e) {
         }
     }
 }
-
 function clearHighlight() {
     upload.style.display = "none";
     //console.log(upload.style.display);
 }
-
 function wait(e) {
     setTimeout(highlight(e), 100);
 }
 
 document.onmousedown = clickedSomewhere;
 document.onmouseup = highlight;
+if (!document.all) {
+    document.captureEvents(Event.MOUSEUP);
+}
 
-if (!document.all) document.captureEvents(Event.MOUSEUP);
-//////////////////
-
-// Joel's code -- hi joel //
+// Joel's Code //
 var formBookID = document.getElementById("artUploadBookID");
 var formCaption = document.getElementById("artUploadCaption");
 var formStartCC = document.getElementById("artUploadStartCC");
@@ -229,7 +189,6 @@ var formChNum = document.getElementById("artUploadChapterNum");
 var formSubmit = document.getElementById("artUploadSubmit");
 
 var augmentForm = function() {
-
     formBookID.setAttribute("value", bookID);
     formCaption.setAttribute("value", highlightedText);
     //console.log(highlightedText.indexOf("\n"));
@@ -244,7 +203,6 @@ var augmentForm = function() {
             bodyText += "\n\n";
         }
     }
-
     //console.log(bodyText);
     highlightedText = $.trim(highlightedText);
     var index = bodyText.indexOf(highlightedText);
@@ -256,16 +214,8 @@ var augmentForm = function() {
     formChNum.setAttribute("value", curChapter);
 }
 
-var uploadArt = function() {
-    //    console.log("i'm try");
-    //augmentForm();
-    //document.getElementById("my-awesome-dropzone").submit(); //what a name...
-}
-
-//formSubmit.addEventListener("click", "uploadArt");
-
+// Dropzone Code 
 Dropzone.options.artDrop = {
-
     // Prevents Dropzone from uploading dropped files immediately
     autoProcessQueue: false,
     acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",

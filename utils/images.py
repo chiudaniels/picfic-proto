@@ -38,6 +38,9 @@ def getImageDataPage(chID, ccStart, ccEnd):
         for entry in imgList:
             retList.append(entry.asDict())
         session.close()
+        # print "Retlist\n", retList # Debugging
+        for i in range(len(retList)):
+            retList[i]['username'] = users.getUsername(int(retList[i]['uploaderID']))
         return retList
     session.close()
     return []
@@ -56,6 +59,8 @@ def getImageDataChapter(chID):
         for entry in imgList:
             retList.append(entry.asDict())
         session.close()
+        for i in range(len(retList)):
+            retList[i]['username'] = users.getUsername(int(retList[i]['uploaderID']))
         return retList
     session.close()
     return []
@@ -74,10 +79,11 @@ def getImageDataBook(bID):
         for entry in imgList:
             retList.append(entry.asDict())
         session.close()
+        for i in range(len(retList)):
+            retList[i]['username'] = users.getUsername(int(retList[i]['uploaderID']))
         return retList
     session.close()
     return []
-
 
 #For a user - unused lmao
 def getImageDataUser(uID):
