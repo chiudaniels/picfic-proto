@@ -43,4 +43,11 @@ $('#bookgallery').not('.slick-initialized').slick({
     }]
 });
 
-console.log("Carousel JS loaded.");
+$('#about').click(function (e) {
+    event.preventDefault();
+    $('html, body').animate({
+	scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 1000);
+});
+
+console.log("Launchpad JS loaded.");
