@@ -136,7 +136,7 @@ class UserProfile(Base):
         #package birthday
         bday = datetime.datetime(bY, bM, bD)
         self.birthday = bday
-        self.gender = "" #figure this out
+        self.gender = gender
         self.about = "Nothing about me just yet!"
         self.hobbies = "Nothing written yet!"
         self.favoriteBooks = "Nothing written yet!"

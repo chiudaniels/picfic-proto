@@ -191,7 +191,6 @@ def chapterGallery():
 # Login Routes ======================================
 @app.route("/login/", methods=["POST"])
 def login():
-
     # request
     email = request.form["loginEmail"]
     pwd = request.form["loginPass"]
@@ -199,6 +198,7 @@ def login():
     msg = ""
     if users.getHashed(email) and bcrypt.check_password_hash(users.getHashed(email), pwd) :
         session['uID'] = users.getUserID( email )
+        #return redirect(request.url) - To Implement To Fix Issue #46 - Redirect To Same Url
         return redirect( url_for('root'))
     else:
         return flask.Response("fail")
@@ -218,6 +218,7 @@ def ajaxLogin():
 @app.route("/logout/")
 def logout():
     session.pop('uID')
+    #return redirect(request.url) - To Implement To Fix Issue #46 - Redirect To Same Url
     return redirect( url_for('root') )
 
 @app.route("/register/", methods=["POST"])
@@ -236,8 +237,7 @@ def register():
     bY = int(request.form["year"])
     gender = request.form["gender"]
     hashedPwd = bcrypt.generate_password_hash(pwd)
-    #reg
-    if not users.isNameTaken(uN): #and email
+    if not users.isNameTaken(uN): # Redundant - Username and Email Checked via AJAX
         session['uID'] = users.addUser( fN, lN, uN, email, hashedPwd, bM, bD, bY, gender, "")
     else:
         msg = "User already exists"
@@ -461,23 +461,20 @@ def upload_file():
     # check if the post request has the file part
     if 'file' not in request.files:
         #flash('No file part')
-        print "work"
         return redirect(request.url)
     file = request.files['file']
-    print "work2"
     # if user does not select file, browser also
     # submit a empty part without filename
     if file.filename == '':
         #flash('No selected file')
         return redirect(request.url)
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
         caption = request.form["caption"]
         bID = request.form["bookID"]
         chN = request.form["chapterNum"]
         cStart = request.form["startCC"]
         cEnd = request.form["endCC"]
-        print "RECEIVING DATA FROM FORM"
+        filename = str(getUserID()) + "_" + str(bID) + "_" + str(cStart) + "_" + str(cEnd) + "_" + secure_filename(file.filename) # Prevent Clashes
         file.save(os.path.join(app.config['UPLOAD_FOLDER'] + "images/", filename))
         images.uploadArt(filename, getUserID(), caption, cStart, cEnd, bID, chN)
         url = request.url.replace("/uploadArt/", "")
@@ -488,8 +485,6 @@ def upload_file():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
-
-
 
 # Admin ==================================================================
 @app.route('/admin/')

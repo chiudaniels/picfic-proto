@@ -124,7 +124,7 @@ function clickedSomewhere() {
         var target = $(e.target);
         if (target.hasClass("upload")) {
             $("#upload-desc").text(highlightedText);
-            //console.log("clicked upload");
+            // console.log("clicked upload");
             augmentForm();
         } else {
             clearHighlight();
